@@ -8,7 +8,7 @@ export default class LandingPage extends Component {
     return (
       <div className="landing">
         <div className="landing_content">
-          <h1>The Andy Dwyers</h1>
+          <h1>BudgetUs</h1>
         </div>
         <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
           <h1 className='login_link'>Login</h1>

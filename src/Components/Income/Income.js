@@ -26,8 +26,6 @@ class Income extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.props.userReducer.id)
     const { updateAmount, updateName } = this.props;
 
     return (
@@ -43,7 +41,7 @@ class Income extends Component {
           <p>Amount: $</p>
           <input onChange={e => updateAmount(e.target.value)} type="text" />
         </div>
-        <h3 onClick={e => this.submitIncome(e)}>Submit</h3>
+        <h3 className='income_btn' onClick={e => this.submitIncome(e)}>Submit</h3>
       </div>
     );
   }
