@@ -51,10 +51,19 @@
 
 .income_map {
     display: flex;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .income_map p {
-    padding: 1%;
+
+}
+.income_del {
+    cursor: pointer;
+}
+.income_display {
+    width: 30%;
+    margin: 5% 0;
 }
 
 .income_display h2{

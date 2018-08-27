@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
-console.log("I made a change");
 
 class Chart extends Component {
   render() {
+    console.log(this.props.income);
     const incomedata = {
       datasets: [
         {
@@ -41,4 +41,5 @@ function mapStateToProps(state) {
   };
 }
 
+// export default Charts;
 export default connect(mapStateToProps)(Chart);

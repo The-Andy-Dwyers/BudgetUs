@@ -13,10 +13,15 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="dashboard">
         <Income />
+
+        {this.props.incomeReducer.income.length !== 0 &&
+        
         <Chart />
+        }
       </div>
     );
   }

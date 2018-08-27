@@ -41,6 +41,23 @@ class Income extends Component {
     this.props.getUser();
   }
 
+  handleKeyDown = e => {
+    let { amount, name } = this.props.incomeReducer;
+    let { id } = this.props.userReducer;
+
+    e.keyCode === 13 &&
+      axios
+        .post('/api/setup-income', {
+          amount,
+          name,
+          id
+        })
+        .then(() => {
+          this.props.getIncome();
+          this.closeModal();
+        });
+  };
+
   submitIncome = e => {
     let { amount, name } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
@@ -57,17 +74,34 @@ class Income extends Component {
       });
   };
 
+  handleDelete = id => {
+    axios.delete(`/api/delete-income/${id}`).then(() => {
+      this.props.getIncome();
+    });
+  };
+
   render() {
     console.log(this.props);
+    console.log(this.props.incomeReducer.income.length);
     const { updateAmount, updateName } = this.props;
 
     const map = this.props.incomeReducer.income.map(e => {
-      return (
-        <div key={e.id} className='income_map'>
-          <p>{e.name}</p>
-          <p>{e.amount}</p>
-        </div>
-      );
+      if (this.props.incomeReducer.income.length === 0) {
+        return <p>No Income, GET A JOB!!</p>;
+      } else {
+        return (
+          <div key={e.id} className="income_map">
+            <p>{e.name}</p>
+            <p>{e.amount}</p>
+            <button
+              className="income_del"
+              onClick={id => this.handleDelete(e.id)}
+            >
+              Remove
+            </button>
+          </div>
+        );
+      }
     });
     return (
       <div>
@@ -76,7 +110,10 @@ class Income extends Component {
         </div>
 
         <div className="income_display">
-          <h2>Income Display</h2>
+          <h2>
+            {this.props.userReducer.name}
+            's Income
+          </h2>
           {map}
         </div>
 
@@ -96,6 +133,7 @@ class Income extends Component {
             <div className="income_sub">
               <p>Amount:</p>
               <input
+                onKeyDown={e => this.handleKeyDown(e)}
                 onChange={e => updateAmount(e.target.value)}
                 type="text"
                 placeholder="$"
