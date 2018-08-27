@@ -2,18 +2,14 @@ import axios from "axios";
 
 const initialState = {
   income: {},
-  amount: '',
-  name: '',
+  amount: "",
+  name: "",
   didErr: false
 };
 
-<<<<<<< HEAD
 const GET_INCOME = "GET_INCOME";
-=======
-const GET_INCOME = 'GET_INCOME';
-const GET_AMOUNT = 'GET_AMOUNT';
-const GET_NAME = 'GET_NAME';
->>>>>>> master
+const GET_AMOUNT = "GET_AMOUNT";
+const GET_NAME = "GET_NAME";
 
 export const getIncome = () => {
   return {
