@@ -60,12 +60,7 @@ function mapStateToProps(state) {
   };
 }
 
-<<<<<<< HEAD
-// export default Charts;
-export default connect(mapStateToProps)(Chart);
-=======
 export default connect(
   mapStateToProps,
   { getExpensesByCategory }
 )(Chart);
->>>>>>> master
