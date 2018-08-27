@@ -3,10 +3,16 @@
 }
 
 .income {
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
     background-color: rgb(245, 245, 245);
     box-shadow: 1px 1px 5px grey;
+    padding: .5em;
+    border-radius: 10%;
+    margin: 3% 0;
+}
+
+.income h1 {
+    cursor: pointer;
 }
 
 .income_btn {
