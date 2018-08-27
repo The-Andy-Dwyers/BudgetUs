@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux'
 import { getExpenses } from '../../ducks/reducers/expensesReducer'
 
@@ -13,13 +13,12 @@ class Expenses extends Component {
     amount: 0,
     type: '',
     company: '',
-    catagories: ''
+    catagory: ''
   }
 
   componentDidMount() {
     this.props.getExpenses();
   }
-
 
 
   handleInputs = (val, state) => {
@@ -29,9 +28,13 @@ class Expenses extends Component {
   }
 
   render() {
-    console.log(this.props)
 
-    // let expenses = this.props.expenses
+    const map = this.props.expensesReducer.expense.data && this.props.expensesReducer.expense.data.map(e => {
+      return <div key={e.id}>
+        <h1>{e.name}</h1>
+        <p>{e.amount}</p>
+      </div>
+    })
     return (
       <div className="expenses">
         <h1>Expenses</h1>
@@ -45,6 +48,18 @@ class Expenses extends Component {
           <option value="Non-Recurring">Non-recurring</option>
         </select>
 
+        <select required onChange={(e) => this.handleInputs(e.target.value, 'catagory')}>
+          <option>Select Catagory:</option>
+          <option value="Rent">Rent</option>
+          <option value="Bills">Bills</option>
+          <option value="Food">Food</option>
+          <option value="Gas">Gas</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">other</option>
+        </select>
+
+
+        {map}
       </div>
     );
   }
