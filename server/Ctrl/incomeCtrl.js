@@ -13,11 +13,11 @@ const getIncome = (req, res) => {
 
 const addIncome = (req, res) => {
   const db = req.app.get("db");
-  const { amount, name, users_id } = req.body;
+  const { amount, name, id } = req.body;
   console.log(req.body);
 
   db.income
-    .add_income([amount, name, users_id])
+    .add_income([amount, name, id])
     .then(response => {
       res.status(200).send(response);
     })
