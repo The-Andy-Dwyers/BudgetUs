@@ -1,3 +1,14 @@
 .income_sub {
     display: flex;
 }
+
+.income {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 1px 1px 5px grey;
+}
+
+.income_btn {
+    text-align: center;
+}

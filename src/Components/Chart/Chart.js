@@ -27,7 +27,9 @@ class Chart extends Component {
     };
     return (
       <div>
+        <h2>Income Data</h2>
         <Doughnut data={incomedata} options={options} />
+        <h2>Expenses Data</h2>
         <Doughnut data={spenddata} options={options} />
       </div>
     );
