@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 
 const strategy = require('./strategy');
 
-const { login, logout, getUsers } = require('./Ctrl/userCtrl');
+const { login, logout, getUser, getUsers } = require('./Ctrl/userCtrl');
 const { getExpenses, addExpenses } = require('./Ctrl/expensesCtrl');
 const { getIncome, addIncome } = require('./Ctrl/incomeCtrl');
 
@@ -68,6 +68,7 @@ passport.deserializeUser((user, done) => {
 //user endpoints
 app.get('/login', login);
 app.get('/logout', logout);
+app.get('/api/me', getUser);
 app.get('/api/users', getUsers);
 
 //expenses endpoints
