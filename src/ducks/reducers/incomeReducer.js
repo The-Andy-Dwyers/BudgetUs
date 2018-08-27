@@ -1,20 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
 const initialState = {
-  income: {},
-  amount: '',
-  name: '',
+  income: [],
+  amount: "",
+  name: "",
   didErr: false
 };
 
-const GET_INCOME = 'GET_INCOME';
-const GET_AMOUNT = 'GET_AMOUNT';
-const GET_NAME = 'GET_NAME';
+const GET_INCOME = "GET_INCOME";
+const GET_AMOUNT = "GET_AMOUNT";
+const GET_NAME = "GET_NAME";
 
 export const getIncome = () => {
   return {
     type: GET_INCOME,
-    payload: axios.get('/api/income')
+    payload: axios.get("/api/income")
   };
 };
 
