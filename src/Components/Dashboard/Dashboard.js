@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import './Dashboard.css';
-import Income from '../Income/Income';
+import "./Dashboard.css";
+import Income from "../Income/Income";
 
-import { getUsers } from '../../ducks/reducers/userReducer';
+import { getUsers } from "../../ducks/reducers/userReducer";
+import Chart from "../Chart/Chart";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class Dashboard extends Component {
       <div className="dashboard">
         <h1>Dashboard</h1>
         <Income />
+        <Chart />
       </div>
     );
   }

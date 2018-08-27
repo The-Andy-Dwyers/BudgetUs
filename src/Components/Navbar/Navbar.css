@@ -1,5 +1,5 @@
 .navbar {
-    width: 5%;
+    width: 80px;
     background-color: rgb(54, 54, 54);
     height: 100vh;
     transition: .5s ease-out;
@@ -11,7 +11,7 @@
 }
 
 .navbar:hover {
-    width: 10%;
+    width: 160px;
 }
 
 .navbar h2 {

@@ -15,13 +15,13 @@ const login = passport.authenticate('auth0', {
   failureRedirect: process.env.REACT_APP_CLIENT + '/login'
 });
 
-// const getUser = (req, res) => {
-//   if (!req.user) {
-//     res.status(500).send({ message: 'Not Logged in' });
-//   } else {
-//     res.status(200).send(req.user);
-//   }
-// };
+const getUser = (req, res) => {
+  if (!req.user) {
+    res.status(500).send({ message: 'Not Logged in' });
+  } else {
+    res.status(200).send(req.user);
+  }
+};
 
 const getUsers = (req, res) => {
   const db = req.app.get('db');
@@ -40,5 +40,6 @@ const getUsers = (req, res) => {
 module.exports = {
   login,
   logout,
+  getUser,
   getUsers
 };
