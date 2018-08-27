@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 import { connect } from 'react-redux'
 import { getExpenses, addExpenses } from '../../ducks/reducers/expensesReducer'
+import { getUser } from '../../ducks/reducers/userReducer'
 
 import './Expenses.css';
 
@@ -36,6 +37,7 @@ class Expenses extends Component {
 
   render() {
     console.log(this.props);
+    const { id } = this.props.userReducer
     const { expenseName, amount, date, type, company, category } = this.state
     const map = this.props.expensesReducer.expense && this.props.expensesReducer.expense.map(e => {
       return <div key={e.id}>
@@ -66,7 +68,7 @@ class Expenses extends Component {
           <option value="Other">other</option>
         </select>
 
-        <button onClick={() => this.props.addExpenses({ expenseName, amount, type, date, company, category })}>Submit</button>
+        <button onClick={() => this.props.addExpenses({ expenseName, amount, type, date, company, category, id })}>Submit</button>
 
 
         {map}
@@ -77,4 +79,4 @@ class Expenses extends Component {
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, { getExpenses, addExpenses })(Expenses);
+export default connect(mapStateToProps, { getExpenses, addExpenses, getUser })(Expenses);

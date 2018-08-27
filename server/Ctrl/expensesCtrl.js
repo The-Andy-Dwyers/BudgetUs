@@ -13,7 +13,7 @@ const getExpenses = (req, res) => {
 };
 
 const addExpenses = (req, res) => {
-  const { expenseName, amount, type, date, company, category } = req.body
+  const { expenseName, amount, type, date, company, category, } = req.body
   req.app.get('db').expenses.add_expenses([expenseName, amount, type, date, company, category])
     .then(newExpenses => {
       res.status(200).send(newExpenses)
