@@ -10,8 +10,8 @@ const port = process.env.PORT || 3001;
 
 const strategy = require('./strategy');
 
-const {login, logout, getUsers} = require('./Ctrl/userCtrl');
-
+const { login, logout, getUsers } = require('./Ctrl/userCtrl');
+const { getExpenses } = require('./Ctrl/expensesCtrl');
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,46 +28,49 @@ massive(process.env.CONNECTION_STRING)
   });
 
 app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        maxAge: 60 * 60 * 24 * 7 * 2
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60 * 60 * 24 * 7 * 2
+    }
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(strategy);
+
+passport.serializeUser((user, done) => {
+  const db = app.get('db');
+
+  db.users
+    .get_user_by_id(user.id)
+    .then(response => {
+      if (!response[0]) {
+        db.users
+          .add_user([user.displayName, user.id])
+          .then(res => done(null, res[0]))
+          .catch(err => done(err, null));
+      } else {
+        return done(null, response[0]);
       }
     })
-  );
-  
-  app.use(passport.initialize());
-  app.use(passport.session());
-  passport.use(strategy);
-  
-  passport.serializeUser((user, done) => {
-    const db = app.get('db');
-  
-    db.users
-      .get_user_by_id(user.id)
-      .then(response => {
-        if (!response[0]) {
-          db.users
-            .add_user([user.displayName, user.id])
-            .then(res => done(null, res[0]))
-            .catch(err => done(err, null));
-        } else {
-          return done(null, response[0]);
-        }
-      })
-      .catch(err => done(err, null));
-  });
-  
-  passport.deserializeUser((user, done) => {
-    done(null, user);
-  });
+    .catch(err => done(err, null));
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 //user endpoints
 app.get('/login', login);
 app.get('/logout', logout);
-app.get('/api/users', getUsers)
+app.get('/api/users', getUsers);
+
+//expenses endpoints
+app.get('/api/expenses', getExpenses);
 
 //run build
 app.get('*', (req, res) => {

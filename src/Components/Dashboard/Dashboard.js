@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './Dashboard.css';
+import Setup from '../Setup/Setup';
+
 import { getUsers } from '../../ducks/reducers/userReducer';
 
 class Dashboard extends Component {
@@ -13,6 +15,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <h1>Dashboard</h1>
+        <Setup />
       </div>
     );
   }
