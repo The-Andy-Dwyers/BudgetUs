@@ -2,7 +2,7 @@ const getExpenses = (req, res) => {
   const db = req.app.get('db');
 
   db.expenses
-    .get_expenses()
+    .get_expenses([req.user.id])
     .then(response => {
       res.status(200).send(response);
     })
@@ -13,8 +13,8 @@ const getExpenses = (req, res) => {
 };
 
 const addExpenses = (req, res) => {
-  const { expenseName, amount, type, date, company, category, } = req.body
-  req.app.get('db').expenses.add_expenses([expenseName, amount, type, date, company, category])
+  const { expenseName, amount, type, date, company, category, id } = req.body
+  req.app.get('db').expenses.add_expenses([expenseName, amount, type, date, company, category, id])
     .then(newExpenses => {
       res.status(200).send(newExpenses)
     }).catch(err => { console.log(err) })

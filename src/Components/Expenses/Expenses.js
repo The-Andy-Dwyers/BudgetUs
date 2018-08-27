@@ -19,6 +19,7 @@ class Expenses extends Component {
 
   componentDidMount() {
     this.props.getExpenses();
+    this.props.getUser()
   }
 
 
