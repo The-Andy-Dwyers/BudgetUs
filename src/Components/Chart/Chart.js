@@ -44,7 +44,9 @@ class Chart extends Component {
     return (
       <div>
         <h2>Income Data</h2>
+        {this.props.income.length !== 0 &&
         <Doughnut data={incomedata} />
+        }
         <h2>Expenses Data</h2>
         {this.props.expenses.length !== 0 && (
           <Doughnut data={spenddata} options={options} />
@@ -62,5 +64,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getExpensesByCategory }
+  { getExpensesByCategory, }
 )(Chart);
