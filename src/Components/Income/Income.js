@@ -53,6 +53,7 @@ class Income extends Component {
       })
       .then(() => {
         this.props.getIncome();
+        this.closeModal();
       });
   };
 
@@ -60,28 +61,50 @@ class Income extends Component {
     console.log(this.props);
     const { updateAmount, updateName } = this.props;
 
+    const map = this.props.incomeReducer.income.map(e => {
+      return (
+        <div key={e.id} className='income_map'>
+          <p>{e.name}</p>
+          <p>{e.amount}</p>
+        </div>
+      );
+    });
     return (
-      <div className="income">
-        <h1 onClick={this.openModal}>Income setup</h1>
+      <div>
+        <div className="income">
+          <h1 onClick={this.openModal}>Income Input</h1>
+        </div>
+
+        <div className="income_display">
+          <h2>Income Display</h2>
+          {map}
+        </div>
+
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <h2>Let's add your main expenses!</h2>
-          <h3>Mortgage / Rent</h3>
-          <div className="income_sub">
-            <p>Name:</p>
-            <input onChange={e => updateName(e.target.value)} type="text" />
+          <div className="income_modal">
+            <h2>Let's add your Income!</h2>
+            <br />
+            <div className="income_sub">
+              <p>Source:</p>
+              <input onChange={e => updateName(e.target.value)} type="text" />
+            </div>
+            <div className="income_sub">
+              <p>Amount:</p>
+              <input
+                onChange={e => updateAmount(e.target.value)}
+                type="text"
+                placeholder="$"
+              />
+            </div>
+            <h3 className="income_btn" onClick={e => this.submitIncome(e)}>
+              Submit
+            </h3>
           </div>
-          <div className="income_sub">
-            <p>Amount: $</p>
-            <input onChange={e => updateAmount(e.target.value)} type="text" />
-          </div>
-          <h3 className="income_btn" onClick={e => this.submitIncome(e)}>
-            Submit
-          </h3>
         </Modal>
       </div>
     );
