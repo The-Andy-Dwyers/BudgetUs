@@ -6,8 +6,6 @@ import $ from 'jquery';
 import './Calendar.css';
 import './fullCalendar.css';
 
-import Income from '../Income/Income';
-
 
 export default class Calendar extends Component {
     componentDidMount() {
@@ -53,7 +51,7 @@ export default class Calendar extends Component {
       return (
         <div className="calendar">
           <div id="calendar" />
-          <Income />
+
         </div>
       );
     }
