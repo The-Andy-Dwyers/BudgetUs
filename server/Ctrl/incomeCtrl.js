@@ -1,5 +1,5 @@
 const getIncome = (req, res) => {
-  const db = req.app.get("db");
+  const db = req.app.get('db');
   db.income
     .get_income([req.user.id])
     .then(response => {
@@ -12,7 +12,7 @@ const getIncome = (req, res) => {
 };
 
 const addIncome = (req, res) => {
-  const db = req.app.get("db");
+  const db = req.app.get('db');
   const { amount, name, id } = req.body;
   console.log(req.body);
 
@@ -27,7 +27,22 @@ const addIncome = (req, res) => {
     });
 };
 
+const deleteIncome = (req, res) => {
+  const db = req.app.get('db');
+  const { id } = req.params;;
+  console.log(req.params)
+
+  db.income
+    .delete_income([req.user.id, id])
+    .then(response => res.status(200).send(response))
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 module.exports = {
   getIncome,
-  addIncome
+  addIncome,
+  deleteIncome
 };
