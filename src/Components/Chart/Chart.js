@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
-console.log("I made a change");
+import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
 
 class Chart extends Component {
+  componentDidMount() {
+    this.props.getExpensesByCategory();
+  }
   render() {
+    console.log(this.props);
     const incomedata = {
       datasets: [
         {
@@ -37,8 +41,12 @@ class Chart extends Component {
 }
 function mapStateToProps(state) {
   return {
-    income: state.incomeReducer.income
+    income: state.incomeReducer.income,
+    expenses: state.expensesReducer.expensesbycat
   };
 }
 
-export default connect(mapStateToProps)(Chart);
+export default connect(
+  mapStateToProps,
+  { getExpensesByCategory }
+)(Chart);
