@@ -7,7 +7,6 @@ export default class Settings extends Component {
         return (
             <div>
                 <h1>Settings</h1>
-                <h2>hello from josh</h2>
             </div>
         )
     }

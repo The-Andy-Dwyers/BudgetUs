@@ -12,11 +12,12 @@ const strategy = require('./strategy');
 
 const { login, logout, getUsers } = require('./Ctrl/userCtrl');
 const { getExpenses } = require('./Ctrl/expensesCtrl');
+const { getIncome } = require('./Ctrl/incomeCtrl');
+
 
 const app = express();
 app.use(bodyParser.json());
 
-console.log(`${__dirname}/../build`);
 app.use(express.static(`${__dirname}/../build`));
 
 massive(process.env.CONNECTION_STRING)
@@ -71,6 +72,9 @@ app.get('/api/users', getUsers);
 
 //expenses endpoints
 app.get('/api/expenses', getExpenses);
+
+//expenses endpoints
+app.get('/api/income', getIncome);
 
 //run build
 app.get('*', (req, res) => {
