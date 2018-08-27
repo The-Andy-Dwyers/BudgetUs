@@ -11,8 +11,8 @@ const port = process.env.PORT || 3001;
 const strategy = require('./strategy');
 
 const { login, logout, getUsers } = require('./Ctrl/userCtrl');
-const { getExpenses } = require('./Ctrl/expensesCtrl');
-const { getIncome } = require('./Ctrl/incomeCtrl');
+const { getExpenses, addExpenses } = require('./Ctrl/expensesCtrl');
+const { getIncome, addIncome } = require('./Ctrl/incomeCtrl');
 
 
 const app = express();
@@ -72,9 +72,11 @@ app.get('/api/users', getUsers);
 
 //expenses endpoints
 app.get('/api/expenses', getExpenses);
+app.post('/api/add-expenses', addExpenses)
 
-//expenses endpoints
+//income endpoints
 app.get('/api/income', getIncome);
+app.post('/api/setup-income', addIncome)
 
 //run build
 app.get('*', (req, res) => {
