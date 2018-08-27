@@ -2,13 +2,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 
 import userReducer from './reducers/userReducer';
+import expensesReducer from './reducers/expensesReducer';
+import incomeReducer from './reducers/incomeReducer';
 
-// const combinedReducers = combineReducers({
-
-// });
+const combinedReducers = combineReducers({
+    userReducer, expensesReducer, incomeReducer
+});
 
 const middlewares = applyMiddleware(promiseMiddleware());
 
-const store = createStore(userReducer, middlewares);
+const store = createStore(combinedReducers, middlewares);
 
 export default store;
