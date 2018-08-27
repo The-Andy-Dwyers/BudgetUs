@@ -1,1 +1,2 @@
-SELECT * FROM income;
+SELECT * FROM income
+WHERE user_id = $1;
