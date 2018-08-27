@@ -16,7 +16,7 @@ const {
   addExpenses,
   getExpensesByCategory
 } = require("./Ctrl/expensesCtrl");
-const { getIncome, addIncome } = require("./Ctrl/incomeCtrl");
+const { getIncome, addIncome, deleteIncome } = require("./Ctrl/incomeCtrl");
 
 const app = express();
 app.use(bodyParser.json());
@@ -82,6 +82,7 @@ app.post("/api/add-expenses", addExpenses);
 //income endpoints
 app.get("/api/income", getIncome);
 app.post("/api/setup-income", addIncome);
+app.delete('/api/delete-income/:id', deleteIncome);
 
 //run build
 app.get("*", (req, res) => {
