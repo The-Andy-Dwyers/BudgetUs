@@ -1,1 +1,2 @@
-#Group Project by Josh, Kierra, & Tim
+# Group Project 
+by Josh, Kierra, & Tim
