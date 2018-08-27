@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 
 class Chart extends Component {
   render() {
-    console.log();
-    console.log(this.props.income);
     const incomedata = {
       datasets: [
         {
