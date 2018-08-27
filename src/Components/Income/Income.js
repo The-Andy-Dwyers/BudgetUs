@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import './Income.css';
 import {
@@ -7,18 +8,26 @@ import {
   updateAmount,
   updateName
 } from '../../ducks/reducers/incomeReducer';
+import {getUser} from '../../ducks/reducers/userReducer';
 
 class Income extends Component {
   componentDidMount() {
     this.props.getIncome();
+    this.props.getUser();
   }
 
   submitIncome = e => {
-    
+    let {amount, name} = this.props.incomeReducer
+    let{ users_id} = this.props.userReducer.id
+
+    axios.post('/api/setup-income', {
+      amount, name, users_id
+    })
   }
 
   render() {
     console.log(this.props);
+    console.log(this.props.userReducer.id)
     const { updateAmount, updateName } = this.props;
 
     return (
@@ -45,6 +54,7 @@ const mapStateToProps = state => state;
 export default connect(
   mapStateToProps,
   {
+    getUser,
     getIncome,
     updateAmount,
     updateName

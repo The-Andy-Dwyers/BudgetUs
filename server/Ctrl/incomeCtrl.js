@@ -15,6 +15,7 @@ const getIncome = (req, res) => {
   const addIncome = (req, res) => {
     const db = req.app.get('db');
     const { amount, name, users_id } = req.body;
+    console.log(req.body)
   
     db.income
       .add_income([amount, name, users_id])
