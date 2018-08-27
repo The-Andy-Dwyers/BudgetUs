@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 import { connect } from 'react-redux'
-import { getExpenses } from '../../ducks/reducers/expensesReducer'
+import { getExpenses, addExpenses } from '../../ducks/reducers/expensesReducer'
 
 import './Expenses.css';
 
 class Expenses extends Component {
 
   state = {
-    expenses: [],
     expenseName: '',
     amount: 0,
     type: '',
     company: '',
-    catagory: ''
+    category: '',
+    date: ''
   }
 
   componentDidMount() {
@@ -27,9 +27,17 @@ class Expenses extends Component {
     })
   }
 
-  render() {
+  handleType = (val) => {
+    this.setState({
+      type: val
+    });
+  }
 
-    const map = this.props.expensesReducer.expense.data && this.props.expensesReducer.expense.data.map(e => {
+
+  render() {
+    console.log(this.props);
+    const { expenseName, amount, date, type, company, category } = this.state
+    const map = this.props.expensesReducer.expense && this.props.expensesReducer.expense.map(e => {
       return <div key={e.id}>
         <h1>{e.name}</h1>
         <p>{e.amount}</p>
@@ -40,16 +48,16 @@ class Expenses extends Component {
         <h1>Expenses</h1>
         <input className="Expenses_input" placeholder="expense name" onChange={(e) => this.handleInputs(e.target.value, 'expenseName')} />
         <input className="Expenses_input" placeholder='amount' onChange={(e) => this.handleInputs(e.target.value, 'amount')} />
+        <input className="Expenses_input" placeholder='date' onChange={(e) => this.handleInputs(e.target.value, 'date')} />
         <input className="Expenses_input" placeholder="Company" onChange={(e) => this.handleInputs(e.target.value, 'company')} />
 
-        <select required onChange={(e) => this.handleInputs(e.target.value, 'type')}>
-          <option>Select Type:</option>
-          <option value="Recurring">Recurring</option>
-          <option value="Non-Recurring">Non-recurring</option>
-        </select>
+        <form>
+          <input name="type" type="radio" value="recurring" onClick={() => this.handleType('Recurring')} /> Recurring
+          <input name="type" type="radio" value="nonrecurring" onClick={() => this.handleType('Non-Recurring')} /> Non-Recurring
+        </form>
 
         <select required onChange={(e) => this.handleInputs(e.target.value, 'catagory')}>
-          <option>Select Catagory:</option>
+          <option>Select Category:</option>
           <option value="Rent">Rent</option>
           <option value="Bills">Bills</option>
           <option value="Food">Food</option>
@@ -57,6 +65,8 @@ class Expenses extends Component {
           <option value="Entertainment">Entertainment</option>
           <option value="Other">other</option>
         </select>
+
+        <button onClick={() => this.props.addExpenses({ expenseName, amount, type, date, company, category })}>Submit</button>
 
 
         {map}
@@ -67,4 +77,4 @@ class Expenses extends Component {
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, { getExpenses })(Expenses);
+export default connect(mapStateToProps, { getExpenses, addExpenses })(Expenses);

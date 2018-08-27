@@ -13,7 +13,7 @@ export function getExpenses() {
 export function addExpenses(newExpense) {
     return {
         type: 'ADD_EXPENSE',
-        payload: axios.post('/api/addExpense', newExpense)
+        payload: axios.post('/api/add-expenses', newExpense)
     }
 }
 
@@ -28,7 +28,7 @@ export default function expensesReducer(state = initialState, action) {
         case `${ADD_EXPENSE}_FULFILLED`:
             return {
                 ...state,
-                expense: action.payload
+                expense: action.payload.data
             }
         case `${GET_EXPENSES}_REJECTED`:
         case `${ADD_EXPENSE}_REJECTED`:
