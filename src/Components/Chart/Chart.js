@@ -40,5 +40,4 @@ function mapStateToProps(state) {
   };
 }
 
-// export default Charts;
 export default connect(mapStateToProps)(Chart);
