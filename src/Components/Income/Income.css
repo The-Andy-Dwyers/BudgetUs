@@ -15,6 +15,50 @@
     cursor: pointer;
 }
 
+.income_modal {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.income_modal h2 {
+    font-weight: 800;
+}
+
+.income_modal p {
+    padding: 1%;
+}
+
+.income_modal input {
+    width: 100%;
+    margin: 1%;
+}
+
 .income_btn {
     text-align: center;
+    cursor: pointer;
+    margin-top: 10%;
+    width: 100%;
 }
+
+.income_btn:hover {
+    transform: scale(1.02);
+}
+
+.income_btn:active {
+    transform: scale(.98)
+}
+
+.income_map {
+    display: flex;
+}
+
+.income_map p {
+    padding: 1%;
+}
+
+.income_display h2{
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
