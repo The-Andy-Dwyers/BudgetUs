@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const initialState = {
-  income: {},
+  income: [],
   amount: "",
   name: "",
   didErr: false
