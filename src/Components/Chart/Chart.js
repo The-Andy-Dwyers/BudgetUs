@@ -8,17 +8,17 @@ class Chart extends Component {
     this.props.getExpensesByCategory();
   }
   render() {
-    console.log(this.props);
-    const incomedata = {
+    const remaindata = {
       datasets: [
         {
-          data:
-            this.props.income.length !== 0 &&
-            this.props.income.map(e => e.amount),
+          data: this.props.income.length !== 0 && [
+            add(this.props.expenses),
+            add(this.props.income) - add(this.props.expenses)
+          ],
           backgroundColor: ["blue", "green", "purple"]
         }
       ],
-      labels: ["label one", "ltwo", "third"]
+      labels: ["expenses", "remaining"]
     };
     const spenddata = {
       datasets: [
@@ -33,20 +33,19 @@ class Chart extends Component {
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
-            console.log("~~~*** tooltip", tooltipItem);
-            console.log("~~~~***data", data);
             return "$" + data.datasets[0]["data"][tooltipItem.index];
           }
         }
       },
-      legend: { display: true, labels: { fontColor: "black" } }
+      legend: { display: true, labels: { fontColor: "black" } },
+      elements: { arc: { borderWidth: 0.5 } }
     };
     return (
       <div>
         <h2>Income Data</h2>
-        {this.props.income.length !== 0 &&
-        <Doughnut data={incomedata} />
-        }
+        {this.props.income.length !== 0 && (
+          <Doughnut data={remaindata} options={options} />
+        )}
         <h2>Expenses Data</h2>
         {this.props.expenses.length !== 0 && (
           <Doughnut data={spenddata} options={options} />
@@ -64,5 +63,12 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getExpensesByCategory, }
+  { getExpensesByCategory }
 )(Chart);
+
+function add(arr) {
+  let total = 0;
+
+  arr.forEach(e => (total += +e.amount));
+  return total;
+}
