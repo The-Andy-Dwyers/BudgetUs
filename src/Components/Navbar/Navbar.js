@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 
+
 export default class Navbar extends Component {
+
   render() {
+     
     return (
       <div className="navbar">
         <Link className="link" to="/dashboard">
@@ -26,3 +29,4 @@ export default class Navbar extends Component {
     );
   }
 }
+
