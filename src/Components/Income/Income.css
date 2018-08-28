@@ -1,89 +1,109 @@
 .income_sub {
-    display: flex;
-}
-
-.income {
-    display: inline-block;
-    background-color: rgb(245, 245, 245);
-    box-shadow: 1px 1px 5px grey;
-    padding: .5em;
-    border-radius: 10%;
-    margin: 3% 0;
-}
-
-.income h1 {
-    cursor: pointer;
-}
-
-.income_modal {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-}
-
-.income_modal h2 {
-    font-weight: 800;
-}
-
-.income_modal p {
-    padding: 1%;
-}
-
-.income_modal input {
-    width: 100%;
-    margin: 1%;
-}
-
-.income_btn {
-    text-align: center;
-    cursor: pointer;
-    margin-top: 10%;
-    width: 100%;
-}
-
-.income_btn:hover {
-    transform: scale(1.02);
-}
-
-.income_btn:active {
-    transform: scale(.98)
+  display: flex;
 }
 
 .income_container {
-    width: 100%;
+  width: 100%;
+}
+
+.income {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.income_input_btn {
+  display: inline-block;
+  box-shadow: 1px 1px 5px grey;
+  background-color: rgb(245, 245, 245);
+  padding: 0.5em;
+  border-radius: 10%;
+  margin: 3% 0;
 }
 
 .income_display {
-    /* width: 100%; */
+  width: 95%;
+  margin: 5% 2%;
+  height: 100%;
+  border: 1px solid black;
 }
 
 .income_display h2 {
-    width: 100%;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  width: 100%;
+  padding: 0.5%;
+}
+
+.income_display > div {
+  display: flex;
+  justify-content: space-around
+}
+
+.income_container {
+  width: 100%;
 }
 
 .income_map {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
+  display: flex;
+  width: 100%;
+  border-top: 1px solid black;
 }
 
 .income_map_name {
-    /* width: 00px !important; */
+  width: 100%;
 }
 
 .income_map p {
-width: 100%;
+  width: 100%;
+  padding: 0.5%;
 }
+
+.income_modal {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+
+.income_modal h2 {
+  font-weight: 800;
+}
+
+.income_modal p {
+  padding: 1%;
+}
+
+.income_modal input {
+  width: 100%;
+  margin: 1%;
+}
+
+.income_btn {
+  text-align: center;
+  margin-top: 10%;
+  width: 100%;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
 .income_del {
-    cursor: pointer;
-}
-.income_display {
-    width: 30%;
-    margin: 5% 0;
-}
-
-.income_display h2{
-    font-weight: 900;
-    letter-spacing: 2px;
+  margin: 0.5%;
+  border: 1px solid black;
+  border-radius: 10%;
+  padding: 0.2%;
 }
 
+.income_del:hover {
+  background-color: rgb(167, 110, 110);
+  transition: .5s;
+  transform: scale(1);
+}

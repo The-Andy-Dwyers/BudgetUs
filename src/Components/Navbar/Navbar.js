@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './Navbar.css';
+import { getUsers } from '../../ducks/reducers/userReducer';
 
-
-export default class Navbar extends Component {
+class Navbar extends Component {
+  componentDidMount() {
+    this.props.getUsers().then(() => {
+      !this.props.userReducer.auth_id && window.location.assign('/');
+    });
+  }
 
   render() {
-     
     return (
       <div className="navbar">
         <Link className="link" to="/dashboard">
@@ -30,3 +35,11 @@ export default class Navbar extends Component {
   }
 }
 
+const mapStateToProps = state => state;
+
+export default connect(
+  mapStateToProps,
+  {
+    getUsers
+  }
+)(Navbar);
