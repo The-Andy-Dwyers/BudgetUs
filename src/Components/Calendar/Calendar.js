@@ -22,13 +22,13 @@ export default class Calendar extends Component {
         editable: true,
        
         events: '/api/income',
-    //     events: [{
-    //     title:"My repeating event",
-    //     start: '11:00', // a start time (10am in this example)
-    //     end: '14:00', // an end time (6pm in this example)
+        events: [{
+        title:"My repeating event",
+        start: '11:00', // a start time (10am in this example)
+        end: '14:00', // an end time (6pm in this example)
         
-    //     dow: [ 6 ] // Repeat monday and thursday
-    // }],
+        dow: [ 1 ] // Repeat monday and thursday
+    }],
         // eventMouseover: function(e, jsEvent) {
         //   const tooltip =
         //     '<div class="tooltipevent" style="padding:1% 1.5%;opacity: 0.8;background:rgb(241, 241, 241);position:absolute;z-index:10001;">' +
