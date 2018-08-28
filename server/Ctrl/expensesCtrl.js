@@ -27,6 +27,7 @@ const getExpensesByCategory = (req, res) => {
 
 const addExpenses = (req, res) => {
   const { expenseName, amount, type, date, company, category, id } = req.body;
+  console.log(date);
   req.app
     .get("db")
     .expenses.add_expenses([
