@@ -87,32 +87,32 @@ class Income extends Component {
     const { updateAmount, updateName, updatePayday } = this.props;
 
     const map = this.props.incomeReducer.income.map(e => {
-        return (
-          <div key={e.id} className="income_map">
-            <p className='income_map_name'>{e.name}</p>
-            <p>{e.amount}</p>
-            <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
-            <button
-              className="income_del"
-              onClick={id => this.handleDelete(e.id)}
-            >
-              Remove
-            </button>
-          </div>
-        );
+      return (
+        <div key={e.id} className="income_map">
+          <p className="income_map_name">{e.name}</p>
+          <p>{e.amount}</p>
+          <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
+          <h3
+            className="income_del btn"
+            onClick={id => this.handleDelete(e.id)}
+          >
+            Remove
+          </h3>
+        </div>
+      );
     });
     return (
-      <div className='income_container'>
+      <div className="income_container">
         <div className="income">
-          <h1 onClick={this.openModal}>Income Input</h1>
-        </div>
+          <h1 className='income_input_btn btn'onClick={this.openModal}>Income Input</h1>
 
-        <div className="income_display">
-          <h2>
-            {this.props.userReducer.name}
-            's Income
-          </h2>
-          {map}
+          <div className="income_display">
+            <h2>
+              {this.props.userReducer.name}
+              's Income
+            </h2>
+            {map}
+          </div>
         </div>
 
         <Modal
@@ -139,12 +139,9 @@ class Income extends Component {
             </div>
             <div className="income_sub">
               <p>Payday:</p>
-              <input
-                onChange={e => updatePayday(e.target.value)}
-                type="text"
-              />
+              <input onChange={e => updatePayday(e.target.value)} type="text" />
             </div>
-            <h3 className="income_btn" onClick={e => this.submitIncome(e)}>
+            <h3 className="income_btn btn" onClick={e => this.submitIncome(e)}>
               Submit
             </h3>
           </div>
