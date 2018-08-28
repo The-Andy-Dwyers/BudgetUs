@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
 import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
+import Switch from "react-switch";
 
 class Chart extends Component {
+  constructor() {
+    super();
+    this.state = { month: true };
+  }
   componentDidMount() {
     this.props.getExpensesByCategory();
   }
+
+  handleChange = month => this.setState({ month });
+
   render() {
     const remaindata = {
       datasets: [
@@ -20,7 +28,16 @@ class Chart extends Component {
       ],
       labels: ["expenses", "remaining"]
     };
-    const spenddata = {
+    const monthSpendData = {
+      datasets: [
+        {
+          data: this.props.expenses.map(e => e.amount),
+          backgroundColor: ["blue", "green", "purple", "red"]
+        }
+      ],
+      labels: this.props.expenses.map(e => e.category)
+    };
+    const yearSpendData = {
       datasets: [
         {
           data: this.props.expenses.map(e => e.amount),
@@ -42,19 +59,41 @@ class Chart extends Component {
     };
     return this.props.type === "remaining" ? (
       <div>
-        <h2>Income Data</h2>
-        {this.props.income.length !== 0 && (
-          <Doughnut data={remaindata} options={options} />
-        )}
+        <h2>Remaining Chart</h2>
+        <Switch
+          onChange={this.handleChange}
+          checked={this.state.month}
+          id="normal-switch"
+        />
+        {this.state.month ? "month chart" : "year chart"}
       </div>
     ) : (
       <div>
-        <h2>Expenses Data</h2>
-        {this.props.expenses.length !== 0 && (
-          <Doughnut data={spenddata} options={options} />
-        )}
+        <h2>Expenses By Category Chart</h2>
+        <Switch
+          onChange={this.handleChange}
+          checked={this.state.month}
+          id="normal-switch"
+        />
+        {this.state.month ? "month chart" : "year chart"}
       </div>
+      // <div>
+      //   <h2>Expenses Data</h2>
+      //   {this.props.expenses.length !== 0 && (
+      //     <Doughnut data={spenddata} options={options} />
+      //   )}
+      // </div>
     );
+    // return (
+    //   <div>
+    //     <Switch
+    //       onChange={this.handleChange}
+    //       checked={this.state.checked}
+    //       id="normal-switch"
+    //     />
+    //     {this.state.checked ? "Its true!" : "Its Not True!"}
+    //   </div>
+    // );
   }
 }
 function mapStateToProps(state) {
