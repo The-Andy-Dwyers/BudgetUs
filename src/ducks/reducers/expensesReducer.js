@@ -11,10 +11,10 @@ export function getExpenses() {
     payload: axios.get("/api/expenses")
   };
 }
-export function getExpensesByCategory() {
+export function getExpensesByCategory(start, end) {
   return {
     type: "GET_EXPENSES_BY_CAT",
-    payload: axios.get("/api/expenses_by_cat")
+    payload: axios.get(`/api/expenses_by_cat/?start=${start}&end=${end}`)
   };
 }
 

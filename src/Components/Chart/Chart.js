@@ -3,6 +3,7 @@ import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
 import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
 import Switch from "react-switch";
+import moment from "moment";
 
 class Chart extends Component {
   constructor() {
@@ -10,10 +11,23 @@ class Chart extends Component {
     this.state = { month: true };
   }
   componentDidMount() {
-    this.props.getExpensesByCategory();
+    moment()
+      .endOf("month")
+      .format("l");
+    this.props.getExpensesByCategory(
+      moment()
+        .startOf("month")
+        .format("l"),
+      moment()
+        .endOf("month")
+        .format("l")
+    );
   }
 
-  handleChange = month => this.setState({ month });
+  handleChange = month => {
+    console.log(month);
+    this.setState({ month });
+  };
 
   render() {
     const remaindata = {
@@ -75,7 +89,21 @@ class Chart extends Component {
           checked={this.state.month}
           id="normal-switch"
         />
-        {this.state.month ? "month chart" : "year chart"}
+        {this.state.month ? (
+          <div>
+            <h2>Month View</h2>
+            {this.props.expenses.length !== 0 && (
+              <Doughnut data={monthSpendData} options={options} />
+            )}
+          </div>
+        ) : (
+          <div>
+            <h2>Month View</h2>
+            {this.props.expenses.length !== 0 && (
+              <Doughnut data={yearSpendData} options={options} />
+            )}
+          </div>
+        )}
       </div>
       // <div>
       //   <h2>Expenses Data</h2>
