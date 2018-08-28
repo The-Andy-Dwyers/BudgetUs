@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import moment from 'moment';
 import axios from 'axios';
 
 import './Income.css';
 import {
   getIncome,
   updateAmount,
+  updatePayday,
   updateName
 } from '../../ducks/reducers/incomeReducer';
 import { getUser } from '../../ducks/reducers/userReducer';
@@ -59,13 +61,14 @@ class Income extends Component {
   };
 
   submitIncome = e => {
-    let { amount, name } = this.props.incomeReducer;
+    let { amount, name, payday } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     axios
       .post('/api/setup-income', {
         amount,
         name,
+        payday,
         id
       })
       .then(() => {
@@ -81,18 +84,14 @@ class Income extends Component {
   };
 
   render() {
-    console.log(this.props);
-    console.log(this.props.incomeReducer.income.length);
-    const { updateAmount, updateName } = this.props;
+    const { updateAmount, updateName, updatePayday } = this.props;
 
     const map = this.props.incomeReducer.income.map(e => {
-      if (this.props.incomeReducer.income.length === 0) {
-        return <p>No Income, GET A JOB!!</p>;
-      } else {
         return (
           <div key={e.id} className="income_map">
             <p>{e.name}</p>
             <p>{e.amount}</p>
+            <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
             <button
               className="income_del"
               onClick={id => this.handleDelete(e.id)}
@@ -101,7 +100,6 @@ class Income extends Component {
             </button>
           </div>
         );
-      }
     });
     return (
       <div>
@@ -139,6 +137,13 @@ class Income extends Component {
                 placeholder="$"
               />
             </div>
+            <div className="income_sub">
+              <p>Payday:</p>
+              <input
+                onChange={e => updatePayday(e.target.value)}
+                type="text"
+              />
+            </div>
             <h3 className="income_btn" onClick={e => this.submitIncome(e)}>
               Submit
             </h3>
@@ -157,6 +162,7 @@ export default connect(
     getUser,
     getIncome,
     updateAmount,
+    updatePayday,
     updateName
   }
 )(Income);
