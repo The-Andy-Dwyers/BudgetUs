@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
+import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
 
 class Chart extends Component {
+  componentDidMount() {
+    this.props.getExpensesByCategory();
+  }
   render() {
     const remaindata = {
       datasets: [
@@ -18,9 +22,12 @@ class Chart extends Component {
     };
     const spenddata = {
       datasets: [
-        { data: [5, 250], backgroundColor: ["blue", "green", "purple"] }
+        {
+          data: this.props.expenses.map(e => e.amount),
+          backgroundColor: ["blue", "green", "purple", "red"]
+        }
       ],
-      labels: ["label one", "ltwo", "third"]
+      labels: this.props.expenses.map(e => e.category)
     };
     const options = {
       tooltips: {
@@ -40,14 +47,17 @@ class Chart extends Component {
           <Doughnut data={remaindata} options={options} />
         )}
         <h2>Expenses Data</h2>
-        <Doughnut data={spenddata} options={options} />
+        {this.props.expenses.length !== 0 && (
+          <Doughnut data={spenddata} options={options} />
+        )}
       </div>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    income: state.incomeReducer.income
+    income: state.incomeReducer.income,
+    expenses: state.expensesReducer.expensesbycat
   };
 }
 
