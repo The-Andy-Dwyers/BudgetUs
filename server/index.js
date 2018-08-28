@@ -1,23 +1,28 @@
-require("dotenv").config();
-const express = require("express");
-const bodyParser = require("body-parser");
-const massive = require("massive");
-const session = require("express-session");
-const passport = require("passport");
-const axios = require("axios");
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const massive = require('massive');
+const session = require('express-session');
+const passport = require('passport');
+const axios = require('axios');
 
 const port = process.env.PORT || 3001;
 
-const strategy = require("./strategy");
+const strategy = require('./strategy');
 
-const { login, logout, getUser, getUsers } = require("./Ctrl/userCtrl");
+const { login, logout, getUser, getUsers } = require('./Ctrl/userCtrl');
 const {
   getExpenses,
   addExpenses,
   getExpensesByCategory,
   deleteExpense
-} = require("./Ctrl/expensesCtrl");
-const { getIncome, addIncome, deleteIncome } = require("./Ctrl/incomeCtrl");
+} = require('./Ctrl/expensesCtrl');
+const {
+  getIncome,
+  addIncome,
+  deleteIncome,
+  editIncome
+} = require('./Ctrl/incomeCtrl');
 
 const app = express();
 app.use(bodyParser.json());
@@ -26,7 +31,7 @@ app.use(express.static(`${__dirname}/../build`));
 
 massive(process.env.CONNECTION_STRING)
   .then(db => {
-    app.set("db", db);
+    app.set('db', db);
   })
   .catch(err => {
     console.log(err);
@@ -48,7 +53,7 @@ app.use(passport.session());
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
-  const db = app.get("db");
+  const db = app.get('db');
 
   db.users
     .get_user_by_id(user.id)
@@ -70,25 +75,26 @@ passport.deserializeUser((user, done) => {
 });
 
 //user endpoints
-app.get("/login", login);
-app.get("/logout", logout);
-app.get("/api/me", getUser);
-app.get("/api/users", getUsers);
+app.get('/login', login);
+app.get('/logout', logout);
+app.get('/api/me', getUser);
+app.get('/api/users', getUsers);
 
 //expenses endpoints
-app.get("/api/expenses", getExpenses);
-app.get("/api/expenses_by_cat", getExpensesByCategory);
-app.post("/api/add-expenses", addExpenses);
-app.delete("/api/delete-expense/:id", deleteExpense);
+app.get('/api/expenses', getExpenses);
+app.get('/api/expenses_by_cat', getExpensesByCategory);
+app.post('/api/add-expenses', addExpenses);
+app.delete('/api/delete-expense/:id', deleteExpense);
 
 //income endpoints
-app.get("/api/income", getIncome);
-app.post("/api/setup-income", addIncome);
-app.delete("/api/delete-income/:id", deleteIncome);
+app.get('/api/income', getIncome);
+app.post('/api/setup-income', addIncome);
+app.delete('/api/delete-income/:id', deleteIncome);
+app.put('/api/edit-income', editIncome);
 
 //run build
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 app.listen(port, () => {

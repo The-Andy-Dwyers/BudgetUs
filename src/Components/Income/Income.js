@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
 import 'moment-recur';
+import ContentEditable from 'react-contenteditable';
 
 import './Income.css';
 import {
@@ -29,8 +30,7 @@ Modal.setAppElement(document.getElementById('root'));
 
 class Income extends Component {
   state = {
-    modalIsOpen: false,
-    number: 2
+    modalIsOpen: false
   };
 
   openModal = () => {
@@ -46,7 +46,7 @@ class Income extends Component {
   }
 
   handleKeyDown = e => {
-    let { amount, name } = this.props.incomeReducer;
+    let { amount, name, payday } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     e.keyCode === 13 &&
@@ -54,6 +54,7 @@ class Income extends Component {
         .post('/api/setup-income', {
           amount,
           name,
+          payday,
           id
         })
         .then(() => {
@@ -85,25 +86,53 @@ class Income extends Component {
     });
   };
 
+  handleKeyDown2 = e => {
+    let { amount, name, payday } = this.props.incomeReducer;
+
+    e.keyCode === 13 &&
+      axios
+        .put('/api/edit-income', {
+          name,
+          amount,
+          payday
+        })
+        .then(() => {
+          this.props.getIncome();
+        });
+  };
+
   render() {
     const { updateAmount, updateName, updatePayday } = this.props;
-
-    let recurrence = moment()
-      .recur({
-        start: '2018-01-01',
-        end: '2018-12-31'
-      })
-      .every(this.state.number)
-      .daysOfMonth()
-      .all('l');
-    console.log(recurrence);
+    console.log(this.props);
+    // let recurrence = moment()
+    //   .recur({
+    //     start: '2018-01-01',
+    //     end: '2018-12-31'
+    //   })
+    //   .every(this.state.number)
+    //   .daysOfMonth()
+    //   .all('l');
+    // console.log(recurrence);
 
     const map = this.props.incomeReducer.income.map(e => {
       return (
         <div key={e.id} className="income_map">
-          <p className="income_map_name">{e.name}</p>
-          <p>{e.amount}</p>
-          <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
+          <ContentEditable
+            html={e.name}
+            onChange={e => updateName(e.target.value)}
+            onKeyDown={e => this.handleKeyDown2(e)}
+          />
+
+          <ContentEditable
+            html={String(e.amount)}
+            onChange={e => updateAmount(e.target.value)}
+            onKeyDown={e => this.handleKeyDown2(e)}
+          />
+          <ContentEditable
+            html={String(moment.utc(e.payday).format('ddd, MMM D'))}
+            onChange={e => updatePayday(e.target.value)}
+            onKeyDown={e => this.handleKeyDown2(e)}
+          />
           <h3
             className="income_del btn"
             onClick={id => this.handleDelete(e.id)}
