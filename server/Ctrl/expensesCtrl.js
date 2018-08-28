@@ -47,9 +47,10 @@ const addExpenses = (req, res) => {
 };
 
 const deleteExpense = (req, res) => {
+  console.log(req.params);
   req.app
     .get("db")
-    .expenses.deleteExpense(req.params.id)
+    .expenses.delete_expense(req.params.id)
     .then(response => {
       res.status(200).send(response);
     })
