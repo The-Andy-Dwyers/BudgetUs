@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
+import 'moment-recur';
 
 import './Income.css';
 import {
@@ -28,7 +29,8 @@ Modal.setAppElement(document.getElementById('root'));
 
 class Income extends Component {
   state = {
-    modalIsOpen: false
+    modalIsOpen: false,
+    number: 2
   };
 
   openModal = () => {
@@ -86,6 +88,16 @@ class Income extends Component {
   render() {
     const { updateAmount, updateName, updatePayday } = this.props;
 
+    let recurrence = moment()
+      .recur({
+        start: '2018-01-01',
+        end: '2018-12-31'
+      })
+      .every(this.state.number)
+      .daysOfMonth()
+      .all('l');
+    console.log(recurrence);
+
     const map = this.props.incomeReducer.income.map(e => {
       return (
         <div key={e.id} className="income_map">
@@ -104,13 +116,19 @@ class Income extends Component {
     return (
       <div className="income_container">
         <div className="income">
-          <h1 className='income_input_btn btn'onClick={this.openModal}>Income Input</h1>
+          <h1 className="income_input_btn btn" onClick={this.openModal}>
+            Income Input
+          </h1>
 
           <div className="income_display">
-            <h2>
-              {this.props.userReducer.name}
-              's Income
-            </h2>
+            <div>
+              <h2>
+                {this.props.userReducer.name}
+                's Income
+              </h2>
+              <h2>Amount</h2>
+              <h2>Payday</h2>
+            </div>
             {map}
           </div>
         </div>
