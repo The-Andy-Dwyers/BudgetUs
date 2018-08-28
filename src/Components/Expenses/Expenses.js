@@ -23,7 +23,7 @@ class Expenses extends Component {
       category: "",
       date: new Date().toISOString()
     };
-    this.handleDelete = this.handleDelete.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -47,10 +47,12 @@ class Expenses extends Component {
     this.setState({ date: new Date(date).toISOString() });
   };
 
-  async handleDelete(e) {
-    await this.props.deleteExpense(e);
-    await this.props.getExpenses();
-  }
+  handleDelete = e => {
+    console.log(e);
+    this.props.deleteExpense(e).then(() => {
+      this.props.getExpenses();
+    });
+  };
 
   // <input className="Expenses_input" placeholder='date' onChange={(e) => this.handleInputs(e.target.value, 'date')} />
 

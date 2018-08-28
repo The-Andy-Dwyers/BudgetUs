@@ -25,10 +25,10 @@ export function addExpenses(newExpense) {
   };
 }
 
-export function deleteExpense() {
+export function deleteExpense(expense) {
   return {
     type: "DELETE_EXPENSE",
-    payload: axios.delete("")
+    payload: axios.delete(`/api/delete-expense/${expense.id}`)
   };
 }
 
