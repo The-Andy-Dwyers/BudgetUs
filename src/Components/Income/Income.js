@@ -89,7 +89,7 @@ class Income extends Component {
     const map = this.props.incomeReducer.income.map(e => {
         return (
           <div key={e.id} className="income_map">
-            <p>{e.name}</p>
+            <p className='income_map_name'>{e.name}</p>
             <p>{e.amount}</p>
             <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
             <button
@@ -102,7 +102,7 @@ class Income extends Component {
         );
     });
     return (
-      <div>
+      <div className='income_container'>
         <div className="income">
           <h1 onClick={this.openModal}>Income Input</h1>
         </div>

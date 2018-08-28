@@ -49,14 +49,30 @@
     transform: scale(.98)
 }
 
+.income_container {
+    width: 100%;
+}
+
+.income_display {
+    /* width: 100%; */
+}
+
+.income_display h2 {
+    width: 100%;
+}
+
 .income_map {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
 }
 
-.income_map p {
+.income_map_name {
+    /* width: 00px !important; */
+}
 
+.income_map p {
+width: 100%;
 }
 .income_del {
     cursor: pointer;
