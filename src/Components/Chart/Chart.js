@@ -40,12 +40,15 @@ class Chart extends Component {
       legend: { display: true, labels: { fontColor: "black" } },
       elements: { arc: { borderWidth: 0.5 } }
     };
-    return (
+    return this.props.type === "remaining" ? (
       <div>
         <h2>Income Data</h2>
         {this.props.income.length !== 0 && (
           <Doughnut data={remaindata} options={options} />
         )}
+      </div>
+    ) : (
+      <div>
         <h2>Expenses Data</h2>
         {this.props.expenses.length !== 0 && (
           <Doughnut data={spenddata} options={options} />
