@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getExpenses, addExpenses } from "../../ducks/reducers/expensesReducer";
+import {
+  getExpenses,
+  addExpenses,
+  deleteExpense
+} from "../../ducks/reducers/expensesReducer";
 import { getUser } from "../../ducks/reducers/userReducer";
 import DatePicker from "react-custom-date-picker";
 import moment from "moment";
+import Chart from "../Chart/Chart";
 
 import "./Expenses.css";
 
@@ -38,6 +43,11 @@ class Expenses extends Component {
     this.setState({ date: new Date(date).toISOString() });
   };
 
+  handleDelete = () => {
+    this.props.deleteExpense();
+    this.props.getExpenses();
+  };
+
   // <input className="Expenses_input" placeholder='date' onChange={(e) => this.handleInputs(e.target.value, 'date')} />
 
   render() {
@@ -50,10 +60,11 @@ class Expenses extends Component {
           <div className="Expenses_expenselist" key={e.id}>
             <p>{e.name}</p>
             <p>{e.amount}</p>
-            <p>{new Date(e.date).toDateString().slice(0, -4)}</p>
+            <p>{moment.utc(date).format("ddd, MMM D")}</p>
             <p>{e.type}</p>
             <p>{e.company}</p>
             <p>{e.category}</p>
+            <button onClick={() => this.handleDelete(e)}>Delete</button>
           </div>
         );
       });
@@ -131,6 +142,7 @@ class Expenses extends Component {
         </button>
 
         {map}
+        <Chart type="expenses" />
       </div>
     );
   }

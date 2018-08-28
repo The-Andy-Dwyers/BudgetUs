@@ -46,8 +46,21 @@ const addExpenses = (req, res) => {
     });
 };
 
+const deleteExpense = (req, res) => {
+  req.app
+    .get("db")
+    .expenses.deleteExpense(req.params.id)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 module.exports = {
   getExpenses,
   addExpenses,
-  getExpensesByCategory
+  getExpensesByCategory,
+  deleteExpense
 };
