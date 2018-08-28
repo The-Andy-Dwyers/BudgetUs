@@ -13,14 +13,18 @@ import Chart from "../Chart/Chart";
 import "./Expenses.css";
 
 class Expenses extends Component {
-  state = {
-    expenseName: "",
-    amount: 0,
-    type: "",
-    company: "",
-    category: "",
-    date: new Date().toISOString()
-  };
+  constructor() {
+    super();
+    this.state = {
+      expenseName: "",
+      amount: 0,
+      type: "",
+      company: "",
+      category: "",
+      date: new Date().toISOString()
+    };
+    this.handleDelete = this.handleDelete.bind(this);
+  }
 
   componentDidMount() {
     this.props.getExpenses();
@@ -43,14 +47,15 @@ class Expenses extends Component {
     this.setState({ date: new Date(date).toISOString() });
   };
 
-  handleDelete = () => {
-    this.props.deleteExpense();
-    this.props.getExpenses();
-  };
+  async handleDelete(e) {
+    await this.props.deleteExpense(e);
+    await this.props.getExpenses();
+  }
 
   // <input className="Expenses_input" placeholder='date' onChange={(e) => this.handleInputs(e.target.value, 'date')} />
 
   render() {
+    console.log(this.props);
     const { id } = this.props.userReducer;
     const { expenseName, amount, date, type, company, category } = this.state;
     const map =
@@ -152,5 +157,5 @@ const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,
-  { getExpenses, addExpenses, getUser }
+  { getExpenses, addExpenses, getUser, deleteExpense }
 )(Expenses);
