@@ -37,6 +37,11 @@
   padding: 0.5%;
 }
 
+.income_display > div {
+  display: flex;
+  justify-content: space-around
+}
+
 .income_container {
   width: 100%;
 }
