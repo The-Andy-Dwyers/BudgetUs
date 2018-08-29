@@ -16,6 +16,7 @@ import {
   updateName
 } from '../../ducks/reducers/incomeReducer';
 import { getUser } from '../../ducks/reducers/userReducer';
+import {getExpenses} from '../../ducks/reducers/expensesReducer';
 
 const customStyles = {
   content: {
@@ -35,8 +36,8 @@ class Income extends Component {
   state = {
     modalIsOpen: false,
     edit: false,
-    incomeTotal: 0,
-    month: true
+    incomeTotal: 0
+    // month: true
   };
 
   openModal = () => {
@@ -277,6 +278,7 @@ export default connect(
     getYearlyIncome,
     updateAmount,
     updatePayday,
-    updateName
+    updateName,
+    getExpenses
   }
 )(Income);
