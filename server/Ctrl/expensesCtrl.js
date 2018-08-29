@@ -1,6 +1,5 @@
 const getExpenses = (req, res) => {
   const db = req.app.get("db");
-  console.log("expenses", res);
 
   db.expenses
     .get_expenses([req.user.id, req.query.start, req.query.end])

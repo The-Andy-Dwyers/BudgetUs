@@ -27,6 +27,20 @@ export const getYearlyIncome = () => {
   };
 };
 
+export const getIncomeSum = () => {
+  return {
+    type: GET_INCOME,
+    payload: axios.get(`/api/income-sum`)
+  };
+};
+
+export const getYearlyIncomeSum = () => {
+  return {
+    type: GET_INCOME,
+    payload: axios.get(`/api/yearly-income-sum`)
+  };
+};
+
 export const updateAmount = amount => {
   return {
     type: GET_AMOUNT,
