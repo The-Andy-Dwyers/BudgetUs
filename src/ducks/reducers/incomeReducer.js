@@ -4,14 +4,14 @@ const initialState = {
   income: [],
   amount: '',
   date: '',
-  name: '',
+  title: '',
   didErr: false
 };
 
 const GET_INCOME = 'GET_INCOME';
 const GET_AMOUNT = 'GET_AMOUNT';
 const GET_DATE = 'GET_DATE';
-const GET_NAME = 'GET_NAME';
+const GET_TITLE = 'GET_TITLE';
 
 export const getIncome = (start, end) => {
   return {
@@ -41,10 +41,10 @@ export const updateDate = date => {
   };
 };
 
-export const updateName = name => {
+export const updateTitle = title => {
   return {
-    type: GET_NAME,
-    payload: name
+    type: GET_TITLE,
+    payload: title
   };
 };
 
@@ -70,10 +70,10 @@ export default function userReducer(state = initialState, action) {
         ...state,
         date: action.payload
       };
-    case GET_NAME:
+    case GET_TITLE:
       return {
         ...state,
-        name: action.payload
+        title: action.payload
       };
     default:
       return state;

@@ -30,7 +30,11 @@ const getIncomeById = (req, res) => {
   db.income
     .get_income_by_id([req.params.id])
     .then(response => {
-      res.status(200).send(response);
+      const modifiedResponse = response.map(e => {
+        return { ...e, date: JSON.stringify(e.date).substring(1, 11) };
+      });
+      console.log(modifiedResponse);
+      res.status(200).send(modifiedResponse);
     })
     .catch(err => {
       console.log(err);
@@ -54,10 +58,10 @@ const getYearlyIncome = (req, res) => {
 
 const addIncome = (req, res) => {
   const db = req.app.get('db');
-  const { amount, name, date, id } = req.body;
+  const { amount, title, date, id } = req.body;
 
   db.income
-    .add_income([amount, name, date, id])
+    .add_income([amount, title, date, id])
     .then(response => {
       res.status(200).send(response);
     })
@@ -82,10 +86,10 @@ const deleteIncome = (req, res) => {
 
 const editIncome = (req, res) => {
   const db = req.app.get('db');
-  const { name, amount, date } = req.body;
+  const { title, amount, date } = req.body;
 
   db.income
-    .edit_income([req.params.id, name, amount, date])
+    .edit_income([req.params.id, title, amount, date])
     .then(response => res.status(200).send(response))
     .catch(err => {
       console.log(err);
