@@ -3,14 +3,14 @@ import axios from 'axios';
 const initialState = {
   income: [],
   amount: '',
-  payday: '',
+  date: '',
   name: '',
   didErr: false
 };
 
 const GET_INCOME = 'GET_INCOME';
 const GET_AMOUNT = 'GET_AMOUNT';
-const GET_PAYDAY = 'GET_PAYDAY';
+const GET_DATE = 'GET_DATE';
 const GET_NAME = 'GET_NAME';
 
 export const getIncome = (start, end) => {
@@ -34,10 +34,10 @@ export const updateAmount = amount => {
   };
 };
 
-export const updatePayday = payday => {
+export const updateDate = date => {
   return {
-    type: GET_PAYDAY,
-    payload: payday
+    type: GET_DATE,
+    payload: date
   };
 };
 
@@ -65,10 +65,10 @@ export default function userReducer(state = initialState, action) {
         ...state,
         amount: action.payload
       };
-    case GET_PAYDAY:
+    case GET_DATE:
       return {
         ...state,
-        payday: action.payload
+        date: action.payload
       };
     case GET_NAME:
       return {

@@ -25,7 +25,7 @@ const getIncome = (req, res) => {
 
 const getIncomeById = (req, res) => {
   const db = req.app.get('db');
-  console.log(req.params)
+  console.log(req.params);
 
   db.income
     .get_income_by_id([req.params.id])
@@ -54,10 +54,10 @@ const getYearlyIncome = (req, res) => {
 
 const addIncome = (req, res) => {
   const db = req.app.get('db');
-  const { amount, name, payday, id } = req.body;
+  const { amount, name, date, id } = req.body;
 
   db.income
-    .add_income([amount, name, payday, id])
+    .add_income([amount, name, date, id])
     .then(response => {
       res.status(200).send(response);
     })
@@ -82,10 +82,10 @@ const deleteIncome = (req, res) => {
 
 const editIncome = (req, res) => {
   const db = req.app.get('db');
-  const { name, amount, payday } = req.body;
+  const { name, amount, date } = req.body;
 
   db.income
-    .edit_income([req.params.id, name, amount, payday])
+    .edit_income([req.params.id, name, amount, date])
     .then(response => res.status(200).send(response))
     .catch(err => {
       console.log(err);
