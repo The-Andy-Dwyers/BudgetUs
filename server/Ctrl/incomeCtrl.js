@@ -23,6 +23,21 @@ const getIncome = (req, res) => {
     });
 };
 
+const getIncomeById = (req, res) => {
+  const db = req.app.get('db');
+  console.log(req.params)
+
+  db.income
+    .get_income_by_id([req.params.id])
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 const getYearlyIncome = (req, res) => {
   const db = req.app.get('db');
 
@@ -113,5 +128,6 @@ module.exports = {
   editIncome,
   incomeSum,
   getYearlyIncome,
-  incomeYearlySum
+  incomeYearlySum,
+  getIncomeById
 };

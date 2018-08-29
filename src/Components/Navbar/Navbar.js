@@ -7,11 +7,11 @@ import { getUsers } from '../../ducks/reducers/userReducer';
 import menu from './menu.svg';
 
 class Navbar extends Component {
-  componentDidMount() {
-    this.props.getUsers().then(() => {
-      !this.props.userReducer.auth_id && window.location.assign('/');
-    });
-  }
+  // componentDidMount() {
+  //   this.props.getUsers().then(() => {
+  //     !this.props.userReducer.auth_id && window.location.assign('/');
+  //   });
+  // }
 
   render() {
     return (
