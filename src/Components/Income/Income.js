@@ -36,8 +36,8 @@ class Income extends Component {
   state = {
     modalIsOpen: false,
     edit: false,
-    incomeTotal: 0
-    // month: true
+    incomeTotal: 0,
+    month: true
   };
 
   openModal = () => {
@@ -197,7 +197,7 @@ class Income extends Component {
           <div className="income_display">
             <div>
               <h2>
-                {this.props.userReducer.title}
+                {this.props.userReducer.name}
                 's Income
               </h2>
               <h2>Amount</h2>

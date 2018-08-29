@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import 'fullcalendar';
 import $ from 'jquery';
 import moment from 'moment';
@@ -12,7 +11,6 @@ import { getUsers } from '../../ducks/reducers/userReducer';
 class Calendar extends Component {
   componentDidMount() {
     this.props.getUsers();
-    console.log(this.props.userReducer.id);
 
     $('#calendar').fullCalendar({
       header: {
@@ -22,14 +20,12 @@ class Calendar extends Component {
       },
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
-      drop: function() {
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
-        }
+
+      eventDrop: function(date, allDay) {
+        console.log(date);
+        console.log(moment(date.start._d).format('YYYY-MM-DD'));
       },
-      events: `/api/income/6`,
+      events: `/api/income/${this.props.userReducer.id}`,
       eventMouseover: function(e, jsEvent) {
         const tooltip =
           '<div class="tooltipevent" style="padding:1% 1.5%;opacity: 0.8;background:rgb(241, 241, 241);position:absolute;z-index:10001;">' +
@@ -48,14 +44,11 @@ class Calendar extends Component {
             $('.tooltipevent').css('top', e.pageY + 10);
             $('.tooltipevent').css('left', e.pageX + 20);
           });
+      },
+      eventMouseout: function(calEvent, jsEvent) {
+        $(this).css('z-index', 8);
+        $('.tooltipevent').remove();
       }
-      // eventMouseout: function(calEvent, jsEvent) {
-      //   $(this).css('z-index', 8);
-      //   $('.tooltipevent').remove();
-      // },
-      // eventClick: function(e) {
-      //   window.location.href = `/events/${e.title}`;
-      // }
     });
   }
 
