@@ -1,17 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
 const initialState = {
   income: [],
-  amount: '',
-  date: '',
-  title: '',
+  amount: "",
+  date: "",
+  title: "",
   didErr: false
 };
 
-const GET_INCOME = 'GET_INCOME';
-const GET_AMOUNT = 'GET_AMOUNT';
-const GET_DATE = 'GET_DATE';
-const GET_TITLE = 'GET_TITLE';
+const GET_INCOME = "GET_INCOME";
+const GET_AMOUNT = "GET_AMOUNT";
+const GET_DATE = "GET_DATE";
+const GET_TITLE = "GET_TITLE";
 
 export const getIncome = (start, end) => {
   return {
@@ -65,6 +65,7 @@ export const updateTitle = title => {
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case `${GET_INCOME}_FULFILLED`:
+      console.log(action.payload.data);
       return {
         ...state,
         income: action.payload.data
