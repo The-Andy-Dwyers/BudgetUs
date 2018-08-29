@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
-import 'moment-recur';
 import ContentEditable from 'react-contenteditable';
 
 import './Income.css';
@@ -86,33 +85,23 @@ class Income extends Component {
     });
   };
 
-  handleKeyDown2 = e => {
+  handleEdit = id => {
     let { amount, name, payday } = this.props.incomeReducer;
+    var find = this.props.incomeReducer.income.find(e => e.id === id);
 
-    e.keyCode === 13 &&
-      axios
-        .put('/api/edit-income', {
-          name,
-          amount,
-          payday
-        })
-        .then(() => {
-          this.props.getIncome();
-        });
+    axios
+      .put(`/api/edit-income/${id}`, {
+        name: name === '' ? find.name : name,
+        amount: amount === '' ? find.amount : amount,
+        payday: payday === '' ? find.payday : payday
+      })
+      .then(() => {
+        this.props.getIncome();
+      });
   };
 
   render() {
     const { updateAmount, updateName, updatePayday } = this.props;
-    console.log(this.props);
-    // let recurrence = moment()
-    //   .recur({
-    //     start: '2018-01-01',
-    //     end: '2018-12-31'
-    //   })
-    //   .every(this.state.number)
-    //   .daysOfMonth()
-    //   .all('l');
-    // console.log(recurrence);
 
     const map = this.props.incomeReducer.income.map(e => {
       return (
@@ -120,18 +109,15 @@ class Income extends Component {
           <ContentEditable
             html={e.name}
             onChange={e => updateName(e.target.value)}
-            onKeyDown={e => this.handleKeyDown2(e)}
           />
 
           <ContentEditable
             html={String(e.amount)}
             onChange={e => updateAmount(e.target.value)}
-            onKeyDown={e => this.handleKeyDown2(e)}
           />
           <ContentEditable
             html={String(moment.utc(e.payday).format('ddd, MMM D'))}
             onChange={e => updatePayday(e.target.value)}
-            onKeyDown={e => this.handleKeyDown2(e)}
           />
           <h3
             className="income_del btn"
@@ -139,6 +125,7 @@ class Income extends Component {
           >
             Remove
           </h3>
+          <h3 onClick={id => this.handleEdit(e.id)}>Submit Edit</h3>
         </div>
       );
     });

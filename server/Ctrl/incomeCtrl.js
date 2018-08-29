@@ -45,9 +45,10 @@ const editIncome = (req, res) => {
   const db = req.app.get('db');
   const { name, amount, payday } = req.body;
   console.log(req.body);
+  console.log(req.params)
 
   db.income
-    .edit_income([req.user.id, name, amount, payday])
+    .edit_income([req.params.id, name, amount, payday])
     .then(response => res.status(200).send(response))
     .catch(err => {
       console.log(err);
