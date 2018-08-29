@@ -1,8 +1,33 @@
+var moment = require('moment');
+const start = moment()
+  .startOf('month')
+  .format('l');
+const end = moment()
+  .endOf('month')
+  .format('l');
+const year = moment()
+  .startOf('year')
+  .format('l');
+
 const getIncome = (req, res) => {
   const db = req.app.get('db');
 
   db.income
-    .get_income([req.user.id])
+    .get_income([req.user.id, start, end])
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
+const getYearlyIncome = (req, res) => {
+  const db = req.app.get('db');
+
+  db.income
+    .get_income([req.user.id, year, end])
     .then(response => {
       res.status(200).send(response);
     })
@@ -57,7 +82,21 @@ const incomeSum = (req, res) => {
   const db = req.app.get('db');
 
   db.income
-    .get_income_sum([req.user.id])
+    .get_income_sum([req.user.id, start, end])
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
+const incomeYearlySum = (req, res) => {
+  const db = req.app.get('db');
+
+  db.income
+    .get_income_sum([req.user.id, year, end])
     .then(response => {
       res.status(200).send(response);
     })
@@ -72,5 +111,7 @@ module.exports = {
   addIncome,
   deleteIncome,
   editIncome,
-  incomeSum
+  incomeSum,
+  getYearlyIncome,
+  incomeYearlySum
 };

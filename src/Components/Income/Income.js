@@ -5,10 +5,12 @@ import moment from 'moment';
 import axios from 'axios';
 import ContentEditable from 'react-contenteditable';
 import DatePicker from 'react-custom-date-picker';
+import Switch from 'react-switch';
 
 import './Income.css';
 import {
   getIncome,
+  getYearlyIncome,
   updateAmount,
   updatePayday,
   updateName
@@ -33,7 +35,8 @@ class Income extends Component {
   state = {
     modalIsOpen: false,
     edit: false,
-    incomeTotal: 0
+    incomeTotal: 0,
+    month: true
   };
 
   openModal = () => {
@@ -50,8 +53,21 @@ class Income extends Component {
     this.incomeSum();
   }
 
-  incomeSum = () => {
-    axios.get('/api/income-sum').then(res => {
+  handleChange = month => {
+    this.setState(
+      {
+        month
+      },
+      () => {
+        this.state.month
+          ? this.props.getIncome()
+          : this.props.getYearlyIncome();
+      }
+    );
+  };
+
+  incomeSum = (start, end) => {
+    axios.get(`/api/income-sum?start=${start}&end=${end}`).then(res => {
       this.setState({ incomeTotal: res.data[0]['sum'] });
     });
   };
@@ -129,7 +145,7 @@ class Income extends Component {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
           <p>{e.name}</p>
-          <p>${(e.amount).toLocaleString()}</p>
+          <p>${e.amount.toLocaleString()}</p>
           <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
         </div>
       ) : (
@@ -178,6 +194,12 @@ class Income extends Component {
             Income Input
           </h1>
           <div className="income_display">
+            <Switch
+              onChange={this.handleChange}
+              checked={this.state.month}
+              id="normal-switch"
+            />
+
             <div>
               <h2>
                 {this.props.userReducer.name}
@@ -186,7 +208,9 @@ class Income extends Component {
               <h2>Amount</h2>
               <h2>Payday</h2>
             </div>
+
             {map}
+
             <div className="income_edit_holder">
               {!this.state.edit && (
                 <h3
@@ -250,6 +274,7 @@ export default connect(
   {
     getUser,
     getIncome,
+    getYearlyIncome,
     updateAmount,
     updatePayday,
     updateName
