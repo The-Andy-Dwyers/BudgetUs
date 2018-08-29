@@ -22,12 +22,28 @@ const getExpenses = (req, res) => {
       res.status(500).send(err);
     });
 };
+
 const getExpensesByCategory = (req, res) => {
   const db = req.app.get("db");
 
   db.expenses
     .get_expenses_by_category([req.user.id, start, end])
     .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
+const getYearlyExpensesByCategory = (req, res) => {
+  const db = req.app.get("db");
+
+  db.expenses
+    .get_expenses_by_category([req.user.id, year, end])
+    .then(response => {
+      console.log(response)
       res.status(200).send(response);
     })
     .catch(err => {
@@ -88,6 +104,7 @@ module.exports = {
   getExpenses,
   addExpenses,
   getExpensesByCategory,
+  getYearlyExpensesByCategory,
   deleteExpense,
   editExpense
 };

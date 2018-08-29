@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
-import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
+import { getExpensesByCategory, getYearlyExpensesByCategory } from "../../ducks/reducers/expensesReducer";
 import Switch from "react-switch";
 import moment from "moment";
 
@@ -12,35 +12,21 @@ class Chart extends Component {
   }
   componentDidMount() {
     // console.log("mounted");
-    this.props.getExpensesByCategory();
+    this.props.getExpensesByCategory();    
   }
 
-  // handleChange = month => {
-  //   this.setState(
-  //     {
-  //       month
-  //     },
-  //     () => {
-  //       this.state.month
-  //         ? this.props.getExpensesByCategory(
-  //             moment()
-  //               .startOf("month")
-  //               .format("l"),
-  //             moment()
-  //               .endOf("month")
-  //               .format("l")
-  //           )
-  //         : this.props.getExpensesByCategory(
-  //             moment()
-  //               .startOf("year")
-  //               .format("l"),
-  //             moment()
-  //               .endOf("month")
-  //               .format("l")
-  //           );
-  //     }
-  //   );
-  // };
+  handleChange = month => {
+    this.setState(
+      {
+        month
+      },
+      () => {
+        this.state.month
+          ? this.props.getExpensesByCategory()
+          : this.props.getYearlyExpensesByCategory();
+      }
+    );
+  };
   render() {
     console.log(add(this.props.expenses), `expenses`);
     console.log(add(this.props.income), "income");
@@ -127,7 +113,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getExpensesByCategory }
+  { getExpensesByCategory, getYearlyExpensesByCategory }
 )(Chart);
 
 function add(arr) {
