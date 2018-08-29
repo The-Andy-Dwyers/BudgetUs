@@ -35,7 +35,8 @@ class Expenses extends Component {
     company: "",
     category: "",
     date: new Date().toISOString(),
-    modalIsOpen: false
+    modalIsOpen: false,
+    edit: false
   };
 
   openModal = () => {
@@ -129,6 +130,7 @@ class Expenses extends Component {
             <h2>Type</h2>
             <h2>Company</h2>
             <h2>Category</h2>
+            <h3 className="expensesinfo_edit btn">Edit</h3>
           </div>
           {map}
         </div>
