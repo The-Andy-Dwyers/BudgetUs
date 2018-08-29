@@ -13,7 +13,7 @@ import {
   getYearlyIncome,
   updateAmount,
   updateDate,
-  updateName
+  updateTitle
 } from '../../ducks/reducers/incomeReducer';
 import { getUser } from '../../ducks/reducers/userReducer';
 import { getExpenses } from '../../ducks/reducers/expensesReducer';
@@ -78,14 +78,14 @@ class Income extends Component {
   };
 
   handleKeyDown = e => {
-    let { amount, name, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     e.keyCode === 13 &&
       axios
         .post('/api/setup-income', {
           amount,
-          name,
+          title,
           date,
           id
         })
@@ -96,13 +96,13 @@ class Income extends Component {
   };
 
   submitIncome = e => {
-    let { amount, name, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     axios
       .post('/api/setup-income', {
         amount,
-        name,
+        title,
         date,
         id
       })
@@ -122,12 +122,12 @@ class Income extends Component {
   };
 
   handleEdit = id => {
-    let { amount, name, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     var find = this.props.incomeReducer.income.find(e => e.id === id);
 
     axios
       .put(`/api/edit-income/${id}`, {
-        name: !name ? find.name : name,
+        title: !title ? find.title : title,
         amount: !amount ? find.amount : amount,
         date: !date ? find.date : date
       })
@@ -139,13 +139,13 @@ class Income extends Component {
   };
 
   render() {
-    const { updateAmount, updateName } = this.props;
+    const { updateAmount, updateTitle } = this.props;
     const day = moment().format('MM/DD/YYYY');
 
     const map = this.props.incomeReducer.income.map(e => {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
-          <p>{e.name}</p>
+          <p>{e.title}</p>
           <p>${e.amount.toLocaleString()}</p>
           <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
         </div>
@@ -153,8 +153,8 @@ class Income extends Component {
         <div key={e.id} className="income_map">
           <ContentEditable
             className="income_content"
-            html={e.name}
-            onChange={e => updateName(e.target.value)}
+            html={e.title}
+            onChange={e => updateTitle(e.target.value)}
           />
           <ContentEditable
             className="income_content"
@@ -203,7 +203,7 @@ class Income extends Component {
 
             <div>
               <h2>
-                {this.props.userReducer.name}
+                {this.props.userReducer.title}
                 's Income
               </h2>
               <h2>Amount</h2>
@@ -239,7 +239,7 @@ class Income extends Component {
             <br />
             <div className="income_sub">
               <p>Source:</p>
-              <input onChange={e => updateName(e.target.value)} type="text" />
+              <input onChange={e => updateTitle(e.target.value)} type="text" />
             </div>
             <div className="income_sub">
               <p>Amount:</p>
@@ -278,7 +278,7 @@ export default connect(
     getYearlyIncome,
     updateAmount,
     updateDate,
-    updateName,
+    updateTitle,
     getExpenses
   }
 )(Income);
