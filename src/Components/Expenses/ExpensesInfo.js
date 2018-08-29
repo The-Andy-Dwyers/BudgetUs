@@ -105,7 +105,7 @@ class Expenses extends Component {
       expense.map(e => {
         return (
           <div className="expensesinfo_map" key={e.id}>
-            <p>{e.name}</p>
+            <p>{e.title}</p>
             <p>${e.amount}</p>
             <p>{moment.utc(date).format("ddd, MMM D")}</p>
             <p>{e.type}</p>
@@ -142,7 +142,7 @@ class Expenses extends Component {
           <h1>Expenses</h1>
           <input
             className="Expenses_input"
-            placeholder="expense name"
+            placeholder="Expense Name"
             onChange={e => this.handleInputs(e.target.value, "expenseName")}
           />
           <input
@@ -162,14 +162,14 @@ class Expenses extends Component {
 
           <form>
             <input
-              name="type"
+              title="type"
               type="radio"
               value="recurring"
               onClick={() => this.handleType("Recurring")}
             />{" "}
             Recurring
             <input
-              name="type"
+              title="type"
               type="radio"
               value="nonrecurring"
               onClick={() => this.handleType("Non-Recurring")}
