@@ -22,7 +22,9 @@ const {
   addIncome,
   deleteIncome,
   editIncome,
-  incomeSum
+  incomeSum,
+  getYearlyIncome,
+  incomeYearlySum
 } = require('./Ctrl/incomeCtrl');
 
 const app = express();
@@ -93,6 +95,8 @@ app.post('/api/setup-income', addIncome);
 app.delete('/api/delete-income/:id', deleteIncome);
 app.put('/api/edit-income/:id', editIncome);
 app.get('/api/income-sum', incomeSum);
+app.get('/api/yearly-income', getYearlyIncome);
+app.get('/api/yearly-income-sum', incomeYearlySum);
 
 // run build
 app.get('*', (req, res) => {

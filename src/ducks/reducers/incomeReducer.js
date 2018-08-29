@@ -13,10 +13,17 @@ const GET_AMOUNT = 'GET_AMOUNT';
 const GET_PAYDAY = 'GET_PAYDAY';
 const GET_NAME = 'GET_NAME';
 
-export const getIncome = () => {
+export const getIncome = (start, end) => {
   return {
     type: GET_INCOME,
-    payload: axios.get('/api/income')
+    payload: axios.get(`/api/income`)
+  };
+};
+
+export const getYearlyIncome = () => {
+  return {
+    type: GET_INCOME,
+    payload: axios.get(`/api/yearly-income`)
   };
 };
 
