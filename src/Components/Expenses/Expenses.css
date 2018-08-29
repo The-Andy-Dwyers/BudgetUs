@@ -1,27 +1,3 @@
-.Expenses_expenselist {
-  display: flex;
-  padding: 1rem;
-}
-
-.expense_input_btn {
-  display: inline-block;
-  box-shadow: 1px 1px 5px grey;
-  background-color: rgb(245, 245, 245);
-  padding: 0.5em;
-  border-radius: 10%;
-  margin: 3% 0;
-}
-
-.Expenses_expenselist {
-  width: 95%;
-  margin: 5% 2%;
-  height: 100%;
-  border: 1px solid black;
-}
-
-.Expenses_list_content {
-  width: 95%;
-  margin: 5% 2%;
-  height: 100%;
-  border: 1px solid black;
+.Expenses {
+  width: 100%;
 }

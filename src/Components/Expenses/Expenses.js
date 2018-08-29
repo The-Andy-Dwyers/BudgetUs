@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { getUsers } from '../../ducks/reducers/userReducer';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { getUsers } from "../../ducks/reducers/userReducer";
+import { connect } from "react-redux";
 
-import Chart from '../Chart/Chart';
-import ExpensesInfo from './ExpensesInfo';
-
+import Chart from "../Chart/Chart";
+import "./Expenses.css";
+import ExpensesInfo from "./ExpensesInfo";
 class Expenses extends Component {
   componentDidMount() {
     this.props.getUsers();
   }
   render() {
     return (
-      <div>
+      <div className="Expenses">
         <ExpensesInfo />
         <Chart type="expenses" />
       </div>
