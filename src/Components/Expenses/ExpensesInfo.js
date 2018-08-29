@@ -7,11 +7,11 @@ import moment from 'moment';
 
 import './Expenses.css';
 import {
+  getExpensesByCategory,
   getExpenses,
   addExpenses,
   deleteExpense
 } from '../../ducks/reducers/expensesReducer';
-import { getExpensesByCategory } from '../../ducks/reducers/expensesReducer';
 import { getUsers } from '../../ducks/reducers/userReducer';
 
 const customStyles = {
@@ -47,7 +47,15 @@ class Expenses extends Component {
   };
 
   componentDidMount() {
-    this.props.getExpenses();
+    this.props
+      .getExpenses(
+        moment()
+          .startOf('month')
+          .format('l'),
+        moment()
+          .endOf('month')
+          .format('l')
+      )
     this.props.getUsers();
   }
 
@@ -69,17 +77,33 @@ class Expenses extends Component {
 
   handleDelete = id => {
     axios.delete(`/api/delete-expense/${id}`).then(() => {
-      this.props.getExpensesByCategory();
-      this.props.getExpenses();
+      this.props.getExpensesByCategory(
+        moment()
+          .startOf('month')
+          .format('l'),
+        moment()
+          .endOf('month')
+          .format('l')
+      );
+      this.props.getExpenses(
+        moment()
+          .startOf('month')
+          .format('l'),
+        moment()
+          .endOf('month')
+          .format('l')
+      );
     });
   };
 
   render() {
     const { id } = this.props.userReducer;
+    const {expense} = this.props.expensesReducer
     const { expenseName, amount, date, type, company, category } = this.state;
+
     const map =
-      this.props.expensesReducer.expense &&
-      this.props.expensesReducer.expense.map(e => {
+      expense &&
+      expense.map(e => {
         return (
           <div className="Expenses_expenselist" key={e.id}>
             <p className="Expenses_list_content">{e.name}</p>
@@ -174,8 +198,22 @@ class Expenses extends Component {
                 })
                 .then(() => {
                   this.closeModal();
-                  this.props.getExpensesByCategory();
-                  this.props.getExpenses();
+                  this.props.getExpensesByCategory(
+                    moment()
+                      .startOf('month')
+                      .format('l'),
+                    moment()
+                      .endOf('month')
+                      .format('l')
+                  );
+                  this.props.getExpenses(
+                    moment()
+                      .startOf('month')
+                      .format('l'),
+                    moment()
+                      .endOf('month')
+                      .format('l')
+                  );
                 })
             }
           >

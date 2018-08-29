@@ -22,7 +22,8 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
+    fontFamily: 'Lato, sans-serif'
   }
 };
 
@@ -109,9 +110,9 @@ class Income extends Component {
 
     axios
       .put(`/api/edit-income/${id}`, {
-        name: name === '' ? find.name : name,
-        amount: amount === '' ? find.amount : amount,
-        payday: payday === '' ? find.payday : payday
+        name: !name ? find.name : name,
+        amount: !amount ? find.amount : amount,
+        payday: !payday ? find.payday : payday
       })
       .then(() => {
         this.props.getIncome();
@@ -121,42 +122,51 @@ class Income extends Component {
   };
 
   render() {
-    const { updateAmount, updateName, updatePayday } = this.props;
+    const { updateAmount, updateName } = this.props;
     const day = moment().format('MM/DD/YYYY');
 
     const map = this.props.incomeReducer.income.map(e => {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
           <p>{e.name}</p>
-          <p>{e.amount}</p>
+          <p>${(e.amount).toLocaleString()}</p>
           <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
-          <h3 onClick={() => this.setState({ edit: true })} className="income_edit btn">
-            Edit
-          </h3>
         </div>
       ) : (
         <div key={e.id} className="income_map">
           <ContentEditable
+            className="income_content"
             html={e.name}
             onChange={e => updateName(e.target.value)}
           />
-
           <ContentEditable
+            className="income_content"
             html={String(e.amount)}
             onChange={e => updateAmount(e.target.value)}
           />
-          <DatePicker
-            date={moment.utc(e.payday).format('MM/DD/YYYY')}
-            placeholder={moment.utc(e.payday).format('MM/DD/YYYY')}
-            handleDateChange={this.handleDateChange}
-          />
-          <h3
-            className="income_del btn"
-            onClick={id => this.handleDelete(e.id)}
-          >
-            Remove
-          </h3>
-          <h3 className='income_edit btn'onClick={id => this.handleEdit(e.id)}>Submit Edit</h3>
+          <div className="income_map_bottom">
+            <DatePicker
+              className="income_content"
+              date={moment.utc(e.payday).format('MM/DD/YYYY')}
+              placeholder={moment.utc(e.payday).format('MM/DD/YYYY')}
+              handleDateChange={this.handleDateChange}
+            />
+            <div className="income_btn_holder">
+              <h3
+                className="income_edit btn"
+                onClick={id => this.handleEdit(e.id)}
+              >
+                Submit Edit
+              </h3>
+              <div
+                className="x_container btn"
+                onClick={id => this.handleDelete(e.id)}
+              >
+                <div className="x_div x1" />
+                <div className="x_div x2" />
+              </div>
+            </div>
+          </div>
         </div>
       );
     });
@@ -167,7 +177,6 @@ class Income extends Component {
           <h1 className="income_input_btn btn" onClick={this.openModal}>
             Income Input
           </h1>
-
           <div className="income_display">
             <div>
               <h2>
@@ -178,8 +187,18 @@ class Income extends Component {
               <h2>Payday</h2>
             </div>
             {map}
+            <div className="income_edit_holder">
+              {!this.state.edit && (
+                <h3
+                  onClick={() => this.setState({ edit: true })}
+                  className="income_edit2 btn"
+                >
+                  Edit
+                </h3>
+              )}
+            </div>
           </div>
-          <div className='income_total'>
+          <div className="income_total">
             <p>Income Total: {+this.state.incomeTotal}</p>
           </div>
         </div>
