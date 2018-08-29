@@ -11,9 +11,6 @@ class Chart extends Component {
     this.state = { month: true };
   }
   componentDidMount() {
-    moment()
-      .endOf("month")
-      .format("l");
     this.props.getExpensesByCategory(
       moment()
         .startOf("month")
@@ -25,12 +22,33 @@ class Chart extends Component {
   }
 
   handleChange = month => {
-    console.log(month);
-    this.setState({ month });
+    this.setState(
+      {
+        month
+      },
+      () => {
+        this.state.month
+          ? this.props.getExpensesByCategory(
+              moment()
+                .startOf("month")
+                .format("l"),
+              moment()
+                .endOf("month")
+                .format("l")
+            )
+          : this.props.getExpensesByCategory(
+              moment()
+                .startOf("year")
+                .format("l"),
+              moment()
+                .endOf("month")
+                .format("l")
+            );
+      }
+    );
   };
-
   render() {
-    const remaindata = {
+    const remainData = {
       datasets: [
         {
           data: this.props.income.length !== 0 && [
@@ -42,16 +60,7 @@ class Chart extends Component {
       ],
       labels: ["expenses", "remaining"]
     };
-    const monthSpendData = {
-      datasets: [
-        {
-          data: this.props.expenses.map(e => e.amount),
-          backgroundColor: ["blue", "green", "purple", "red"]
-        }
-      ],
-      labels: this.props.expenses.map(e => e.category)
-    };
-    const yearSpendData = {
+    const spendData = {
       datasets: [
         {
           data: this.props.expenses.map(e => e.amount),
@@ -74,12 +83,7 @@ class Chart extends Component {
     return this.props.type === "remaining" ? (
       <div>
         <h2>Remaining Chart</h2>
-        <Switch
-          onChange={this.handleChange}
-          checked={this.state.month}
-          id="normal-switch"
-        />
-        {this.state.month ? "month chart" : "year chart"}
+        <Doughnut data={remainData} options={options} />
       </div>
     ) : (
       <div>
@@ -93,35 +97,19 @@ class Chart extends Component {
           <div>
             <h2>Month View</h2>
             {this.props.expenses.length !== 0 && (
-              <Doughnut data={monthSpendData} options={options} />
+              <Doughnut data={spendData} options={options} />
             )}
           </div>
         ) : (
           <div>
-            <h2>Month View</h2>
+            <h2>Year View</h2>
             {this.props.expenses.length !== 0 && (
-              <Doughnut data={yearSpendData} options={options} />
+              <Doughnut data={spendData} options={options} />
             )}
           </div>
         )}
       </div>
-      // <div>
-      //   <h2>Expenses Data</h2>
-      //   {this.props.expenses.length !== 0 && (
-      //     <Doughnut data={spenddata} options={options} />
-      //   )}
-      // </div>
     );
-    // return (
-    //   <div>
-    //     <Switch
-    //       onChange={this.handleChange}
-    //       checked={this.state.checked}
-    //       id="normal-switch"
-    //     />
-    //     {this.state.checked ? "Its true!" : "Its Not True!"}
-    //   </div>
-    // );
   }
 }
 function mapStateToProps(state) {
