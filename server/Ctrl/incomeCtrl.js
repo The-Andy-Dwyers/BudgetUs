@@ -53,9 +53,24 @@ const editIncome = (req, res) => {
     });
 };
 
+const incomeSum = (req, res) => {
+  const db = req.app.get('db');
+
+  db.income
+    .get_income_sum([req.user.id])
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 module.exports = {
   getIncome,
   addIncome,
   deleteIncome,
-  editIncome
+  editIncome,
+  incomeSum
 };

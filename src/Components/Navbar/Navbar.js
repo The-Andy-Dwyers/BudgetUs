@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 import { getUsers } from '../../ducks/reducers/userReducer';
+import menu from './menu.svg';
 
 class Navbar extends Component {
   componentDidMount() {
@@ -15,21 +16,26 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar">
-        <Link className="link" to="/dashboard">
-          <h2>Home</h2>
-        </Link>
-        <Link className="link" to="/expenses">
-          <h2>Expenses</h2>
-        </Link>
-        <Link className="link" to="/calendar">
-          <h2>Calendar</h2>
-        </Link>
-        <Link className="link" to="/settings">
-          <h2>Settings</h2>
-        </Link>
-        <a className="link" href={process.env.REACT_APP_LOGOUT}>
-          <h1 className="link">Logout</h1>
-        </a>
+        <div className="ham_container">
+          <img className="hamburger" src={menu} alt="Hamburger menu" />
+        </div>
+        <div className="navbar_sub">
+          <Link className="link" to="/dashboard">
+            <h2>Home</h2>
+          </Link>
+          <Link className="link" to="/expenses">
+            <h2>Expenses</h2>
+          </Link>
+          <Link className="link" to="/calendar">
+            <h2>Calendar</h2>
+          </Link>
+          <Link className="link" to="/settings">
+            <h2>Settings</h2>
+          </Link>
+          <a className="link" href={process.env.REACT_APP_LOGOUT}>
+            <h1 className="link">Logout</h1>
+          </a>
+        </div>
       </div>
     );
   }

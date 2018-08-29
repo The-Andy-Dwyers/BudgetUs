@@ -1,19 +1,61 @@
 .navbar {
-    width: 80px;
-    background-color: rgb(54, 54, 54);
-    height: 100vh;
-    transition: .5s ease-out;
+  width: 80px;
+  background-color: rgb(54, 54, 54);
+  height: 100vh;
+  transition: 0.5s ease-out;
+}
+
+.navbar_sub {
 }
 
 .link {
-    text-decoration: none;
-    color: rgb(228, 228, 228);
+  text-decoration: none;
+  color: rgb(228, 228, 228);
 }
 
 .navbar:hover {
-    width: 160px;
+  width: 160px;
 }
 
 .navbar h2 {
-    margin: 10% 0;
+  margin: 10% 0;
+}
+
+.ham_container {
+  cursor: pointer;
+  z-index: 9999;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
+.hamburger {
+  width: 30px;
+  display: none;
+  animation: slide-in-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    width: 0%;
+  }
+
+  .navbar img {
+    display: block;
+  }
+
+  .navbar_sub {
+    display: none;
+  }
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

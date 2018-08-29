@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
 import ContentEditable from 'react-contenteditable';
+import DatePicker from 'react-custom-date-picker';
 
 import './Income.css';
 import {
@@ -29,7 +30,9 @@ Modal.setAppElement(document.getElementById('root'));
 
 class Income extends Component {
   state = {
-    modalIsOpen: false
+    modalIsOpen: false,
+    edit: false,
+    incomeTotal: 0
   };
 
   openModal = () => {
@@ -43,7 +46,18 @@ class Income extends Component {
   componentDidMount() {
     this.props.getIncome();
     this.props.getUser();
+    this.incomeSum();
   }
+
+  incomeSum = () => {
+    axios.get('/api/income-sum').then(res => {
+      this.setState({ incomeTotal: res.data[0]['sum'] });
+    });
+  };
+
+  handleDateChange = date => {
+    this.props.updatePayday(date);
+  };
 
   handleKeyDown = e => {
     let { amount, name, payday } = this.props.incomeReducer;
@@ -76,6 +90,7 @@ class Income extends Component {
       })
       .then(() => {
         this.props.getIncome();
+        this.incomeSum();
         this.closeModal();
       });
   };
@@ -83,6 +98,8 @@ class Income extends Component {
   handleDelete = id => {
     axios.delete(`/api/delete-income/${id}`).then(() => {
       this.props.getIncome();
+      this.incomeSum();
+      this.setState({ edit: false });
     });
   };
 
@@ -98,14 +115,26 @@ class Income extends Component {
       })
       .then(() => {
         this.props.getIncome();
+        this.incomeSum();
+        this.setState({ edit: false });
       });
   };
 
   render() {
     const { updateAmount, updateName, updatePayday } = this.props;
+    const day = moment().format('MM/DD/YYYY');
 
     const map = this.props.incomeReducer.income.map(e => {
-      return (
+      return !this.state.edit ? (
+        <div key={e.id} className="income_map">
+          <p>{e.name}</p>
+          <p>{e.amount}</p>
+          <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
+          <h3 onClick={() => this.setState({ edit: true })} className="income_edit btn">
+            Edit
+          </h3>
+        </div>
+      ) : (
         <div key={e.id} className="income_map">
           <ContentEditable
             html={e.name}
@@ -116,9 +145,10 @@ class Income extends Component {
             html={String(e.amount)}
             onChange={e => updateAmount(e.target.value)}
           />
-          <ContentEditable
-            html={String(moment.utc(e.payday).format('ddd, MMM D'))}
-            onChange={e => updatePayday(e.target.value)}
+          <DatePicker
+            date={moment.utc(e.payday).format('MM/DD/YYYY')}
+            placeholder={moment.utc(e.payday).format('MM/DD/YYYY')}
+            handleDateChange={this.handleDateChange}
           />
           <h3
             className="income_del btn"
@@ -126,10 +156,11 @@ class Income extends Component {
           >
             Remove
           </h3>
-          <h3 onClick={id => this.handleEdit(e.id)}>Submit Edit</h3>
+          <h3 className='income_edit btn'onClick={id => this.handleEdit(e.id)}>Submit Edit</h3>
         </div>
       );
     });
+
     return (
       <div className="income_container">
         <div className="income">
@@ -147,6 +178,9 @@ class Income extends Component {
               <h2>Payday</h2>
             </div>
             {map}
+          </div>
+          <div className='income_total'>
+            <p>Income Total: {+this.state.incomeTotal}</p>
           </div>
         </div>
 
@@ -174,7 +208,11 @@ class Income extends Component {
             </div>
             <div className="income_sub">
               <p>Payday:</p>
-              <input onChange={e => updatePayday(e.target.value)} type="text" />
+              <DatePicker
+                date={this.props.incomeReducer.date}
+                placeholder={day}
+                handleDateChange={this.handleDateChange}
+              />
             </div>
             <h3 className="income_btn btn" onClick={e => this.submitIncome(e)}>
               Submit
