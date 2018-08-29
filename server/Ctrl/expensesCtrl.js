@@ -1,5 +1,5 @@
 const getExpenses = (req, res) => {
-  const db = req.app.get("db");
+  const db = req.app.get('db');
 
   db.expenses
     .get_expenses([req.user.id, req.query.start, req.query.end])
@@ -12,9 +12,11 @@ const getExpenses = (req, res) => {
     });
 };
 const getExpensesByCategory = (req, res) => {
-  const db = req.app.get("db");
+  const db = req.app.get('db');
+  const { start, end } = req.query;
+
   db.expenses
-    .get_expenses_by_category([req.user.id, req.query.start, req.query.end])
+    .get_expenses_by_category([req.user.id, start, end])
     .then(response => {
       res.status(200).send(response);
     })
@@ -25,18 +27,11 @@ const getExpensesByCategory = (req, res) => {
 };
 
 const addExpenses = (req, res) => {
+  const db = req.app.get('db');
   const { expenseName, amount, type, date, company, category, id } = req.body;
-  req.app
-    .get("db")
-    .expenses.add_expenses([
-      expenseName,
-      amount,
-      type,
-      date,
-      company,
-      category,
-      id
-    ])
+
+  db.expenses
+    .add_expenses([expenseName, amount, type, date, company, category, id])
     .then(newExpenses => {
       res.status(200).send(newExpenses);
     })
@@ -46,10 +41,10 @@ const addExpenses = (req, res) => {
 };
 
 const deleteExpense = (req, res) => {
-  console.log(req.params);
-  req.app
-    .get("db")
-    .expenses.delete_expense(req.params.id)
+  const db = req.app.get('db');
+
+  db.expenses
+    .delete_expense(req.params.id)
     .then(response => {
       res.status(200).send(response);
     })

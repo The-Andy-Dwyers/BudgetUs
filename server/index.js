@@ -90,12 +90,12 @@ app.delete("/api/delete-expense/:id", deleteExpense);
 app.get("/api/income", getIncome);
 app.post("/api/setup-income", addIncome);
 app.delete("/api/delete-income/:id", deleteIncome);
-app.put("/api/edit-income", editIncome);
+app.put("/api/edit-income/:id", editIncome);
 
-//run build
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
+// run build
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}.`);
