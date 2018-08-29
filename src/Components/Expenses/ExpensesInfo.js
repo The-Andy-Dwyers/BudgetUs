@@ -1,47 +1,45 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import DatePicker from 'react-custom-date-picker';
+import Modal from 'react-modal';
+import moment from 'moment';
+
+import './Expenses.css';
 import {
   getExpenses,
   addExpenses,
   deleteExpense
-} from "../../ducks/reducers/expensesReducer";
-import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import DatePicker from "react-custom-date-picker";
-import moment from "moment";
-import axios from "axios";
-import Modal from "react-modal";
-// import Chart from "../Chart/Chart";
-
-import "./Expenses.css";
+} from '../../ducks/reducers/expensesReducer';
+import { getExpensesByCategory } from '../../ducks/reducers/expensesReducer';
+import { getUsers } from '../../ducks/reducers/userReducer';
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
-Modal.setAppElement(document.getElementById("root"));
+Modal.setAppElement(document.getElementById('root'));
 
 class Expenses extends Component {
   state = {
-    expenseName: "",
+    expenseName: '',
     amount: 0,
-    type: "",
-    company: "",
-    category: "",
+    type: '',
+    company: '',
+    category: '',
     date: new Date().toISOString(),
     modalIsOpen: false
   };
 
   openModal = () => {
     this.setState({ modalIsOpen: true });
-    console.log("open");
   };
 
   closeModal = () => {
@@ -77,7 +75,6 @@ class Expenses extends Component {
   };
 
   render() {
-    // console.log(this.props);
     const { id } = this.props.userReducer;
     const { expenseName, amount, date, type, company, category } = this.state;
     const map =
@@ -88,7 +85,7 @@ class Expenses extends Component {
             <p className="Expenses_list_content">{e.name}</p>
             <p className="Expenses_list_content">{e.amount}</p>
             <p className="Expenses_list_content">
-              {moment.utc(date).format("ddd, MMM D")}
+              {moment.utc(date).format('ddd, MMM D')}
             </p>
             <p className="Expenses_list_content">{e.type}</p>
             <p className="Expenses_list_content">{e.company}</p>
@@ -116,12 +113,12 @@ class Expenses extends Component {
           <input
             className="Expenses_input"
             placeholder="expense name"
-            onChange={e => this.handleInputs(e.target.value, "expenseName")}
+            onChange={e => this.handleInputs(e.target.value, 'expenseName')}
           />
           <input
             className="Expenses_input"
             placeholder="amount"
-            onChange={e => this.handleInputs(e.target.value, "amount")}
+            onChange={e => this.handleInputs(e.target.value, 'amount')}
           />
           <DatePicker
             date={this.state.date}
@@ -130,7 +127,7 @@ class Expenses extends Component {
           <input
             className="Expenses_input"
             placeholder="Company"
-            onChange={e => this.handleInputs(e.target.value, "company")}
+            onChange={e => this.handleInputs(e.target.value, 'company')}
           />
 
           <form>
@@ -138,21 +135,21 @@ class Expenses extends Component {
               name="type"
               type="radio"
               value="recurring"
-              onClick={() => this.handleType("Recurring")}
-            />{" "}
+              onClick={() => this.handleType('Recurring')}
+            />{' '}
             Recurring
             <input
               name="type"
               type="radio"
               value="nonrecurring"
-              onClick={() => this.handleType("Non-Recurring")}
-            />{" "}
+              onClick={() => this.handleType('Non-Recurring')}
+            />{' '}
             Non-Recurring
           </form>
 
           <select
             required
-            onChange={e => this.handleInputs(e.target.value, "category")}
+            onChange={e => this.handleInputs(e.target.value, 'category')}
           >
             <option>Select Category:</option>
             <option value="Rent">Rent</option>

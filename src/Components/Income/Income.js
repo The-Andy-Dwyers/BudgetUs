@@ -39,6 +39,7 @@ class Income extends Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
+
   componentDidMount() {
     this.props.getIncome();
     this.props.getUser();

@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import { connect } from "react-redux";
-import Chart from "../Chart/Chart";
-import ExpensesInfo from "./ExpensesInfo";
+import React, { Component } from 'react';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import { connect } from 'react-redux';
+
+import Chart from '../Chart/Chart';
+import ExpensesInfo from './ExpensesInfo';
 
 class Expenses extends Component {
   componentDidMount() {
@@ -12,7 +13,6 @@ class Expenses extends Component {
     return (
       <div>
         <ExpensesInfo />
-
         <Chart type="expenses" />
       </div>
     );

@@ -1,5 +1,6 @@
 const getIncome = (req, res) => {
   const db = req.app.get('db');
+
   db.income
     .get_income([req.user.id])
     .then(response => {
@@ -14,7 +15,6 @@ const getIncome = (req, res) => {
 const addIncome = (req, res) => {
   const db = req.app.get('db');
   const { amount, name, payday, id } = req.body;
-  console.log(req.body);
 
   db.income
     .add_income([amount, name, payday, id])
@@ -30,7 +30,6 @@ const addIncome = (req, res) => {
 const deleteIncome = (req, res) => {
   const db = req.app.get('db');
   const { id } = req.params;
-  console.log(req.params);
 
   db.income
     .delete_income([req.user.id, id])
@@ -44,8 +43,6 @@ const deleteIncome = (req, res) => {
 const editIncome = (req, res) => {
   const db = req.app.get('db');
   const { name, amount, payday } = req.body;
-  console.log(req.body);
-  console.log(req.params)
 
   db.income
     .edit_income([req.params.id, name, amount, payday])
