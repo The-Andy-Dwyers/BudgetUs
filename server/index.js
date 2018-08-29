@@ -17,7 +17,12 @@ const {
   getExpensesByCategory,
   deleteExpense
 } = require("./Ctrl/expensesCtrl");
-const { getIncome, addIncome, deleteIncome } = require("./Ctrl/incomeCtrl");
+const {
+  getIncome,
+  addIncome,
+  deleteIncome,
+  editIncome
+} = require("./Ctrl/incomeCtrl");
 
 const app = express();
 app.use(bodyParser.json());
@@ -85,11 +90,12 @@ app.delete("/api/delete-expense/:id", deleteExpense);
 app.get("/api/income", getIncome);
 app.post("/api/setup-income", addIncome);
 app.delete("/api/delete-income/:id", deleteIncome);
+app.put("/api/edit-income", editIncome);
 
 //run build
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}.`);

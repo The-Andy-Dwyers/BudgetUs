@@ -2,13 +2,53 @@ import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
 import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
+import Switch from "react-switch";
+import moment from "moment";
 
 class Chart extends Component {
-  componentDidMount() {
-    this.props.getExpensesByCategory();
+  constructor() {
+    super();
+    this.state = { month: true };
   }
+  componentDidMount() {
+    this.props.getExpensesByCategory(
+      moment()
+        .startOf("month")
+        .format("l"),
+      moment()
+        .endOf("month")
+        .format("l")
+    );
+  }
+
+  handleChange = month => {
+    this.setState(
+      {
+        month
+      },
+      () => {
+        this.state.month
+          ? this.props.getExpensesByCategory(
+              moment()
+                .startOf("month")
+                .format("l"),
+              moment()
+                .endOf("month")
+                .format("l")
+            )
+          : this.props.getExpensesByCategory(
+              moment()
+                .startOf("year")
+                .format("l"),
+              moment()
+                .endOf("month")
+                .format("l")
+            );
+      }
+    );
+  };
   render() {
-    const remaindata = {
+    const remainData = {
       datasets: [
         {
           data: this.props.income.length !== 0 && [
@@ -20,7 +60,7 @@ class Chart extends Component {
       ],
       labels: ["expenses", "remaining"]
     };
-    const spenddata = {
+    const spendData = {
       datasets: [
         {
           data: this.props.expenses.map(e => e.amount),
@@ -42,16 +82,31 @@ class Chart extends Component {
     };
     return this.props.type === "remaining" ? (
       <div>
-        <h2>Income Data</h2>
-        {this.props.income.length !== 0 && (
-          <Doughnut data={remaindata} options={options} />
-        )}
+        <h2>Remaining Chart</h2>
+        <Doughnut data={remainData} options={options} />
       </div>
     ) : (
       <div>
-        <h2>Expenses Data</h2>
-        {this.props.expenses.length !== 0 && (
-          <Doughnut data={spenddata} options={options} />
+        <h2>Expenses By Category Chart</h2>
+        <Switch
+          onChange={this.handleChange}
+          checked={this.state.month}
+          id="normal-switch"
+        />
+        {this.state.month ? (
+          <div>
+            <h2>Month View</h2>
+            {this.props.expenses.length !== 0 && (
+              <Doughnut data={spendData} options={options} />
+            )}
+          </div>
+        ) : (
+          <div>
+            <h2>Year View</h2>
+            {this.props.expenses.length !== 0 && (
+              <Doughnut data={spendData} options={options} />
+            )}
+          </div>
         )}
       </div>
     );

@@ -1,2 +1,6 @@
 SELECT * FROM expenses
-where user_id = $1
+WHERE user_id = $1
+AND
+date >= $2 
+AND
+date <= $3;
