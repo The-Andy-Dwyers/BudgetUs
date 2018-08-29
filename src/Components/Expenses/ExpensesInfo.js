@@ -103,33 +103,6 @@ class Expenses extends Component {
     const map =
       expense &&
       expense.map(e => {
-        // if (e.type === "food") {
-        //   return (
-        //     <div className="expensesinfo_map" key={e.id}>
-        //       <p>{e.name}</p>
-        //       <p>${e.amount}</p>
-        //       <p>{moment.utc(date).format("ddd, MMM D")}</p>
-        //       <p>{e.type}</p>
-        //       <p>{e.company}</p>
-        //       <p>{e.category}</p>
-        //       <button onClick={id => this.handleDelete(e.id)}>Delete</button>
-        //     </div>
-        //   );
-        // }
-
-        // if (e.type === "rent") {
-        //   return (
-        //     <div className="expensesinfo_map" key={e.id}>
-        //       <p>{e.name}</p>
-        //       <p>${e.amount}</p>
-        //       <p>{moment.utc(date).format("ddd, MMM D")}</p>
-        //       <p>{e.type}</p>
-        //       <p>{e.company}</p>
-        //       <p>{e.category}</p>
-        //       <button onClick={id => this.handleDelete(e.id)}>Delete</button>
-        //     </div>
-        //   );
-        // }
         return (
           <div className="expensesinfo_map" key={e.id}>
             <p>{e.name}</p>
@@ -149,6 +122,14 @@ class Expenses extends Component {
           <h1 className="expense_input_btn btn" onClick={this.openModal}>
             Add ExpenseExpense
           </h1>
+          <div>
+            <h2>Name</h2>
+            <h2>Amount</h2>
+            <h2>Date</h2>
+            <h2>Type</h2>
+            <h2>Company</h2>
+            <h2>Category</h2>
+          </div>
           {map}
         </div>
 
