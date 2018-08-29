@@ -13,7 +13,7 @@ import {
   deleteExpense
 } from "../../ducks/reducers/expensesReducer";
 import { getUsers } from "../../ducks/reducers/userReducer";
-import { capitaliseFirstLetter } from "fullcalendar";
+// import { capitaliseFirstLetter } from "fullcalendar";
 import ContentEditable from "react-contenteditable";
 
 const customStyles = {
@@ -50,14 +50,7 @@ class Expenses extends Component {
   };
 
   componentDidMount() {
-    this.props.getExpenses(
-      moment()
-        .startOf("month")
-        .format("l"),
-      moment()
-        .endOf("month")
-        .format("l")
-    );
+    this.props.getExpenses();
     this.props.getUsers();
   }
 
@@ -79,44 +72,29 @@ class Expenses extends Component {
 
   handleDelete = id => {
     axios.delete(`/api/delete-expense/${id}`).then(() => {
-      this.props.getExpensesByCategory(
-        moment()
-          .startOf("month")
-          .format("l"),
-        moment()
-          .endOf("month")
-          .format("l")
-      );
-      this.props.getExpenses(
-        moment()
-          .startOf("month")
-          .format("l"),
-        moment()
-          .endOf("month")
-          .format("l")
-      );
+      this.props.getExpensesByCategory();
+      this.props.getExpenses();
     });
   };
 
   handleEdit = id => {
-    const {
-      title,
-      amount,
-      date,
-      type,
-      company,
-      category
-    } = this.props.expensesReducer.expense;
+    const { expenseName, amount, date, type, company, category } = this.state;
     var find = this.props.expensesReducer.expense.find(e => e.id === id);
 
-    axios.put(`/api/edit-expense/${id}`, {
-      expenseName: !title ? find.title : title,
-      amount: !amount ? find.amount : amount,
-      date: !date ? find.date : date,
-      type: !type ? find.type : type,
-      company: !company ? find.company : company,
-      category: !category ? find.category : category
-    });
+    console.log(this.state);
+    axios
+      .put(`/api/edit-expense/${id}`, {
+        expenseName: !expenseName ? find.expenseName : expenseName,
+        amount: !amount ? find.amount : amount,
+        date: !date ? find.date : date,
+        type: !type ? find.type : type,
+        company: !company ? find.company : company,
+        category: !category ? find.category : category
+      })
+      .then(() => {
+        this.props.getExpenses();
+        this.setState({ edit: false });
+      });
   };
 
   updateExpense = (val, state) => {
@@ -258,22 +236,8 @@ class Expenses extends Component {
                 })
                 .then(() => {
                   this.closeModal();
-                  this.props.getExpensesByCategory(
-                    moment()
-                      .startOf("month")
-                      .format("l"),
-                    moment()
-                      .endOf("month")
-                      .format("l")
-                  );
-                  this.props.getExpenses(
-                    moment()
-                      .startOf("month")
-                      .format("l"),
-                    moment()
-                      .endOf("month")
-                      .format("l")
-                  );
+                  this.props.getExpensesByCategory();
+                  this.props.getExpenses();
                 })
             }
           >

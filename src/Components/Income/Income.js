@@ -11,6 +11,8 @@ import "./Income.css";
 import {
   getIncome,
   getYearlyIncome,
+  getIncomeSum,
+  getYearlyIncomeSum,
   updateAmount,
   updateDate,
   updateTitle
@@ -51,7 +53,7 @@ class Income extends Component {
   componentDidMount() {
     this.props.getIncome();
     this.props.getUser();
-    this.incomeSum();
+
   }
 
   handleChange = month => {
@@ -67,11 +69,11 @@ class Income extends Component {
     );
   };
 
-  incomeSum = (start, end) => {
-    axios.get(`/api/income-sum?start=${start}&end=${end}`).then(res => {
-      this.setState({ incomeTotal: res.data[0]["sum"] });
-    });
-  };
+  // incomeSum = (start, end) => {
+  //   axios.get(`/api/income-sum?start=${start}&end=${end}`).then(res => {
+  //     this.setState({ incomeTotal: res.data[0]["sum"] });
+  //   });
+  // };
 
   handleDateChange = date => {
     this.props.updateDate(date);
