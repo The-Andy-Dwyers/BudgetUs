@@ -13,6 +13,8 @@ import {
   deleteExpense
 } from "../../ducks/reducers/expensesReducer";
 import { getUsers } from "../../ducks/reducers/userReducer";
+import { capitaliseFirstLetter } from "fullcalendar";
+import ContentEditable from "react-contenteditable";
 
 const customStyles = {
   content: {
@@ -96,6 +98,31 @@ class Expenses extends Component {
     });
   };
 
+  handleEdit = id => {
+    const {
+      title,
+      amount,
+      date,
+      type,
+      company,
+      category
+    } = this.props.expensesReducer.expense;
+    var find = this.props.expensesReducer.expense.find(e => e.id === id);
+
+    axios.put(`/api/edit-expense/${id}`, {
+      expenseName: !title ? find.title : title,
+      amount: !amount ? find.amount : amount,
+      date: !date ? find.date : date,
+      type: !type ? find.type : type,
+      company: !company ? find.company : company,
+      category: !category ? find.category : category
+    });
+  };
+
+  updateExpense = (val, state) => {
+    this.setState({ [state]: val });
+  };
+
   render() {
     const { id } = this.props.userReducer;
     const { expense } = this.props.expensesReducer;
@@ -104,15 +131,31 @@ class Expenses extends Component {
     const map =
       expense &&
       expense.map(e => {
-        return (
+        return !this.state.edit ? (
           <div className="expensesinfo_map" key={e.id}>
             <p>{e.title}</p>
-            <p>${e.amount}</p>
+            <p>${e.amount.toLocaleString()}</p>
             <p>{moment.utc(date).format("ddd, MMM D")}</p>
             <p>{e.type}</p>
             <p>{e.company}</p>
             <p>{e.category}</p>
             <button onClick={id => this.handleDelete(e.id)}>Delete</button>
+          </div>
+        ) : (
+          <div key={e.id} className="expensesinfo_map">
+            <ContentEditable
+              className="expensesinfo_content"
+              html={e.title}
+              onChange={e => this.updateExpense(e.target.value, "expenseName")}
+            />
+            <div className="expensesinfo_btn_holder">
+              <h3
+                className="expensesinfo_edit btn"
+                onClick={id => this.handleEdit(e.id)}
+              >
+                submit edit
+              </h3>
+            </div>
           </div>
         );
       });
@@ -121,7 +164,7 @@ class Expenses extends Component {
       <div className="expenses_container">
         <div className="expenses">
           <h1 className="expense_input_btn btn" onClick={this.openModal}>
-            Add ExpenseExpense
+            Add Expense
           </h1>
           <div>
             <h2>Name</h2>
@@ -130,7 +173,16 @@ class Expenses extends Component {
             <h2>Type</h2>
             <h2>Company</h2>
             <h2>Category</h2>
-            <h3 className="expensesinfo_edit btn">Edit</h3>
+            <div>
+              {!this.state.edit && (
+                <h3
+                  className="expensesinfo_edit btn"
+                  onClick={() => this.setState({ edit: true })}
+                >
+                  Edit
+                </h3>
+              )}
+            </div>
           </div>
           {map}
         </div>
