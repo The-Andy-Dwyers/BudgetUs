@@ -65,10 +65,18 @@ const deleteExpense = (req, res) => {
 
 const editExpense = (req, res) => {
   const db = req.app.get("db");
-  const { name, amount, date, type, company, category } = req.body;
-
+  const { expenseName, amount, date, type, company, category } = req.body;
+  console.log(req.body);
   db.expenses
-    .edit_expense([req.params.id, name, amount, date, type, company, category])
+    .edit_expense([
+      req.params.id,
+      expenseName,
+      amount,
+      date,
+      type,
+      company,
+      category
+    ])
     .then(response => res.status(200).send(response))
     .catch(err => {
       console.log(err);
