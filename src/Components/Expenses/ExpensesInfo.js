@@ -50,14 +50,7 @@ class Expenses extends Component {
   };
 
   componentDidMount() {
-    this.props.getExpenses(
-      moment()
-        .startOf("month")
-        .format("l"),
-      moment()
-        .endOf("month")
-        .format("l")
-    );
+    this.props.getExpenses();
     this.props.getUsers();
   }
 
@@ -79,22 +72,8 @@ class Expenses extends Component {
 
   handleDelete = id => {
     axios.delete(`/api/delete-expense/${id}`).then(() => {
-      this.props.getExpensesByCategory(
-        moment()
-          .startOf("month")
-          .format("l"),
-        moment()
-          .endOf("month")
-          .format("l")
-      );
-      this.props.getExpenses(
-        moment()
-          .startOf("month")
-          .format("l"),
-        moment()
-          .endOf("month")
-          .format("l")
-      );
+      this.props.getExpensesByCategory();
+      this.props.getExpenses();
     });
   };
 
@@ -258,22 +237,8 @@ class Expenses extends Component {
                 })
                 .then(() => {
                   this.closeModal();
-                  this.props.getExpensesByCategory(
-                    moment()
-                      .startOf("month")
-                      .format("l"),
-                    moment()
-                      .endOf("month")
-                      .format("l")
-                  );
-                  this.props.getExpenses(
-                    moment()
-                      .startOf("month")
-                      .format("l"),
-                    moment()
-                      .endOf("month")
-                      .format("l")
-                  );
+                  this.props.getExpensesByCategory();
+                  this.props.getExpenses();
                 })
             }
           >
