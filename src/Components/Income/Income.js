@@ -12,11 +12,11 @@ import {
   getIncome,
   getYearlyIncome,
   updateAmount,
-  updatePayday,
+  updateDate,
   updateName
 } from '../../ducks/reducers/incomeReducer';
 import { getUser } from '../../ducks/reducers/userReducer';
-import {getExpenses} from '../../ducks/reducers/expensesReducer';
+import { getExpenses } from '../../ducks/reducers/expensesReducer';
 
 const customStyles = {
   content: {
@@ -74,11 +74,11 @@ class Income extends Component {
   };
 
   handleDateChange = date => {
-    this.props.updatePayday(date);
+    this.props.updateDate(date);
   };
 
   handleKeyDown = e => {
-    let { amount, name, payday } = this.props.incomeReducer;
+    let { amount, name, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     e.keyCode === 13 &&
@@ -86,7 +86,7 @@ class Income extends Component {
         .post('/api/setup-income', {
           amount,
           name,
-          payday,
+          date,
           id
         })
         .then(() => {
@@ -96,14 +96,14 @@ class Income extends Component {
   };
 
   submitIncome = e => {
-    let { amount, name, payday } = this.props.incomeReducer;
+    let { amount, name, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     axios
       .post('/api/setup-income', {
         amount,
         name,
-        payday,
+        date,
         id
       })
       .then(() => {
@@ -122,14 +122,14 @@ class Income extends Component {
   };
 
   handleEdit = id => {
-    let { amount, name, payday } = this.props.incomeReducer;
+    let { amount, name, date } = this.props.incomeReducer;
     var find = this.props.incomeReducer.income.find(e => e.id === id);
 
     axios
       .put(`/api/edit-income/${id}`, {
         name: !name ? find.name : name,
         amount: !amount ? find.amount : amount,
-        payday: !payday ? find.payday : payday
+        date: !date ? find.date : date
       })
       .then(() => {
         this.props.getIncome();
@@ -147,7 +147,7 @@ class Income extends Component {
         <div key={e.id} className="income_map">
           <p>{e.name}</p>
           <p>${e.amount.toLocaleString()}</p>
-          <p>{moment.utc(e.payday).format('ddd, MMM D')}</p>
+          <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
         </div>
       ) : (
         <div key={e.id} className="income_map">
@@ -164,8 +164,8 @@ class Income extends Component {
           <div className="income_map_bottom">
             <DatePicker
               className="income_content"
-              date={moment.utc(e.payday).format('MM/DD/YYYY')}
-              placeholder={moment.utc(e.payday).format('MM/DD/YYYY')}
+              date={moment.utc(e.date).format('MM/DD/YYYY')}
+              placeholder={moment.utc(e.date).format('MM/DD/YYYY')}
               handleDateChange={this.handleDateChange}
             />
             <div className="income_btn_holder">
@@ -277,7 +277,7 @@ export default connect(
     getIncome,
     getYearlyIncome,
     updateAmount,
-    updatePayday,
+    updateDate,
     updateName,
     getExpenses
   }

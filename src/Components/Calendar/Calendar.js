@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 import 'fullcalendar';
 import $ from 'jquery';
 import moment from 'moment';
@@ -10,6 +11,7 @@ import { getUsers } from '../../ducks/reducers/userReducer';
 
 
 class Calendar extends Component {
+
     componentDidMount() {
       this.props.getUsers();
       console.log(this.props.userReducer.id)
@@ -29,7 +31,7 @@ class Calendar extends Component {
             $(this).remove();
           }
         },
-        // events: `/api/income/6`,
+        events: `/api/income/6`,
         // eventMouseover: function(e, jsEvent) {
         //   const tooltip =
         //     '<div class="tooltipevent" style="padding:1% 1.5%;opacity: 0.8;background:rgb(241, 241, 241);position:absolute;z-index:10001;">' +
@@ -52,10 +54,10 @@ class Calendar extends Component {
         //       $('.tooltipevent').css('left', e.pageX + 20);
         //     });
         // },
-        eventMouseout: function(calEvent, jsEvent) {
-          $(this).css('z-index', 8);
-          $('.tooltipevent').remove();
-        },
+        // eventMouseout: function(calEvent, jsEvent) {
+        //   $(this).css('z-index', 8);
+        //   $('.tooltipevent').remove();
+        // },
         // eventClick: function(e) {
         //   window.location.href = `/events/${e.title}`;
         // }
