@@ -20,18 +20,18 @@ class Calendar extends Component {
       },
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
-
       eventDrop: function(date, allDay) {
         console.log(date);
         console.log(moment(date.start._d).format('YYYY-MM-DD'));
       },
-      events: `/api/income/${this.props.userReducer.id}`,
+      // events: `/api/income/${this.props.userReducer.id}`,
+      events: `/api/income/6`,
       eventMouseover: function(e, jsEvent) {
         const tooltip =
           '<div class="tooltipevent" style="padding:1% 1.5%;opacity: 0.8;background:rgb(241, 241, 241);position:absolute;z-index:10001;">' +
           e.title +
           '<br />' +
-          e.amount +
+          '$' + e.amount +
           '</div>';
         $('body').append(tooltip);
         $(this)
@@ -55,6 +55,7 @@ class Calendar extends Component {
   render() {
     return (
       <div className="calendar">
+      <h1>Calendar</h1>
         <div id="calendar" />
       </div>
     );

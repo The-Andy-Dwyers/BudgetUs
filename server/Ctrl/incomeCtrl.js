@@ -25,7 +25,6 @@ const getIncome = (req, res) => {
 
 const getIncomeById = (req, res) => {
   const db = req.app.get('db');
-  console.log(req.params);
 
   db.income
     .get_income_by_id([req.params.id])
@@ -33,7 +32,6 @@ const getIncomeById = (req, res) => {
       const modifiedResponse = response.map(e => {
         return { ...e, date: JSON.stringify(e.date).substring(1, 11) };
       });
-      console.log(modifiedResponse);
       res.status(200).send(modifiedResponse);
     })
     .catch(err => {
