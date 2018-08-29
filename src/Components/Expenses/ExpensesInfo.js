@@ -1,39 +1,39 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import DatePicker from 'react-custom-date-picker';
-import Modal from 'react-modal';
-import moment from 'moment';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import DatePicker from "react-custom-date-picker";
+import Modal from "react-modal";
+import moment from "moment";
 
-import './Expenses.css';
+import "./ExpensesInfo.css";
 import {
   getExpensesByCategory,
   getExpenses,
   addExpenses,
   deleteExpense
-} from '../../ducks/reducers/expensesReducer';
-import { getUsers } from '../../ducks/reducers/userReducer';
+} from "../../ducks/reducers/expensesReducer";
+import { getUsers } from "../../ducks/reducers/userReducer";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
   }
 };
 
-Modal.setAppElement(document.getElementById('root'));
+Modal.setAppElement(document.getElementById("root"));
 
 class Expenses extends Component {
   state = {
-    expenseName: '',
+    expenseName: "",
     amount: 0,
-    type: '',
-    company: '',
-    category: '',
+    type: "",
+    company: "",
+    category: "",
     date: new Date().toISOString(),
     modalIsOpen: false
   };
@@ -47,15 +47,14 @@ class Expenses extends Component {
   };
 
   componentDidMount() {
-    this.props
-      .getExpenses(
-        moment()
-          .startOf('month')
-          .format('l'),
-        moment()
-          .endOf('month')
-          .format('l')
-      )
+    this.props.getExpenses(
+      moment()
+        .startOf("month")
+        .format("l"),
+      moment()
+        .endOf("month")
+        .format("l")
+    );
     this.props.getUsers();
   }
 
@@ -79,45 +78,71 @@ class Expenses extends Component {
     axios.delete(`/api/delete-expense/${id}`).then(() => {
       this.props.getExpensesByCategory(
         moment()
-          .startOf('month')
-          .format('l'),
+          .startOf("month")
+          .format("l"),
         moment()
-          .endOf('month')
-          .format('l')
+          .endOf("month")
+          .format("l")
       );
       this.props.getExpenses(
         moment()
-          .startOf('month')
-          .format('l'),
+          .startOf("month")
+          .format("l"),
         moment()
-          .endOf('month')
-          .format('l')
+          .endOf("month")
+          .format("l")
       );
     });
   };
 
   render() {
     const { id } = this.props.userReducer;
-    const {expense} = this.props.expensesReducer
+    const { expense } = this.props.expensesReducer;
     const { expenseName, amount, date, type, company, category } = this.state;
 
     const map =
       expense &&
       expense.map(e => {
+        // if (e.type === "food") {
+        //   return (
+        //     <div className="expensesinfo_map" key={e.id}>
+        //       <p>{e.name}</p>
+        //       <p>${e.amount}</p>
+        //       <p>{moment.utc(date).format("ddd, MMM D")}</p>
+        //       <p>{e.type}</p>
+        //       <p>{e.company}</p>
+        //       <p>{e.category}</p>
+        //       <button onClick={id => this.handleDelete(e.id)}>Delete</button>
+        //     </div>
+        //   );
+        // }
+
+        // if (e.type === "rent") {
+        //   return (
+        //     <div className="expensesinfo_map" key={e.id}>
+        //       <p>{e.name}</p>
+        //       <p>${e.amount}</p>
+        //       <p>{moment.utc(date).format("ddd, MMM D")}</p>
+        //       <p>{e.type}</p>
+        //       <p>{e.company}</p>
+        //       <p>{e.category}</p>
+        //       <button onClick={id => this.handleDelete(e.id)}>Delete</button>
+        //     </div>
+        //   );
+        // }
         return (
-          <div className="Expenses_expenselist" key={e.id}>
-            <p className="Expenses_list_content">{e.name}</p>
-            <p className="Expenses_list_content">{e.amount}</p>
-            <p className="Expenses_list_content">
-              {moment.utc(date).format('ddd, MMM D')}
-            </p>
-            <p className="Expenses_list_content">{e.type}</p>
-            <p className="Expenses_list_content">{e.company}</p>
-            <p className="Expenses_list_content">{e.category}</p>
+          <div className="expensesinfo_map" key={e.id}>
+            <p>{e.name}</p>
+            <p>${e.amount}</p>
+            <p>{moment.utc(date).format("ddd, MMM D")}</p>
+            <p>{e.type}</p>
+            <p>{e.company}</p>
+            <p>{e.category}</p>
             <button onClick={id => this.handleDelete(e.id)}>Delete</button>
           </div>
         );
       });
+
     return (
       <div className="expenses_container">
         <div className="expenses">
@@ -137,12 +162,12 @@ class Expenses extends Component {
           <input
             className="Expenses_input"
             placeholder="expense name"
-            onChange={e => this.handleInputs(e.target.value, 'expenseName')}
+            onChange={e => this.handleInputs(e.target.value, "expenseName")}
           />
           <input
             className="Expenses_input"
             placeholder="amount"
-            onChange={e => this.handleInputs(e.target.value, 'amount')}
+            onChange={e => this.handleInputs(e.target.value, "amount")}
           />
           <DatePicker
             date={this.state.date}
@@ -151,7 +176,7 @@ class Expenses extends Component {
           <input
             className="Expenses_input"
             placeholder="Company"
-            onChange={e => this.handleInputs(e.target.value, 'company')}
+            onChange={e => this.handleInputs(e.target.value, "company")}
           />
 
           <form>
@@ -159,21 +184,21 @@ class Expenses extends Component {
               name="type"
               type="radio"
               value="recurring"
-              onClick={() => this.handleType('Recurring')}
-            />{' '}
+              onClick={() => this.handleType("Recurring")}
+            />{" "}
             Recurring
             <input
               name="type"
               type="radio"
               value="nonrecurring"
-              onClick={() => this.handleType('Non-Recurring')}
-            />{' '}
+              onClick={() => this.handleType("Non-Recurring")}
+            />{" "}
             Non-Recurring
           </form>
 
           <select
             required
-            onChange={e => this.handleInputs(e.target.value, 'category')}
+            onChange={e => this.handleInputs(e.target.value, "category")}
           >
             <option>Select Category:</option>
             <option value="Rent">Rent</option>
@@ -200,19 +225,19 @@ class Expenses extends Component {
                   this.closeModal();
                   this.props.getExpensesByCategory(
                     moment()
-                      .startOf('month')
-                      .format('l'),
+                      .startOf("month")
+                      .format("l"),
                     moment()
-                      .endOf('month')
-                      .format('l')
+                      .endOf("month")
+                      .format("l")
                   );
                   this.props.getExpenses(
                     moment()
-                      .startOf('month')
-                      .format('l'),
+                      .startOf("month")
+                      .format("l"),
                     moment()
-                      .endOf('month')
-                      .format('l')
+                      .endOf("month")
+                      .format("l")
                   );
                 })
             }
