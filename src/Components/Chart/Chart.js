@@ -12,14 +12,7 @@ class Chart extends Component {
   }
   componentDidMount() {
     // console.log("mounted");
-    this.props.getExpensesByCategory(
-      moment()
-        .startOf("month")
-        .format("l"),
-      moment()
-        .endOf("month")
-        .format("l")
-    );
+    this.props.getExpensesByCategory();
   }
 
   // handleChange = month => {
