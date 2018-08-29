@@ -9,11 +9,12 @@ const initialState = {
 };
 
 const GET_INCOME = 'GET_INCOME';
+const GET_INCOME_SUM = 'GET_INCOME_SUM';
 const GET_AMOUNT = 'GET_AMOUNT';
 const GET_DATE = 'GET_DATE';
 const GET_TITLE = 'GET_TITLE';
 
-export const getIncome = (start, end) => {
+export const getIncome = () => {
   return {
     type: GET_INCOME,
     payload: axios.get(`/api/income`)
@@ -29,14 +30,14 @@ export const getYearlyIncome = () => {
 
 export const getIncomeSum = () => {
   return {
-    type: GET_INCOME,
+    type: GET_INCOME_SUM,
     payload: axios.get(`/api/income-sum`)
   };
 };
 
 export const getYearlyIncomeSum = () => {
   return {
-    type: GET_INCOME,
+    type: GET_INCOME_SUM,
     payload: axios.get(`/api/yearly-income-sum`)
   };
 };

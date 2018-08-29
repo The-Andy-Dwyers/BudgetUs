@@ -5,17 +5,17 @@ const GET_EXPENSES_BY_CAT = "GET_EXPENSES_BY_CAT";
 const ADD_EXPENSE = "ADD_EXPENSE";
 const DELETE_EXPENSE = "DELETE_EXPENSE";
 
-export function getExpenses(start, end) {
+export function getExpenses() {
   return {
     type: "GET_EXPENSES",
-    payload: axios.get(`/api/expenses/?start=${start}&end=${end}`)
+    payload: axios.get(`/api/expenses`)
 
   };
 }
-export function getExpensesByCategory(start, end) {
+export function getExpensesByCategory() {
   return {
     type: "GET_EXPENSES_BY_CAT",
-    payload: axios.get(`/api/expenses_by_cat/?start=${start}&end=${end}`)
+    payload: axios.get(`/api/expenses_by_cat`)
   };
 }
 
