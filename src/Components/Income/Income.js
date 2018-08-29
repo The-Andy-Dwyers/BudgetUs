@@ -1,36 +1,36 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Modal from 'react-modal';
-import moment from 'moment';
-import axios from 'axios';
-import ContentEditable from 'react-contenteditable';
-import DatePicker from 'react-custom-date-picker';
-import Switch from 'react-switch';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Modal from "react-modal";
+import moment from "moment";
+import axios from "axios";
+import ContentEditable from "react-contenteditable";
+import DatePicker from "react-custom-date-picker";
+import Switch from "react-switch";
 
-import './Income.css';
+import "./Income.css";
 import {
   getIncome,
   getYearlyIncome,
   updateAmount,
   updateDate,
   updateTitle
-} from '../../ducks/reducers/incomeReducer';
-import { getUser } from '../../ducks/reducers/userReducer';
-import { getExpenses } from '../../ducks/reducers/expensesReducer';
+} from "../../ducks/reducers/incomeReducer";
+import { getUser } from "../../ducks/reducers/userReducer";
+import { getExpenses } from "../../ducks/reducers/expensesReducer";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    fontFamily: 'Lato, sans-serif'
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    fontFamily: "Lato, sans-serif"
   }
 };
 
-Modal.setAppElement(document.getElementById('root'));
+Modal.setAppElement(document.getElementById("root"));
 
 class Income extends Component {
   state = {
@@ -60,7 +60,7 @@ class Income extends Component {
         month
       },
       () => {
-        this.state.month
+        this.props.month
           ? this.props.getIncome()
           : this.props.getYearlyIncome();
       }
@@ -69,7 +69,7 @@ class Income extends Component {
 
   incomeSum = (start, end) => {
     axios.get(`/api/income-sum?start=${start}&end=${end}`).then(res => {
-      this.setState({ incomeTotal: res.data[0]['sum'] });
+      this.setState({ incomeTotal: res.data[0]["sum"] });
     });
   };
 
@@ -83,7 +83,7 @@ class Income extends Component {
 
     e.keyCode === 13 &&
       axios
-        .post('/api/setup-income', {
+        .post("/api/setup-income", {
           amount,
           title,
           date,
@@ -100,7 +100,7 @@ class Income extends Component {
     let { id } = this.props.userReducer;
 
     axios
-      .post('/api/setup-income', {
+      .post("/api/setup-income", {
         amount,
         title,
         date,
@@ -140,14 +140,14 @@ class Income extends Component {
 
   render() {
     const { updateAmount, updateTitle } = this.props;
-    const day = moment().format('MM/DD/YYYY');
+    const day = moment().format("MM/DD/YYYY");
 
     const map = this.props.incomeReducer.income.map(e => {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
           <p>{e.title}</p>
           <p>${e.amount.toLocaleString()}</p>
-          <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
+          <p>{moment.utc(e.date).format("ddd, MMM D")}</p>
         </div>
       ) : (
         <div key={e.id} className="income_map">
@@ -164,8 +164,8 @@ class Income extends Component {
           <div className="income_map_bottom">
             <DatePicker
               className="income_content"
-              date={moment.utc(e.date).format('MM/DD/YYYY')}
-              placeholder={moment.utc(e.date).format('MM/DD/YYYY')}
+              date={moment.utc(e.date).format("MM/DD/YYYY")}
+              placeholder={moment.utc(e.date).format("MM/DD/YYYY")}
               handleDateChange={this.handleDateChange}
             />
             <div className="income_btn_holder">
@@ -195,12 +195,6 @@ class Income extends Component {
             Income Input
           </h1>
           <div className="income_display">
-            <Switch
-              onChange={this.handleChange}
-              checked={this.state.month}
-              id="normal-switch"
-            />
-
             <div>
               <h2>
                 {this.props.userReducer.title}
