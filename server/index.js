@@ -29,6 +29,7 @@ const {
   incomeYearlySum,
   getIncomeById
 } = require('./Ctrl/incomeCtrl');
+const { addGoal, getGoal } = require('./Ctrl/goalsCtrl');
 
 const app = express();
 app.use(bodyParser.json());
@@ -100,6 +101,10 @@ app.post('/api/setup-income', addIncome);
 app.delete('/api/delete-income/:id', deleteIncome);
 app.put('/api/edit-income/:id', editIncome);
 app.get('/api/income/:id', getIncomeById);
+
+//goals endpoints
+app.get('/api/goal', getGoal);
+app.post('/api/add-goal', addGoal);
 
 // run build
 // app.get("*", (req, res) => {

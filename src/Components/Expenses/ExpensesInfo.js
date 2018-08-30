@@ -166,7 +166,7 @@ class Expenses extends Component {
           <div className="">
             <p>
               Expenses Total: $
-              {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+              {this.props.incomeReducer.dashboard.expensesum.toLocaleString()}
             </p>
           </div>
         </div>
