@@ -25,3 +25,7 @@
     text-decoration: none;
     color: #000;
   }
+
+  div.react-switch-bg {
+    background: #d12012 !important;
+   }

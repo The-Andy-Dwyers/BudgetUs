@@ -14,7 +14,7 @@ import {
   updateTitle,
   getDashboard
 } from '../../ducks/reducers/incomeReducer';
-import {getGoals} from '../../ducks/reducers/expensesReducer';
+import { getGoals } from '../../ducks/reducers/expensesReducer';
 import menu from './icons/menu.svg';
 import home from './icons/home.svg';
 import calendar from './icons/calendar.svg';
@@ -46,7 +46,7 @@ class Navbar extends Component {
     // this.props.getUsers().then(() => {
     //   !this.props.userReducer.auth_id && window.location.assign('/');
     // });
-    this.props.getGoals()
+    this.props.getGoals();
   }
 
   openModal = () => {
@@ -63,12 +63,6 @@ class Navbar extends Component {
 
   handleDateChange = date => {
     this.props.updateDate(date);
-  };
-
-  addGoal = () => {
-    axios.post('/api/add-goal', {
-      savings: this.state.savings
-    }).t
   };
 
   submitIncome = e => {
@@ -88,15 +82,24 @@ class Navbar extends Component {
       });
   };
 
+  addGoal = () => {
+    axios
+      .post('/api/add-goal', {
+        savings: this.state.savings
+      })
+      .then(() => {
+        this.props.getGoals();
+      });
+  };
+
   render() {
     const { updateAmount, updateTitle } = this.props;
+
     const day = moment().format('MM/DD/YYYY');
 
     const dashboardDate =
       this.props.incomeReducer.dashboard.length &&
       this.props.incomeReducer.dashboard.sources.date;
-
-    console.log(this.props);
 
     return (
       <div className="navbar">
@@ -136,8 +139,8 @@ class Navbar extends Component {
             Add Income
           </h1>
           <h3 className="income_input_btn btn" onClick={this.openModal1}>
-          Monthly Goal
-        </h3>
+            Monthly Goal
+          </h3>
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
