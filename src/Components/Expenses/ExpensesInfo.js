@@ -1,41 +1,40 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import DatePicker from "react-custom-date-picker";
-import Modal from "react-modal";
-import moment from "moment";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import DatePicker from 'react-custom-date-picker';
+import Modal from 'react-modal';
+import moment from 'moment';
 
-import "./ExpensesInfo.css";
+import './ExpensesInfo.css';
 import {
   getExpensesByCategory,
   getExpenses,
   addExpenses,
   deleteExpense
-} from "../../ducks/reducers/expensesReducer";
-import { getUsers } from "../../ducks/reducers/userReducer";
-// import { capitaliseFirstLetter } from "fullcalendar";
-import ContentEditable from "react-contenteditable";
+} from '../../ducks/reducers/expensesReducer';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import ContentEditable from 'react-contenteditable';
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
-Modal.setAppElement(document.getElementById("root"));
+Modal.setAppElement(document.getElementById('root'));
 
 class Expenses extends Component {
   state = {
-    expenseName: "",
-    amount: 0,
-    type: "",
-    company: "",
-    category: "",
+    expenseName: '',
+    amount: '',
+    type: '',
+    company: '',
+    category: '',
     date: new Date().toISOString(),
     modalIsOpen: false,
     edit: false
@@ -84,7 +83,7 @@ class Expenses extends Component {
     axios
       .put(`/api/edit-expense/${id}`, {
         expenseName: !expenseName ? find.expenseName : expenseName,
-        amount: !amount ? find.amount : amount,
+        amount: !amount ? find.cost : amount,
         date: !date ? find.date : date,
         type: !type ? find.type : type,
         company: !company ? find.company : company,
@@ -112,7 +111,8 @@ class Expenses extends Component {
           <div className="expensesinfo_map" key={e.id}>
             <p>{e.title}</p>
             <p>${e.cost.toLocaleString()}</p>
-            <p>{moment.utc(date).format("ddd, MMM D")}</p>
+            {/* <p>{e.cost}</p> */}
+            <p>{moment.utc(e.expense_date).format('ddd, MMM D')}</p>
             <p>{e.expense_type}</p>
             <p>{e.company}</p>
             <p>{e.category}</p>
@@ -123,7 +123,7 @@ class Expenses extends Component {
             <ContentEditable
               className="expensesinfo_content"
               html={e.title}
-              onChange={e => this.updateExpense(e.target.value, "expenseName")}
+              onChange={e => this.updateExpense(e.target.value, 'expenseName')}
             />
             <div className="expensesinfo_btn_holder">
               <h3
@@ -137,6 +137,7 @@ class Expenses extends Component {
         );
       });
 
+    console.log(this.props);
     return (
       <div className="expenses_container">
         <div className="expenses">
@@ -162,6 +163,12 @@ class Expenses extends Component {
             </div>
           </div>
           {map}
+          <div className="">
+            <p>
+              Expenses Total: $
+              {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+            </p>
+          </div>
         </div>
 
         <Modal
@@ -174,12 +181,12 @@ class Expenses extends Component {
           <input
             className="Expenses_input"
             placeholder="Expense Name"
-            onChange={e => this.handleInputs(e.target.value, "expenseName")}
+            onChange={e => this.handleInputs(e.target.value, 'expenseName')}
           />
           <input
             className="Expenses_input"
             placeholder="amount"
-            onChange={e => this.handleInputs(e.target.value, "amount")}
+            onChange={e => this.handleInputs(e.target.value, 'amount')}
           />
           <DatePicker
             date={this.state.date}
@@ -188,7 +195,7 @@ class Expenses extends Component {
           <input
             className="Expenses_input"
             placeholder="Company"
-            onChange={e => this.handleInputs(e.target.value, "company")}
+            onChange={e => this.handleInputs(e.target.value, 'company')}
           />
 
           <form>
@@ -196,21 +203,21 @@ class Expenses extends Component {
               title="type"
               type="radio"
               value="recurring"
-              onClick={() => this.handleType("Recurring")}
-            />{" "}
+              onClick={() => this.handleType('Recurring')}
+            />{' '}
             Recurring
             <input
               title="type"
               type="radio"
               value="nonrecurring"
-              onClick={() => this.handleType("Non-Recurring")}
-            />{" "}
+              onClick={() => this.handleType('Non-Recurring')}
+            />{' '}
             Non-Recurring
           </form>
 
           <select
             required
-            onChange={e => this.handleInputs(e.target.value, "category")}
+            onChange={e => this.handleInputs(e.target.value, 'category')}
           >
             <option>Select Category:</option>
             <option value="Rent">Rent</option>

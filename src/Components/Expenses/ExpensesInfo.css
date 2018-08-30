@@ -13,6 +13,14 @@
   margin: 3% 0;
 }
 
+.expenseinfo_btn_holder {
+  display: flex;
+  justify-content: flex-end;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .expensesinfo_map {
   display: flex;
   width: 100%;

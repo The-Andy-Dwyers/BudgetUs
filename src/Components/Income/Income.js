@@ -1,35 +1,35 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Modal from "react-modal";
-import moment from "moment";
-import axios from "axios";
-import ContentEditable from "react-contenteditable";
-import DatePicker from "react-custom-date-picker";
-import Switch from "react-switch";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Modal from 'react-modal';
+import moment from 'moment';
+import axios from 'axios';
+import ContentEditable from 'react-contenteditable';
+import DatePicker from 'react-custom-date-picker';
+import Switch from 'react-switch';
 
-import "./Income.css";
+import './Income.css';
 import {
   updateAmount,
   updateDate,
   updateTitle,
   getDashboard
-} from "../../ducks/reducers/incomeReducer";
-import { getUser } from "../../ducks/reducers/userReducer";
-import { getExpenses } from "../../ducks/reducers/expensesReducer";
+} from '../../ducks/reducers/incomeReducer';
+import { getUser } from '../../ducks/reducers/userReducer';
+import { getExpenses } from '../../ducks/reducers/expensesReducer';
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    fontFamily: "Lato, sans-serif"
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    fontFamily: 'Lato, sans-serif'
   }
 };
 
-Modal.setAppElement(document.getElementById("root"));
+Modal.setAppElement(document.getElementById('root'));
 
 class Income extends Component {
   state = {
@@ -38,6 +38,10 @@ class Income extends Component {
     incomeTotal: 0,
     month: true
   };
+
+  componentDidMount() {
+    this.props.getUser();
+  }
 
   openModal = () => {
     this.setState({ modalIsOpen: true });
@@ -57,7 +61,7 @@ class Income extends Component {
 
     e.keyCode === 13 &&
       axios
-        .post("/api/setup-income", {
+        .post('/api/setup-income', {
           amount,
           source,
           date,
@@ -73,21 +77,21 @@ class Income extends Component {
     let { id } = this.props.userReducer;
 
     axios
-      .post("/api/setup-income", {
+      .post('/api/setup-income', {
         amount,
         source,
         date,
         id
       })
       .then(() => {
-        this.props.getDashboard(this.props.month ? "month" : "year");
+        this.props.getDashboard(this.props.month ? 'month' : 'year');
         this.closeModal();
       });
   };
 
   handleDelete = id => {
     axios.delete(`/api/delete-income/${id}`).then(() => {
-      this.props.getDashboard(this.props.month ? "month" : "year");
+      this.props.getDashboard(this.props.month ? 'month' : 'year');
       this.setState({ edit: false });
     });
   };
@@ -105,20 +109,20 @@ class Income extends Component {
       })
       .then(() => {
         this.setState({ edit: false }),
-          this.props.getDashboard(this.props.month ? "month" : "year");
+          this.props.getDashboard(this.props.month ? 'month' : 'year');
       });
   };
 
   render() {
     const { updateAmount, updateTitle } = this.props;
-    const day = moment().format("MM/DD/YYYY");
+    const day = moment().format('MM/DD/YYYY');
 
     const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
           <p>{e.source}</p>
           <p>${e.amount.toLocaleString()}</p>
-          <p>{moment.utc(e.date).format("ddd, MMM D")}</p>
+          <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
         </div>
       ) : (
         <div key={e.id} className="income_map">
@@ -135,8 +139,8 @@ class Income extends Component {
           <div className="income_map_bottom">
             <DatePicker
               className="income_content"
-              date={moment.utc(e.date).format("MM/DD/YYYY")}
-              placeholder={moment.utc(e.date).format("MM/DD/YYYY")}
+              date={moment.utc(e.date).format('MM/DD/YYYY')}
+              placeholder={moment.utc(e.date).format('MM/DD/YYYY')}
               handleDateChange={this.handleDateChange}
             />
             <div className="income_btn_holder">
@@ -158,7 +162,6 @@ class Income extends Component {
         </div>
       );
     });
-
     return (
       <div className="income_container">
         <div className="income">
@@ -189,7 +192,18 @@ class Income extends Component {
             </div>
           </div>
           <div className="income_total">
-            <p>Income Total: {this.props.incomeReducer.dashboard.incomesum}</p>
+            {this.props.month ? (
+              <p>
+                Monthly Income Total: $
+                {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+              </p>
+            ) : (
+              <p>
+                {' '}
+                Yearly Income Total: $
+                {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+              </p>
+            )}
           </div>
         </div>
 
