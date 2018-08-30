@@ -122,3 +122,29 @@
   height: 30px;
   margin: 0px 2px 0px 2px;
 }
+
+.expensesinfo_modal {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 50vh;
+}
+
+.expensesinfo_modal h2 {
+  font-weight: 800;
+}
+
+.expensesinfo_modal p {
+  padding: 1%;
+}
+
+.expensesinfo_modal input {
+  width: 100%;
+  margin: 1%;
+}
+
+.income_btn {
+  text-align: center;
+  margin-top: 10%;
+  width: 100%;
+}

@@ -22,7 +22,8 @@ const customStyles = {
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
+    fontFamily: "Lato, sans-serif"
   }
 };
 
@@ -84,7 +85,7 @@ class Expenses extends Component {
       .put(`/api/edit-expense/${id}`, {
         expenseName: !expenseName ? find.title : expenseName,
         amount: !amount ? find.cost : amount,
-        date: !date ? find.date : date,
+        date: !date ? find.expense_date : date,
         type: !type ? find.occur : type,
         company: !company ? find.company : company,
         category: !category ? find.category : category
@@ -92,6 +93,14 @@ class Expenses extends Component {
       .then(() => {
         this.props.getExpenses();
         this.setState({ edit: false });
+        this.setState({
+          expenseName: "",
+          amount: "",
+          type: "",
+          company: "",
+          category: "",
+          date: ""
+        });
       });
   };
 
@@ -169,8 +178,8 @@ class Expenses extends Component {
             <div className="expense_map_bottom">
               <DatePicker
                 className="expensesinfo_content_datepicker"
-                date={moment.utc(e.expense_date).format("ddd, MMM D")}
-                placeholder={moment.utc(e.expense_date).format("ddd, MMM D")}
+                date={moment.utc(e.expense_date).format("MM/DD/YYYY")}
+                placeholder={moment.utc(e.expense_date).format("MM/DD/YYYY")}
                 handleDateChange={this.handleDateChange}
               />
               <div className="expense_btn_holder">
@@ -229,78 +238,80 @@ class Expenses extends Component {
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <h1>Expenses</h1>
-          <input
-            className="Expenses_input"
-            placeholder="Expense Name"
-            onChange={e => this.handleInputs(e.target.value, "expenseName")}
-          />
-          <input
-            className="Expenses_input"
-            placeholder="amount"
-            onChange={e => this.handleInputs(e.target.value, "amount")}
-          />
-          <DatePicker
-            date={this.state.date}
-            handleDateChange={this.handleDateChange}
-          />
-          <input
-            className="Expenses_input"
-            placeholder="Company"
-            onChange={e => this.handleInputs(e.target.value, "company")}
-          />
-
-          <form>
+          <div className="expensesinfo_modal">
+            <h1>Expenses</h1>
             <input
-              name="type"
-              type="radio"
-              value="recurring"
-              onClick={() => this.handleType("Recurring")}
-            />{" "}
-            Recurring
+              className="expensesinfo_input"
+              placeholder="Expense Name"
+              onChange={e => this.handleInputs(e.target.value, "expenseName")}
+            />
             <input
-              name="type"
-              type="radio"
-              value="nonrecurring"
-              onClick={() => this.handleType("Non-Recurring")}
-            />{" "}
-            Non-Recurring
-          </form>
+              className="expensesinfo_input"
+              placeholder="amount"
+              onChange={e => this.handleInputs(e.target.value, "amount")}
+            />
+            <DatePicker
+              date={this.state.date}
+              handleDateChange={this.handleDateChange}
+            />
+            <input
+              className="expensesinfo_input"
+              placeholder="Company"
+              onChange={e => this.handleInputs(e.target.value, "company")}
+            />
 
-          <select
-            required
-            onChange={e => this.handleInputs(e.target.value, "category")}
-          >
-            <option>Select Category:</option>
-            <option value="Rent">Rent</option>
-            <option value="Bills">Bills</option>
-            <option value="Food">Food</option>
-            <option value="Gas">Gas</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Other">other</option>
-          </select>
+            <form>
+              <input
+                name="type"
+                type="radio"
+                value="recurring"
+                onClick={() => this.handleType("Recurring")}
+              />{" "}
+              Recurring
+              <input
+                name="type"
+                type="radio"
+                value="nonrecurring"
+                onClick={() => this.handleType("Non-Recurring")}
+              />{" "}
+              Non-Recurring
+            </form>
 
-          <button
-            onClick={() =>
-              this.props
-                .addExpenses({
-                  expenseName,
-                  amount,
-                  type,
-                  date,
-                  company,
-                  category,
-                  id
-                })
-                .then(() => {
-                  this.closeModal();
-                  this.props.getExpensesByCategory();
-                  this.props.getExpenses();
-                })
-            }
-          >
-            Submit
-          </button>
+            <select
+              required
+              onChange={e => this.handleInputs(e.target.value, "category")}
+            >
+              <option>Select Category:</option>
+              <option value="Rent">Rent</option>
+              <option value="Bills">Bills</option>
+              <option value="Food">Food</option>
+              <option value="Gas">Gas</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">other</option>
+            </select>
+
+            <button
+              onClick={() =>
+                this.props
+                  .addExpenses({
+                    expenseName,
+                    amount,
+                    type,
+                    date,
+                    company,
+                    category,
+                    id
+                  })
+                  .then(() => {
+                    this.closeModal();
+                    this.props.getExpensesByCategory();
+                    this.props.getExpenses();
+                  })
+              }
+            >
+              Submit
+            </button>
+          </div>
         </Modal>
       </div>
     );
