@@ -56,14 +56,14 @@ class Income extends Component {
   };
 
   handleKeyDown = e => {
-    let { amount, source, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     e.keyCode === 13 &&
       axios
         .post('/api/setup-income', {
           amount,
-          source,
+          title,
           date,
           id
         })
@@ -73,13 +73,13 @@ class Income extends Component {
   };
 
   submitIncome = e => {
-    let { amount, source, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     axios
       .post('/api/setup-income', {
         amount,
-        source,
+        title,
         date,
         id
       })
@@ -97,15 +97,16 @@ class Income extends Component {
   };
 
   handleEdit = id => {
-    let { amount, source, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     var find = this.props.incomeReducer.dashboard.sources.find(
       e => e.id === id
     );
+    console.log(find)
     axios
       .put(`/api/edit-income/${id}`, {
-        source: !source ? find.source : source,
-        amount: !amount ? find.amount : amount,
-        date: !date ? find.date : date
+        title: title ? title : find.title,
+        amount: amount ? amount : find.amount,
+        date: date ? date : find.date
       })
       .then(() => {
         this.setState({ edit: false })
@@ -116,6 +117,8 @@ class Income extends Component {
   render() {
     const { updateAmount, updateTitle } = this.props;
     const day = moment().format('MM/DD/YYYY');
+
+    console.log(this.props.incomeReducer.dashboard)
 
     const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
