@@ -187,3 +187,14 @@ position: relative;
   display: flex;
   width: 100%;
 }
+
+@media (max-width: 700px) {
+  .income_display h2 {
+    font-size: .8em;
+  }
+
+  .income_map p {
+    font-size: .8em;
+
+  }
+}

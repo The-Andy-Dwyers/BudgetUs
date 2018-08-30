@@ -82,6 +82,8 @@ const deleteExpense = (req, res) => {
 const editExpense = (req, res) => {
   const db = req.app.get("db");
   const { expenseName, amount, date, type, company, category } = req.body;
+  console.log(req.body)
+  
   db.expenses
     .edit_expense([
       req.params.id,
