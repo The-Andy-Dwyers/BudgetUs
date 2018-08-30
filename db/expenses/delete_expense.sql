@@ -1,1 +1,1 @@
-delete from expenses where id = $1;
+DELETE FROM expenses WHERE id = $1;
