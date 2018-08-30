@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
-import { getExpensesByCategory, getYearlyExpensesByCategory } from "../../ducks/reducers/expensesReducer";
+import {
+  getExpensesByCategory,
+  getYearlyExpensesByCategory,
+  getExpenses
+} from "../../ducks/reducers/expensesReducer";
 import Switch from "react-switch";
 import moment from "moment";
 
@@ -11,8 +15,7 @@ class Chart extends Component {
     this.state = { month: true };
   }
   componentDidMount() {
-    // console.log("mounted");
-    this.props.getExpensesByCategory();    
+    this.props.getExpensesByCategory();
   }
 
   handleChange = month => {
@@ -22,36 +25,25 @@ class Chart extends Component {
       },
       () => {
         this.state.month
-          ? this.props.getExpensesByCategory()
-          : this.props.getYearlyExpensesByCategory();
+          ? (this.props.getExpensesByCategory(), this.props.getExpenses())
+          : this.props.getYearlyExpensesByCategory(),
+          this.props.getExpenses();
       }
     );
   };
   render() {
-    console.log(add(this.props.expenses), `expenses`);
-    console.log(add(this.props.income), "income");
-    console.log(add(this.props.income) - add(this.props.expenses));
     const remainData = {
       datasets: [
         {
-          data: this.props.income.length !== 0 && [
-            add(this.props.expenses),
-            add(this.props.income) - add(this.props.expenses)
+          data: [
+            this.props.expensesum,
+            this.props.incomesum - this.props.expensesum
           ],
           backgroundColor: ["blue", "green", "purple"]
         }
       ],
       labels: ["expenses", "remaining"]
     };
-    // const data = {
-    //   datasets: [
-    //     {
-    //       data: this.props.income.length !== 0 && [5, 10],
-    //       backgroundColor: ["blue", "green", "purple"]
-    //     }
-    //   ],
-    //   labels: ["expenses", "remaining"]
-    // };
     const spendData = {
       datasets: [
         {
@@ -107,13 +99,15 @@ class Chart extends Component {
 function mapStateToProps(state) {
   return {
     income: state.incomeReducer.income,
-    expenses: state.expensesReducer.expensesbycat
+    expenses: state.expensesReducer.expensesbycat,
+    incomesum: state.incomeReducer.dashboard.incomesum,
+    expensesum: state.incomeReducer.dashboard.expensesum
   };
 }
 
 export default connect(
   mapStateToProps,
-  { getExpensesByCategory, getYearlyExpensesByCategory }
+  { getExpensesByCategory, getYearlyExpensesByCategory, getExpenses }
 )(Chart);
 
 function add(arr) {
