@@ -166,20 +166,19 @@ class Expenses extends Component {
               <option value="Other">other</option>
             </select>
 
-            <div className="income_map_bottom">
+            <div className="expense_map_bottom">
               <DatePicker
-                className="income_content"
+                className="expensesinfo_content_datepicker"
                 date={moment.utc(e.expense_date).format("ddd, MMM D")}
                 placeholder={moment.utc(e.expense_date).format("ddd, MMM D")}
                 handleDateChange={this.handleDateChange}
               />
-              <div className="income_btn_holder">
-                <h3
-                  className="income_edit btn"
+              <div className="expense_btn_holder">
+                <img
+                  src="https://image.flaticon.com/icons/png/128/128/128384.png"
+                  className="expenses_edit btn"
                   onClick={id => this.handleEdit(e.id)}
-                >
-                  Submit Edit
-                </h3>
+                />
                 <div
                   className="x_container btn"
                   onClick={id => this.handleDelete(e.id)}
