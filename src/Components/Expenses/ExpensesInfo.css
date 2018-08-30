@@ -54,3 +54,65 @@
   display: flex;
   justify-content: space-around;
 }
+
+.income_btn_holder {
+  display: flex;
+  justify-content: flex-end;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.x_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  position: relative;
+}
+
+.x_div {
+  width: 30px;
+  height: 3px;
+  border-radius: 15%;
+  background-color: grey;
+  position: absolute;
+}
+
+.x1 {
+  transform: rotate(45deg);
+}
+
+.x2 {
+  transform: rotate(135deg);
+}
+
+.x_container:hover .x_div {
+  background-color: rgb(167, 110, 110);
+}
+
+.x_container:hover {
+  transform: scale(1.02);
+}
+
+.x_container:active {
+  transform: scale(0.98);
+}
+
+.income_map_bottom {
+  display: flex;
+  width: 100%;
+}
+
+.income_edit_holder {
+  justify-content: flex-end !important;
+}
+
+.income_edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5%;
+  width: 100%;
+}
