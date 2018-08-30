@@ -5,4 +5,3 @@ AND
 date >= $2 
 AND
 date <= $3;
-;
