@@ -82,10 +82,10 @@ class Expenses extends Component {
 
     axios
       .put(`/api/edit-expense/${id}`, {
-        expenseName: !expenseName ? find.expenseName : expenseName,
+        expenseName: !expenseName ? find.title : expenseName,
         amount: !amount ? find.cost : amount,
         date: !date ? find.date : date,
-        type: !type ? find.type : type,
+        type: !type ? find.occur : type,
         company: !company ? find.company : company,
         category: !category ? find.category : category
       })
@@ -99,6 +99,7 @@ class Expenses extends Component {
     this.setState({ [state]: val });
   };
 
+  // <button onClick={id => this.handleDelete(e.id)}>Delete</button>
   render() {
     const { id } = this.props.userReducer;
     const { expense } = this.props.expensesReducer;
@@ -112,11 +113,10 @@ class Expenses extends Component {
             <p>{e.title}</p>
             <p>${e.cost.toLocaleString()}</p>
             {/* <p>{e.cost}</p> */}
-            <p>{moment.utc(e.expense_date).format("ddd, MMM D")}</p>
             <p>{e.occur}</p>
             <p>{e.company}</p>
             <p>{e.category}</p>
-            <button onClick={id => this.handleDelete(e.id)}>Delete</button>
+            <p>{moment.utc(e.expense_date).format("ddd, MMM D")}</p>
           </div>
         ) : (
           <div key={e.id} className="expensesinfo_map">
@@ -125,13 +125,69 @@ class Expenses extends Component {
               html={e.title}
               onChange={e => this.updateExpense(e.target.value, "expenseName")}
             />
-            <div className="expensesinfo_btn_holder">
-              <h3
-                className="expensesinfo_edit btn"
-                onClick={id => this.handleEdit(e.id)}
-              >
-                submit edit
-              </h3>
+            <ContentEditable
+              className="expensesinfo_content"
+              html={String(e.cost.toLocaleString())}
+              onChange={e => this.updateExpense(e.target.value, "amount")}
+            />
+
+            <form>
+              <input
+                name="occur"
+                type="radio"
+                value="recurring"
+                onClick={() => this.handleType("Recurring")}
+              />{" "}
+              Recurring
+              <input
+                name="occur"
+                type="radio"
+                value="nonrecurring"
+                onClick={() => this.handleType("Non-Recurring")}
+              />{" "}
+              Non-Recurring
+            </form>
+
+            <ContentEditable
+              className="expensesinfo_content"
+              html={e.company}
+              onChange={e => this.updateExpense(e.target.value, "company")}
+            />
+            <select
+              required
+              onChange={e => this.updateExpense(e.target.value, "category")}
+            >
+              <option>Select Category:</option>
+              <option value="Rent">Rent</option>
+              <option value="Bills">Bills</option>
+              <option value="Food">Food</option>
+              <option value="Gas">Gas</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">other</option>
+            </select>
+
+            <div className="income_map_bottom">
+              <DatePicker
+                className="income_content"
+                date={moment.utc(e.expense_date).format("ddd, MMM D")}
+                placeholder={moment.utc(e.expense_date).format("ddd, MMM D")}
+                handleDateChange={this.handleDateChange}
+              />
+              <div className="income_btn_holder">
+                <h3
+                  className="income_edit btn"
+                  onClick={id => this.handleEdit(e.id)}
+                >
+                  Submit Edit
+                </h3>
+                <div
+                  className="x_container btn"
+                  onClick={id => this.handleDelete(e.id)}
+                >
+                  <div className="x_div x1" />
+                  <div className="x_div x2" />
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -145,10 +201,10 @@ class Expenses extends Component {
           <div>
             <h2>Name</h2>
             <h2>Amount</h2>
-            <h2>Date</h2>
             <h2>Type</h2>
             <h2>Company</h2>
             <h2>Category</h2>
+            <h2>Date</h2>
             <div>
               {!this.state.edit && (
                 <h3
@@ -197,14 +253,14 @@ class Expenses extends Component {
 
           <form>
             <input
-              title="occur"
+              name="type"
               type="radio"
               value="recurring"
               onClick={() => this.handleType("Recurring")}
             />{" "}
             Recurring
             <input
-              title="occur"
+              name="type"
               type="radio"
               value="nonrecurring"
               onClick={() => this.handleType("Non-Recurring")}
