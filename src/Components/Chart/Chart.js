@@ -7,7 +7,7 @@ import {
   getExpenses
 } from "../../ducks/reducers/expensesReducer";
 import Switch from "react-switch";
-import moment from "moment";
+// import moment from "moment";
 
 class Chart extends Component {
   constructor() {
@@ -26,8 +26,8 @@ class Chart extends Component {
       () => {
         this.state.month
           ? (this.props.getExpensesByCategory(), this.props.getExpenses())
-          : this.props.getYearlyExpensesByCategory(),
-          this.props.getExpenses();
+          : this.props.getYearlyExpensesByCategory();
+        this.props.getExpenses();
       }
     );
   };
@@ -110,9 +110,9 @@ export default connect(
   { getExpensesByCategory, getYearlyExpensesByCategory, getExpenses }
 )(Chart);
 
-function add(arr) {
-  let total = 0;
+// function add(arr) {
+//   let total = 0;
 
-  arr.forEach(e => (total += +e.amount));
-  return total;
-}
+//   arr.forEach(e => (total += +e.amount));
+//   return total;
+// }
