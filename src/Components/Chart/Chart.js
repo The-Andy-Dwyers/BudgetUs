@@ -39,7 +39,11 @@ class Chart extends Component {
             this.props.expensesum,
             this.props.incomesum - this.props.expensesum
           ],
-          backgroundColor: ["blue", "green", "purple"]
+          backgroundColor: [
+            "blue",
+            this.props.incomesum - this.props.expensesum < 0 ? "red" : "green",
+            "purple"
+          ]
         }
       ],
       labels: ["expenses", "remaining"]
@@ -109,10 +113,3 @@ export default connect(
   mapStateToProps,
   { getExpensesByCategory, getYearlyExpensesByCategory, getExpenses }
 )(Chart);
-
-// function add(arr) {
-//   let total = 0;
-
-//   arr.forEach(e => (total += +e.amount));
-//   return total;
-// }
