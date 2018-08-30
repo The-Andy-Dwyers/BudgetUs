@@ -46,7 +46,12 @@ class Chart extends Component {
           ]
         }
       ],
-      labels: ["expenses", "remaining"]
+      labels: [
+        "expenses",
+        this.props.incomesum - this.props.expensesum < 0
+          ? "defecit"
+          : "remaining"
+      ]
     };
     const spendData = {
       datasets: [
