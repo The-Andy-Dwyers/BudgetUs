@@ -1,4 +1,22 @@
 .dashboard {
     width: 100%;
     height: 100%;
+    padding-left: 90px;
+    background-color: rgb(247, 247, 247);
+  /* background-color: rgb(252, 252, 252); */
+    opacity: .8;
+}
+
+.dashboard_top {
+    display: flex;
+}
+
+.dashboard_expense {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px grey;
+    margin: 1%;
 }

@@ -12,7 +12,8 @@ import {
   updateAmount,
   updateDate,
   updateTitle,
-  getDashboard
+  getDashboard,
+  reset
 } from '../../ducks/reducers/incomeReducer';
 import { getUser } from '../../ducks/reducers/userReducer';
 import { getExpenses } from '../../ducks/reducers/expensesReducer';
@@ -56,14 +57,14 @@ class Income extends Component {
   };
 
   handleKeyDown = e => {
-    let { amount, source, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     e.keyCode === 13 &&
       axios
         .post('/api/setup-income', {
           amount,
-          source,
+          title,
           date,
           id
         })
@@ -73,13 +74,13 @@ class Income extends Component {
   };
 
   submitIncome = e => {
-    let { amount, source, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     axios
       .post('/api/setup-income', {
         amount,
-        source,
+        title,
         date,
         id
       })
@@ -97,19 +98,20 @@ class Income extends Component {
   };
 
   handleEdit = id => {
-    let { amount, source, date } = this.props.incomeReducer;
+    let { amount, title, date } = this.props.incomeReducer;
     var find = this.props.incomeReducer.dashboard.sources.find(
       e => e.id === id
     );
     axios
       .put(`/api/edit-income/${id}`, {
-        source: !source ? find.source : source,
-        amount: !amount ? find.amount : amount,
-        date: !date ? find.date : date
+        title: title ? title : find.title,
+        amount: amount ? amount : find.amount,
+        date: date ? date : find.date
       })
       .then(() => {
-        this.setState({ edit: false })
-          this.props.getDashboard(this.props.month ? 'month' : 'year');
+        this.setState({ edit: false });
+        this.props.getDashboard(this.props.month ? 'month' : 'year');
+        this.props.reset();
       });
   };
 
@@ -257,6 +259,7 @@ export default connect(
     updateDate,
     updateTitle,
     getExpenses,
-    getDashboard
+    getDashboard,
+    reset
   }
 )(Income);

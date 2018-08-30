@@ -2,10 +2,10 @@
   width: 80px;
   background-color: rgb(54, 54, 54);
   height: 100vh;
+  max-height: 1000px;
   transition: 0.5s ease-out;
-}
-
-.navbar_sub {
+  position: fixed;
+  z-index: 9;
 }
 
 .link {
@@ -13,12 +13,38 @@
   color: rgb(228, 228, 228);
 }
 
-.navbar:hover {
-  width: 160px;
+.navbar_logo_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(145, 28, 28);
+}
+
+.navbar_sub {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20% 0;
+}
+
+.navbar_logo {
+  padding: 5%;
+  width: 60px;
+}
+
+.navbar_icon {
+  width: 40px;
 }
 
 .navbar h2 {
-  margin: 10% 0;
+  padding: 10%;
+}
+
+.navbar h1 {
+  padding: 10%;
 }
 
 .ham_container {

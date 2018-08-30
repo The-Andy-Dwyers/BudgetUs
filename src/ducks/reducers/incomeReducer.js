@@ -4,7 +4,7 @@ const initialState = {
   income: [],
   amount: "",
   date: "",
-  source: "",
+  title: "",
   didErr: false,
   dashboard: []
 };
@@ -12,6 +12,7 @@ const initialState = {
 const GET_AMOUNT = "GET_AMOUNT";
 const GET_DATE = "GET_DATE";
 const GET_TITLE = "GET_TITLE";
+const RESET = 'RESET';
 
 const GET_DASHBOARD = "GET_DASHBOARD";
 export const getDashboard = view => {
@@ -42,6 +43,13 @@ export const updateTitle = title => {
   };
 };
 
+export const reset = () => {
+  return {
+    type: RESET,
+    payload: ''
+  };
+}
+
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case `${GET_DASHBOARD}_FULFILLED`:
@@ -67,8 +75,15 @@ export default function userReducer(state = initialState, action) {
     case GET_TITLE:
       return {
         ...state,
-        source: action.payload
+        title: action.payload
       };
+    case RESET:
+    return {
+      ...state,
+      amount: action.payload,
+      date: action.payload,
+      title: action.payload
+    }
     default:
       return state;
   }
