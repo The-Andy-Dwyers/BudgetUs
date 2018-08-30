@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 // import axios from 'axios';
 // import moment from 'moment';
-import Switch from 'react-switch';
-import { Link } from 'react-router-dom';
+import Switch from "react-switch";
+import { Link } from "react-router-dom";
 
-import Income from '../Income/Income';
-import Chart from '../Chart/Chart';
-import Goals from '../Goals/Goals';
+import Income from "../Income/Income";
+import Chart from "../Chart/Chart";
+import Goals from "../Goals/Goals";
 
-import './Dashboard.css';
-import { getUsers } from '../../ducks/reducers/userReducer';
-import { getDashboard } from '../../ducks/reducers/incomeReducer';
+import "./Dashboard.css";
+import { getUsers } from "../../ducks/reducers/userReducer";
+import { getDashboard } from "../../ducks/reducers/incomeReducer";
 
 class Dashboard extends Component {
   constructor() {
@@ -21,11 +21,11 @@ class Dashboard extends Component {
     };
   }
   componentDidMount() {
-    this.props.getDashboard('month');
+    this.props.getDashboard("month");
   }
   handleChange = month =>
     this.setState({ month }, () =>
-      this.props.getDashboard(this.state.month ? 'month' : 'year')
+      this.props.getDashboard(this.state.month ? "month" : "year")
     );
   render() {
     return (
@@ -75,13 +75,9 @@ class Dashboard extends Component {
             <Income month={this.state.month} />
           )}
           <div className="dashboard_expense">
-<<<<<<< HEAD
-            <h2>Expense goes here</h2>
-=======
             <Link className="link2" to="/expenses">
               <h2>Expenses</h2>
             </Link>
->>>>>>> master
           </div>
         </div>
 
