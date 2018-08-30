@@ -31,18 +31,51 @@ class Dashboard extends Component {
       <div className="dashboard">
         <Goals />
         <Switch
+          uncheckedIcon={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+                fontSize: 15,
+                color: "white",
+                paddingRight: 2,
+                background: "#d12012",
+                borderRadius: 50
+              }}
+            >
+              Y
+            </div>
+          }
+          checkedIcon={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+                fontSize: 15,
+                color: "white",
+                paddingRight: 2,
+                background: "#d12012",
+                borderRadius: 50
+              }}
+            >
+              M
+            </div>
+          }
           onChange={this.handleChange}
           checked={this.state.month}
           id="normal-switch"
         />
-        <div className='dashboard_top'>
-
-        {this.props.incomeReducer.dashboard.sources && (
-          <Income month={this.state.month} />
-        )}
-        <div className='dashboard_expense'>
-          <h2>Expense goes here</h2>
-        </div>
+        <div className="dashboard_top">
+          {this.props.incomeReducer.dashboard.sources && (
+            <Income month={this.state.month} />
+          )}
+          <div className="dashboard_expense">
+            <h2>Expense goes here</h2>
+          </div>
         </div>
 
         {this.props.incomeReducer.dashboard.sources && (

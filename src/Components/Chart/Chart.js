@@ -43,9 +43,10 @@ class Chart extends Component {
             this.props.incomesum - this.props.expensesum
           ],
           backgroundColor: [
-            "blue",
-            this.props.incomesum - this.props.expensesum < 0 ? "red" : "green",
-            "purple"
+            "#28224F",
+            this.props.incomesum - this.props.expensesum < 0
+              ? "#d12012"
+              : "#2EC4B6"
           ]
         }
       ],
@@ -60,7 +61,13 @@ class Chart extends Component {
       datasets: [
         {
           data: this.props.expenses.map(e => e.amount),
-          backgroundColor: ["blue", "green", "purple", "red"]
+          backgroundColor: [
+            "#D12012",
+            "#28224F",
+            "#68151E",
+            "#205798",
+            "#2EC4B6"
+          ]
         }
       ],
       labels: this.props.expenses.map(e => e.category)
@@ -90,6 +97,40 @@ class Chart extends Component {
           onChange={this.handleChange}
           checked={this.state.month}
           id="normal-switch"
+          uncheckedIcon={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+                fontSize: 15,
+                color: "white",
+                paddingRight: 2,
+                background: "#d12012",
+                borderRadius: 50
+              }}
+            >
+              Y
+            </div>
+          }
+          checkedIcon={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+                fontSize: 15,
+                color: "white",
+                paddingRight: 2,
+                background: "#d12012",
+                borderRadius: 50
+              }}
+            >
+              M
+            </div>
+          }
         />
         {this.state.month ? (
           <div>
