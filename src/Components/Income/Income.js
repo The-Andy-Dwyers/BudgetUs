@@ -9,13 +9,10 @@ import Switch from "react-switch";
 
 import "./Income.css";
 import {
-  getIncome,
-  getYearlyIncome,
-  getIncomeSum,
-  getYearlyIncomeSum,
   updateAmount,
   updateDate,
-  updateTitle
+  updateTitle,
+  getDashboard
 } from "../../ducks/reducers/incomeReducer";
 import { getUser } from "../../ducks/reducers/userReducer";
 import { getExpenses } from "../../ducks/reducers/expensesReducer";
@@ -50,93 +47,65 @@ class Income extends Component {
     this.setState({ modalIsOpen: false });
   };
 
-  componentDidMount() {
-    this.props.getIncome();
-    this.props.getUser();
-
-  }
-
-  handleChange = month => {
-    this.setState(
-      {
-        month
-      },
-      () => {
-        this.props.month
-          ? this.props.getIncome()
-          : this.props.getYearlyIncome();
-      }
-    );
-  };
-
-  // incomeSum = (start, end) => {
-  //   axios.get(`/api/income-sum?start=${start}&end=${end}`).then(res => {
-  //     this.setState({ incomeTotal: res.data[0]["sum"] });
-  //   });
-  // };
-
   handleDateChange = date => {
     this.props.updateDate(date);
   };
 
   handleKeyDown = e => {
-    let { amount, title, date } = this.props.incomeReducer;
+    let { amount, source, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     e.keyCode === 13 &&
       axios
         .post("/api/setup-income", {
           amount,
-          title,
+          source,
           date,
           id
         })
         .then(() => {
-          this.props.getIncome();
           this.closeModal();
         });
   };
 
   submitIncome = e => {
-    let { amount, title, date } = this.props.incomeReducer;
+    let { amount, source, date } = this.props.incomeReducer;
     let { id } = this.props.userReducer;
 
     axios
       .post("/api/setup-income", {
         amount,
-        title,
+        source,
         date,
         id
       })
       .then(() => {
-        this.props.getIncome();
-        this.incomeSum();
+        this.props.getDashboard(this.props.month ? "month" : "year");
         this.closeModal();
       });
   };
 
   handleDelete = id => {
     axios.delete(`/api/delete-income/${id}`).then(() => {
-      this.props.getIncome();
-      this.incomeSum();
+      this.props.getDashboard(this.props.month ? "month" : "year");
       this.setState({ edit: false });
     });
   };
 
   handleEdit = id => {
-    let { amount, title, date } = this.props.incomeReducer;
-    var find = this.props.incomeReducer.income.find(e => e.id === id);
-
+    let { amount, source, date } = this.props.incomeReducer;
+    var find = this.props.incomeReducer.dashboard.sources.find(
+      e => e.id === id
+    );
     axios
       .put(`/api/edit-income/${id}`, {
-        title: !title ? find.title : title,
+        source: !source ? find.source : source,
         amount: !amount ? find.amount : amount,
         date: !date ? find.date : date
       })
       .then(() => {
-        this.props.getIncome();
-        this.incomeSum();
-        this.setState({ edit: false });
+        this.setState({ edit: false }),
+          this.props.getDashboard(this.props.month ? "month" : "year");
       });
   };
 
@@ -144,10 +113,10 @@ class Income extends Component {
     const { updateAmount, updateTitle } = this.props;
     const day = moment().format("MM/DD/YYYY");
 
-    const map = this.props.incomeReducer.income.map(e => {
+    const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
-          <p>{e.title}</p>
+          <p>{e.source}</p>
           <p>${e.amount.toLocaleString()}</p>
           <p>{moment.utc(e.date).format("ddd, MMM D")}</p>
         </div>
@@ -155,7 +124,7 @@ class Income extends Component {
         <div key={e.id} className="income_map">
           <ContentEditable
             className="income_content"
-            html={e.title}
+            html={e.source}
             onChange={e => updateTitle(e.target.value)}
           />
           <ContentEditable
@@ -220,7 +189,7 @@ class Income extends Component {
             </div>
           </div>
           <div className="income_total">
-            <p>Income Total: {+this.state.incomeTotal}</p>
+            <p>Income Total: {this.props.incomeReducer.dashboard.incomesum}</p>
           </div>
         </div>
 
@@ -249,7 +218,7 @@ class Income extends Component {
             <div className="income_sub">
               <p>Payday:</p>
               <DatePicker
-                date={this.props.incomeReducer.date}
+                date={this.props.incomeReducer.dashboard.sources.date}
                 placeholder={day}
                 handleDateChange={this.handleDateChange}
               />
@@ -270,11 +239,10 @@ export default connect(
   mapStateToProps,
   {
     getUser,
-    getIncome,
-    getYearlyIncome,
     updateAmount,
     updateDate,
     updateTitle,
-    getExpenses
+    getExpenses,
+    getDashboard
   }
 )(Income);

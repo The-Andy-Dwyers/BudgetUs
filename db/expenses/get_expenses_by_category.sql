@@ -1,7 +1,7 @@
-SELECT category,SUM(amount) as amount FROM expenses
+SELECT category,SUM(cost) as amount FROM expenses
 WHERE user_id = $1
 AND
-date >= $2 
+expense_date >= $2 
 AND
-date <= $3
+expense_date <= $3
 GROUP BY category;

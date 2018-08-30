@@ -1,13 +1,13 @@
-var moment = require('moment');
+var moment = require("moment");
 const start = moment()
-  .startOf('month')
-  .format('l');
+  .startOf("month")
+  .format("l");
 const end = moment()
-  .endOf('month')
-  .format('l');
+  .endOf("month")
+  .format("l");
 const year = moment()
-  .startOf('year')
-  .format('l');
+  .startOf("year")
+  .format("l");
 
 const getExpenses = (req, res) => {
   const db = req.app.get("db");
@@ -43,7 +43,7 @@ const getYearlyExpensesByCategory = (req, res) => {
   db.expenses
     .get_expenses_by_category([req.user.id, year, end])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.status(200).send(response);
     })
     .catch(err => {
@@ -82,7 +82,6 @@ const deleteExpense = (req, res) => {
 const editExpense = (req, res) => {
   const db = req.app.get("db");
   const { expenseName, amount, date, type, company, category } = req.body;
-  console.log(req.body);
   db.expenses
     .edit_expense([
       req.params.id,
