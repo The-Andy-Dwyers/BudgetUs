@@ -35,9 +35,16 @@ class Dashboard extends Component {
           checked={this.state.month}
           id="normal-switch"
         />
+        <div className='dashboard_top'>
+
         {this.props.incomeReducer.dashboard.sources && (
           <Income month={this.state.month} />
         )}
+        <div className='dashboard_expense'>
+          <h2>Expense goes here</h2>
+        </div>
+        </div>
+
         {this.props.incomeReducer.dashboard.sources && (
           <Chart type="remaining" />
         )}
