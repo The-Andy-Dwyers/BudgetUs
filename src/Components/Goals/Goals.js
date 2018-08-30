@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Modal from 'react-modal';
 
+import './Goals.css';
 import { getDashboard } from '../../ducks/reducers/incomeReducer';
+import {getGoals} from '../../ducks/reducers/expensesReducer';
 
 const customStyles = {
   content: {
@@ -27,14 +29,15 @@ class Goals extends Component {
   };
 
   componentDidMount() {
-    this.getGoal();
+    this.props.getGoals()
   }
 
-  getGoal = () => {
-    axios.get('/api/goal').then(res => {
-      this.setState({ goal: res.data[0].savings });
-    });
-  };
+  // getGoal = () => {
+  //   axios.get('/api/goal').then(res => {
+  //     res.data.length &&
+  //     this.setState({ goal: res.data[0].savings });
+  //   });
+  // };
 
   addGoal = () => {
     axios.post('/api/add-goal', {
@@ -51,20 +54,25 @@ class Goals extends Component {
   };
   render() {
     const { expensesum, incomesum } = this.props.incomeReducer.dashboard;
+    const {goals} = this.props.expensesReducer;
+
     const remaining = incomesum - expensesum;
-    const remainder = remaining - this.state.goal;
+    const remainder = remaining - (goals.length && goals[0].savings);
+
+console.log(goals)
+    console.log(remainder)
     return (
-      <div>
+      <div className="goals">
         <h3 className="income_input_btn btn" onClick={this.openModal}>
           Monthly Goal
         </h3>
 
-        {remainder > 0 ? (
+        {remainder && remainder > 0 ? (
           <p>
             You've saved a total of ${remaining.toLocaleString()} this month.{' '}
             <br />
             You are ${remainder.toLocaleString()} above from your goal of $
-            {this.state.goal.toLocaleString()}!
+            {goals.length && goals[0].savings.toLocaleString()}!
           </p>
         ) : (
           <p>
@@ -97,5 +105,5 @@ const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,
-  { getDashboard }
+  { getDashboard, getGoals }
 )(Goals);
