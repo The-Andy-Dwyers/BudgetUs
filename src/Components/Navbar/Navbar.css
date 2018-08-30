@@ -47,6 +47,17 @@
   padding: 10%;
 }
 
+.income_input_btn {
+  display: inline-block;
+  color: #fff;
+  font-size: .7em;
+  /* box-shadow: 1px 1px 5px grey; */
+  /* background-color: rgb(245, 245, 245); */
+  /* padding: 0.5em; */
+  /* border-radius: 10%; */
+  /* margin: 3% 0; */
+}
+
 .ham_container {
   cursor: pointer;
   z-index: 9999;
