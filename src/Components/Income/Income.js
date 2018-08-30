@@ -5,7 +5,7 @@ import moment from 'moment';
 import axios from 'axios';
 import ContentEditable from 'react-contenteditable';
 import DatePicker from 'react-custom-date-picker';
-import Switch from 'react-switch';
+// import Switch from 'react-switch';
 
 import './Income.css';
 import {
@@ -108,7 +108,7 @@ class Income extends Component {
         date: !date ? find.date : date
       })
       .then(() => {
-        this.setState({ edit: false }),
+        this.setState({ edit: false })
           this.props.getDashboard(this.props.month ? 'month' : 'year');
       });
   };
@@ -120,7 +120,7 @@ class Income extends Component {
     const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
-          <p>{e.source}</p>
+          <p>{e.title}</p>
           <p>${e.amount.toLocaleString()}</p>
           <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
         </div>
@@ -128,7 +128,7 @@ class Income extends Component {
         <div key={e.id} className="income_map">
           <ContentEditable
             className="income_content"
-            html={e.source}
+            html={e.title}
             onChange={e => updateTitle(e.target.value)}
           />
           <ContentEditable

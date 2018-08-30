@@ -24,8 +24,7 @@ class Calendar extends Component {
         console.log(date);
         console.log(moment(date.start._d).format('YYYY-MM-DD'));
       },
-      // events: `/api/income/${this.props.userReducer.id}`,
-      events: `/api/income/6`,
+      events: `/api/income/${this.props.userReducer.id}`,
       eventMouseover: function(e, jsEvent) {
         const tooltip =
           '<div class="tooltipevent" style="padding:1% 1.5%;opacity: 0.8;background:rgb(241, 241, 241);position:absolute;z-index:10001;">' +
