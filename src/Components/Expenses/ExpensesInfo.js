@@ -81,7 +81,6 @@ class Expenses extends Component {
     const { expenseName, amount, date, type, company, category } = this.state;
     var find = this.props.expensesReducer.expense.find(e => e.id === id);
 
-    console.log(this.state);
     axios
       .put(`/api/edit-expense/${id}`, {
         expenseName: !expenseName ? find.expenseName : expenseName,
@@ -112,9 +111,9 @@ class Expenses extends Component {
         return !this.state.edit ? (
           <div className="expensesinfo_map" key={e.id}>
             <p>{e.title}</p>
-            <p>${e.amount.toLocaleString()}</p>
+            <p>${e.cost.toLocaleString()}</p>
             <p>{moment.utc(date).format("ddd, MMM D")}</p>
-            <p>{e.type}</p>
+            <p>{e.expense_type}</p>
             <p>{e.company}</p>
             <p>{e.category}</p>
             <button onClick={id => this.handleDelete(e.id)}>Delete</button>

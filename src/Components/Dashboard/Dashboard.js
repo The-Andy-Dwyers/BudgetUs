@@ -7,13 +7,7 @@ import { getUsers } from "../../ducks/reducers/userReducer";
 import Income from "../Income/Income";
 import Chart from "../Chart/Chart";
 import Switch from "react-switch";
-import {
-  getIncome,
-  getYearlyIncome,
-  getIncomeSum,
-  getYearlyIncomeSum
-} from "../../ducks/reducers/incomeReducer";
-import { getExpensesByCategory } from "../../ducks/reducers/expensesReducer";
+import { getDashboard } from "../../ducks/reducers/incomeReducer";
 import moment from "moment";
 
 class Dashboard extends Component {
@@ -24,36 +18,13 @@ class Dashboard extends Component {
     };
   }
   componentDidMount() {
-    this.props.getUsers();
-    this.props.getIncomeSum();
+    this.props.getDashboard("month");
   }
-  // incomeSum = (start, end) => {
-  //   axios.get(`/api/income-sum?start=${start}&end=${end}`).then(res => {
-  //     this.setState({ incomeTotal: res.data[0]["sum"] });
-  //   });
-  // };
-  // incomeYearlySum = (start, end) => {
-  //   axios.get(`/api/yearly-income-sum`).then(res => {
-  //     this.setState({ incomeTotal: res.data[0]["sum"] });
-  //   });
-  // };
-  handleChange = month => {
-    // const { month } = this.state;
-    this.setState({
-      month
-    });
-    if (month) {
-      this.props.getIncome(),
-        this.props.getExpensesByCategory(),
-        this.props.getIncomeSum();
-    } else {
-      this.props.getYearlyIncome(),
-        this.props.getExpensesByCategory(),
-        this.props.getYearlyIncomeSum();
-    }
-  };
+  handleChange = month =>
+    this.setState({ month }, () =>
+      this.props.getDashboard(this.state.month ? "month" : "year")
+    );
   render() {
-    console.log(this.state.month);
     return (
       <div className="dashboard">
         <Switch
@@ -61,8 +32,12 @@ class Dashboard extends Component {
           checked={this.state.month}
           id="normal-switch"
         />
-        <Income month={this.state.month} />
-        <Chart month={this.state.month} type="remaining" />
+        {this.props.incomeReducer.dashboard.sources && (
+          <Income month={this.state.month} />
+        )}
+        {this.props.incomeReducer.dashboard.sources && (
+          <Chart type="remaining" />
+        )}
       </div>
     );
   }
@@ -74,10 +49,6 @@ export default connect(
   mapStateToProps,
   {
     getUsers,
-    getIncome,
-    getYearlyIncome,
-    getIncomeSum,
-    getYearlyIncomeSum,
-    getExpensesByCategory
+    getDashboard
   }
 )(Dashboard);
