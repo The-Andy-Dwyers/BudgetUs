@@ -4,6 +4,9 @@
   margin: 0 auto;
 }
 
+.expensesinfo_content {
+  width: 10%;
+}
 .expense_input_btn {
   display: inline-block;
   box-shadow: 1px 1px 5px grey;
@@ -15,7 +18,7 @@
 
 .expenseinfo_btn_holder {
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   right: 0;
   height: 100%;
   width: 100%;
@@ -34,7 +37,7 @@
 }
 
 .expenses_container {
-  width: 95%;
+  width: 100%;
 }
 
 .expenses h2 {
@@ -46,8 +49,9 @@
 
 .expenses {
   width: 95%;
-  margin: 5% 2%;
+  margin: 1% auto;
   height: 100%;
+  padding: 1%;
 }
 
 .expenses > div {
@@ -55,12 +59,17 @@
   justify-content: space-around;
 }
 
-.income_btn_holder {
+.expensesinfo_content_datepicker {
+  display: inline-block;
+  margin: 5px;
+}
+
+.expense_btn_holder {
   display: flex;
-  justify-content: flex-end;
-  right: 0;
+  justify-content: center;
   height: 100%;
-  width: 100%;
+  width: 23%;
+  margin: 0px 4px 0px 4px;
 }
 
 .x_container {
@@ -100,19 +109,16 @@
   transform: scale(0.98);
 }
 
-.income_map_bottom {
+.expense_map_bottom {
   display: flex;
-  width: 100%;
+  justify-content: flex-end;
+  align-self: flex-end;
+  justify-self: flex-end;
+  width: 25%;
 }
 
-.income_edit_holder {
-  justify-content: flex-end !important;
-}
-
-.income_edit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5%;
-  width: 100%;
+.expenses_edit {
+  width: 30px;
+  height: 30px;
+  margin: 0px 2px 0px 2px;
 }

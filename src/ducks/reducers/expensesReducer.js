@@ -4,6 +4,7 @@ const GET_EXPENSES = 'GET_EXPENSES';
 const GET_EXPENSES_BY_CAT = 'GET_EXPENSES_BY_CAT';
 const ADD_EXPENSE = 'ADD_EXPENSE';
 const DELETE_EXPENSE = 'DELETE_EXPENSE';
+const GET_GOAL = 'GET_GOAL';
 
 export function getExpenses() {
   return {
@@ -40,8 +41,16 @@ export function deleteExpense(expense) {
   };
 }
 
+export function getGoals() {
+  return {
+    type: 'GET_GOAL',
+    payload: axios.get(`/api/goal`)
+  };
+}
+
 const initialState = {
   expense: [],
+  goals: [],
   expensesbycat: [],
   didErr: false
 };
@@ -52,6 +61,11 @@ export default function expensesReducer(state = initialState, action) {
     case `${ADD_EXPENSE}_FULFILLED`:
     case `${DELETE_EXPENSE}_FULFILLED`:
       return { ...state, expense: action.payload.data };
+    case `${GET_GOAL}_FULFILLED`:
+      return {
+        ...state,
+        goals: action.payload.data
+      };
     case `${GET_EXPENSES_BY_CAT}_FULFILLED`:
       return { ...state, expensesbycat: action.payload.data };
     case `${GET_EXPENSES}_REJECTED`:
@@ -59,6 +73,11 @@ export default function expensesReducer(state = initialState, action) {
     case `${GET_EXPENSES_BY_CAT}_REJECTED`:
     case `${DELETE_EXPENSE}_REJECTED`:
       return { ...state, didErr: true };
+    case `${GET_GOAL}_REJECTED`:
+      return {
+        ...state,
+        didErr: true
+      };
     default:
       return state;
   }

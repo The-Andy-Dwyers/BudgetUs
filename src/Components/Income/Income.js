@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
 import ContentEditable from 'react-contenteditable';
 import DatePicker from 'react-custom-date-picker';
-// import Switch from 'react-switch';
+
 
 import './Income.css';
 import {
@@ -18,23 +17,8 @@ import {
 import { getUser } from '../../ducks/reducers/userReducer';
 import { getExpenses } from '../../ducks/reducers/expensesReducer';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    fontFamily: 'Lato, sans-serif'
-  }
-};
-
-Modal.setAppElement(document.getElementById('root'));
-
 class Income extends Component {
   state = {
-    modalIsOpen: false,
     edit: false,
     incomeTotal: 0,
     month: true
@@ -44,50 +28,8 @@ class Income extends Component {
     this.props.getUser();
   }
 
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
-  };
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-  };
-
   handleDateChange = date => {
     this.props.updateDate(date);
-  };
-
-  handleKeyDown = e => {
-    let { amount, title, date } = this.props.incomeReducer;
-    let { id } = this.props.userReducer;
-
-    e.keyCode === 13 &&
-      axios
-        .post('/api/setup-income', {
-          amount,
-          title,
-          date,
-          id
-        })
-        .then(() => {
-          this.closeModal();
-        });
-  };
-
-  submitIncome = e => {
-    let { amount, title, date } = this.props.incomeReducer;
-    let { id } = this.props.userReducer;
-
-    axios
-      .post('/api/setup-income', {
-        amount,
-        title,
-        date,
-        id
-      })
-      .then(() => {
-        this.props.getDashboard(this.props.month ? 'month' : 'year');
-        this.closeModal();
-      });
   };
 
   handleDelete = id => {
@@ -117,7 +59,6 @@ class Income extends Component {
 
   render() {
     const { updateAmount, updateTitle } = this.props;
-    const day = moment().format('MM/DD/YYYY');
 
     const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
@@ -167,9 +108,6 @@ class Income extends Component {
     return (
       <div className="income_container">
         <div className="income">
-          <h1 className="income_input_btn btn" onClick={this.openModal}>
-            Income Input
-          </h1>
           <div className="income_display">
             <div>
               <h2>
@@ -208,42 +146,6 @@ class Income extends Component {
             )}
           </div>
         </div>
-
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-        >
-          <div className="income_modal">
-            <h2>Let's add your Income!</h2>
-            <br />
-            <div className="income_sub">
-              <p>Source:</p>
-              <input onChange={e => updateTitle(e.target.value)} type="text" />
-            </div>
-            <div className="income_sub">
-              <p>Amount:</p>
-              <input
-                onKeyDown={e => this.handleKeyDown(e)}
-                onChange={e => updateAmount(e.target.value)}
-                type="text"
-                placeholder="$"
-              />
-            </div>
-            <div className="income_sub">
-              <p>Payday:</p>
-              <DatePicker
-                date={this.props.incomeReducer.dashboard.sources.date}
-                placeholder={day}
-                handleDateChange={this.handleDateChange}
-              />
-            </div>
-            <h3 className="income_btn btn" onClick={e => this.submitIncome(e)}>
-              Submit
-            </h3>
-          </div>
-        </Modal>
       </div>
     );
   }

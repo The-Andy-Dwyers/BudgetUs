@@ -3,7 +3,6 @@
     height: 100%;
     padding-left: 90px;
     background-color: rgb(247, 247, 247);
-  /* background-color: rgb(252, 252, 252); */
     opacity: .8;
 }
 
@@ -13,6 +12,7 @@
 
 .dashboard_expense {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 50%;
@@ -20,3 +20,12 @@
     box-shadow: 1px 1px 5px grey;
     margin: 1%;
 }
+
+.link2 {
+    text-decoration: none;
+    color: #000;
+  }
+
+  div.react-switch-bg {
+    background: #d12012 !important;
+   }
