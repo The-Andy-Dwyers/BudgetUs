@@ -21,8 +21,8 @@ class Calendar extends Component {
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
       eventDrop: function(date, allDay) {
-        console.log(date);
-        console.log(moment(date.start._d).format('YYYY-MM-DD'));
+        // console.log(date);
+        // console.log(moment(date.start._d).format('YYYY-MM-DD'));
       },
       events: `/api/income/${this.props.userReducer.id}`,
       eventMouseover: function(e, jsEvent) {

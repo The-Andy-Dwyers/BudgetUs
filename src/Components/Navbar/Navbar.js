@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 import { getUsers } from '../../ducks/reducers/userReducer';
-import menu from './menu.svg';
+import menu from './icons/menu.svg';
+import home from './icons/home.svg';
+import calendar from './icons/calendar.svg';
 
 class Navbar extends Component {
   // componentDidMount() {
@@ -19,15 +21,18 @@ class Navbar extends Component {
         <div className="ham_container">
           <img className="hamburger" src={menu} alt="Hamburger menu" />
         </div>
+        <div className='navbar_logo_container'>
+          <img className='navbar_logo'src="https://image.flaticon.com/icons/svg/134/134597.svg" alt="Logo"/>
+        </div>
         <div className="navbar_sub">
           <Link className="link" to="/dashboard">
-            <h2>Home</h2>
+              <img className='navbar_icon btn' src={home} alt="Home icon"/>
           </Link>
-          <Link className="link" to="/expenses">
+          {/* <Link className="link" to="/expenses">
             <h2>Expenses</h2>
-          </Link>
+          </Link> */}
           <Link className="link" to="/calendar">
-            <h2>Calendar</h2>
+          <img className='navbar_icon btn' src={calendar} alt="Calendar icon"/>
           </Link>
           <Link className="link" to="/settings">
             <h2>Settings</h2>

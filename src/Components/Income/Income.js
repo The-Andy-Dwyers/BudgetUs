@@ -12,7 +12,8 @@ import {
   updateAmount,
   updateDate,
   updateTitle,
-  getDashboard
+  getDashboard,
+  reset
 } from '../../ducks/reducers/incomeReducer';
 import { getUser } from '../../ducks/reducers/userReducer';
 import { getExpenses } from '../../ducks/reducers/expensesReducer';
@@ -101,7 +102,6 @@ class Income extends Component {
     var find = this.props.incomeReducer.dashboard.sources.find(
       e => e.id === id
     );
-    console.log(find)
     axios
       .put(`/api/edit-income/${id}`, {
         title: title ? title : find.title,
@@ -109,16 +109,15 @@ class Income extends Component {
         date: date ? date : find.date
       })
       .then(() => {
-        this.setState({ edit: false })
-          this.props.getDashboard(this.props.month ? 'month' : 'year');
+        this.setState({ edit: false });
+        this.props.getDashboard(this.props.month ? 'month' : 'year');
+        this.props.reset();
       });
   };
 
   render() {
     const { updateAmount, updateTitle } = this.props;
     const day = moment().format('MM/DD/YYYY');
-
-    console.log(this.props.incomeReducer.dashboard)
 
     const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
@@ -260,6 +259,7 @@ export default connect(
     updateDate,
     updateTitle,
     getExpenses,
-    getDashboard
+    getDashboard,
+    reset
   }
 )(Income);

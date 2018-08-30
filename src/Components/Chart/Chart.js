@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { connect } from "react-redux";
+
+import "./Chart.css";
+
 import {
   getExpensesByCategory,
   getYearlyExpensesByCategory,
@@ -74,12 +77,14 @@ class Chart extends Component {
       elements: { arc: { borderWidth: 0.5 } }
     };
     return this.props.type === "remaining" ? (
-      <div>
+      <div className="chart">
         <h2>Remaining Chart</h2>
-        <Doughnut data={remainData} options={options} />
+        <div className="chart_main">
+          <Doughnut data={remainData} options={options} />
+        </div>
       </div>
     ) : (
-      <div>
+      <div className="chart">
         <h2>Expenses By Category Chart</h2>
         <Switch
           onChange={this.handleChange}
