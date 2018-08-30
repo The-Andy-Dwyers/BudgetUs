@@ -52,8 +52,7 @@ class Goals extends Component {
   render() {
     const { expensesum, incomesum } = this.props.incomeReducer.dashboard;
     const remaining = incomesum - expensesum;
-    // const remainder = remaining - this.state.goal;
-    const remainder = -1000
+    const remainder = remaining - this.state.goal;
     return (
       <div>
         <h3 className="income_input_btn btn" onClick={this.openModal}>

@@ -1,7 +1,8 @@
 .calendar {
     /* width: 75%; */
     margin: 2%;
-    width: 100vw;
+    margin-left: 90px;
+    width: 94%;
     /* height: 100vh; */
     display: flex;
     flex-direction: column;

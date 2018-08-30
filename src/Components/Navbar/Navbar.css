@@ -2,7 +2,9 @@
   width: 80px;
   background-color: rgb(54, 54, 54);
   height: 100vh;
+  max-height: 1000px;
   transition: 0.5s ease-out;
+  position: fixed;
 }
 
 .navbar_sub {

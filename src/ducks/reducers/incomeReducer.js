@@ -4,7 +4,7 @@ const initialState = {
   income: [],
   amount: "",
   date: "",
-  source: "",
+  title: "",
   didErr: false,
   dashboard: []
 };
@@ -67,7 +67,7 @@ export default function userReducer(state = initialState, action) {
     case GET_TITLE:
       return {
         ...state,
-        source: action.payload
+        title: action.payload
       };
     default:
       return state;

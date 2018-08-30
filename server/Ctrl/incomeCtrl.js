@@ -59,10 +59,10 @@ const getIncomeById = (req, res) => {
 
 const addIncome = (req, res) => {
   const db = req.app.get("db");
-  const { amount, source, date, id } = req.body;
+  const { amount, title, date, id } = req.body;
 
   db.income
-    .add_income([amount, source, date, req.user.id])
+    .add_income([amount, title, date, req.user.id])
     .then(response => {
       res.status(200).send(response);
     })
@@ -87,10 +87,10 @@ const deleteIncome = (req, res) => {
 
 const editIncome = (req, res) => {
   const db = req.app.get("db");
-  const { source, amount, date } = req.body;
+  const { title, amount, date } = req.body;
 
   db.income
-    .edit_income([req.params.id, source, amount, date])
+    .edit_income([req.params.id, title, amount, date])
     .then(response => res.status(200).send(response))
     .catch(err => {
       console.log(err);
