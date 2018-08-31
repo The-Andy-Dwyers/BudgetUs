@@ -6,19 +6,27 @@ const initialState = {
   date: "",
   title: "",
   didErr: false,
+  events: [],
   dashboard: []
 };
 
 const GET_AMOUNT = "GET_AMOUNT";
 const GET_DATE = "GET_DATE";
 const GET_TITLE = "GET_TITLE";
-const RESET = 'RESET';
+const RESET = "RESET";
 
 const GET_DASHBOARD = "GET_DASHBOARD";
+const GET_INCOME_EVENTS = "GET_INCOME_EVENTS";
 export const getDashboard = view => {
   return {
     type: GET_DASHBOARD,
     payload: axios.get(`/api/dashboard?view=${view}`)
+  };
+};
+export const getIncomeEvents = () => {
+  return {
+    type: GET_INCOME_EVENTS,
+    payload: axios.get(`/api/dashboard?view=year`)
   };
 };
 
@@ -46,9 +54,9 @@ export const updateTitle = title => {
 export const reset = () => {
   return {
     type: RESET,
-    payload: ''
+    payload: ""
   };
-}
+};
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -56,6 +64,12 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         dashboard: action.payload.data
+      };
+    case `${GET_INCOME_EVENTS}_FULFILLED`:
+      // console.log(action.payload.data);
+      return {
+        ...state,
+        events: action.payload.data.sources
       };
     case `${GET_DASHBOARD}_REJECTED`:
       return {
@@ -78,12 +92,12 @@ export default function userReducer(state = initialState, action) {
         title: action.payload
       };
     case RESET:
-    return {
-      ...state,
-      amount: action.payload,
-      date: action.payload,
-      title: action.payload
-    }
+      return {
+        ...state,
+        amount: action.payload,
+        date: action.payload,
+        title: action.payload
+      };
     default:
       return state;
   }

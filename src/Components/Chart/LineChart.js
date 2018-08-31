@@ -8,7 +8,6 @@ class LineChart extends Component {
     this.props.getExpenseTotalsByMonth();
   }
   render() {
-    // console.log(this.props);
     const data = {
       labels: this.props.totals.map(e => e.month.trim()),
       datasets: [
