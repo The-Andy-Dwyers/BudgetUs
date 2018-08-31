@@ -1,7 +1,8 @@
 .goals {
-    width: 95%;
-    background-color: #fff;
-    box-shadow: 1px 1px 5px grey;
-    margin: 1%;
-    padding: 1%;
+  width: 95%;
+  background-color: #fff;
+  box-shadow: 1px 1px 5px grey;
+  margin: 1%;
+  padding: 1%;
+  animation: downFade 1.5s;
 }
