@@ -92,6 +92,7 @@ class Expenses extends Component {
       .then(() => {
         this.props.getExpenses();
         this.setState({ edit: false });
+        // this.setState({ })
       });
   };
 

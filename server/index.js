@@ -17,7 +17,8 @@ const {
   getExpensesByCategory,
   getYearlyExpensesByCategory,
   deleteExpense,
-  editExpense
+  editExpense,
+  getTopExpenses
 } = require('./Ctrl/expensesCtrl');
 const {
   getDashboard,
@@ -91,6 +92,7 @@ app.get('/api/users', getUsers);
 app.get('/api/expenses', getExpenses);
 app.get('/api/expenses_by_cat', getExpensesByCategory);
 app.get('/api/yearly-expenses_by_cat', getYearlyExpensesByCategory);
+app.get('/api/top-expenses', getTopExpenses)
 app.post('/api/add-expenses', addExpenses);
 app.delete('/api/delete-expense/:id', deleteExpense);
 app.put('/api/edit-expense/:id', editExpense);

@@ -16,7 +16,6 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  position: relative;
 }
 
 .income_display {
@@ -123,10 +122,9 @@ justify-content: flex-end !important;
 
 .income_total {
   display: inline-block;
-  position: absolute;
-  bottom: 0;
-  right: 5%;
+  align-self: flex-end;
   border: 1px solid black;
+  margin: .5%;
   padding: .5%;
 }
 

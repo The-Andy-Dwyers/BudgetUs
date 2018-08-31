@@ -101,11 +101,26 @@ const editExpense = (req, res) => {
     });
 };
 
+const getTopExpenses = (req, res) => {
+  const db = req.app.get("db");
+
+  db.expenses
+    .get_top_expenses([req.user.id])
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 module.exports = {
   getExpenses,
   addExpenses,
   getExpensesByCategory,
   getYearlyExpensesByCategory,
   deleteExpense,
-  editExpense
+  editExpense,
+  getTopExpenses
 };

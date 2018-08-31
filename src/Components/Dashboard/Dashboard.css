@@ -1,31 +1,77 @@
 .dashboard {
-    width: 100%;
-    height: 100%;
-    padding-left: 90px;
-    background-color: rgb(247, 247, 247);
-    opacity: .8;
+  width: 100%;
+  height: 100%;
+  padding-left: 90px;
+  background-color: rgb(247, 247, 247);
+  opacity: 0.8;
 }
 
 .dashboard_top {
-    display: flex;
+  display: flex;
 }
 
 .dashboard_expense {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color: #fff;
+  box-shadow: 1px 1px 5px grey;
+  margin: 1%;
+  padding: 1%;
+}
+
+.dashboard_expense > div {
+    width: 90%;
+}
+
+.dash_map {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    background-color: #fff;
-    box-shadow: 1px 1px 5px grey;
-    margin: 1%;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding-bottom: 1%;
+}
+
+.expenses_link {
+    color: rgb(59, 59, 224);
+    letter-spacing: 1px;
+    font-weight: bolder;
 }
 
 .link2 {
-    text-decoration: none;
-    color: #000;
-  }
+  text-decoration: none;
+  color: #000;
+  align-self: flex-end;
+  margin: 2% 5% 0 0;
+}
 
-  div.react-switch-bg {
-    background: #d12012 !important;
-   }
+div.react-switch-bg {
+  background: #d12012 !important;
+}
+
+.checkbox_container {
+position: relative;
+width: 100px;
+height: 100px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.check_main {
+    background-color: grey;
+    position: absolute;
+    width: 5px;
+    border-radius: 20%;
+}
+
+.c_left{
+    height: 30px;
+    transform: rotate(135deg);
+}
+
+.c_right {
+    height: 50px;
+    transform: rotate(45deg) 
+}
