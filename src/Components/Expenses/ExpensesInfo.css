@@ -5,7 +5,9 @@
 }
 
 .expensesinfo_content {
-  width: 10%;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 .expense_input_btn {
   display: inline-block;
@@ -16,14 +18,6 @@
   margin: 3% 0;
 }
 
-.expenseinfo_btn_holder {
-  display: flex;
-  /* justify-content: flex-end; */
-  right: 0;
-  height: 100%;
-  width: 100%;
-}
-
 .expensesinfo_map {
   display: flex;
   width: 100%;
@@ -31,13 +25,14 @@
   position: relative;
 }
 
-.expensesinfo_map p {
-  width: 100%;
-  padding: 0.5%;
+.expensesinfo_map form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;it 
 }
 
-.expenses_container {
-  width: 100%;
+.expensesinfo_map form div {
+  display: flex;
 }
 
 .expenses h2 {
@@ -48,7 +43,7 @@
 }
 
 .expenses {
-  width: 95%;
+  width: 97%;
   margin: 1% auto;
   height: 100%;
   padding: 1%;
@@ -59,16 +54,11 @@
   justify-content: space-around;
 }
 
-.expensesinfo_content_datepicker {
-  display: inline-block;
-  margin: 5px;
-}
-
 .expense_btn_holder {
   display: flex;
   justify-content: center;
   height: 100%;
-  width: 23%;
+  /* width: 23%; */
   margin: 0px 4px 0px 4px;
 }
 
@@ -81,7 +71,7 @@
   position: relative;
 }
 
-.x_div {
+.expense_x_div {
   width: 30px;
   height: 3px;
   border-radius: 15%;
@@ -111,10 +101,11 @@
 
 .expense_map_bottom {
   display: flex;
-  justify-content: flex-end;
-  align-self: flex-end;
-  justify-self: flex-end;
-  width: 25%;
+  /* position: relative; */
+  /* justify-content: flex-end; */
+  /* align-self: flex-end;
+  justify-self: flex-end; */
+  width: 100%;
 }
 
 .expenses_edit {
@@ -127,7 +118,7 @@
   display: flex;
   flex-direction: column;
   width: 50vw;
-  height: 50vh;
+  height: 70vh;
 }
 
 .expensesinfo_modal h2 {
@@ -139,12 +130,25 @@
 }
 
 .expensesinfo_modal input {
-  width: 100%;
+  width: 98%;
   margin: 1%;
 }
 
-.income_btn {
-  text-align: center;
-  margin-top: 10%;
-  width: 100%;
+.expensesinfo_modal_form input {
+  width: 2%;
+}
+
+.expensesinfo_modal select {
+  width: 23%;
+  background-color: #ffffff;
+}
+
+.expensesinfo_modal button {
+  width: 20%;
+  border-radius: 11%;
+  background-color: #dfdfdf;
+}
+
+.expensesinfo_select {
+  background-color: #ffffff;
 }

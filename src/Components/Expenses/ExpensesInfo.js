@@ -108,7 +108,6 @@ class Expenses extends Component {
     this.setState({ [state]: val });
   };
 
-  // <button onClick={id => this.handleDelete(e.id)}>Delete</button>
   render() {
     const { id } = this.props.userReducer;
     const { expense } = this.props.expensesReducer;
@@ -120,12 +119,11 @@ class Expenses extends Component {
         return !this.state.edit ? (
           <div className="expensesinfo_map" key={e.id}>
             <p>{e.title}</p>
-            <p>${e.cost.toLocaleString()}</p>
-            {/* <p>{e.cost}</p> */}
-            <p>{e.occur}</p>
             <p>{e.company}</p>
-            <p>{e.category}</p>
+            <p>${e.cost.toLocaleString()}</p>
+            <p>{e.occur}</p>
             <p>{moment.utc(e.expense_date).format("ddd, MMM D")}</p>
+            <p>{e.category}</p>
           </div>
         ) : (
           <div key={e.id} className="expensesinfo_map">
@@ -136,57 +134,65 @@ class Expenses extends Component {
             />
             <ContentEditable
               className="expensesinfo_content"
-              html={String(e.cost.toLocaleString())}
-              onChange={e => this.updateExpense(e.target.value, "amount")}
-            />
-
-            <form>
-              <input
-                name="occur"
-                type="radio"
-                value="recurring"
-                onClick={() => this.handleType("Recurring")}
-              />{" "}
-              Recurring
-              <input
-                name="occur"
-                type="radio"
-                value="nonrecurring"
-                onClick={() => this.handleType("Non-Recurring")}
-              />{" "}
-              Non-Recurring
-            </form>
-
-            <ContentEditable
-              className="expensesinfo_content"
               html={e.company}
               onChange={e => this.updateExpense(e.target.value, "company")}
             />
-            <select
-              required
-              onChange={e => this.updateExpense(e.target.value, "category")}
-            >
-              <option>Select Category:</option>
-              <option value="Rent">Rent</option>
-              <option value="Bills">Bills</option>
-              <option value="Food">Food</option>
-              <option value="Gas">Gas</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Other">other</option>
-            </select>
-
-            <div className="expense_map_bottom">
+            <ContentEditable
+              className="expensesinfo_content"
+              html={String(e.cost.toLocaleString())}
+              onChange={e => this.updateExpense(e.target.value, "amount")}
+            />
+            <form>
+              <div>
+                <input
+                  name="occur"
+                  type="radio"
+                  value="recurring"
+                  onClick={() => this.handleType("Recurring")}
+                />{" "}
+                Recurring
+              </div>
+              <div>
+                <input
+                  name="occur"
+                  type="radio"
+                  value="nonrecurring"
+                  onClick={() => this.handleType("Non-Recurring")}
+                />{" "}
+                Non-Recurring
+              </div>
+            </form>
+            <div className="expensesinfo_content">
               <DatePicker
-                className="expensesinfo_content_datepicker"
+                width={240}
+                inputStyle={{
+                  width: 70
+                }}
                 date={moment.utc(e.expense_date).format("MM/DD/YYYY")}
                 placeholder={moment.utc(e.expense_date).format("MM/DD/YYYY")}
                 handleDateChange={this.handleDateChange}
               />
+            </div>
+            <div className="expense_map_bottom">
+              <select
+                className="expensesinfo_select"
+                required
+                onChange={e => this.updateExpense(e.target.value, "category")}
+              >
+                <option>Select Category:</option>
+                <option value="Rent">Rent</option>
+                <option value="Bills">Bills</option>
+                <option value="Food">Food</option>
+                <option value="Gas">Gas</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">other</option>
+              </select>
               <div className="expense_btn_holder">
                 <img
                   src="https://image.flaticon.com/icons/png/128/128/128384.png"
                   className="expenses_edit btn"
                   onClick={id => this.handleEdit(e.id)}
+                  alt="checkmark"
                 />
                 <div
                   className="x_container btn"
@@ -200,6 +206,7 @@ class Expenses extends Component {
           </div>
         );
       });
+
     return (
       <div className="expenses_container">
         <div className="expenses">
@@ -208,11 +215,11 @@ class Expenses extends Component {
           </h1>
           <div>
             <h2>Name</h2>
+            <h2>Company</h2>
             <h2>Amount</h2>
             <h2>Type</h2>
-            <h2>Company</h2>
-            <h2>Category</h2>
             <h2>Date</h2>
+            <h2>Category</h2>
             <div>
               {!this.state.edit && (
                 <h3
@@ -241,26 +248,18 @@ class Expenses extends Component {
           <div className="expensesinfo_modal">
             <h1>Expenses</h1>
             <input
-              className="expensesinfo_input"
               placeholder="Expense Name"
               onChange={e => this.handleInputs(e.target.value, "expenseName")}
             />
             <input
-              className="expensesinfo_input"
-              placeholder="amount"
-              onChange={e => this.handleInputs(e.target.value, "amount")}
-            />
-            <DatePicker
-              date={this.state.date}
-              handleDateChange={this.handleDateChange}
-            />
-            <input
-              className="expensesinfo_input"
               placeholder="Company"
               onChange={e => this.handleInputs(e.target.value, "company")}
             />
-
-            <form>
+            <input
+              placeholder="amount"
+              onChange={e => this.handleInputs(e.target.value, "amount")}
+            />
+            <form className="expensesinfo_modal_form">
               <input
                 name="type"
                 type="radio"
@@ -277,6 +276,14 @@ class Expenses extends Component {
               Non-Recurring
             </form>
 
+            <DatePicker
+              inputStyle={{
+                width: 70
+              }}
+              width={240}
+              date={this.state.date}
+              handleDateChange={this.handleDateChange}
+            />
             <select
               required
               onChange={e => this.handleInputs(e.target.value, "category")}
