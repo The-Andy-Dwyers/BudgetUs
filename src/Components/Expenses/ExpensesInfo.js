@@ -187,6 +187,7 @@ class Expenses extends Component {
                   src="https://image.flaticon.com/icons/png/128/128/128384.png"
                   className="expenses_edit btn"
                   onClick={id => this.handleEdit(e.id)}
+                  alt="checkmark"
                 />
                 <div
                   className="x_container btn"
@@ -250,17 +251,12 @@ class Expenses extends Component {
               placeholder="amount"
               onChange={e => this.handleInputs(e.target.value, "amount")}
             />
-            <DatePicker
-              date={this.state.date}
-              handleDateChange={this.handleDateChange}
-            />
             <input
               className="expensesinfo_input"
               placeholder="Company"
               onChange={e => this.handleInputs(e.target.value, "company")}
             />
-
-            <form>
+            <form className="expensesinfo_modal_form">
               <input
                 name="type"
                 type="radio"
@@ -276,7 +272,6 @@ class Expenses extends Component {
               />{" "}
               Non-Recurring
             </form>
-
             <select
               required
               onChange={e => this.handleInputs(e.target.value, "category")}
@@ -289,7 +284,12 @@ class Expenses extends Component {
               <option value="Entertainment">Entertainment</option>
               <option value="Other">other</option>
             </select>
-
+            <div className="expensesinfo_modal_date">
+              <DatePicker
+                date={this.state.date}
+                handleDateChange={this.handleDateChange}
+              />
+            </div>
             <button
               onClick={() =>
                 this.props

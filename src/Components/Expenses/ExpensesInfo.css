@@ -139,7 +139,7 @@
 }
 
 .expensesinfo_modal input {
-  width: 100%;
+  width: 98%;
   margin: 1%;
 }
 
@@ -147,4 +147,8 @@
   text-align: center;
   margin-top: 10%;
   width: 100%;
+}
+
+.expensesinfo_modal_date {
+  width: 20%;
 }
