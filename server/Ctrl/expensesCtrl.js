@@ -105,7 +105,7 @@ const getTopExpenses = (req, res) => {
   const db = req.app.get("db");
 
   db.expenses
-    .get_top_expenses([req.user.id])
+    .get_top_expenses([req.user.id, start, end])
     .then(response => {
       res.status(200).send(response);
     })
