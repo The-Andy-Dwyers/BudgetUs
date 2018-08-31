@@ -1,11 +1,11 @@
-.Expenses_expenselist {
-  display: flex;
-  /* padding: 0.25%; */
-  margin: 0 auto;
+.expenses_container {
+  margin-top: 10%;
 }
 
 .expensesinfo_content {
-  width: 10%;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 .expense_input_btn {
   display: inline-block;
@@ -14,14 +14,6 @@
   padding: 0.5em;
   border-radius: 10%;
   margin: 3% 0;
-}
-
-.expenseinfo_btn_holder {
-  display: flex;
-  /* justify-content: flex-end; */
-  right: 0;
-  height: 100%;
-  width: 100%;
 }
 
 .expensesinfo_map {
@@ -33,11 +25,16 @@
 
 .expensesinfo_map p {
   width: 100%;
-  padding: 0.5%;
 }
 
-.expenses_container {
+.expensesinfo_map form {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+.expensesinfo_map form div {
+  display: flex;
 }
 
 .expenses h2 {
@@ -48,7 +45,7 @@
 }
 
 .expenses {
-  width: 95%;
+  width: 97%;
   margin: 1% auto;
   height: 100%;
   padding: 1%;
@@ -59,25 +56,34 @@
   justify-content: space-around;
 }
 
-.expensesinfo_content_datepicker {
-  display: inline-block;
-  margin: 5px;
-}
-
 .expense_btn_holder {
   display: flex;
   justify-content: center;
   height: 100%;
-  /* width: 23%; */
-  margin: 0px 4px 0px 4px;
+  width: 100%;
+  /* margin: 0px 4px 0px 4px; */
+}
+.expense_map_bottom {
+  display: flex;
+  width: 100%;
 }
 
-.x_container {
+.expensesinfo_select {
+  background-color: #ffffff;
+  width: 100%;
+}
+.expenses_edit {
+  width: 100%;
+  height: 30px;
+  /* margin: 0px 2px 0px 2px; */
+}
+
+.expenses_x_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40px;
+  width: 100%;
   position: relative;
 }
 
@@ -109,26 +115,11 @@
   transform: scale(0.98);
 }
 
-.expense_map_bottom {
-  display: flex;
-  /* position: relative; */
-  /* justify-content: flex-end; */
-  /* align-self: flex-end;
-  justify-self: flex-end; */
-  /* width: 25%; */
-}
-
-.expenses_edit {
-  width: 30px;
-  height: 30px;
-  margin: 0px 2px 0px 2px;
-}
-
 .expensesinfo_modal {
   display: flex;
   flex-direction: column;
   width: 50vw;
-  height: 50vh;
+  height: 70vh;
 }
 
 .expensesinfo_modal h2 {
@@ -144,16 +135,6 @@
   margin: 1%;
 }
 
-.income_btn {
-  text-align: center;
-  margin-top: 10%;
-  width: 100%;
-}
-
-.expensesinfo_modal_date {
-  width: 20%;
-}
-
 .expensesinfo_modal_form input {
   width: 2%;
 }
@@ -167,12 +148,4 @@
   width: 20%;
   border-radius: 11%;
   background-color: #dfdfdf;
-}
-
-.expensesinfo_select {
-  background-color: #ffffff;
-}
-
-.expensesinfo_content_datepicker {
-  width: 10%;
 }

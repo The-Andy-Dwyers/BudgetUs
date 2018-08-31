@@ -7,7 +7,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
+    animation: downFade 1.5s;
 }
 
 .chart_main {

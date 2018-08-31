@@ -5,9 +5,10 @@
 .income_container {
   width: 50%;
   box-shadow: 1px 1px 5px grey;
-  background-color: #fff;  
+  background-color: #fff;
   padding: 1%;
   margin: 1%;
+  animation: downFade 1.5s;
 }
 
 .income {
@@ -22,23 +23,22 @@
   width: 95%;
   margin: 0 2% 5% 2%;
   height: 100%;
-  background-color: rgb(252, 252, 252);  
+  background-color: rgb(252, 252, 252);
   padding: 2%;
-  box-shadow: 1px 1px 5px grey;  
+  box-shadow: 1px 1px 5px grey;
 }
 
 .income_edit_holder {
-justify-content: flex-end !important;
+  justify-content: flex-end !important;
 }
 
 .income_edit {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .5%;
+  padding: 0.5%;
   width: 100%;
 }
-
 
 .income_display h2 {
   font-weight: bolder;
@@ -49,7 +49,7 @@ justify-content: flex-end !important;
 
 .income_display > div {
   display: flex;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .income_map {
@@ -117,7 +117,7 @@ justify-content: flex-end !important;
 
 .income_del:hover {
   background-color: rgb(167, 110, 110);
-  transition: .5s;
+  transition: 0.5s;
   transform: scale(1);
 }
 
@@ -125,8 +125,8 @@ justify-content: flex-end !important;
   display: inline-block;
   align-self: flex-end;
   border: 1px solid black;
-  margin: .5%;
-  padding: .5%;
+  margin: 0.5%;
+  padding: 0.5%;
 }
 
 .income_btn_holder {
@@ -138,12 +138,12 @@ justify-content: flex-end !important;
 }
 
 .x_container {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 40px;
-position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  position: relative;
 }
 
 .x_div {
@@ -155,25 +155,24 @@ position: relative;
 }
 
 .x1 {
-  transform: rotate(45deg)
+  transform: rotate(45deg);
 }
 
 .x2 {
-  transform: rotate(135deg)
+  transform: rotate(135deg);
 }
 
-.x_container:hover .x_div{
+.x_container:hover .x_div {
   background-color: rgb(167, 110, 110);
 }
 
-.x_container:hover{
+.x_container:hover {
   transform: scale(1.02);
 }
 
-.x_container:active{
-  transform: scale(.98);
+.x_container:active {
+  transform: scale(0.98);
 }
-
 
 .income_map_bottom {
   display: flex;
@@ -181,13 +180,24 @@ position: relative;
   width: 100%;
 }
 
+@keyframes downFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 700px) {
   .income_display h2 {
-    font-size: .8em;
+    font-size: 0.8em;
   }
 
   .income_map p {
-    font-size: .8em;
-
+    font-size: 0.8em;
   }
 }
