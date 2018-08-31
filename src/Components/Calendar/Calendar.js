@@ -10,12 +10,6 @@ import { getUsers } from '../../ducks/reducers/userReducer';
 
 class Calendar extends Component {
 
-  state = {
-    date: 'Hi there'
-  }
-
-
-
   componentDidMount() {
     this.props.getUsers();
 
@@ -28,18 +22,10 @@ class Calendar extends Component {
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
       eventDrop: function(date, dayDelta, minuteDelta, allDay) {
-        const dateDrop = moment(date.start._d).add(1, 'day').format('YYYY-MM-DD')
         console.log(moment(date.start._d).add(1, 'day').format('YYYY-MM-DD'));
-        console.log(allDay)
-        // const chageEvent = () => {
-
-        //   this.setState({date: dateDrop})
-        //   console.log(this.state)
-        // }
       },
-
-      // events: `/api/income/${this.props.userReducer.id}`,
-      events: `/api/income/6`,
+      events: `/api/income/${this.props.userReducer.id}`,
+      // events: `/api/income/6`,
       
       eventMouseover: function(e, jsEvent) {
         const tooltip =
@@ -68,7 +54,6 @@ class Calendar extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="calendar">
       <h1>Calendar</h1>
