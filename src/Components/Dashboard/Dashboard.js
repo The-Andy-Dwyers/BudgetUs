@@ -40,11 +40,11 @@ class Dashboard extends Component {
     const { expenses } = this.state;
     const map =
       expenses.length !== 0 &&
-      expenses.map(e => {
+      expenses.map((e, i) => {
         return (
-          <div className="dash_map" key={e.id}>
-            <p>{e.title}</p>
-            <p>${e.cost.toLocaleString()}</p>
+          <div className="dash_map" key={i}>
+            <p>{e.category}</p>
+            <p>${e.amount.toLocaleString()}</p>
           </div>
         );
       });

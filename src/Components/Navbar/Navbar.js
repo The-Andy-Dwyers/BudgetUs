@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import DatePicker from 'react-custom-date-picker';
 import moment from 'moment';
 import axios from 'axios';
+import swal from 'sweetalert2';
 
 import './Navbar.css';
 import { getUsers } from '../../ducks/reducers/userReducer';
@@ -47,7 +48,28 @@ class Navbar extends Component {
     //   !this.props.userReducer.auth_id && window.location.assign('/');
     // });
     this.props.getGoals();
+    // setTimeout(
+    //   function() {
+    //     this.initialGoal();
+    //   }.bind(this),
+    //   3000
+    // );
   }
+
+  initialGoal = () => {
+    this.props.expensesReducer.goals.length ||
+      swal({
+        position: 'top-end',
+        title: `You haven't set up a monthly goal yet.`,
+        text: 'Would you like to set a goal?',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Let's go!`
+      }).then(res => {
+        res.value && this.setState({ modal1IsOpen: true });
+      });
+  };
 
   openModal = () => {
     this.setState({ modalIsOpen: true });
@@ -90,6 +112,7 @@ class Navbar extends Component {
       .then(() => {
         this.props.getGoals();
       });
+      this.closeModal();
   };
 
   render() {
@@ -135,11 +158,11 @@ class Navbar extends Component {
             <h1 className="link">Logout</h1>
           </a>
 
-          <h1 className="income_input_btn btn" onClick={this.openModal}>
-            Add Income
-          </h1>
+          <h3 className="income_input_btn btn" onClick={this.openModal}>
+            Add
+          </h3>
           <h3 className="income_input_btn btn" onClick={this.openModal1}>
-            Monthly Goal
+            ++
           </h3>
           <Modal
             isOpen={this.state.modalIsOpen}
@@ -195,7 +218,9 @@ class Navbar extends Component {
               type="text"
               onChange={e => this.setState({ savings: e.target.value })}
             />
-            <h3 onClick={() => this.addGoal()}>Submit</h3>
+            <h3 className="income_btn btn" onClick={() => this.addGoal()}>
+              Submit
+            </h3>
           </Modal>
         </div>
       </div>

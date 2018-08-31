@@ -59,13 +59,8 @@ class Goals extends Component {
     const remaining = incomesum - expensesum;
     const remainder = remaining - (goals.length && goals[0].savings);
 
-console.log(goals)
-    console.log(remainder)
     return (
       <div className="goals">
-        <h3 className="income_input_btn btn" onClick={this.openModal}>
-          Monthly Goal
-        </h3>
 
         {remainder && remainder > 0 ? (
           <p>
