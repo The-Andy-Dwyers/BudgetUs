@@ -7,6 +7,7 @@ import "./Calendar.css";
 import "./fullCalendar.css";
 
 import { getUsers } from "../../ducks/reducers/userReducer";
+import { getIncomeEvents } from "../../ducks/reducers/incomeReducer";
 
 class Calendar extends Component {
   state = {
@@ -15,15 +16,28 @@ class Calendar extends Component {
 
   componentDidMount() {
     this.props.getUsers();
+    this.props.getIncomeEvents();
 
     $("#calendar").fullCalendar({
       header: {
-        left: "prev,next today",
+        left: "prev,next",
         center: "title",
-        right: "month,agendaWeek,agendaDay"
+        right: "month"
       },
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
+      displayEventTime: false,
+      eventRender: function(event) {
+        return (
+          event.ranges.filter(function(range) {
+            // test event against all the ranges
+
+            return (
+              event.start.isBefore(range.end) && event.end.isAfter(range.start)
+            );
+          }).length > 0
+        ); //if it isn't in one of the ranges, don't render it (by returning false)
+      },
       eventDrop: function(date, dayDelta, minuteDelta, allDay) {
         const dateDrop = moment(date.start._d)
           .add(1, "day")
@@ -42,7 +56,25 @@ class Calendar extends Component {
       },
 
       // events: `/api/income/${this.props.userReducer.id}`,
-      events: `/api/income/6`,
+      // events: `/api/income/6`,
+      events: [
+        {
+          // allDay: true,
+          // displayEventTime: false,
+          amount: 500,
+          start: "10:00",
+          end: "12:00",
+          dow: [0],
+          // date: "2018-08-01",
+          title: "taster",
+          ranges: [
+            {
+              start: moment("2018-08-19").startOf("day"),
+              end: moment("2018-08-25").endOf("day")
+            }
+          ]
+        }
+      ],
 
       eventMouseover: function(e, jsEvent) {
         console.log(e);
@@ -73,7 +105,7 @@ class Calendar extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.props.incomeReducer);
     return (
       <div className="calendar">
         <h1>Calendar</h1>
@@ -88,6 +120,7 @@ const mapStateToProps = state => state;
 export default connect(
   mapStateToProps,
   {
-    getUsers
+    getUsers,
+    getIncomeEvents
   }
 )(Calendar);
