@@ -8,6 +8,9 @@ const end = moment()
 const year = moment()
   .startOf("year")
   .format("l");
+const yearend = moment()
+  .endOf("month")
+  .format("l");
 
 const getExpenses = (req, res) => {
   const db = req.app.get("db");
@@ -82,8 +85,8 @@ const deleteExpense = (req, res) => {
 const editExpense = (req, res) => {
   const db = req.app.get("db");
   const { expenseName, amount, date, type, company, category } = req.body;
-  console.log(req.body)
-  
+  console.log(req.body);
+
   db.expenses
     .edit_expense([
       req.params.id,
@@ -114,6 +117,16 @@ const getTopExpenses = (req, res) => {
       res.status(500).send(err);
     });
 };
+const getExpenseTotalByMonth = (req, res) => {
+  const db = req.app.get("db");
+  db.expenses
+    .get_expense_total_by_month(req.user.id, year, yearend)
+    .then(totals => res.status(200).send(totals))
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
 
 module.exports = {
   getExpenses,
@@ -122,5 +135,6 @@ module.exports = {
   getYearlyExpensesByCategory,
   deleteExpense,
   editExpense,
-  getTopExpenses
+  getTopExpenses,
+  getExpenseTotalByMonth
 };
