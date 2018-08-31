@@ -54,6 +54,7 @@ justify-content: flex-end !important;
 
 .income_map {
   display: flex;
+  align-items: center;
   width: 100%;
   border-top: 1px solid black;
   position: relative;
@@ -176,6 +177,7 @@ position: relative;
 
 .income_map_bottom {
   display: flex;
+  align-items: center;
   width: 100%;
 }
 
