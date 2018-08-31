@@ -282,6 +282,7 @@ class Goals extends Component {
 
                 <div className="income_sub">
                   <p>Date:</p>
+                 
                   <DatePicker
                     date={this.state.date}
                     handleDateChange={this.handleDateChange1}
