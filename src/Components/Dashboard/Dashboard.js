@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import Switch from 'react-switch';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import Switch from "react-switch";
+import { Link } from "react-router-dom";
 
-import Income from '../Income/Income';
-import Chart from '../Chart/Chart';
-import Goals from '../Goals/Goals';
+import Income from "../Income/Income";
+import Chart from "../Chart/Chart";
+import Goals from "../Goals/Goals";
+import LineChart from "../Chart/LineChart";
 
-import './Dashboard.css';
-import { getUsers } from '../../ducks/reducers/userReducer';
-import { getDashboard } from '../../ducks/reducers/incomeReducer';
-import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
+import "./Dashboard.css";
+import { getUsers } from "../../ducks/reducers/userReducer";
+import { getDashboard } from "../../ducks/reducers/incomeReducer";
+import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
 
 class Dashboard extends Component {
   constructor() {
@@ -22,13 +23,13 @@ class Dashboard extends Component {
     };
   }
   componentDidMount() {
-    this.props.getDashboard('month');
+    this.props.getDashboard("month");
     this.props.getTopExpenses();
   }
 
   handleChange = month =>
     this.setState({ month }, () =>
-      this.props.getDashboard(this.state.month ? 'month' : 'year')
+      this.props.getDashboard(this.state.month ? "month" : "year")
     );
   render() {
     const { topExpenses } = this.props.expensesReducer;
@@ -46,19 +47,19 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Goals />
-        <div className='dash_switch'>
+        <div className="dash_switch">
           <Switch
             uncheckedIcon={
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '100%',
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
                   fontSize: 15,
-                  color: 'white',
+                  color: "white",
                   paddingRight: 2,
-                  background: '#d12012',
+                  background: "#d12012",
                   borderRadius: 50
                 }}
               >
@@ -68,14 +69,14 @@ class Dashboard extends Component {
             checkedIcon={
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '100%',
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
                   fontSize: 15,
-                  color: 'white',
+                  color: "white",
                   paddingRight: 2,
-                  background: '#d12012',
+                  background: "#d12012",
                   borderRadius: 50
                 }}
               >
@@ -103,6 +104,7 @@ class Dashboard extends Component {
         {this.props.incomeReducer.dashboard.sources && (
           <Chart type="remaining" />
         )}
+        {this.props.incomeReducer.dashboard.sources && <LineChart />}
       </div>
     );
   }
