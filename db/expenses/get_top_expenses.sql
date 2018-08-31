@@ -1,4 +1,8 @@
-SELECT * FROM expenses
+SELECT category,SUM(cost) as amount FROM expenses
 WHERE user_id = $1
-order by cost desc
-LIMIT 5;
+AND
+expense_date >= $2
+AND
+expense_date <= $3
+GROUP BY category
+ORDER BY amount desc;
