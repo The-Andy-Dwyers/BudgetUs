@@ -68,7 +68,7 @@
   display: flex;
   justify-content: center;
   height: 100%;
-  width: 23%;
+  /* width: 23%; */
   margin: 0px 4px 0px 4px;
 }
 
@@ -81,7 +81,7 @@
   position: relative;
 }
 
-.x_div {
+.expense_x_div {
   width: 30px;
   height: 3px;
   border-radius: 15%;
@@ -111,10 +111,11 @@
 
 .expense_map_bottom {
   display: flex;
-  justify-content: flex-end;
-  align-self: flex-end;
-  justify-self: flex-end;
-  width: 25%;
+  /* position: relative; */
+  /* justify-content: flex-end; */
+  /* align-self: flex-end;
+  justify-self: flex-end; */
+  /* width: 25%; */
 }
 
 .expenses_edit {
@@ -139,7 +140,7 @@
 }
 
 .expensesinfo_modal input {
-  width: 100%;
+  width: 98%;
   margin: 1%;
 }
 
@@ -147,4 +148,31 @@
   text-align: center;
   margin-top: 10%;
   width: 100%;
+}
+
+.expensesinfo_modal_date {
+  width: 20%;
+}
+
+.expensesinfo_modal_form input {
+  width: 2%;
+}
+
+.expensesinfo_modal select {
+  width: 23%;
+  background-color: #ffffff;
+}
+
+.expensesinfo_modal button {
+  width: 20%;
+  border-radius: 11%;
+  background-color: #dfdfdf;
+}
+
+.expensesinfo_select {
+  background-color: #ffffff;
+}
+
+.expensesinfo_content_datepicker {
+  width: 10%;
 }
