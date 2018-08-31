@@ -5,7 +5,6 @@ import axios from 'axios';
 import ContentEditable from 'react-contenteditable';
 import DatePicker from 'react-custom-date-picker';
 
-
 import './Income.css';
 import {
   updateAmount,
@@ -86,13 +85,14 @@ class Income extends Component {
               placeholder={moment.utc(e.date).format('MM/DD/YYYY')}
               handleDateChange={this.handleDateChange}
             />
-            <div className="income_btn_holder">
-              <h3
-                className="income_edit btn"
-                onClick={id => this.handleEdit(e.id)}
-              >
-                Submit Edit
-              </h3>
+            <div
+              className="income_btn_holder"
+              onClick={id => this.handleEdit(e.id)}
+            >
+              <div className="checkbox_container">
+                <div className="check_main c_left" />
+                <div className="check_main c_right" />
+              </div>
               <div
                 className="x_container btn"
                 onClick={id => this.handleDelete(e.id)}

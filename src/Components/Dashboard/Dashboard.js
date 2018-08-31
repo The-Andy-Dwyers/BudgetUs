@@ -107,11 +107,6 @@ class Dashboard extends Component {
         {this.props.incomeReducer.dashboard.sources && (
           <Chart type="remaining" />
         )}
-
-        {/* <div className='checkbox_container'>
-          <div className='check_main c_left'></div>
-          <div className='check_main c_right'></div>
-        </div> */}
       </div>
     );
   }
