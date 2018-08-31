@@ -16,7 +16,7 @@ import {
 } from '../../ducks/reducers/incomeReducer';
 import {
   getGoals,
-  getExpensesByCategory,
+  getTopExpenses,
   getExpenses,
   addExpenses
 } from '../../ducks/reducers/expensesReducer';
@@ -302,7 +302,7 @@ class Goals extends Component {
                       })
                       .then(() => {
                         this.closeModal();
-                        this.props.getExpensesByCategory();
+                        this.props.getTopExpenses();
                         this.props.getExpenses();
                       })
                   }
@@ -346,7 +346,7 @@ export default connect(
     updateDate,
     updateTitle,
     getDashboard,
-    getExpensesByCategory,
+    getTopExpenses,
     getExpenses,
     addExpenses
   }
