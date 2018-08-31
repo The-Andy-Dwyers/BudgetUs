@@ -25,7 +25,7 @@ class Income extends Component {
 
   componentDidMount() {
     this.props.getUser();
-  }
+  }  
 
   handleDateChange = date => {
     this.props.updateDate(date);
