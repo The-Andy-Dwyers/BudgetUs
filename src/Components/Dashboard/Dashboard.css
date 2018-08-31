@@ -20,6 +20,7 @@
   box-shadow: 1px 1px 5px grey;
   margin: 1%;
   padding: 1%;
+  animation: downFade 1.5s;  
 }
 
 .dashboard_expense > div {
@@ -48,6 +49,10 @@
 
 div.react-switch-bg {
   background: #d12012 !important;
+}
+
+.dash_switch {
+    animation: downFade 1.5s;
 }
 /* ------------ */
 
