@@ -23,3 +23,8 @@
     margin: 1%;
     padding: 1%;
 }
+
+.linechart h1 {
+    margin: 1% 0 3% 0;
+    letter-spacing: 2px;
+}

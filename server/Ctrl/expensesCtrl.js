@@ -121,7 +121,14 @@ const getExpenseTotalByMonth = (req, res) => {
   const db = req.app.get("db");
   db.expenses
     .get_expense_total_by_month(req.user.id, year, yearend)
-    .then(totals => res.status(200).send(totals))
+    .then(totals => {
+      const modifiedResponse = totals.map(e => {
+        console.log('Modified response >>',e)
+        return { ...e, month: JSON.stringify(e.month).substring(6, 8) };
+      });
+
+      res.status(200).send(modifiedResponse)
+    })
     .catch(err => {
       console.log(err);
       res.status(500).send(err);
