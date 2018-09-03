@@ -27,9 +27,9 @@ const getDashboard = (req, res) => {
           )
       )
     )
-    .then(response => {
-      res.status(200).send(response);
-    })
+    // .then(response => {
+    //   res.status(200).send(response);
+    // })
     .catch(err => {
       console.log(err);
       res.status(500).send(err);

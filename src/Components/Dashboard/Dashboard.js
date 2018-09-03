@@ -27,19 +27,8 @@ class Dashboard extends Component {
   }
 
   handleChange = month => {
-    // console.log(month);
     this.props.getDashboard(start(month), end(month));
     this.props.getTopExpenses(start(month), end(month));
-    // };
-    //   this.setState({ month }, () =>
-    //     this.props.getDashboard(
-    //       this.state.month
-    //         ? (start(month), end(month))
-    //         : moment().startOf("year"),
-    //       moment().endOf("year")
-    //     )
-    //   );
-    // };
   };
   handleSwitchChange = month => {
     this.setState(
@@ -72,6 +61,8 @@ class Dashboard extends Component {
           {e.month.trim()}
         </option>
       ));
+
+      
     return (
       <div className="dashboard">
         <Goals />
@@ -116,13 +107,15 @@ class Dashboard extends Component {
             id="normal-switch"
           />
           {this.state.month && (
-            <select onChange={e => this.handleChange(e.target.value)}>
+            <select className='dash_options' onChange={e => this.handleChange(e.target.value)}>
               <option
+              className='dash_select'
                 value={moment().format("l")}
                 defaultValue={moment().format("l")}
               >
                 {moment().format("MMMM")}
               </option>
+              <option disabled>───────</option>
               {options}
             </select>
           )}

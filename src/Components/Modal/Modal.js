@@ -135,6 +135,7 @@ class Goals extends Component {
       id,
       savings
     });
+    this.closeModal();
   };
 
   //   expense modal
