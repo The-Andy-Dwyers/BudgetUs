@@ -23,12 +23,13 @@ class Dashboard extends Component {
   }
   componentDidMount() {
     this.props.getDashboard(start(moment()), end(moment()));
-    this.props.getTopExpenses();
+    this.props.getTopExpenses(start(moment()), end(moment()));
   }
 
   handleChange = month => {
-    console.log(month);
+    // console.log(month);
     this.props.getDashboard(start(month), end(month));
+    this.props.getTopExpenses(start(month), end(month));
   };
   // this.setState({ month }, () =>
   //   this.props.getDashboard(this.state.month ? "month" : "year")
