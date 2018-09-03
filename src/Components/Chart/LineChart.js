@@ -12,7 +12,6 @@ class LineChart extends Component {
       labels: this.props.totals.map(e => e.month.trim()),
       datasets: [
         {
-          //   label: "Population (millions)",
           backgroundColor: [
             "#D12012",
             "#28224F",
@@ -43,10 +42,6 @@ class LineChart extends Component {
           }
         }
       }
-      //   title: {
-      //     display: true,
-      //     text: "Predicted world population (millions) in 2050"
-      //   }
     };
     return (
       <div>

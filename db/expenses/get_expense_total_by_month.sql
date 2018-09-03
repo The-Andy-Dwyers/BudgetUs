@@ -5,4 +5,5 @@ AND
 expense_date >= $2 
 AND
 expense_date <= $3
-GROUP BY date_trunc('month', expense_date);
+GROUP BY date_trunc('month', expense_date)
+ORDER BY  date_trunc('month',expense_date);
