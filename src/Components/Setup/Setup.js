@@ -45,7 +45,7 @@ class Setup extends Component {
     return (
       <div className="setup">
         <div className='setup_container'>
-          <h1>Welcome to BudgetUs</h1>
+          <h1>Thank you for using BudgetUs</h1>
           <div className='setup_sub_cont'>
 
           <h2>Let's get started!</h2>

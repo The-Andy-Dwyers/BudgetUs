@@ -58,6 +58,9 @@ class Income extends Component {
 
   render() {
     const { updateAmount, updateTitle } = this.props;
+    const { users } = this.props.userReducer;
+    const find =
+      users.length && users.find(e => e.id === this.props.userReducer.id);
 
     const map = this.props.incomeReducer.dashboard.sources.map(e => {
       return !this.state.edit ? (
@@ -111,7 +114,7 @@ class Income extends Component {
           <div className="income_display">
             <div>
               <h2>
-                {this.props.userReducer.name}
+                {find && find.name}
                 's Income
               </h2>
               <h2>Amount</h2>
