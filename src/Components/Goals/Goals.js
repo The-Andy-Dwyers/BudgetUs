@@ -13,7 +13,6 @@ class Goals extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { expensesum, incomesum } = this.props.incomeReducer.dashboard;
     const { goals } = this.props.expensesReducer;
     const { users } = this.props.userReducer;
