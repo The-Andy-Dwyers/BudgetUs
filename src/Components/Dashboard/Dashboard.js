@@ -23,16 +23,36 @@ class Dashboard extends Component {
   }
   componentDidMount() {
     this.props.getDashboard(start(moment()), end(moment()));
-    this.props.getTopExpenses();
+    this.props.getTopExpenses(start(moment()), end(moment()));
   }
 
   handleChange = month => {
-    console.log(month);
+    // console.log(month);
     this.props.getDashboard(start(month), end(month));
+    this.props.getTopExpenses(start(month), end(month));
+    // };
+    //   this.setState({ month }, () =>
+    //     this.props.getDashboard(
+    //       this.state.month
+    //         ? (start(month), end(month))
+    //         : moment().startOf("year"),
+    //       moment().endOf("year")
+    //     )
+    //   );
+    // };
   };
-  // this.setState({ month }, () =>
-  //   this.props.getDashboard(this.state.month ? "month" : "year")
-  // );
+  handleSwitchChange = month => {
+    this.setState(
+      { month },
+      () =>
+        this.state.month
+          ? this.props.getDashboard(start(moment()), end(moment()))
+          : this.props.getDashboard(
+              start(moment().startOf("year")),
+              end(moment().endOf("year"))
+            )
+    );
+  };
   render() {
     const { topExpenses } = this.props.expensesReducer;
     const map =
@@ -45,16 +65,18 @@ class Dashboard extends Component {
           </div>
         );
       });
-    const options = this.props.expensesReducer.expensesbymonth.map(e => (
-      <option value={moment(e.month.trim(), "MMMM").format("l")}>
-        {e.month.trim()}
-      </option>
-    ));
+    const options = this.props.expensesReducer.expensesbymonth
+      .filter(e => e.month.trim() !== moment().format("MMMM"))
+      .map(e => (
+        <option value={moment(e.month.trim(), "MMMM").format("l")}>
+          {e.month.trim()}
+        </option>
+      ));
     return (
       <div className="dashboard">
         <Goals />
         <div className="dash_switch">
-          {/* <Switch
+          <Switch
             uncheckedIcon={
               <div
                 style={{
@@ -89,31 +111,41 @@ class Dashboard extends Component {
                 M
               </div>
             }
-            onChange={this.handleChange}
+            onChange={this.handleSwitchChange}
             checked={this.state.month}
             id="normal-switch"
-          /> */}
-          <select onChange={e => this.handleChange(e.target.value)}>
-            <option
-              value={moment().format("l")}
-              defaultValue={moment().format("l")}
-            >
-              {moment().format("MMMM")}
-            </option>
-            {options}
-          </select>
+          />
+          {this.state.month && (
+            <select onChange={e => this.handleChange(e.target.value)}>
+              <option
+                value={moment().format("l")}
+                defaultValue={moment().format("l")}
+              >
+                {moment().format("MMMM")}
+              </option>
+              {options}
+            </select>
+          )}
         </div>
         <div className="dashboard_top">
           {this.props.incomeReducer.dashboard.sources && (
             <Income month={this.state.month} />
           )}
-          <div className="dashboard_expense">
-            <h2>Expenses Overview</h2>
-            <div>{map}</div>
-            <Link className="link2" to="/expenses">
-              <h2 className="expenses_link btn">More info</h2>
-            </Link>
-          </div>
+          {this.state.month ? (
+            <div className="dashboard_expense">
+              <h2>Expenses Overview</h2>
+              <div>{map}</div>
+              <Link className="link2" to="/expenses">
+                <h2 className="expenses_link btn">More info</h2>
+              </Link>
+            </div>
+          ) : (
+            <div className="dashboard_expense">
+              <Link className="link2" to="/expenses">
+                <h2 className="expenses_link btn">Go To Expenses Page</h2>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="dash_bottom">
           {this.props.incomeReducer.dashboard.sources && (
