@@ -25,7 +25,7 @@ class Income extends Component {
 
   componentDidMount() {
     this.props.getUser();
-  }  
+  }
 
   handleDateChange = date => {
     this.props.updateDate(date);
@@ -121,14 +121,15 @@ class Income extends Component {
             {map}
 
             <div className="income_edit_holder">
-              {!this.state.edit && (
-                <h3
-                  onClick={() => this.setState({ edit: true })}
-                  className="income_edit2 btn"
-                >
-                  Edit
-                </h3>
-              )}
+              {!this.state.edit &&
+                this.props.incomeReducer.dashboard.sources.length !== 0 && (
+                  <h3
+                    onClick={() => this.setState({ edit: true })}
+                    className="income_edit2 btn"
+                  >
+                    Edit
+                  </h3>
+                )}
             </div>
           </div>
           <div className="income_total">

@@ -56,25 +56,25 @@ class Calendar extends Component {
       },
 
       // events: `/api/income/${this.props.userReducer.id}`,
-      // events: `/api/income/6`,
-      events: [
-        {
-          // allDay: true,
-          // displayEventTime: false,
-          amount: 500,
-          start: "10:00",
-          end: "12:00",
-          dow: [0],
-          // date: "2018-08-01",
-          title: "taster",
-          ranges: [
-            {
-              start: moment("2018-08-19").startOf("day"),
-              end: moment("2018-08-25").endOf("day")
-            }
-          ]
-        }
-      ],
+      events: `/api/income/6`,
+      // events: [
+      //   {
+      //     // allDay: true,
+      //     // displayEventTime: false,
+      //     amount: 500,
+      //     start: "10:00",
+      //     end: "12:00",
+      //     dow: [0],
+      //     // date: "2018-08-01",
+      //     title: "taster",
+      //     ranges: [
+      //       {
+      //         start: moment("2018-08-19").startOf("day"),
+      //         end: moment("2018-08-25").endOf("day")
+      //       }
+      //     ]
+      //   }
+      // ],
 
       eventMouseover: function(e, jsEvent) {
         const tooltip =

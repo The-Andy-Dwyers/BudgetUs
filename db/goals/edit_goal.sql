@@ -1,2 +1,2 @@
-UPDATE goal SET savings = $2, 
+UPDATE goals SET savings = $2
 WHERE id=$1

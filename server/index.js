@@ -31,7 +31,7 @@ const {
   incomeYearlySum,
   getIncomeById
 } = require('./Ctrl/incomeCtrl');
-const { addGoal, getGoal } = require('./Ctrl/goalsCtrl');
+const { addGoal, getGoal, editGoal } = require('./Ctrl/goalsCtrl');
 
 const app = express();
 app.use(bodyParser.json());
@@ -110,6 +110,7 @@ app.get('/api/income/:id', getIncomeById);
 //goals endpoints
 app.get('/api/goal', getGoal);
 app.post('/api/add-goal', addGoal);
+app.put('/api/edit-goal', editGoal)
 
 // run build
 // app.get("*", (req, res) => {

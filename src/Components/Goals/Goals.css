@@ -9,3 +9,7 @@
   padding: 1%;
   animation: downFade 1.5s;
 }
+
+.goals h2:nth-of-type(1n) {
+  font-size: 2em;
+}
