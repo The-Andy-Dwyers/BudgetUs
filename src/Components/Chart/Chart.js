@@ -27,6 +27,7 @@ class Chart extends Component {
         month
       },
       () => {
+        // eslint-disable-next-line
         this.state.month
           ? (this.props.getExpensesByCategory(), this.props.getExpenses())
           : this.props.getYearlyExpensesByCategory();

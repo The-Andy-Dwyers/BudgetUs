@@ -44,7 +44,7 @@ class LineChart extends Component {
       }
     };
     return (
-      <div>
+      <div className='linechart_cont'>
         <Bar data={data} options={options} />
       </div>
     );

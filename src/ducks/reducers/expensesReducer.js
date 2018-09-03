@@ -1,16 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
-const GET_EXPENSES = 'GET_EXPENSES';
-const GET_EXPENSES_BY_CAT = 'GET_EXPENSES_BY_CAT';
-const GET_TOP_EXPENSES = 'GET_TOP_EXPENSES';
-const GET_EXPENSES_BY_MONTH = 'GET_EXPENSES_BY_MONTH';
-const ADD_EXPENSE = 'ADD_EXPENSE';
-const DELETE_EXPENSE = 'DELETE_EXPENSE';
-const GET_GOAL = 'GET_GOAL';
+const GET_EXPENSES = "GET_EXPENSES";
+const GET_EXPENSES_BY_CAT = "GET_EXPENSES_BY_CAT";
+const GET_TOP_EXPENSES = "GET_TOP_EXPENSES";
+const GET_EXPENSES_BY_MONTH = "GET_EXPENSES_BY_MONTH";
+const ADD_EXPENSE = "ADD_EXPENSE";
+const DELETE_EXPENSE = "DELETE_EXPENSE";
+const GET_GOAL = "GET_GOAL";
 
 export function getExpenseTotalsByMonth() {
   return {
-    type: 'GET_EXPENSES_BY_MONTH',
+    type: "GET_EXPENSES_BY_MONTH",
     payload: axios.get(`/api/linechart`)
   };
 }
@@ -29,10 +29,10 @@ export function getExpensesByCategory() {
   };
 }
 
-export const getTopExpenses = () => {
+export const getTopExpenses = (start, end) => {
   return {
     type: GET_TOP_EXPENSES,
-    payload: axios.get(`/api/top-expenses`)
+    payload: axios.get(`/api/top-expenses/?start=${start}&end=${end}`)
   };
 };
 
@@ -46,7 +46,7 @@ export function getYearlyExpensesByCategory() {
 export function addExpenses(newExpense) {
   return {
     type: ADD_EXPENSE,
-    payload: axios.post('/api/add-expenses', newExpense)
+    payload: axios.post("/api/add-expenses", newExpense)
   };
 }
 
@@ -92,7 +92,7 @@ export default function expensesReducer(state = initialState, action) {
         ...state,
         expensesbycat: action.payload.data
       };
-      case `${GET_TOP_EXPENSES}_FULFILLED`:
+    case `${GET_TOP_EXPENSES}_FULFILLED`:
       return {
         ...state,
         topExpenses: action.payload.data

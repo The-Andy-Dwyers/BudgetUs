@@ -13,6 +13,7 @@ class Goals extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { expensesum, incomesum } = this.props.incomeReducer.dashboard;
     const { goals } = this.props.expensesReducer;
     const { users } = this.props.userReducer;
@@ -32,24 +33,26 @@ class Goals extends Component {
             </div>
           )}
         </div>
-        <div>
-          {remainder && remainder > 0 ? (
-            <p>
-              You've saved a total of ${remaining.toLocaleString()} this month.{' '}
-              <br />
-              You are ${remainder.toLocaleString()} above from your goal of $
-              {goals.length && goals[0].savings.toLocaleString()}!
-            </p>
-          ) : (
-            <p>
-              You are -$
-              {Math.abs(remainder).toLocaleString()} under your savings goal for
-              this month.
-              <br />
-              Watch your spending!
-            </p>
-          )}
-        </div>
+        {this.props.userReducer.id && (
+          <div>
+            {remainder && remainder > 0 ? (
+              <p>
+                You've saved a total of ${remaining.toLocaleString()} this
+                month. <br />
+                You are ${remainder.toLocaleString()} above from your goal of $
+                {goals.length && goals[0].savings.toLocaleString()}!
+              </p>
+            ) : (
+              <p>
+                You are -$
+                {Math.abs(remainder).toLocaleString()} under your savings goal
+                for this month.
+                <br />
+                Watch your spending!
+              </p>
+            )}
+          </div>
+        )}
       </div>
     );
   }

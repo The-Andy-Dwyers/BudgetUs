@@ -18,7 +18,8 @@ import {
   getGoals,
   getTopExpenses,
   getExpenses,
-  addExpenses
+  addExpenses,
+  getExpenseTotalsByMonth
 } from '../../ducks/reducers/expensesReducer';
 
 const customStyles = {
@@ -126,6 +127,16 @@ class Goals extends Component {
     this.closeModal();
   };
 
+  editGoal = () => {
+    const { savings } = this.state;
+    const { id } = this.props.expensesReducer.goals[0];
+
+    axios.put('/api/edit-goal', {
+      id,
+      savings
+    });
+  };
+
   //   expense modal
   handleInputs = (val, state) => {
     this.setState({
@@ -153,7 +164,6 @@ class Goals extends Component {
     const { id } = this.props.userReducer;
 
     const day = moment().format('MM/DD/YYYY');
-
     const dashboardDate =
       this.props.incomeReducer.dashboard.length &&
       this.props.incomeReducer.dashboard.sources.date;
@@ -161,7 +171,7 @@ class Goals extends Component {
     return this.props.type === 'goals' ? (
       <div className="modal_goals_container">
         <h3 className="btn" onClick={this.openModal1}>
-          Add
+          Goals
         </h3>
         <Modal
           isOpen={this.state.modal1IsOpen}
@@ -169,15 +179,31 @@ class Goals extends Component {
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <h1>Savings Goal!</h1>
-          <h3>What is your monthly Goal?</h3>
-          <input
-            type="text"
-            onChange={e => this.setState({ savings: e.target.value })}
-          />
-          <h3 className="income_btn btn" onClick={() => this.addGoal()}>
-            Submit
-          </h3>
+          {this.props.expensesReducer.goals.length !== 0 ? (
+            <div>
+              <div>
+                <h2>Edit Goal</h2>
+                <input
+                  type="text"
+                  placeholder="Edit your goal"
+                  onChange={e => this.setState({ savings: e.target.value })}
+                />
+                <h3 onClick={() => this.editGoal()}>Submit</h3>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <h1>Savings Goal!</h1>
+              <h3>What is your monthly Goal?</h3>
+              <input
+                type="text"
+                onChange={e => this.setState({ savings: e.target.value })}
+              />
+              <h3 className="income_btn btn" onClick={() => this.addGoal()}>
+                Submit
+              </h3>
+            </div>
+          )}
         </Modal>
       </div>
     ) : (
@@ -325,6 +351,7 @@ class Goals extends Component {
                         this.closeModal();
                         this.props.getTopExpenses();
                         this.props.getExpenses();
+                        this.props.getExpenseTotalsByMonth();
                       })
                   }
                 >
@@ -351,6 +378,7 @@ export default connect(
     updateTitle,
     getDashboard,
     getTopExpenses,
+    getExpenseTotalsByMonth,
     getExpenses,
     addExpenses
   }

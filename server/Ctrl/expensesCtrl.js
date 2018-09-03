@@ -1,10 +1,10 @@
 var moment = require("moment");
-const start = moment()
-  .startOf("month")
-  .format("l");
-const end = moment()
-  .endOf("month")
-  .format("l");
+// const start = moment()
+//   .startOf("month")
+//   .format("l");
+// const end = moment()
+//   .endOf("month")
+//   .format("l");
 const year = moment()
   .startOf("year")
   .format("l");
@@ -104,6 +104,7 @@ const editExpense = (req, res) => {
 
 const getTopExpenses = (req, res) => {
   const db = req.app.get("db");
+  const { start, end } = req.query;
 
   db.expenses
     .get_top_expenses([req.user.id, start, end])
@@ -120,20 +121,13 @@ const getExpenseTotalByMonth = (req, res) => {
   db.expenses
     .get_expense_total_by_month(req.user.id, year, yearend)
     .then(totals => {
-      const modifiedResponse = totals.map(e => {
-        return { ...e, month: JSON.stringify(e.month).substring(6, 8) };
-      });
-
-      res.status(200).send(modifiedResponse)
+      res.status(200).send(totals);
     })
     .catch(err => {
       console.log(err);
       res.status(500).send(err);
     });
 };
-
-
-
 
 module.exports = {
   getExpenses,

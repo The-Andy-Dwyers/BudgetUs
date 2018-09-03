@@ -17,10 +17,10 @@ const RESET = "RESET";
 
 const GET_DASHBOARD = "GET_DASHBOARD";
 const GET_INCOME_EVENTS = "GET_INCOME_EVENTS";
-export const getDashboard = view => {
+export const getDashboard = (start, end) => {
   return {
     type: GET_DASHBOARD,
-    payload: axios.get(`/api/dashboard?view=${view}`)
+    payload: axios.get(`/api/dashboard?start=${start}&end=${end}`)
   };
 };
 export const getIncomeEvents = () => {
@@ -66,7 +66,6 @@ export default function userReducer(state = initialState, action) {
         dashboard: action.payload.data
       };
     case `${GET_INCOME_EVENTS}_FULFILLED`:
-      // console.log(action.payload.data);
       return {
         ...state,
         events: action.payload.data.sources
