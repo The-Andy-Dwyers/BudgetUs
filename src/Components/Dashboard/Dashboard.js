@@ -67,8 +67,8 @@ class Dashboard extends Component {
       });
     const options = this.props.expensesReducer.expensesbymonth
       .filter(e => e.month.trim() !== moment().format("MMMM"))
-      .map(e => (
-        <option value={moment(e.month.trim(), "MMMM").format("l")}>
+      .map((e, i) => (
+        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
           {e.month.trim()}
         </option>
       ));

@@ -1,10 +1,10 @@
 var moment = require("moment");
-// const start = moment()
-//   .startOf("month")
-//   .format("l");
-// const end = moment()
-//   .endOf("month")
-//   .format("l");
+const start = moment()
+  .startOf("month")
+  .format("l");
+const end = moment()
+  .endOf("month")
+  .format("l");
 const year = moment()
   .startOf("year")
   .format("l");
@@ -104,10 +104,9 @@ const editExpense = (req, res) => {
 
 const getTopExpenses = (req, res) => {
   const db = req.app.get("db");
-  const { start, end } = req.query;
 
   db.expenses
-    .get_top_expenses([req.user.id, start, end])
+    .get_top_expenses([req.user.id, req.query.start, req.query.end])
     .then(response => {
       res.status(200).send(response);
     })
