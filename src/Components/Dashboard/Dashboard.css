@@ -1,9 +1,8 @@
 .dashboard {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   padding-left: 90px;
   background-color: rgb(247, 247, 247);
-  opacity: 0.8;
 }
 
 .dashboard_top {
