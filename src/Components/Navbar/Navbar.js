@@ -15,40 +15,40 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar">
-          <div className="ham_container">
-            <img className="hamburger" src={menu} alt="Hamburger menu" />
-          </div>
-        <div className='navbar_main'>
-          <div className="navbar_logo_container">
-            <img
-              className="navbar_logo"
-              src="https://image.flaticon.com/icons/svg/134/134597.svg"
-              alt="Logo"
-            />
-          </div>
-          <div className="navbar_sub">
-            <Link className="link" to="/dashboard">
-              <img className="navbar_icon btn" src={home} alt="Home icon" />
-            </Link>
-            <Link className="link" to="/calendar">
+        <div className="ham_container">
+          <img className="hamburger" src={menu} alt="Hamburger menu" />
+          <div className="navbar_main">
+            <div className="navbar_logo_container">
               <img
-                className="navbar_icon btn"
-                src={calendar}
-                alt="Calendar icon"
+                className="navbar_logo"
+                src="https://image.flaticon.com/icons/svg/134/134597.svg"
+                alt="Logo"
               />
-            </Link>
-            <Link className="link" to="/settings">
-              <img
-                className="navbar_icon btn"
-                src={settings}
-                alt="Settings icon"
-              />
-            </Link>
-            <Modal />
+            </div>
+            <div className="navbar_sub">
+              <Link className="link" to="/dashboard">
+                <img className="navbar_icon btn" src={home} alt="Home icon" />
+              </Link>
+              <Link className="link" to="/calendar">
+                <img
+                  className="navbar_icon btn"
+                  src={calendar}
+                  alt="Calendar icon"
+                />
+              </Link>
+              <Link className="link" to="/settings">
+                <img
+                  className="navbar_icon btn"
+                  src={settings}
+                  alt="Settings icon"
+                />
+              </Link>
+              <Modal />
 
-            <a className="link" href={process.env.REACT_APP_LOGOUT}>
-              <h1 className="link">Logout</h1>
-            </a>
+              <a className="link" href={process.env.REACT_APP_LOGOUT}>
+                <h1 className="link">Logout</h1>
+              </a>
+            </div>
           </div>
         </div>
       </div>
