@@ -77,7 +77,6 @@ class Calendar extends Component {
       ],
 
       eventMouseover: function(e, jsEvent) {
-        console.log(e);
         const tooltip =
           '<div class="tooltipevent" style="padding:1% 1.5%;opacity: 0.8;background:rgb(241, 241, 241);position:absolute;z-index:10001;">' +
           e.title +
@@ -105,7 +104,6 @@ class Calendar extends Component {
   }
 
   render() {
-    console.log(this.props.incomeReducer);
     return (
       <div className="calendar">
         <h1>Calendar</h1>

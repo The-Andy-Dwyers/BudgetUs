@@ -46,7 +46,6 @@ const getYearlyExpensesByCategory = (req, res) => {
   db.expenses
     .get_expenses_by_category([req.user.id, year, end])
     .then(response => {
-      // console.log(response)
       res.status(200).send(response);
     })
     .catch(err => {
@@ -85,7 +84,6 @@ const deleteExpense = (req, res) => {
 const editExpense = (req, res) => {
   const db = req.app.get("db");
   const { expenseName, amount, date, type, company, category } = req.body;
-  console.log(req.body);
 
   db.expenses
     .edit_expense([
@@ -123,7 +121,6 @@ const getExpenseTotalByMonth = (req, res) => {
     .get_expense_total_by_month(req.user.id, year, yearend)
     .then(totals => {
       const modifiedResponse = totals.map(e => {
-        console.log('Modified response >>',e)
         return { ...e, month: JSON.stringify(e.month).substring(6, 8) };
       });
 
