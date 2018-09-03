@@ -107,6 +107,7 @@ class Expenses extends Component {
             >
               {moment().format("MMMM")}
             </option>
+            <option disabled>───────</option>
             {options}
           </select>
         )}
