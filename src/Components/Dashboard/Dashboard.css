@@ -1,5 +1,5 @@
 .dashboard {
-  width: 100%;
+  width: 100vw;
   height: 100%;
   padding-left: 90px;
   background-color: rgb(247, 247, 247);
@@ -20,24 +20,24 @@
   box-shadow: 1px 1px 5px grey;
   margin: 1%;
   padding: 1%;
-  animation: downFade 1.5s;  
+  animation: downFade 1.5s;
 }
 
 .dashboard_expense > div {
-    width: 90%;
+  width: 90%;
 }
 
 .dash_map {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
-    padding: 1% 1% 1% 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 1% 1% 1% 0;
 }
 
 .expenses_link {
-    color: rgb(59, 59, 224);
-    letter-spacing: 1px;
-    font-weight: bolder;
+  color: rgb(59, 59, 224);
+  letter-spacing: 1px;
+  font-weight: bolder;
 }
 
 .link2 {
@@ -52,43 +52,48 @@ div.react-switch-bg {
 }
 
 .dash_switch {
-    animation: downFade 1.5s;
+  animation: downFade 1.5s;
 }
 /* ------------ */
 
 .checkbox_container {
-position: relative;
-width: 40px;
-height: 40px;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-padding: 1%;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 1%;
 }
 
 .check_main {
-    background-color: grey;
-    position: absolute;
-    width: 3px;
-    border-radius: 15%;
-    margin-top: 10%;
+  background-color: grey;
+  position: absolute;
+  width: 3px;
+  border-radius: 15%;
+  margin-top: 10%;
 }
 
-.c_left{
-    height: 12px;
-    transform: rotate(135deg);
+.c_left {
+  height: 12px;
+  transform: rotate(135deg);
 }
 
 .c_right {
-    height: 25px;
-    transform: rotate(41deg) translate(5px, -11px)
+  height: 25px;
+  transform: rotate(41deg) translate(5px, -11px);
 }
 
-.checkbox_container:hover .check_main{
-    background-color: rgb(0, 128, 0);
+.checkbox_container:hover .check_main {
+  background-color: rgb(0, 128, 0);
 }
-  
-  .checkbox_container:active{
-    transform: scale(.98);
-  }
+
+.checkbox_container:active {
+  transform: scale(0.98);
+}
+
+.dash_bottom {
+    display: flex;
+    width: 100%;
+}

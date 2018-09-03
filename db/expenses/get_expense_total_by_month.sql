@@ -1,4 +1,4 @@
-SELECT SUM(cost), to_char( date_trunc('month',expense_date),'Month') as month
+SELECT SUM(cost), date_trunc('month',expense_date) as month
 FROM expenses
 WHERE user_id = $1
 AND

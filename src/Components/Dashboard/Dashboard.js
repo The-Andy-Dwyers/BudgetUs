@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 import Switch from "react-switch";
 import { Link } from "react-router-dom";
-
 import Income from "../Income/Income";
 import Chart from "../Chart/Chart";
 import Goals from "../Goals/Goals";
@@ -100,11 +98,14 @@ class Dashboard extends Component {
             </Link>
           </div>
         </div>
+        <div className='dash_bottom'>
 
         {this.props.incomeReducer.dashboard.sources && (
           <Chart type="remaining" />
         )}
         {this.props.incomeReducer.dashboard.sources && <LineChart />}
+        </div>
+
       </div>
     );
   }
