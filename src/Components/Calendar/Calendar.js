@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "fullcalendar";
 import $ from "jquery";
-import moment from "moment";
 import "./Calendar.css";
 import "./fullCalendar.css";
 

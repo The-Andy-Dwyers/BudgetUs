@@ -15,17 +15,17 @@ export function getExpenseTotalsByMonth() {
   };
 }
 
-export function getExpenses() {
+export function getExpenses(start, end) {
   return {
     type: GET_EXPENSES,
-    payload: axios.get(`/api/expenses`)
+    payload: axios.get(`/api/expenses/?start=${start}&end=${end}`)
   };
 }
 
-export function getExpensesByCategory() {
+export function getExpensesByCategory(start, end) {
   return {
     type: GET_EXPENSES_BY_CAT,
-    payload: axios.get(`/api/expenses_by_cat`)
+    payload: axios.get(`/api/expenses_by_cat/?start=${start}&end=${end}`)
   };
 }
 
@@ -88,6 +88,7 @@ export default function expensesReducer(state = initialState, action) {
         goals: action.payload.data
       };
     case `${GET_EXPENSES_BY_CAT}_FULFILLED`:
+      console.log("here");
       return {
         ...state,
         expensesbycat: action.payload.data

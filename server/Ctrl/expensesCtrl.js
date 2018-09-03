@@ -16,7 +16,7 @@ const getExpenses = (req, res) => {
   const db = req.app.get("db");
 
   db.expenses
-    .get_expenses([req.user.id, start, end])
+    .get_expenses([req.user.id, req.query.start, req.query.end])
     .then(response => {
       res.status(200).send(response);
     })
@@ -30,7 +30,7 @@ const getExpensesByCategory = (req, res) => {
   const db = req.app.get("db");
 
   db.expenses
-    .get_expenses_by_category([req.user.id, start, end])
+    .get_expenses_by_category([req.user.id, req.query.start, req.query.end])
     .then(response => {
       res.status(200).send(response);
     })

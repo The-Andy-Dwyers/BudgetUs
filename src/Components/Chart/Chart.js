@@ -9,8 +9,6 @@ import {
   getYearlyExpensesByCategory,
   getExpenses
 } from "../../ducks/reducers/expensesReducer";
-import Switch from "react-switch";
-// import moment from "moment";
 
 class Chart extends Component {
   constructor() {
@@ -18,23 +16,23 @@ class Chart extends Component {
     this.state = { month: true };
   }
   componentDidMount() {
-    this.props.getExpensesByCategory();
+    // this.props.getExpensesByCategory();
   }
 
-  handleChange = month => {
-    this.setState(
-      {
-        month
-      },
-      () => {
-        // eslint-disable-next-line
-        this.state.month
-          ? (this.props.getExpensesByCategory(), this.props.getExpenses())
-          : this.props.getYearlyExpensesByCategory();
-        this.props.getExpenses();
-      }
-    );
-  };
+  // handleChange = month => {
+  //   this.setState(
+  //     {
+  //       month
+  //     },
+  //     () => {
+  //       // eslint-disable-next-line
+  //       this.state.month
+  //         ? (this.props.getExpensesByCategory(), this.props.getExpenses())
+  //         : this.props.getYearlyExpensesByCategory();
+  //       this.props.getExpenses();
+  //     }
+  //   );
+  // };
   render() {
     const remainData = {
       datasets: [
@@ -84,6 +82,7 @@ class Chart extends Component {
       legend: { display: true, labels: { fontColor: "black" } },
       elements: { arc: { borderWidth: 0.5 } }
     };
+    console.log(this.props.expenses);
     return this.props.type === "remaining" ? (
       <div className="chart">
         <h2>Remaining Chart</h2>
@@ -94,45 +93,7 @@ class Chart extends Component {
     ) : (
       <div className="chart">
         <h2>Expenses By Category Chart</h2>
-        <Switch
-          onChange={this.handleChange}
-          checked={this.state.month}
-          id="normal-switch"
-          uncheckedIcon={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                fontSize: 15,
-                color: "white",
-                paddingRight: 2,
-                background: "#d12012",
-                borderRadius: 50
-              }}
-            >
-              Y
-            </div>
-          }
-          checkedIcon={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                fontSize: 15,
-                color: "white",
-                paddingRight: 2,
-                background: "#d12012",
-                borderRadius: 50
-              }}
-            >
-              M
-            </div>
-          }
-        />
+
         {this.state.month ? (
           <div>
             <h2>Month View</h2>
