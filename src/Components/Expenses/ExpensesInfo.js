@@ -327,6 +327,8 @@ class Expenses extends Component {
         );
       });
 
+    const sum = expense && expense.reduce((sum, e) => (sum += +e.cost), 0);
+
     return (
       <div className="expenses_container">
         <div className="expensesinfo_map1">
@@ -353,17 +355,13 @@ class Expenses extends Component {
 
             {map}
             <div>
-              <p>
-                Expenses Total: ${this.props.incomeReducer.dashboard.expensesum}
-              </p>
+              <p>Expenses Total: ${sum}</p>
             </div>
           </div>
         </div>
         <div className="expensesinfo_map2">
           <div className="expensesinfo_map2_total">
-            <p>
-              Expenses Total: ${this.props.incomeReducer.dashboard.expensesum}
-            </p>
+            <p>Expenses Total: ${sum}</p>
           </div>
           {map2}
         </div>
