@@ -66,7 +66,6 @@ export default function userReducer(state = initialState, action) {
         dashboard: action.payload.data
       };
     case `${GET_INCOME_EVENTS}_FULFILLED`:
-      // console.log(action.payload.data);
       return {
         ...state,
         events: action.payload.data.sources

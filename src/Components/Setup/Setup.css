@@ -1,3 +1,30 @@
-.setup_modal {
-  margin-left: 80px;
+.setup {
+  width: 80vw;
+}
+
+.setup_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 5px grey;
+  background-color: #fff;
+  margin: 3%;
+  padding: 2%;
+}
+
+.setup_sub_cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.setup_sub_cont input {
+  border: none;
+  border-bottom: 1px solid grey;
+  margin: 1%;
+  padding-bottom: 1%;
+}
+
+.setup_btn {
+  display: inline-block;
 }

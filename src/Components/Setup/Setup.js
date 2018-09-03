@@ -27,7 +27,8 @@ class Setup extends Component {
     axios.put('/api/edit-user', {
       name: name ? name : find.name,
       email: email ? email : find.email
-    });
+    })
+    this.setState({name: '', email: '', savings: ''})
   };
 
   editGoal = () => {
@@ -44,38 +45,31 @@ class Setup extends Component {
     const { goals } = this.props.expensesReducer;
     return (
       <div className="setup">
-        <div>
+        <div className='setup_container'>
           <h1>Welcome to BudgetUs</h1>
+          <div className='setup_sub_cont'>
+
           <h2>Let's get started!</h2>
           <input
             type="text"
+            value={this.state.name}
             placeholder="Tell us your name"
             onChange={e => this.setState({ name: e.target.value })}
           />
           <input
             type="text"
+            value={this.state.email}            
             placeholder="What is your email"
             onChange={e => this.setState({ email: e.target.value })}
           />
-          <h3 onClick={() => this.editUser()}>Submit</h3>
+          </div>
+
+          <h3 className='setup_btn btn' onClick={() => this.editUser()}>Submit</h3>
         </div>
 
-        <div className="setup_modal">
+        <div className="setup_container">
           <Modal type="goals" />
         </div>
-        {/* {this.props.expensesReducer.goals.length !== 0 ? (
-          <div>
-            <h2>Edit Goal</h2>
-            <input
-              type="text"
-              placeholder="Edit your goal"
-              onChange={e => this.setState({ savings: e.target.value })}
-            />
-            <h3 onClick={() => this.editGoal()}>Submit</h3>
-          </div>
-        ) : (
-          <div>Add Goal</div>
-        )} */}
       </div>
     );
   }
