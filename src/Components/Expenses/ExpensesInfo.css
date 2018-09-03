@@ -153,9 +153,14 @@
     margin-bottom: 1%;
   }
 
+  .expensesinfo_map2_cards:hover {
+    cursor: pointer;
+    background-color: beige;
+  }
   .expensesinfo_map2_cards {
     display: flex;
     width: 95%;
+    height: 100%;
     margin: 2%;
     flex-direction: column;
     /* border: solid 1px red; */
@@ -200,5 +205,12 @@
   }
   .expensesinfo_map2_right_edit {
     width: 90%;
+  }
+  .expensesinfo_map2_total {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3%;
+    margin-bottom: 1%;
+    font-size: 1.2em;
   }
 }
