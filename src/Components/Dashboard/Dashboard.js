@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Switch from 'react-switch';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
-import Income from '../Income/Income';
-import Chart from '../Chart/Chart';
-import Goals from '../Goals/Goals';
-import LineChart from '../Chart/LineChart';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Switch from "react-switch";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import Income from "../Income/Income";
+import Chart from "../Chart/Chart";
+import Goals from "../Goals/Goals";
+import LineChart from "../Chart/LineChart";
 
-import './Dashboard.css';
-import { getUsers } from '../../ducks/reducers/userReducer';
-import { getDashboard } from '../../ducks/reducers/incomeReducer';
-import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
+import "./Dashboard.css";
+import { getUsers } from "../../ducks/reducers/userReducer";
+import { getDashboard } from "../../ducks/reducers/incomeReducer";
+import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
 
 class Dashboard extends Component {
   constructor() {
@@ -67,8 +67,8 @@ class Dashboard extends Component {
       });
     const options = this.props.expensesReducer.expensesbymonth
       .filter(e => e.month.trim() !== moment().format("MMMM"))
-      .map(e => (
-        <option value={moment(e.month.trim(), "MMMM").format("l")}>
+      .map((e, i) => (
+        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
           {e.month.trim()}
         </option>
       ));
@@ -171,11 +171,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf('month')
-    .format('l');
+    .startOf("month")
+    .format("l");
 }
 function end(d) {
   return moment(d)
-    .endOf('month')
-    .format('l');
+    .endOf("month")
+    .format("l");
 }
