@@ -333,7 +333,7 @@ class Expenses extends Component {
       <div className="expenses_container">
         <div className="expensesinfo_map1">
           <div className="expenses">
-            <div>
+            <div className="expenses_titles">
               <h2>Name</h2>
               <h2>Company</h2>
               <h2>Amount</h2>
@@ -354,7 +354,7 @@ class Expenses extends Component {
             </div>
 
             {map}
-            <div>
+            <div className="expensesinfo_map1_total">
               <p>Expenses Total: ${sum}</p>
             </div>
           </div>
