@@ -104,6 +104,7 @@ const editExpense = (req, res) => {
 
 const getTopExpenses = (req, res) => {
   const db = req.app.get("db");
+  // const { start, end } = req.query;
 
   db.expenses
     .get_top_expenses([req.user.id, req.query.start, req.query.end])
