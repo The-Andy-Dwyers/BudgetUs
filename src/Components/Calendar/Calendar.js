@@ -39,9 +39,9 @@ class Calendar extends Component {
         ); //if it isn't in one of the ranges, don't render it (by returning false)
       },
       eventDrop: function(date, dayDelta, minuteDelta, allDay) {
-        const dateDrop = moment(date.start._d)
-          .add(1, "day")
-          .format("YYYY-MM-DD");
+        // const dateDrop = moment(date.start._d)
+        //   .add(1, "day")
+        //   .format("YYYY-MM-DD");
         console.log(
           moment(date.start._d)
             .add(1, "day")
