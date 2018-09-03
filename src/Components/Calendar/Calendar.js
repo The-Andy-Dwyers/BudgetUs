@@ -25,56 +25,22 @@ class Calendar extends Component {
         right: "month"
       },
       editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar
+      droppable: true,
       displayEventTime: false,
-      eventRender: function(event) {
-        return (
-          event.ranges.filter(function(range) {
-            // test event against all the ranges
+      // eventRender: function(event) {
+      //   return (
+      //     event.ranges.filter(function(range) {
+      //       // test event against all the ranges
 
-            return (
-              event.start.isBefore(range.end) && event.end.isAfter(range.start)
-            );
-          }).length > 0
-        ); //if it isn't in one of the ranges, don't render it (by returning false)
-      },
-      eventDrop: function(date, dayDelta, minuteDelta, allDay) {
-        // const dateDrop = moment(date.start._d)
-        //   .add(1, "day")
-        //   .format("YYYY-MM-DD");
-        console.log(
-          moment(date.start._d)
-            .add(1, "day")
-            .format("YYYY-MM-DD")
-        );
-        console.log(allDay);
-        // const chageEvent = () => {
+      //       return (
+      //         event.start.isBefore(range.end) && event.end.isAfter(range.start)
+      //       );
+      //     }).length > 0
+      //   ); //if it isn't in one of the ranges, don't render it (by returning false)
+      // },
 
-        //   this.setState({date: dateDrop})
-        //   console.log(this.state)
-        // }
-      },
-
-      // events: `/api/income/${this.props.userReducer.id}`,
-      events: `/api/income/6`,
-      // events: [
-      //   {
-      //     // allDay: true,
-      //     // displayEventTime: false,
-      //     amount: 500,
-      //     start: "10:00",
-      //     end: "12:00",
-      //     dow: [0],
-      //     // date: "2018-08-01",
-      //     title: "taster",
-      //     ranges: [
-      //       {
-      //         start: moment("2018-08-19").startOf("day"),
-      //         end: moment("2018-08-25").endOf("day")
-      //       }
-      //     ]
-      //   }
-      // ],
+      events: `/api/income/${this.props.userReducer.id}`,
+      // events: `/api/income/6`,
 
       eventMouseover: function(e, jsEvent) {
         const tooltip =
