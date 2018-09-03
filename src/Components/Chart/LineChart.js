@@ -10,34 +10,32 @@ class LineChart extends Component {
     this.props.getExpenseTotalsByMonth();
   }
   render() {
-    console.log(this.props.totals);
-    console.log(this.props);
     const data = {
       labels: this.props.totals.reverse().map(e => {
         if (e.month === '01') {
           return 'January';
         } else if (e.month === '02') {
           return 'February';
-        } else if (e.month === '03'){
-          return 'March'
-        } else if (e.month === '04'){
-          return 'April'
-        } else if (e.month === '05'){
-          return 'May'
-        } else if (e.month === '06'){
-          return 'June'
-        } else if (e.month === '07'){
-          return 'July'
-        } else if (e.month === '08'){
-          return 'August'
-        } else if (e.month === '09'){
-          return 'September'
-        } else if (e.month === '10'){
-          return 'October'
-        } else if (e.month === '11'){
-          return 'November'
+        } else if (e.month === '03') {
+          return 'March';
+        } else if (e.month === '04') {
+          return 'April';
+        } else if (e.month === '05') {
+          return 'May';
+        } else if (e.month === '06') {
+          return 'June';
+        } else if (e.month === '07') {
+          return 'July';
+        } else if (e.month === '08') {
+          return 'August';
+        } else if (e.month === '09') {
+          return 'September';
+        } else if (e.month === '10') {
+          return 'October';
+        } else if (e.month === '11') {
+          return 'November';
         } else {
-          return 'December'
+          return 'December';
         }
       }),
       datasets: [
@@ -92,7 +90,7 @@ class LineChart extends Component {
     };
     return (
       <div className="linechart">
-      <h1>Expenses Breakdown</h1>
+        <h1>Expenses Breakdown</h1>
         <Bar data={data} options={options} />
       </div>
     );
