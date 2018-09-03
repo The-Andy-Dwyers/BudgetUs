@@ -6,7 +6,6 @@ import { getDashboard } from '../../ducks/reducers/incomeReducer';
 import { getGoals } from '../../ducks/reducers/expensesReducer';
 import { getUsers } from '../../ducks/reducers/userReducer';
 
-
 class Goals extends Component {
   componentDidMount() {
     this.props.getGoals();
@@ -16,18 +15,22 @@ class Goals extends Component {
   render() {
     const { expensesum, incomesum } = this.props.incomeReducer.dashboard;
     const { goals } = this.props.expensesReducer;
-    const {users} = this.props.userReducer
-    const find = users.length && users.find(e=> e.id === this.props.userReducer.id)
+    const { users } = this.props.userReducer;
+    const find =
+      users.length && users.find(e => e.id === this.props.userReducer.id);
     const remaining = incomesum - expensesum;
     const remainder = remaining - (goals.length && goals[0].savings);
     return (
       <div className="goals">
         <div>
-          {
-            find ?
-          <h2>Welcome {find.name}!</h2> :
-          <h2>Welcome to BudgetUs! Click here to setup your profile.</h2>
-          }
+          {find ? (
+            <h2>Welcome {find.name}!</h2>
+          ) : (
+            <div>
+              <h2>Welcome to BudgetUs!</h2>
+              <p>Click here to setup your profile.</p>
+            </div>
+          )}
         </div>
         <div>
           {remainder && remainder > 0 ? (

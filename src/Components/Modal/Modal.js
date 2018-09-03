@@ -54,7 +54,7 @@ class Goals extends Component {
     //   this.props.getUsers().then(() => {
     //     !this.props.userReducer.auth_id && window.location.assign('/');
     //   });
-    this.props.getGoals();
+    // this.props.getGoals();
     //   setTimeout(
     //     function() {
     //       this.initialGoal();
@@ -70,6 +70,7 @@ class Goals extends Component {
         title: `You haven't set up a monthly goal yet.`,
         text: 'Would you like to set a goal?',
         showCancelButton: true,
+        cancelButtonText: 'No, Thanks.',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: `Let's go!`
@@ -157,13 +158,32 @@ class Goals extends Component {
       this.props.incomeReducer.dashboard.length &&
       this.props.incomeReducer.dashboard.sources.date;
 
-    return (
+    return this.props.type === 'goals' ? (
+      <div className="modal_goals_container">
+        <h3 className="btn" onClick={this.openModal1}>
+          Add
+        </h3>
+        <Modal
+          isOpen={this.state.modal1IsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+        >
+          <h1>Savings Goal!</h1>
+          <h3>What is your monthly Goal?</h3>
+          <input
+            type="text"
+            onChange={e => this.setState({ savings: e.target.value })}
+          />
+          <h3 className="income_btn btn" onClick={() => this.addGoal()}>
+            Submit
+          </h3>
+        </Modal>
+      </div>
+    ) : (
       <div className="modal_container">
         <h3 className="income_input_btn btn" onClick={this.openModal}>
           Add
-        </h3>
-        <h3 className="income_input_btn btn" onClick={this.openModal1}>
-          ++
         </h3>
 
         <Modal
@@ -225,7 +245,7 @@ class Goals extends Component {
             ) : (
               <div className="expensesinfo_modal">
                 <div className="income_sub">
-                  <p>Source:</p>
+                  <p>Name:</p>
                   <input
                     placeholder="Expense Name"
                     onChange={e =>
@@ -282,7 +302,7 @@ class Goals extends Component {
 
                 <div className="income_sub">
                   <p>Date:</p>
-                 
+
                   <DatePicker
                     date={this.state.date}
                     handleDateChange={this.handleDateChange1}
@@ -313,23 +333,6 @@ class Goals extends Component {
               </div>
             )}
           </div>
-        </Modal>
-
-        <Modal
-          isOpen={this.state.modal1IsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-        >
-          <h1>Savings Goal!</h1>
-          <h3>What is your monthly Goal?</h3>
-          <input
-            type="text"
-            onChange={e => this.setState({ savings: e.target.value })}
-          />
-          <h3 className="income_btn btn" onClick={() => this.addGoal()}>
-            Submit
-          </h3>
         </Modal>
       </div>
     );
