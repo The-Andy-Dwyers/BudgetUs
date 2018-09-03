@@ -87,7 +87,10 @@ class Expenses extends Component {
       expense.map(e => {
         return !this.state.edit ? (
           <div className="expensesinfo_map2_all" key={e.id}>
-            <div className="expensesinfo_map2_cards">
+            <div
+              className="expensesinfo_map2_cards"
+              onClick={() => this.setState({ edit: true })}
+            >
               <div className="expensesinfo_map2_top">
                 <div className="left">
                   <p>{e.title}</p>
@@ -347,16 +350,23 @@ class Expenses extends Component {
                   )}
               </div>
             </div>
+
+            {map}
             <div>
               <p>
                 Expenses Total: ${this.props.incomeReducer.dashboard.expensesum}
               </p>
             </div>
-
-            {map}
           </div>
         </div>
-        <div className="expensesinfo_map2">{map2}</div>
+        <div className="expensesinfo_map2">
+          <div className="expensesinfo_map2_total">
+            <p>
+              Expenses Total: ${this.props.incomeReducer.dashboard.expensesum}
+            </p>
+          </div>
+          {map2}
+        </div>
       </div>
     );
   }
