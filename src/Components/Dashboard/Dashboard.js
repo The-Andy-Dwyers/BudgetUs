@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Switch from "react-switch";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import Income from "../Income/Income";
 import Chart from "../Chart/Chart";
 import Goals from "../Goals/Goals";
@@ -21,14 +22,17 @@ class Dashboard extends Component {
     };
   }
   componentDidMount() {
-    this.props.getDashboard("month");
+    this.props.getDashboard(start(moment()), end(moment()));
     this.props.getTopExpenses();
   }
 
-  handleChange = month =>
-    this.setState({ month }, () =>
-      this.props.getDashboard(this.state.month ? "month" : "year")
-    );
+  handleChange = month => {
+    console.log(month);
+    this.props.getDashboard(start(month), end(month));
+  };
+  // this.setState({ month }, () =>
+  //   this.props.getDashboard(this.state.month ? "month" : "year")
+  // );
   render() {
     const { topExpenses } = this.props.expensesReducer;
     const map =
@@ -41,12 +45,16 @@ class Dashboard extends Component {
           </div>
         );
       });
-
+    const options = this.props.expensesReducer.expensesbymonth.map(e => (
+      <option value={moment(e.month.trim(), "MMMM").format("l")}>
+        {e.month.trim()}
+      </option>
+    ));
     return (
       <div className="dashboard">
         <Goals />
         <div className="dash_switch">
-          <Switch
+          {/* <Switch
             uncheckedIcon={
               <div
                 style={{
@@ -84,7 +92,16 @@ class Dashboard extends Component {
             onChange={this.handleChange}
             checked={this.state.month}
             id="normal-switch"
-          />
+          /> */}
+          <select onChange={e => this.handleChange(e.target.value)}>
+            <option
+              value={moment().format("l")}
+              defaultValue={moment().format("l")}
+            >
+              {moment().format("MMMM")}
+            </option>
+            {options}
+          </select>
         </div>
         <div className="dashboard_top">
           {this.props.incomeReducer.dashboard.sources && (
@@ -98,14 +115,12 @@ class Dashboard extends Component {
             </Link>
           </div>
         </div>
-        <div className='dash_bottom'>
-
-        {this.props.incomeReducer.dashboard.sources && (
-          <Chart type="remaining" />
-        )}
-        {this.props.incomeReducer.dashboard.sources && <LineChart />}
+        <div className="dash_bottom">
+          {this.props.incomeReducer.dashboard.sources && (
+            <Chart type="remaining" />
+          )}
+          {this.props.incomeReducer.dashboard.sources && <LineChart />}
         </div>
-
       </div>
     );
   }
@@ -121,3 +136,14 @@ export default connect(
     getTopExpenses
   }
 )(Dashboard);
+
+function start(d) {
+  return moment(d)
+    .startOf("month")
+    .format("l");
+}
+function end(d) {
+  return moment(d)
+    .endOf("month")
+    .format("l");
+}

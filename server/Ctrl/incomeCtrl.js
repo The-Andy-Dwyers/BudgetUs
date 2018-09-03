@@ -2,34 +2,30 @@ var moment = require("moment");
 const month = moment()
   .startOf("month")
   .format("l");
-const end = moment()
-  .endOf("month")
-  .format("l");
+// const end = moment()
+//   .endOf("month")
+//   .format("l");
 const year = moment()
   .startOf("year")
   .format("l");
 
 const getDashboard = (req, res) => {
   const db = req.app.get("db");
-  const { view } = req.query;
+  const { start, end } = req.query;
   db.income
-    .get_income([req.user.id, view === "month" ? month : year, end])
+    .get_income([req.user.id, start, end])
     .then(sources =>
-      db.income
-        .get_income_sum([req.user.id, view === "month" ? month : year, end])
-        .then(incomesum =>
-          db.expenses
-            .get_expense_sum([
-              req.user.id,
-              view === "month" ? month : year,
-              end
-            ])
-            .then(expensesum => ({
+      db.income.get_income_sum([req.user.id, start, end]).then(incomesum =>
+        db.expenses
+          .get_expense_sum([req.user.id, start, end])
+          .then(expensesum =>
+            res.status(200).send({
               sources,
               incomesum: +incomesum[0]["sum"],
               expensesum: +expensesum[0]["sum"]
-            }))
-        )
+            })
+          )
+      )
     )
     .then(response => {
       res.status(200).send(response);
