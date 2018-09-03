@@ -28,3 +28,11 @@
     margin: 1% 0 3% 0;
     letter-spacing: 2px;
 }
+
+.linechart_cont {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px grey;
+    margin: 1%;
+    padding: 1%;
+}

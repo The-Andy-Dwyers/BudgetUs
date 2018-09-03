@@ -42,7 +42,6 @@ class Setup extends Component {
   };
 
   render() {
-    const { goals } = this.props.expensesReducer;
     return (
       <div className="setup">
         <div className='setup_container'>

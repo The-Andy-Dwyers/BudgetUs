@@ -18,7 +18,8 @@ import {
   getGoals,
   getTopExpenses,
   getExpenses,
-  addExpenses
+  addExpenses,
+  getExpenseTotalsByMonth
 } from '../../ducks/reducers/expensesReducer';
 
 const customStyles = {
@@ -350,6 +351,7 @@ class Goals extends Component {
                         this.closeModal();
                         this.props.getTopExpenses();
                         this.props.getExpenses();
+                        this.props.getExpenseTotalsByMonth();
                       })
                   }
                 >
@@ -376,6 +378,7 @@ export default connect(
     updateTitle,
     getDashboard,
     getTopExpenses,
+    getExpenseTotalsByMonth,
     getExpenses,
     addExpenses
   }
