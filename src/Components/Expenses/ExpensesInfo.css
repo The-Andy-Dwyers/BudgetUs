@@ -143,6 +143,12 @@
 /* mobile view map2 CSS */
 
 @media (max-width: 900px) {
+
+  .Expenses {
+    width: 100%;
+    margin: 2%;
+  }
+  
   .expensesinfo_map1 {
     display: none;
   }
