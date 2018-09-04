@@ -138,13 +138,13 @@ class Income extends Component {
           <div className="income_total">
             {this.props.month ? (
               <p>
-                Monthly Income Total: $
+                Total: $
                 {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
               </p>
             ) : (
               <p>
                 {' '}
-                Yearly Income Total: $
+                Total: $
                 {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
               </p>
             )}
