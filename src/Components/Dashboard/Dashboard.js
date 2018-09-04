@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Switch from 'react-switch';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
-import Income from '../Income/Income';
-import Chart from '../Chart/Chart';
-import Goals from '../Goals/Goals';
-import LineChart from '../Chart/LineChart';
-import Modal from '../Modal/Modal';
-import TextLoop from 'react-text-loop';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import Income from "../Income/Income";
+import Chart from "../Chart/Chart";
+import Goals from "../Goals/Goals";
+import LineChart from "../Chart/LineChart";
+import Modal from "../Modal/Modal";
+import TextLoop from "react-text-loop";
 
-import './Dashboard.css';
-import { getUsers } from '../../ducks/reducers/userReducer';
-import { getDashboard } from '../../ducks/reducers/incomeReducer';
-import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
+import "./Dashboard.css";
+import { getUsers } from "../../ducks/reducers/userReducer";
+import { getDashboard } from "../../ducks/reducers/incomeReducer";
+import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
 
 class Dashboard extends Component {
   constructor() {
@@ -29,8 +28,23 @@ class Dashboard extends Component {
   }
 
   handleChange = month => {
-    this.props.getDashboard(start(month), end(month));
-    this.props.getTopExpenses(start(month), end(month));
+    if (
+      month ===
+      moment()
+        .startOf("year")
+        .format("l")
+    ) {
+      this.props.getDashboard(start(month), moment().format("l"));
+      this.props.getTopExpenses(
+        start(month),
+        moment()
+          .endOf("month")
+          .format("l")
+      );
+    } else {
+      this.props.getDashboard(start(month), end(month));
+      this.props.getTopExpenses(start(month), end(month));
+    }
   };
   handleSwitchChange = month => {
     this.setState(
@@ -39,8 +53,8 @@ class Dashboard extends Component {
         this.state.month
           ? this.props.getDashboard(start(moment()), end(moment()))
           : this.props.getDashboard(
-              start(moment().startOf('year')),
-              end(moment().endOf('year'))
+              start(moment().startOf("year")),
+              end(moment().endOf("year"))
             )
     );
   };
@@ -59,9 +73,9 @@ class Dashboard extends Component {
         );
       });
     const options = this.props.expensesReducer.expensesbymonth
-      .filter(e => e.month.trim() !== moment().format('MMMM'))
+      .filter(e => e.month.trim() !== moment().format("MMMM"))
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
+        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
           {e.month.trim()}
         </option>
       ));
@@ -71,51 +85,12 @@ class Dashboard extends Component {
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
 
-    console.log(this.props)
+    // console.log(this.props);
 
     return (
       <div className="dashboard">
         <header className="dash_switch">
           <div>
-            {/* <Switch
-              uncheckedIcon={
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100%',
-                    fontSize: 15,
-                    color: 'white',
-                    paddingRight: 2,
-                    background: '#d12012',
-                    borderRadius: 50
-                  }}
-                >
-                  Y
-                </div>
-              }
-              checkedIcon={
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100%',
-                    fontSize: 15,
-                    color: 'white',
-                    paddingRight: 2,
-                    background: '#d12012',
-                    borderRadius: 50
-                  }}
-                >
-                  M
-                </div>
-              }
-              onChange={this.handleSwitchChange}
-              checked={this.state.month}
-              id="normal-switch"
-            /> */}
             {this.state.month && (
               <select
                 className="dash_options"
@@ -123,28 +98,34 @@ class Dashboard extends Component {
               >
                 <option
                   className="dash_select"
-                  value={moment().format('l')}
-                  defaultValue={moment().format('l')}
+                  value={moment().format("l")}
+                  defaultValue={moment().format("l")}
                 >
-                  {moment().format('MMMM')}
+                  {moment().format("MMMM")}
                 </option>
                 <option disabled>───────</option>
                 {options}
+                <option
+                  value={moment()
+                    .startOf("year")
+                    .format("l")}
+                >
+                  YTD
+                </option>
               </select>
             )}
           </div>
           <div>
-            <TextLoop
-              speed={4000}
-              adjustingSpeed={500}
-
-            >
+            <TextLoop speed={4000} adjustingSpeed={500}>
               <p>
-                You've spent <mark>${daily && daily} </mark> per day this
-                month.
+                You've spent <mark>${daily && daily} </mark> per day this month.
               </p>
-              <p>You earned <mark>${dashboard.incomesum}</mark> this month!</p>
-              <p>You've made <mark>${dashboard.incomesum}</mark> this year!</p>
+              <p>
+                You earned <mark>${dashboard.incomesum}</mark> this month!
+              </p>
+              <p>
+                You've made <mark>${dashboard.incomesum}</mark> this year!
+              </p>
             </TextLoop>
           </div>
           <div className="dash_modal">
@@ -223,11 +204,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf('month')
-    .format('l');
+    .startOf("month")
+    .format("l");
 }
 function end(d) {
   return moment(d)
-    .endOf('month')
-    .format('l');
+    .endOf("month")
+    .format("l");
 }
