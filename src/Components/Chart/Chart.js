@@ -45,7 +45,7 @@ class Chart extends Component {
             "#28224F",
             this.props.incomesum - this.props.expensesum < 0
               ? "#d12012"
-              : "grey"
+              : "#0EC1AA"
           ]
         }
       ],

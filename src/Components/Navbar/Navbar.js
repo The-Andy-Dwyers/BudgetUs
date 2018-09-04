@@ -13,7 +13,8 @@ import Modal from '../Modal/Modal';
 
 class Navbar extends Component {
   state = {
-    hidden: false
+    hidden: false,
+    icon: true
   };
 
   render() {
@@ -57,17 +58,19 @@ class Navbar extends Component {
             </div>
           </div>
         </div>
-        <img
-          className="hamburger btn"
-          src={menu}
-          alt="Hamburger menu"
-          onClick={() =>
-            this.setState(
-              !this.state.hidden ? { hidden: true } : { hidden: false }
-            )
-          }
-          onBlur={() => this.setState({ hidden: false })}
-        />
+        {this.state.icon && (
+          <img
+            className="hamburger btn"
+            src={menu}
+            alt="Hamburger menu"
+            onClick={() =>
+              this.setState(
+               {hidden: true, icon: false}
+              )
+            }
+            onBlur={() => this.setState({ hidden: false })}
+          />
+        )}
         {this.state.hidden && (
           <div className="ham_container">
             <div className="navbar_main_hidden">
@@ -84,7 +87,7 @@ class Navbar extends Component {
                     className="navbar_icon btn"
                     src={home}
                     alt="Home icon"
-                    onClick={() => this.setState({ hidden: false })}
+                    onClick={() => this.setState({ hidden: false, icon: true })}
                   />
                 </Link>
                 <Link className="link" to="/calendar">
@@ -92,7 +95,7 @@ class Navbar extends Component {
                     className="navbar_icon btn"
                     src={calendar}
                     alt="Calendar icon"
-                    onClick={() => this.setState({ hidden: false })}
+                    onClick={() => this.setState({ hidden: false, icon: true })}
                   />
                 </Link>
                 <Link className="link" to="/settings">
@@ -100,7 +103,7 @@ class Navbar extends Component {
                     className="navbar_icon btn"
                     src={settings}
                     alt="Settings icon"
-                    onClick={() => this.setState({ hidden: false })}
+                    onClick={() => this.setState({ hidden: false, icon: true })}
                   />
                 </Link>
                 <Modal />

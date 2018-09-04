@@ -180,6 +180,16 @@
   width: 100%;
 }
 
+mark {
+  color: green;
+  background-color: transparent;
+}
+
+.red_mark {
+  color: red;
+  background-color: transparent;
+}
+
 @keyframes downFade {
   0% {
     opacity: 0;

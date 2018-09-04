@@ -14,9 +14,9 @@ const GET_AMOUNT = "GET_AMOUNT";
 const GET_DATE = "GET_DATE";
 const GET_TITLE = "GET_TITLE";
 const RESET = "RESET";
-
 const GET_DASHBOARD = "GET_DASHBOARD";
 const GET_INCOME_EVENTS = "GET_INCOME_EVENTS";
+
 export const getDashboard = (start, end) => {
   return {
     type: GET_DASHBOARD,
