@@ -53,14 +53,16 @@ class Setup extends Component {
             <div className="setup_sub_cont">
               <h2>Click to edit info</h2>
               <ContentEditable
-                className="income_content"
+                className="profile_content"
                 html={find && find.name}
                 onChange={e => this.setState({ name: e.target.value })}
+                onBlur={() => this.editUser()}
               />
               <ContentEditable
-                className="income_content"
+                className="profile_content"
                 html={find && find.email}
                 onChange={e => this.setState({ email: e.target.value })}
+                onBlur={() => this.editUser()}
               />
             </div>
           ) : (
@@ -78,12 +80,11 @@ class Setup extends Component {
                 placeholder="What is your email"
                 onChange={e => this.setState({ email: e.target.value })}
               />
+              <h3 className="setup_btn btn" onClick={() => this.editUser()}>
+                Submit
+              </h3>
             </div>
           )}
-
-          <h3 className="setup_btn btn" onClick={() => this.editUser()}>
-            Submit
-          </h3>
         </div>
 
         <div className="setup_container modal">

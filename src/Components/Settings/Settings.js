@@ -7,7 +7,9 @@ export default class Settings extends Component {
   render() {
     return (
       <div className="settings_main">
-        <div className="settings_header" />
+        <div className="settings_header">
+            <h1>Profile Information</h1>
+        </div>
         <Setup />
       </div>
     );

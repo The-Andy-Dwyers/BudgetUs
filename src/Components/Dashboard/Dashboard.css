@@ -26,14 +26,38 @@
 
 .dashboard_expense > div {
   width: 90%;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
 }
 
 .dash_map {
   display: flex;
   justify-content: space-between;
+  /* border-bottom: 1px solid black; */
+  padding: 1% 1% 1% 0;
+}
+
+.dash_map2 {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid black;
   padding: 1% 1% 1% 0;
+  width: 93%;
+}
+
+.dash_map_icon {
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgb(190, 190, 190);
+  background-color: #F6F6F6;
+  
+}
+
+.dash_map_icon img {
+  width: 20px;
+  height: 20px;
 }
 
 .expenses_link {
@@ -44,6 +68,7 @@
   position: absolute;
   bottom: 5%;
   right: 1%;
+  display: inline-block;
 }
 
 .link2 {

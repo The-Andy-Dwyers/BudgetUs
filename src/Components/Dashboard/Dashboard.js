@@ -51,10 +51,40 @@ class Dashboard extends Component {
       topExpenses.map((e, i) => {
         return (
           <div className="dash_map" key={i}>
-            <p>{e.category}</p>
-            <p>
-              <mark>${e.amount.toLocaleString()}</mark>
-            </p>
+            <div className="dash_map_icon">
+              {e.category === 'Food' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/263/263125.svg"
+                  alt="Food icon"
+                />
+              ) : e.category === 'Bills' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/85/85966.svg"
+                  alt="Bills icon"
+                />
+              ) : e.category === 'Entertainment' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/263/263068.svg"
+                  alt="Entertainment icon"
+                />
+              ) : e.category === 'Gas' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/115/115101.svg"
+                  alt="Gas icon"
+                />
+              ) : (
+                <img
+                  src="https://image.flaticon.com/icons/svg/116/116384.svg"
+                  alt="Rent icon"
+                />
+              )}
+            </div>
+            <div className="dash_map2">
+              <p>{e.category}</p>
+              <p>
+                <mark>${e.amount.toLocaleString()}</mark>
+              </p>
+            </div>
           </div>
         );
       });
@@ -71,7 +101,7 @@ class Dashboard extends Component {
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
 
-    console.log(this.props)
+    console.log(this.props);
 
     return (
       <div className="dashboard">
@@ -134,17 +164,16 @@ class Dashboard extends Component {
             )}
           </div>
           <div>
-            <TextLoop
-              speed={4000}
-              adjustingSpeed={500}
-
-            >
+            <TextLoop speed={4000} adjustingSpeed={500}>
               <p>
-                You've spent <mark>${daily && daily} </mark> per day this
-                month.
+                You've spent <mark>${daily && daily} </mark> per day this month.
               </p>
-              <p>You earned <mark>${dashboard.incomesum}</mark> this month!</p>
-              <p>You've made <mark>${dashboard.incomesum}</mark> this year!</p>
+              <p>
+                You earned <mark>${dashboard.incomesum}</mark> this month!
+              </p>
+              <p>
+                You've made <mark>${dashboard.incomesum}</mark> this year!
+              </p>
             </TextLoop>
           </div>
           <div className="dash_modal">

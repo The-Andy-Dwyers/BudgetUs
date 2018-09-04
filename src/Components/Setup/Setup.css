@@ -18,6 +18,15 @@
   width: 100%;
 }
 
+.setup_sub_cont h2{
+  border-bottom: 1px solid rgb(207, 207, 207);
+  padding-bottom: 1%;
+}
+
+.profile_content {
+  margin: 2% 0;
+}
+
 .setup_sub_cont input {
   border: none;
   border-bottom: 1px solid grey;
@@ -26,5 +35,6 @@
 }
 
 .setup_btn {
-  display: inline-block;
+  text-align: center;
+  margin-top: 2%;
 }
