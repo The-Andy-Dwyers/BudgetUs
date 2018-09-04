@@ -7,6 +7,8 @@ import Income from '../Income/Income';
 import Chart from '../Chart/Chart';
 import Goals from '../Goals/Goals';
 import LineChart from '../Chart/LineChart';
+import Modal from '../Modal/Modal';
+import TextLoop from 'react-text-loop';
 
 import './Dashboard.css';
 import { getUsers } from '../../ducks/reducers/userReducer';
@@ -68,7 +70,8 @@ class Dashboard extends Component {
     const remaining = dashboard && dashboard.incomesum - dashboard.expensesum;
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
-    console.log(daily);
+
+    console.log(this.props)
 
     return (
       <div className="dashboard">
@@ -131,7 +134,21 @@ class Dashboard extends Component {
             )}
           </div>
           <div>
-            <p>You have spent <mark>${daily && daily} </mark> per day this month.</p>
+            <TextLoop
+              speed={4000}
+              adjustingSpeed={500}
+
+            >
+              <p>
+                You've spent <mark>${daily && daily} </mark> per day this
+                month.
+              </p>
+              <p>You earned <mark>${dashboard.incomesum}</mark> this month!</p>
+              <p>You've made <mark>${dashboard.incomesum}</mark> this year!</p>
+            </TextLoop>
+          </div>
+          <div className="dash_modal">
+            <Modal />
           </div>
         </header>
         <Goals />

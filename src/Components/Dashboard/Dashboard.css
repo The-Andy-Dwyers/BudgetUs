@@ -147,6 +147,13 @@ div.react-switch-bg {
   align-items: center;
 }
 
+.dash_modal {
+  display: none;
+  position: absolute;
+  top: 1%;
+  right: 2%;
+}
+
 @media (max-width: 900px) {
   .dashboard {
     padding-left: 0;
@@ -180,6 +187,10 @@ div.react-switch-bg {
 
    .dashboard_expense, .linechart_cont {
     width: 90%;
+  }
+
+  .dash_modal {
+    display: block;
   }
 
 }

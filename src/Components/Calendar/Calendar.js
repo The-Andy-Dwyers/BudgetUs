@@ -71,7 +71,10 @@ class Calendar extends Component {
   render() {
     return (
       <div className="calendar">
+      <div className='calendar_top'>
+
         <h1>Calendar</h1>
+      </div>
         <div id="calendar" />
       </div>
     );

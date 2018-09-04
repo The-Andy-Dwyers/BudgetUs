@@ -63,16 +63,14 @@ class Navbar extends Component {
             className="hamburger btn"
             src={menu}
             alt="Hamburger menu"
-            onClick={() =>
-              this.setState(
-               {hidden: true, icon: false}
-              )
-            }
-            onBlur={() => this.setState({ hidden: false })}
+            onClick={() => this.setState({ hidden: true, icon: false })}
           />
         )}
         {this.state.hidden && (
-          <div className="ham_container">
+          <div
+            className="ham_container"
+            onBlur={() => this.setState({ hidden: false })}
+          >
             <div className="navbar_main_hidden">
               <div className="navbar_logo_container">
                 <img

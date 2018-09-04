@@ -70,9 +70,17 @@
   font-size: 1.5em;
 }
 
+.income_input_btn2 {
+  display: inline-block;
+  color: #fff;
+  font-size: 3em;
+  display: none;
+}
+
 .hamburger {
-  width: 30px;
-  margin-left: 10px;
+  width: 40px;
+  margin-left: 20px;
+  margin-top: 15px;
   display: none;
   animation: slide-in-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   cursor: pointer;
@@ -147,15 +155,21 @@ input:focus {
   .navbar img {
     display: block;
   }
-}
 
-@media (max-width: 900px) {
   .dash_top2 {
     margin: 2% 0;
   }
 
   .dashboard_expense {
     margin-bottom: 3% !important;
+  }
+
+  .income_input_btn {
+    display: none;
+  }
+
+  .income_input_btn2 {
+    display: block;
   }
 }
 
