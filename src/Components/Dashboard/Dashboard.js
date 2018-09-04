@@ -65,10 +65,40 @@ class Dashboard extends Component {
       topExpenses.map((e, i) => {
         return (
           <div className="dash_map" key={i}>
-            <p>{e.category}</p>
-            <p>
-              <mark>${e.amount.toLocaleString()}</mark>
-            </p>
+            <div className="dash_map_icon">
+              {e.category === 'Food' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/263/263125.svg"
+                  alt="Food icon"
+                />
+              ) : e.category === 'Bills' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/85/85966.svg"
+                  alt="Bills icon"
+                />
+              ) : e.category === 'Entertainment' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/263/263068.svg"
+                  alt="Entertainment icon"
+                />
+              ) : e.category === 'Gas' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/115/115101.svg"
+                  alt="Gas icon"
+                />
+              ) : (
+                <img
+                  src="https://image.flaticon.com/icons/svg/116/116384.svg"
+                  alt="Rent icon"
+                />
+              )}
+            </div>
+            <div className="dash_map2">
+              <p>{e.category}</p>
+              <p>
+                <mark>${e.amount.toLocaleString()}</mark>
+              </p>
+            </div>
           </div>
         );
       });

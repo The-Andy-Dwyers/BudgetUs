@@ -37,3 +37,7 @@
     padding: 1%;
     animation: downFade 1.5s;    
 }
+
+@media (max-width: 900px) {
+
+}

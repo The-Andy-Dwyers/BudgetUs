@@ -15,6 +15,9 @@
   justify-content: center;
   align-items: center;
   margin: 0;
+  color: #fff;
+  font-size: 2em;
+  letter-spacing: 2px;
 }
 
 @media (max-width: 900px) {
