@@ -28,7 +28,7 @@ class Goals extends Component {
           ) : (
             <div>
               <h2>Welcome to BudgetUs!</h2>
-              <p>Click here to setup your profile.</p>
+              <p className='profile_setup_homepage'>Click here to setup your profile.</p>
             </div>
           )}
         </div>
