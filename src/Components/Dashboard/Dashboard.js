@@ -66,7 +66,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Goals />
-        <div className="dash_switch">
+        <header className="dash_switch">
           <Switch
             uncheckedIcon={
               <div
@@ -119,7 +119,7 @@ class Dashboard extends Component {
               {options}
             </select>
           )}
-        </div>
+        </header>
         <div className="dashboard_top">
           {this.props.incomeReducer.dashboard.sources && (
             <Income month={this.state.month} />
