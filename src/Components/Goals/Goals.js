@@ -35,13 +35,23 @@ class Goals extends Component {
         {this.props.userReducer.id && (
           <div>
             {remainder && remainder > 0 ? (
-              <p>
-                You've saved a total of ${remaining.toLocaleString()} this
-                month. <br />
-                You are ${remainder.toLocaleString()} above from your goal of $
-                {goals.length && goals[0].savings.toLocaleString()}!
-              </p>
+              <div className="goals_p">
+                <p>
+                  You've saved a total of ${remaining.toLocaleString()} this
+                  month.
+                </p>
+                <p>
+                  You are ${remainder.toLocaleString()} above from your goal of
+                  ${goals.length && goals[0].savings.toLocaleString()}!
+                </p>
+              </div>
             ) : (
+              // <p>
+              //   You've saved a total of ${remaining.toLocaleString()} this
+              //   month. <br />
+              //   You are ${remainder.toLocaleString()} above from your goal of $
+              //   {goals.length && goals[0].savings.toLocaleString()}!
+              // </p>
               <p>
                 You are -$
                 {Math.abs(remainder).toLocaleString()} under your savings goal

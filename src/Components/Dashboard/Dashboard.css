@@ -1,7 +1,9 @@
 .dashboard {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   padding-left: 90px;
+  margin-top: 4%;
   background-color: rgb(247, 247, 247);
 }
 
@@ -109,6 +111,10 @@ div.react-switch-bg {
   outline: none;
 }
 
+.dash_top2, .dash_bottom2 {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .dashboard {
     padding-left: 0;
@@ -116,11 +122,31 @@ div.react-switch-bg {
     flex-direction: column;
   }
   .dashboard_top, .dash_bottom  {
+    display: none;
+  }
+
+  .dash_top2 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .income_container {
+    width: 52%;
+  }
+
+  .chart {
+    padding: 2%;
+    width: 32%;
+  }
+
+
+  .dash_bottom2 {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .income_container, .dashboard_expense, .chart, .linechart_cont {
+   .dashboard_expense, .linechart_cont {
     width: 90%;
   }
 

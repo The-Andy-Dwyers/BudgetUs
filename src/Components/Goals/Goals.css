@@ -14,3 +14,18 @@
   font-size: 2em;
   letter-spacing: 3px;
 }
+
+.goals_p {
+
+}
+
+@media (max-width: 900px) {
+  .goals {
+    flex-direction: column;
+  }
+
+  .goals_p {
+    display: flex;
+  }
+}
+
