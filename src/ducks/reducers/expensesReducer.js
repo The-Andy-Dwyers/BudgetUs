@@ -88,7 +88,6 @@ export default function expensesReducer(state = initialState, action) {
         goals: action.payload.data
       };
     case `${GET_EXPENSES_BY_CAT}_FULFILLED`:
-      console.log("here");
       return {
         ...state,
         expensesbycat: action.payload.data
