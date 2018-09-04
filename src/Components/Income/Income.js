@@ -33,7 +33,15 @@ class Income extends Component {
 
   handleDelete = id => {
     axios.delete(`/api/delete-income/${id}`).then(() => {
-      this.props.getDashboard(this.props.month ? 'month' : 'year');
+      // this.props.getDashboard(this.props.month ? 'month' : 'year');
+      this.props.getDashboard(
+        moment()
+          .startOf('month')
+          .format('l'),
+        moment()
+          .endOf('month')
+          .format('l')
+      );
       this.setState({ edit: false });
     });
   };
@@ -51,7 +59,15 @@ class Income extends Component {
       })
       .then(() => {
         this.setState({ edit: false });
-        this.props.getDashboard(this.props.month ? 'month' : 'year');
+        // this.props.getDashboard(this.props.month ? 'month' : 'year');
+        this.props.getDashboard(
+          moment()
+            .startOf('month')
+            .format('l'),
+          moment()
+            .endOf('month')
+            .format('l')
+        );
         this.props.reset();
       });
   };
@@ -66,7 +82,9 @@ class Income extends Component {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
           <p>{e.title}</p>
-          <p>${e.amount.toLocaleString()}</p>
+          <p>
+            <mark>${e.amount.toLocaleString()}</mark>
+          </p>
           <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
         </div>
       ) : (
@@ -138,14 +156,20 @@ class Income extends Component {
           <div className="income_total">
             {this.props.month ? (
               <p>
-                Total: $
-                {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+                Total:
+                <mark>
+                  $
+                  {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+                </mark>
               </p>
             ) : (
               <p>
                 {' '}
-                Total: $
-                {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+                Total:
+                <mark>
+                  $
+                  {this.props.incomeReducer.dashboard.incomesum.toLocaleString()}
+                </mark>
               </p>
             )}
           </div>

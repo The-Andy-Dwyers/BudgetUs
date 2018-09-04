@@ -111,7 +111,15 @@ class Goals extends Component {
         id
       })
       .then(() => {
-        this.props.getDashboard(this.state.month ? 'month' : 'year');
+        // this.props.getDashboard(this.state.month ? 'month' : 'year');
+        this.props.getDashboard(
+          moment()
+            .startOf('month')
+            .format('l'),
+          moment()
+            .endOf('month')
+            .format('l')
+        );
         this.closeModal();
       });
   };

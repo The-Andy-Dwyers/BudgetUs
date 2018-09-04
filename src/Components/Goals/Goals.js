@@ -24,11 +24,11 @@ class Goals extends Component {
       <div className="goals">
         <div>
           {find ? (
-            <h2 className='profile_homepage'>Welcome {find.name}!</h2>
+            <h2 className="profile_homepage">Welcome {find.name}!</h2>
           ) : (
             <div>
               <h2>Welcome to BudgetUs!</h2>
-              <p >Click here to setup your profile.</p>
+              <p>Click here to setup your profile.</p>
             </div>
           )}
         </div>
@@ -37,25 +37,27 @@ class Goals extends Component {
             {remainder && remainder > 0 ? (
               <div className="goals_p">
                 <p>
-                  You've saved a total of ${remaining.toLocaleString()} this
-                  month.
+                  You've saved a total of{' '}
+                  <mark>${remaining.toLocaleString()}</mark> this month.
                 </p>
                 <p>
-                  You are ${remainder.toLocaleString()} above from your goal of
-                  ${goals.length && goals[0].savings.toLocaleString()}!
+                  You are <mark>${remainder.toLocaleString()}</mark> above from
+                  your goal of
+                  <mark>
+                    {' '}
+                    ${goals.length && goals[0].savings.toLocaleString()}
+                  </mark>{' '}
+                  !
                 </p>
               </div>
             ) : (
-              // <p>
-              //   You've saved a total of ${remaining.toLocaleString()} this
-              //   month. <br />
-              //   You are ${remainder.toLocaleString()} above from your goal of $
-              //   {goals.length && goals[0].savings.toLocaleString()}!
-              // </p>
               <p>
-                You are -$
-                {Math.abs(remainder).toLocaleString()} under your savings goal
-                for this month.
+                You are{' '}
+                <mark className='red_mark'>
+                  -$
+                  {Math.abs(remainder).toLocaleString()}
+                </mark>{' '}
+                under your savings goal for this month.
                 <br />
                 Watch your spending!
               </p>

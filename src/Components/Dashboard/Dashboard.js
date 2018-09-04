@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Switch from "react-switch";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import Income from "../Income/Income";
-import Chart from "../Chart/Chart";
-import Goals from "../Goals/Goals";
-import LineChart from "../Chart/LineChart";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Switch from 'react-switch';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import Income from '../Income/Income';
+import Chart from '../Chart/Chart';
+import Goals from '../Goals/Goals';
+import LineChart from '../Chart/LineChart';
 
-import "./Dashboard.css";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import { getDashboard } from "../../ducks/reducers/incomeReducer";
-import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
+import './Dashboard.css';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import { getDashboard } from '../../ducks/reducers/incomeReducer';
+import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
 
 class Dashboard extends Component {
   constructor() {
@@ -37,8 +37,8 @@ class Dashboard extends Component {
         this.state.month
           ? this.props.getDashboard(start(moment()), end(moment()))
           : this.props.getDashboard(
-              start(moment().startOf("year")),
-              end(moment().endOf("year"))
+              start(moment().startOf('year')),
+              end(moment().endOf('year'))
             )
     );
   };
@@ -50,76 +50,91 @@ class Dashboard extends Component {
         return (
           <div className="dash_map" key={i}>
             <p>{e.category}</p>
-            <p>${e.amount.toLocaleString()}</p>
+            <p>
+              <mark>${e.amount.toLocaleString()}</mark>
+            </p>
           </div>
         );
       });
     const options = this.props.expensesReducer.expensesbymonth
-      .filter(e => e.month.trim() !== moment().format("MMMM"))
+      .filter(e => e.month.trim() !== moment().format('MMMM'))
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
+        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
           {e.month.trim()}
         </option>
       ));
 
-      
+    const { dashboard } = this.props.incomeReducer;
+    const remaining = dashboard && dashboard.incomesum - dashboard.expensesum;
+    const days = moment().daysInMonth();
+    const daily = Math.round((remaining / days) * 100) / 100;
+    console.log(daily);
+
     return (
       <div className="dashboard">
-        <Goals />
         <header className="dash_switch">
-          <Switch
-            uncheckedIcon={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                  fontSize: 15,
-                  color: "white",
-                  paddingRight: 2,
-                  background: "#d12012",
-                  borderRadius: 50
-                }}
+          <div>
+            {/* <Switch
+              uncheckedIcon={
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                    fontSize: 15,
+                    color: 'white',
+                    paddingRight: 2,
+                    background: '#d12012',
+                    borderRadius: 50
+                  }}
+                >
+                  Y
+                </div>
+              }
+              checkedIcon={
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                    fontSize: 15,
+                    color: 'white',
+                    paddingRight: 2,
+                    background: '#d12012',
+                    borderRadius: 50
+                  }}
+                >
+                  M
+                </div>
+              }
+              onChange={this.handleSwitchChange}
+              checked={this.state.month}
+              id="normal-switch"
+            /> */}
+            {this.state.month && (
+              <select
+                className="dash_options"
+                onChange={e => this.handleChange(e.target.value)}
               >
-                Y
-              </div>
-            }
-            checkedIcon={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                  fontSize: 15,
-                  color: "white",
-                  paddingRight: 2,
-                  background: "#d12012",
-                  borderRadius: 50
-                }}
-              >
-                M
-              </div>
-            }
-            onChange={this.handleSwitchChange}
-            checked={this.state.month}
-            id="normal-switch"
-          />
-          {this.state.month && (
-            <select className='dash_options' onChange={e => this.handleChange(e.target.value)}>
-              <option
-              className='dash_select'
-                value={moment().format("l")}
-                defaultValue={moment().format("l")}
-              >
-                {moment().format("MMMM")}
-              </option>
-              <option disabled>───────</option>
-              {options}
-            </select>
-          )}
+                <option
+                  className="dash_select"
+                  value={moment().format('l')}
+                  defaultValue={moment().format('l')}
+                >
+                  {moment().format('MMMM')}
+                </option>
+                <option disabled>───────</option>
+                {options}
+              </select>
+            )}
+          </div>
+          <div>
+            <p>You have spent <mark>${daily && daily} </mark> per day this month.</p>
+          </div>
         </header>
+        <Goals />
         <div className="dashboard_top">
           {this.props.incomeReducer.dashboard.sources && (
             <Income month={this.state.month} />
@@ -155,8 +170,6 @@ class Dashboard extends Component {
           )}
         </div>
         <div className="dash_bottom2">
-          
-
           {this.state.month ? (
             <div className="dashboard_expense">
               <h2>Expenses Overview</h2>
@@ -193,11 +206,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf("month")
-    .format("l");
+    .startOf('month')
+    .format('l');
 }
 function end(d) {
   return moment(d)
-    .endOf("month")
-    .format("l");
+    .endOf('month')
+    .format('l');
 }
