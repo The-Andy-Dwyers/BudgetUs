@@ -33,14 +33,14 @@ class Navbar extends Component {
               <Link className="link" to="/dashboard">
                 <img className="navbar_icon btn" src={home} alt="Home icon" />
               </Link>
-              <Link className="link" to="/calendar">
+              <Link className="link calendar_link" to="/calendar">
                 <img
                   className="navbar_icon btn"
                   src={calendar}
                   alt="Calendar icon"
                 />
               </Link>
-              <Link className="link" to="/settings">
+              <Link className="link settings_link" to="/settings">
                 <img
                   className="navbar_icon btn"
                   src={settings}
@@ -49,7 +49,10 @@ class Navbar extends Component {
               </Link>
               <Modal />
 
-              <a className="link" href={process.env.REACT_APP_LOGOUT}>
+              <a
+                className="link logout_link"
+                href={process.env.REACT_APP_LOGOUT}
+              >
                 <h1 className="link">Logout</h1>
               </a>
             </div>

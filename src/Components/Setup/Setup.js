@@ -86,7 +86,7 @@ class Setup extends Component {
           </h3>
         </div>
 
-        <div className="setup_container">
+        <div className="setup_container modal">
           <Modal type="goals" />
         </div>
       </div>
