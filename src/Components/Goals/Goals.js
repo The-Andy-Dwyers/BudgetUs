@@ -24,11 +24,11 @@ class Goals extends Component {
       <div className="goals">
         <div>
           {find ? (
-            <h2>Welcome {find.name}!</h2>
+            <h2 className='profile_homepage'>Welcome {find.name}!</h2>
           ) : (
             <div>
               <h2>Welcome to BudgetUs!</h2>
-              <p className='profile_setup_homepage'>Click here to setup your profile.</p>
+              <p >Click here to setup your profile.</p>
             </div>
           )}
         </div>
