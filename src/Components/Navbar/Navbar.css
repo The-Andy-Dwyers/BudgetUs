@@ -1,25 +1,26 @@
 .navbar {
-
 }
 
 .navbar_main {
-  width: 80px;;
+  width: 80px;
   background-image: linear-gradient(#000, #0c023d, #000);
-  height: 100vh;
+  height: 100%;
   max-height: 1000px;
   transition: 0.5s ease-out;
   position: fixed;
   z-index: 9;
-
 }
 
-.ham_container {
-
-}
-
-.bm-menu-wrap {
+.navbar_main_hidden {
+  width: 80px;
   background-image: linear-gradient(#000, #0c023d, #000);
-  width: 100px !important;
+  height: 100%;
+  max-height: 1000px;
+  transition: 0.5s ease-out;
+  position: fixed;
+  z-index: 9;
+  opacity: 0.9;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .link {
@@ -37,7 +38,7 @@
 }
 
 .navbar_sub {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -68,19 +69,19 @@
   font-size: 1.5em;
 }
 
-
-
 .hamburger {
   width: 30px;
-  margin-left: 5%;
+  margin-left: 10px;
   display: none;
   animation: slide-in-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  cursor: pointer;
 }
 
-.ham_container:hover .navbar_main {
+/* .hamburger:hover .navbar_main {
   display: block;
-  transition: .5s;
-}
+  transition: 0.5s;
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+} */
 
 .modal_container {
   display: flex;
@@ -117,6 +118,28 @@ input:focus {
   display: flex;
 }
 
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 900px) {
   .navbar {
     width: 0%;
@@ -131,13 +154,33 @@ input:focus {
   }
 }
 
-@keyframes slide-in-top {
-  0% {
-    transform: translateY(-1000px);
-    opacity: 0;
+@media (max-width: 900px) {
+  .dash_top2 {
+    margin: 2% 0;
   }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+
+  .dashboard_expense {
+    margin-bottom: 3% !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .goals h2 {
+    font-size: 1.5em !important;
+  }
+
+  .goals p {
+    font-size: 0.8em;
+    margin: 2% 0;
+  }
+}
+
+@media (max-width: 550px) {
+  .goals h2 {
+    font-size: 1.2em !important;
+  }
+
+  .goals p {
+    font-size: 0.6em;
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import ContentEditable from 'react-contenteditable';
 
 import './Setup.css';
 import { getGoals } from '../../ducks/reducers/expensesReducer';
@@ -27,8 +28,8 @@ class Setup extends Component {
     axios.put('/api/edit-user', {
       name: name ? name : find.name,
       email: email ? email : find.email
-    })
-    this.setState({name: '', email: '', savings: ''})
+    });
+    this.setState({ name: '', email: '', savings: '' });
   };
 
   editGoal = () => {
@@ -42,28 +43,47 @@ class Setup extends Component {
   };
 
   render() {
+    const { users, id, name, email } = this.props.userReducer;
+    const find = users.length && users.find(e => e.id === id);
     return (
       <div className="setup">
-        <div className='setup_container'>
+        <div className="setup_container">
           <h1>Thank you for using BudgetUs</h1>
-          <div className='setup_sub_cont'>
+          {name || email ? (
+            <div className="setup_sub_cont">
+              <h2>Click to edit info</h2>
+              <ContentEditable
+                className="income_content"
+                html={find && find.name}
+                onChange={e => this.setState({ name: e.target.value })}
+              />
+              <ContentEditable
+                className="income_content"
+                html={find && find.email}
+                onChange={e => this.setState({ email: e.target.value })}
+              />
+            </div>
+          ) : (
+            <div className="setup_sub_cont">
+              <h2>Let's get started!</h2>
+              <input
+                type="text"
+                value={this.state.name}
+                placeholder="Tell us your name"
+                onChange={e => this.setState({ name: e.target.value })}
+              />
+              <input
+                type="text"
+                value={this.state.email}
+                placeholder="What is your email"
+                onChange={e => this.setState({ email: e.target.value })}
+              />
+            </div>
+          )}
 
-          <h2>Let's get started!</h2>
-          <input
-            type="text"
-            value={this.state.name}
-            placeholder="Tell us your name"
-            onChange={e => this.setState({ name: e.target.value })}
-          />
-          <input
-            type="text"
-            value={this.state.email}            
-            placeholder="What is your email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          </div>
-
-          <h3 className='setup_btn btn' onClick={() => this.editUser()}>Submit</h3>
+          <h3 className="setup_btn btn" onClick={() => this.editUser()}>
+            Submit
+          </h3>
         </div>
 
         <div className="setup_container">

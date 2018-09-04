@@ -82,7 +82,6 @@ class Chart extends Component {
       legend: { display: true, labels: { fontColor: "black" } },
       elements: { arc: { borderWidth: 0.5 } }
     };
-    console.log(this.props.expenses);
     return this.props.type === "remaining" ? (
       <div className="chart">
         <h2>Remaining Chart</h2>

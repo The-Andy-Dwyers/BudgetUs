@@ -146,6 +146,35 @@ class Dashboard extends Component {
           )}
           {this.props.incomeReducer.dashboard.sources && <LineChart />}
         </div>
+        <div className="dash_top2">
+          {this.props.incomeReducer.dashboard.sources && (
+            <Income month={this.state.month} />
+          )}
+          {this.props.incomeReducer.dashboard.sources && (
+            <Chart type="remaining" />
+          )}
+        </div>
+        <div className="dash_bottom2">
+          
+
+          {this.state.month ? (
+            <div className="dashboard_expense">
+              <h2>Expenses Overview</h2>
+              <div>{map}</div>
+              <Link className="link2" to="/expenses">
+                <h2 className="expenses_link btn">More info</h2>
+              </Link>
+            </div>
+          ) : (
+            <div className="dashboard_expense">
+              <Link className="link2" to="/expenses">
+                <h2 className="expenses_link btn">Go To Expenses Page</h2>
+              </Link>
+            </div>
+          )}
+
+          {this.props.incomeReducer.dashboard.sources && <LineChart />}
+        </div>
       </div>
     );
   }
