@@ -41,8 +41,8 @@ class Expenses extends Component {
 
 	handleDelete = id => {
 		axios.delete(`/api/delete-expense/${id}`).then(() => {
-			this.props.getExpensesByCategory();
-			this.props.getExpenses();
+			this.props.getExpensesByCategory(this.props.start, this.props.end);
+			this.props.getExpenses(this.props.start, this.props.end);
 		});
 	};
 
@@ -60,7 +60,8 @@ class Expenses extends Component {
 				category: !category ? find.category : category
 			})
 			.then(() => {
-				this.props.getExpenses();
+				this.props.getExpenses(this.props.start, this.props.end);
+				this.props.getExpensesByCategory(this.props.start, this.props.end);
 				this.setState({ edit: false });
 				this.setState({
 					expenseName: '',
