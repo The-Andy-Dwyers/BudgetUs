@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
-import Income from '../Income/Income';
-import Chart from '../Chart/Chart';
-import Goals from '../Goals/Goals';
-import LineChart from '../Chart/LineChart';
-import Modal from '../Modal/Modal';
-import TextLoop from 'react-text-loop';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import Income from "../Income/Income";
+import Chart from "../Chart/Chart";
+import Goals from "../Goals/Goals";
+import LineChart from "../Chart/LineChart";
+import Modal from "../Modal/Modal";
+import TextLoop from "react-text-loop";
 
-import './Dashboard.css';
-import { getUsers } from '../../ducks/reducers/userReducer';
-import { getDashboard } from '../../ducks/reducers/incomeReducer';
-import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
+import "./Dashboard.css";
+import { getUsers } from "../../ducks/reducers/userReducer";
+import { getDashboard } from "../../ducks/reducers/incomeReducer";
+import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
 
 class Dashboard extends Component {
   constructor() {
@@ -53,8 +53,8 @@ class Dashboard extends Component {
         this.state.month
           ? this.props.getDashboard(start(moment()), end(moment()))
           : this.props.getDashboard(
-              start(moment().startOf('year')),
-              end(moment().endOf('year'))
+              start(moment().startOf("year")),
+              end(moment().endOf("year"))
             )
     );
   };
@@ -67,22 +67,22 @@ class Dashboard extends Component {
         return (
           <div className="dash_map" key={i}>
             <div className="dash_map_icon">
-              {e.category === 'Food' ? (
+              {e.category === "Food" ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/263/263125.svg"
                   alt="Food icon"
                 />
-              ) : e.category === 'Bills' ? (
+              ) : e.category === "Bills" ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/85/85966.svg"
                   alt="Bills icon"
                 />
-              ) : e.category === 'Entertainment' ? (
+              ) : e.category === "Entertainment" ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/263/263068.svg"
                   alt="Entertainment icon"
                 />
-              ) : e.category === 'Gas' ? (
+              ) : e.category === "Gas" ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/115/115101.svg"
                   alt="Gas icon"
@@ -103,16 +103,11 @@ class Dashboard extends Component {
           </div>
         );
       });
-<<<<<<< HEAD
 
     const options = this.props.incomeReducer.months
       .filter(e => e.month.trim() !== moment().format("MMMM"))
-=======
-    const options = this.props.expensesReducer.expensesbymonth
-      .filter(e => e.month.trim() !== moment().format('MMMM'))
->>>>>>> master
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
+        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
           {e.month.trim()}
         </option>
       ));
@@ -133,24 +128,14 @@ class Dashboard extends Component {
               >
                 <option
                   className="dash_select"
-                  value={moment().format('l')}
-                  defaultValue={moment().format('l')}
+                  value={moment().format("l")}
+                  defaultValue={moment().format("l")}
                 >
-                  {moment().format('MMMM')}
+                  {moment().format("MMMM")}
                 </option>
                 <option disabled>───────</option>
                 {options}
-<<<<<<< HEAD
                 <option value={"year"}>YTD</option>
-=======
-                <option
-                  value={moment()
-                    .startOf('year')
-                    .format('l')}
-                >
-                  YTD
-                </option>
->>>>>>> master
               </select>
             )}
           </div>
@@ -243,11 +228,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf('month')
-    .format('l');
+    .startOf("month")
+    .format("l");
 }
 function end(d) {
   return moment(d)
-    .endOf('month')
-    .format('l');
+    .endOf("month")
+    .format("l");
 }
