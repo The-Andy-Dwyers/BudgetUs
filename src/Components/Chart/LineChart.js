@@ -34,6 +34,7 @@ class LineChart extends Component {
       ]
     };
     const options = {
+      scales: { xAxes: [{ maxBarThickness: 90 }] },
       legend: { display: false },
       tooltips: {
         callbacks: {
@@ -44,7 +45,7 @@ class LineChart extends Component {
       }
     };
     return (
-      <div className='linechart_cont'>
+      <div className="linechart_cont">
         <Bar data={data} options={options} />
       </div>
     );

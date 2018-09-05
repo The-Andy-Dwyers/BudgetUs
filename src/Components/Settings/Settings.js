@@ -9,7 +9,7 @@ import { getUser, getTrophy } from '../../ducks/reducers/userReducer';
 
 class Settings extends Component {
   componentDidMount() {
-    this.props.getUser();
+    // this.props.getUser();
     this.props.getTrophy();
     this.addTrophy();
   }
@@ -38,6 +38,14 @@ class Settings extends Component {
 
   render() {
     console.log(this.props);
+    const { trophies } = this.props.userReducer;
+    var find1 = trophies.length && trophies.filter(e => e.trophy === 1);
+    var find2 = trophies.length && trophies.filter(e => e.trophy === 2);
+    var find3 = trophies.length && trophies.filter(e => e.trophy === 3);
+
+    console.log(find1);
+    console.log(find2);
+    console.log(find3);
 
     const trophyArr = [
       { trophy: 'Created Account', id: 1 },
@@ -49,7 +57,17 @@ class Settings extends Component {
     const map = trophyArr.map(e => {
       return (
         <div className="trophy_map" key={e.id}>
-          {this.props.userReducer.login !== 1 ? (
+          {(find1 && find1.length && e.id === 1) ||
+          (find2 && find2.length && e.id === 2) ||
+          (find3 && find3.length && e.id === 3) ? (
+            <div className="achieved">
+              <img
+                src="https://image.flaticon.com/icons/svg/610/610333.svg"
+                alt="Trophy"
+              />
+              <p>{e.trophy}</p>
+            </div>
+          ) : (
             <div>
               <img
                 className="fuzzy_trophy"
@@ -57,14 +75,6 @@ class Settings extends Component {
                 alt="Trophy"
               />
               <p className="fuzzy_text">{e.trophy}</p>
-            </div>
-          ) : (
-            <div className="achieved">
-              <img
-                src="https://image.flaticon.com/icons/svg/610/610333.svg"
-                alt="Trophy"
-              />
-              <p>{e.trophy}</p>
             </div>
           )}
         </div>

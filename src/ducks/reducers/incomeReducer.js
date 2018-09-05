@@ -1,21 +1,23 @@
-import axios from "axios";
+import axios from 'axios';
 
 const initialState = {
   income: [],
-  amount: "",
-  date: "",
-  title: "",
+  amount: '',
+  date: '',
+  title: '',
   didErr: false,
   events: [],
-  dashboard: []
+  dashboard: [],
+  sources: [],
+  months: []
 };
 
-const GET_AMOUNT = "GET_AMOUNT";
-const GET_DATE = "GET_DATE";
-const GET_TITLE = "GET_TITLE";
-const RESET = "RESET";
-const GET_DASHBOARD = "GET_DASHBOARD";
-const GET_INCOME_EVENTS = "GET_INCOME_EVENTS";
+const GET_AMOUNT = 'GET_AMOUNT';
+const GET_DATE = 'GET_DATE';
+const GET_TITLE = 'GET_TITLE';
+const RESET = 'RESET';
+const GET_DASHBOARD = 'GET_DASHBOARD';
+const GET_INCOME_EVENTS = 'GET_INCOME_EVENTS';
 
 export const getDashboard = (start, end) => {
   return {
@@ -54,7 +56,7 @@ export const updateTitle = title => {
 export const reset = () => {
   return {
     type: RESET,
-    payload: ""
+    payload: ''
   };
 };
 
@@ -63,14 +65,16 @@ export default function userReducer(state = initialState, action) {
     case `${GET_DASHBOARD}_FULFILLED`:
       return {
         ...state,
-        dashboard: action.payload.data
+        dashboard: action.payload.data,
+        sources: action.payload.data.sources,
+        months: action.payload.data.months
       };
     case `${GET_INCOME_EVENTS}_FULFILLED`:
       return {
         ...state,
         events: action.payload.data.sources
       };
-    case `${GET_DASHBOARD}_REJECTED`:
+    case `${GET_DASHBOARD}_REJECTED`:  
       return {
         ...state,
         didErr: true

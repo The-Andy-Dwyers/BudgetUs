@@ -37,7 +37,13 @@ const {
   incomeYearlySum,
   getIncomeById
 } = require('./Ctrl/incomeCtrl');
-const { addGoal, getGoal, editGoal, addTrophy, getTrophy } = require('./Ctrl/goalsCtrl');
+const {
+  addGoal,
+  getGoal,
+  editGoal,
+  addTrophy,
+  getTrophy
+} = require('./Ctrl/goalsCtrl');
 
 const app = express();
 app.use(bodyParser.json());
@@ -56,10 +62,10 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
-    // cookie: {
-    //   maxAge: 60 * 60 * 24 * 7 * 2
-    // }
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60 * 60 * 24 * 7 * 2
+    }
   })
 );
 
@@ -80,9 +86,13 @@ passport.serializeUser((user, done) => {
       if (!response[0]) {
         db.users
           .add_user([modifiedUser, user.id])
-          .then(res => done(null, res[0]))
+          .then(res => {
+            session.auth_id = res[0].auth_id;
+            done(null, res[0]);
+          })
           .catch(err => done(err, null));
       } else {
+        session.auth_id = response[0].auth_id;
         return done(null, response[0]);
       }
     })
@@ -123,7 +133,6 @@ app.post('/api/add-goal', addGoal);
 app.put('/api/edit-goal', editGoal);
 app.post('/api/add-trophy', addTrophy);
 app.get('/api/trophy', getTrophy);
-
 
 // run build
 // app.get("*", (req, res) => {
