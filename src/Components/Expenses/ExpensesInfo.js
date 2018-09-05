@@ -100,7 +100,6 @@ class Expenses extends Component {
             )
     );
   render() {
-    console.log(this.props);
     const { expense } = this.props.expensesReducer;
 
     const map2 =
