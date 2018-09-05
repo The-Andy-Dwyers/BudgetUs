@@ -28,7 +28,6 @@ class Dashboard extends Component {
   }
 
   handleChange = month => {
-<<<<<<< HEAD
     if (month === "year") {
       this.props.getDashboard(
         moment()
@@ -36,25 +35,11 @@ class Dashboard extends Component {
           .format("l"),
         moment().format("l")
       );
-=======
-    if (
-      month ===
-      moment()
-        .startOf('year')
-        .format('l')
-    ) {
-      this.props.getDashboard(start(month), moment().format('l'));
->>>>>>> master
       this.props.getTopExpenses(
         moment()
-<<<<<<< HEAD
           .startOf("year")
           .format("l"),
         moment().format("l")
-=======
-          .endOf('month')
-          .format('l')
->>>>>>> master
       );
     } else {
       this.props.getDashboard(start(month), end(month));
