@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './Navbar.css';
-import { getUsers } from '../../ducks/reducers/userReducer';
+import { getUsers, getUser } from '../../ducks/reducers/userReducer';
 
 import menu from './icons/menu.svg';
 import home from './icons/home.svg';
@@ -19,6 +19,10 @@ class Navbar extends Component {
     hidden: false,
     icon: true
   };
+
+  componentDidMount() {
+    this.props.getUser();
+  }
 
   render() {
     return (
@@ -88,9 +92,7 @@ class Navbar extends Component {
           />
         )}
         {this.state.hidden && (
-          <div
-            className="ham_container"
-          >
+          <div className="ham_container">
             <div className="navbar_main_hidden">
               <div className="navbar_logo_container">
                 <img
@@ -170,6 +172,7 @@ const mapStateToProps = state => state;
 export default connect(
   mapStateToProps,
   {
-    getUsers
+    getUsers,
+    getUser
   }
 )(Navbar);

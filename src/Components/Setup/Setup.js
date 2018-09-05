@@ -5,7 +5,7 @@ import ContentEditable from 'react-contenteditable';
 
 import './Setup.css';
 import { getGoals } from '../../ducks/reducers/expensesReducer';
-import { getUsers } from '../../ducks/reducers/userReducer';
+import { getUsers, getUser } from '../../ducks/reducers/userReducer';
 import Modal from '../Modal/Modal';
 
 class Setup extends Component {
@@ -16,6 +16,7 @@ class Setup extends Component {
   };
 
   componentDidMount() {
+    this.props.getUsers();
     this.props.getGoals();
   }
 
@@ -40,13 +41,12 @@ class Setup extends Component {
       id,
       savings
     });
-
-    
   };
 
   render() {
     const { users, id, name, email } = this.props.userReducer;
     const find = users.length && users.find(e => e.id === id);
+
     return (
       <div className="setup">
         <div className="setup_container">
@@ -107,5 +107,5 @@ const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,
-  { getGoals, getUsers }
+  { getGoals, getUsers, getUser }
 )(Setup);
