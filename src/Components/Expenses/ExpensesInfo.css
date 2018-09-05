@@ -1,9 +1,12 @@
 .expenses_container {
   margin-top: 10%;
+  box-shadow: 1px 1px 5px grey;
+background-color: #fff;  
 }
 
 .expensesinfo_map2 {
   display: none;
+
 }
 
 .expensesinfo_content {
@@ -146,7 +149,7 @@
 
   .Expenses {
     width: 100%;
-    margin: 2%;
+    margin: 0;
   }
   
   .expensesinfo_map1 {

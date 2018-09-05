@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import Income from "../Income/Income";
-import Chart from "../Chart/Chart";
-import Goals from "../Goals/Goals";
-import LineChart from "../Chart/LineChart";
-import Modal from "../Modal/Modal";
-import TextLoop from "react-text-loop";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import Income from '../Income/Income';
+import Chart from '../Chart/Chart';
+import Goals from '../Goals/Goals';
+import LineChart from '../Chart/LineChart';
+import Modal from '../Modal/Modal';
+import TextLoop from 'react-text-loop';
 
-import "./Dashboard.css";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import { getDashboard } from "../../ducks/reducers/incomeReducer";
-import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
+import './Dashboard.css';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import { getDashboard } from '../../ducks/reducers/incomeReducer';
+import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
 
 class Dashboard extends Component {
   constructor() {
@@ -31,15 +31,15 @@ class Dashboard extends Component {
     if (
       month ===
       moment()
-        .startOf("year")
-        .format("l")
+        .startOf('year')
+        .format('l')
     ) {
-      this.props.getDashboard(start(month), moment().format("l"));
+      this.props.getDashboard(start(month), moment().format('l'));
       this.props.getTopExpenses(
         start(month),
         moment()
-          .endOf("month")
-          .format("l")
+          .endOf('month')
+          .format('l')
       );
     } else {
       this.props.getDashboard(start(month), end(month));
@@ -53,11 +53,12 @@ class Dashboard extends Component {
         this.state.month
           ? this.props.getDashboard(start(moment()), end(moment()))
           : this.props.getDashboard(
-              start(moment().startOf("year")),
-              end(moment().endOf("year"))
+              start(moment().startOf('year')),
+              end(moment().endOf('year'))
             )
     );
   };
+
   render() {
     const { topExpenses } = this.props.expensesReducer;
     const map =
@@ -103,9 +104,9 @@ class Dashboard extends Component {
         );
       });
     const options = this.props.expensesReducer.expensesbymonth
-      .filter(e => e.month.trim() !== moment().format("MMMM"))
+      .filter(e => e.month.trim() !== moment().format('MMMM'))
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
+        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
           {e.month.trim()}
         </option>
       ));
@@ -128,17 +129,17 @@ class Dashboard extends Component {
               >
                 <option
                   className="dash_select"
-                  value={moment().format("l")}
-                  defaultValue={moment().format("l")}
+                  value={moment().format('l')}
+                  defaultValue={moment().format('l')}
                 >
-                  {moment().format("MMMM")}
+                  {moment().format('MMMM')}
                 </option>
                 <option disabled>───────</option>
                 {options}
                 <option
                   value={moment()
-                    .startOf("year")
-                    .format("l")}
+                    .startOf('year')
+                    .format('l')}
                 >
                   YTD
                 </option>
@@ -234,11 +235,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf("month")
-    .format("l");
+    .startOf('month')
+    .format('l');
 }
 function end(d) {
   return moment(d)
-    .endOf("month")
-    .format("l");
+    .endOf('month')
+    .format('l');
 }
