@@ -90,7 +90,6 @@ class Navbar extends Component {
         {this.state.hidden && (
           <div
             className="ham_container"
-            onBlur={() => this.setState({ hidden: false, icon: true })}
           >
             <div className="navbar_main_hidden">
               <div className="navbar_logo_container">
