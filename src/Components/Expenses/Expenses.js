@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { getUsers } from '../../ducks/reducers/userReducer';
+import React, { Component } from "react";
+import { getUsers } from "../../ducks/reducers/userReducer";
 import {
   getExpenses,
   getExpensesByCategory
-} from '../../ducks/reducers/expensesReducer';
-import { connect } from 'react-redux';
-import moment from 'moment';
-import Switch from 'react-switch';
+} from "../../ducks/reducers/expensesReducer";
+import { connect } from "react-redux";
+import moment from "moment";
+import Switch from "react-switch";
 
-import Chart from '../Chart/Chart';
-import './Expenses.css';
-import ExpensesInfo from './ExpensesInfo';
+import Chart from "../Chart/Chart";
+import "./Expenses.css";
+import ExpensesInfo from "./ExpensesInfo";
 class Expenses extends Component {
   constructor() {
     super();
@@ -22,97 +22,50 @@ class Expenses extends Component {
     this.props.getExpensesByCategory(start(moment()), end(moment()));
   }
 
-  handleSwitchChange = month =>
-    this.setState({ month }, () => {
-      if (this.state.month) {
-        this.props.getExpenses(start(moment()), end(moment()));
-        this.props.getExpensesByCategory(start(moment()), end(moment()));
-      } else {
-        this.props.getExpenses(
-          moment()
-            .startOf('year')
-            .format('l'),
-          moment()
-            .endOf('year')
-            .format('l')
-        );
-        this.props.getExpensesByCategory(
-          moment()
-            .startOf('year')
-            .format('l'),
-          moment()
-            .endOf('year')
-            .format('l')
-        );
-      }
-    });
   handleChange = month => {
-    this.props.getExpenses(start(month), end(month));
-    this.props.getExpensesByCategory(start(month), end(month));
+    if (month === "year") {
+      this.props.getExpenses(
+        moment()
+          .startOf("year")
+          .format("l"),
+        moment().format("l")
+      );
+      this.props.getExpensesByCategory(
+        moment()
+          .startOf("year")
+          .format("l"),
+        moment().format("l")
+      );
+    } else {
+      this.props.getExpenses(start(month), end(month));
+      this.props.getExpensesByCategory(start(month), end(month));
+    }
   };
   render() {
     const options = this.props.expensesReducer.expensesbymonth
-      .filter(e => e.month.trim() !== moment().format('MMMM'))
+      .filter(e => e.month.trim() !== moment().format("MMMM"))
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
+        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
           {e.month.trim()}
         </option>
       ));
     return (
       <div className="Expenses">
         <div className="expenses_top">
-          <Switch
-            onChange={this.handleSwitchChange}
-            checked={this.state.month}
-            id="normal-switch"
-            uncheckedIcon={
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '100%',
-                  fontSize: 15,
-                  color: 'white',
-                  paddingRight: 2,
-                  background: '#d12012',
-                  borderRadius: 50
-                }}
-              >
-                Y
-              </div>
-            }
-            checkedIcon={
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '100%',
-                  fontSize: 15,
-                  color: 'white',
-                  paddingRight: 2,
-                  background: '#d12012',
-                  borderRadius: 50
-                }}
-              >
-                M
-              </div>
-            }
-          />
           {this.state.month && (
             <select
               className="dash_options"
               onChange={e => this.handleChange(e.target.value)}
             >
               <option
-                value={moment().format('l')}
-                defaultValue={moment().format('l')}
+                value={moment().format("l")}
+                defaultValue={moment().format("l")}
               >
-                {moment().format('MMMM')}
+                {moment().format("MMMM")}
               </option>
               <option disabled>───────</option>
               {options}
+              <option value="year">YTD</option>
             </select>
           )}
         </div>
@@ -129,12 +82,12 @@ export default connect(
 )(Expenses);
 
 function start(d) {
-  return moment(d)
-    .startOf('month')
-    .format('l');
+  return moment(new Date(d).toISOString())
+    .startOf("month")
+    .format("l");
 }
 function end(d) {
-  return moment(d)
-    .endOf('month')
-    .format('l');
+  return moment(new Date(d).toISOString())
+    .endOf("month")
+    .format("l");
 }
