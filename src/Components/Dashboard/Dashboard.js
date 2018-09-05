@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import Income from "../Income/Income";
-import Chart from "../Chart/Chart";
-import Goals from "../Goals/Goals";
-import LineChart from "../Chart/LineChart";
-import Modal from "../Modal/Modal";
-import TextLoop from "react-text-loop";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import Income from '../Income/Income';
+import Chart from '../Chart/Chart';
+import Goals from '../Goals/Goals';
+import LineChart from '../Chart/LineChart';
+import Modal from '../Modal/Modal';
+import TextLoop from 'react-text-loop';
 
-import "./Dashboard.css";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import { getDashboard } from "../../ducks/reducers/incomeReducer";
-import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
+import './Dashboard.css';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import { getDashboard } from '../../ducks/reducers/incomeReducer';
+import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
 
 class Dashboard extends Component {
   constructor() {
@@ -28,6 +28,7 @@ class Dashboard extends Component {
   }
 
   handleChange = month => {
+<<<<<<< HEAD
     if (month === "year") {
       this.props.getDashboard(
         moment()
@@ -35,11 +36,25 @@ class Dashboard extends Component {
           .format("l"),
         moment().format("l")
       );
+=======
+    if (
+      month ===
+      moment()
+        .startOf('year')
+        .format('l')
+    ) {
+      this.props.getDashboard(start(month), moment().format('l'));
+>>>>>>> master
       this.props.getTopExpenses(
         moment()
+<<<<<<< HEAD
           .startOf("year")
           .format("l"),
         moment().format("l")
+=======
+          .endOf('month')
+          .format('l')
+>>>>>>> master
       );
     } else {
       this.props.getDashboard(start(month), end(month));
@@ -53,11 +68,12 @@ class Dashboard extends Component {
         this.state.month
           ? this.props.getDashboard(start(moment()), end(moment()))
           : this.props.getDashboard(
-              start(moment().startOf("year")),
-              end(moment().endOf("year"))
+              start(moment().startOf('year')),
+              end(moment().endOf('year'))
             )
     );
   };
+
   render() {
     const { topExpenses } = this.props.expensesReducer;
     const map =
@@ -65,18 +81,53 @@ class Dashboard extends Component {
       topExpenses.map((e, i) => {
         return (
           <div className="dash_map" key={i}>
-            <p>{e.category}</p>
-            <p>
-              <mark>${e.amount.toLocaleString()}</mark>
-            </p>
+            <div className="dash_map_icon">
+              {e.category === 'Food' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/263/263125.svg"
+                  alt="Food icon"
+                />
+              ) : e.category === 'Bills' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/85/85966.svg"
+                  alt="Bills icon"
+                />
+              ) : e.category === 'Entertainment' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/263/263068.svg"
+                  alt="Entertainment icon"
+                />
+              ) : e.category === 'Gas' ? (
+                <img
+                  src="https://image.flaticon.com/icons/svg/115/115101.svg"
+                  alt="Gas icon"
+                />
+              ) : (
+                <img
+                  src="https://image.flaticon.com/icons/svg/116/116384.svg"
+                  alt="Rent icon"
+                />
+              )}
+            </div>
+            <div className="dash_map2">
+              <p>{e.category}</p>
+              <p>
+                <mark>${e.amount.toLocaleString()}</mark>
+              </p>
+            </div>
           </div>
         );
       });
+<<<<<<< HEAD
 
     const options = this.props.incomeReducer.months
       .filter(e => e.month.trim() !== moment().format("MMMM"))
+=======
+    const options = this.props.expensesReducer.expensesbymonth
+      .filter(e => e.month.trim() !== moment().format('MMMM'))
+>>>>>>> master
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
+        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
           {e.month.trim()}
         </option>
       ));
@@ -97,14 +148,24 @@ class Dashboard extends Component {
               >
                 <option
                   className="dash_select"
-                  value={moment().format("l")}
-                  defaultValue={moment().format("l")}
+                  value={moment().format('l')}
+                  defaultValue={moment().format('l')}
                 >
-                  {moment().format("MMMM")}
+                  {moment().format('MMMM')}
                 </option>
                 <option disabled>───────</option>
                 {options}
+<<<<<<< HEAD
                 <option value={"year"}>YTD</option>
+=======
+                <option
+                  value={moment()
+                    .startOf('year')
+                    .format('l')}
+                >
+                  YTD
+                </option>
+>>>>>>> master
               </select>
             )}
           </div>
@@ -197,11 +258,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf("month")
-    .format("l");
+    .startOf('month')
+    .format('l');
 }
 function end(d) {
   return moment(d)
-    .endOf("month")
-    .format("l");
+    .endOf('month')
+    .format('l');
 }

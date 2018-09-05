@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { getUsers } from "../../ducks/reducers/userReducer";
+import React, { Component } from 'react';
+import { getUsers } from '../../ducks/reducers/userReducer';
 import {
   getExpenses,
   getExpensesByCategory
-} from "../../ducks/reducers/expensesReducer";
-import { connect } from "react-redux";
-import moment from "moment";
-import Switch from "react-switch";
+} from '../../ducks/reducers/expensesReducer';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import Switch from 'react-switch';
 
-import Chart from "../Chart/Chart";
-import "./Expenses.css";
-import ExpensesInfo from "./ExpensesInfo";
+import Chart from '../Chart/Chart';
+import './Expenses.css';
+import ExpensesInfo from './ExpensesInfo';
 class Expenses extends Component {
   constructor() {
     super();
@@ -30,19 +30,19 @@ class Expenses extends Component {
       } else {
         this.props.getExpenses(
           moment()
-            .startOf("year")
-            .format("l"),
+            .startOf('year')
+            .format('l'),
           moment()
-            .endOf("year")
-            .format("l")
+            .endOf('year')
+            .format('l')
         );
         this.props.getExpensesByCategory(
           moment()
-            .startOf("year")
-            .format("l"),
+            .startOf('year')
+            .format('l'),
           moment()
-            .endOf("year")
-            .format("l")
+            .endOf('year')
+            .format('l')
         );
       }
     });
@@ -52,65 +52,70 @@ class Expenses extends Component {
   };
   render() {
     const options = this.props.expensesReducer.expensesbymonth
-      .filter(e => e.month.trim() !== moment().format("MMMM"))
+      .filter(e => e.month.trim() !== moment().format('MMMM'))
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
+        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
           {e.month.trim()}
         </option>
       ));
     return (
       <div className="Expenses">
-        <Switch
-          onChange={this.handleSwitchChange}
-          checked={this.state.month}
-          id="normal-switch"
-          uncheckedIcon={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                fontSize: 15,
-                color: "white",
-                paddingRight: 2,
-                background: "#d12012",
-                borderRadius: 50
-              }}
+        <div className="expenses_top">
+          <Switch
+            onChange={this.handleSwitchChange}
+            checked={this.state.month}
+            id="normal-switch"
+            uncheckedIcon={
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                  fontSize: 15,
+                  color: 'white',
+                  paddingRight: 2,
+                  background: '#d12012',
+                  borderRadius: 50
+                }}
+              >
+                Y
+              </div>
+            }
+            checkedIcon={
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                  fontSize: 15,
+                  color: 'white',
+                  paddingRight: 2,
+                  background: '#d12012',
+                  borderRadius: 50
+                }}
+              >
+                M
+              </div>
+            }
+          />
+          {this.state.month && (
+            <select
+              className="dash_options"
+              onChange={e => this.handleChange(e.target.value)}
             >
-              Y
-            </div>
-          }
-          checkedIcon={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                fontSize: 15,
-                color: "white",
-                paddingRight: 2,
-                background: "#d12012",
-                borderRadius: 50
-              }}
-            >
-              M
-            </div>
-          }
-        />
-        {this.state.month && (
-          <select onChange={e => this.handleChange(e.target.value)}>
-            <option
-              value={moment().format("l")}
-              defaultValue={moment().format("l")}
-            >
-              {moment().format("MMMM")}
-            </option>
-            <option disabled>───────</option>
-            {options}
-          </select>
-        )}
+              <option
+                value={moment().format('l')}
+                defaultValue={moment().format('l')}
+              >
+                {moment().format('MMMM')}
+              </option>
+              <option disabled>───────</option>
+              {options}
+            </select>
+          )}
+        </div>
         <ExpensesInfo />
         <Chart type="expenses" />
       </div>
@@ -125,11 +130,11 @@ export default connect(
 
 function start(d) {
   return moment(d)
-    .startOf("month")
-    .format("l");
+    .startOf('month')
+    .format('l');
 }
 function end(d) {
   return moment(d)
-    .endOf("month")
-    .format("l");
+    .endOf('month')
+    .format('l');
 }

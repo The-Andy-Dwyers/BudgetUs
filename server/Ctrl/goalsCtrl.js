@@ -42,8 +42,40 @@ const getGoal = (req, res) => {
     });
   }
 
+  const addTrophy = (req,res) => {
+    const db = req.app.get("db");
+    const {trophy, id} = req.body
+    console.log('trophy body>>>', req.body)
+
+    db.goals
+    .add_trophy([trophy, id])
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+  }
+
+  const getTrophy = (req, res) => {
+    const db = req.app.get("db");
+  
+    db.goals
+      .get_trophies([req.user.id])
+      .then(response => {
+        res.status(200).send(response);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).send(err);
+      });
+  };
+
 module.exports = {
     addGoal,
     getGoal,
-    editGoal
+    editGoal,
+    addTrophy,
+    getTrophy
 }

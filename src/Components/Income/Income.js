@@ -135,8 +135,7 @@ class Income extends Component {
                 {find && find.name}
                 's Income
               </h2>
-              {/* <h2>Amount</h2>
-              <h2>Payday</h2> */}
+     
             </div>
 
             {map}

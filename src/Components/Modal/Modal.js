@@ -217,7 +217,7 @@ class Goals extends Component {
       </div>
     ) : (
       <div className="modal_container">
-        <h3 className="income_input_btn btn" onClick={this.openModal}>
+        <h3 className="income_input_btn" onClick={this.openModal}>
           Add
         </h3>
         <h3 className="income_input_btn2 btn" onClick={this.openModal}>

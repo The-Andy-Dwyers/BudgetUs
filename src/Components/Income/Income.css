@@ -8,7 +8,10 @@
   background-color: #fff;
   padding: 1%;
   margin: 1%;
-  animation: downFade 1.5s;
+}
+
+.income_container:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 .income {
@@ -202,6 +205,24 @@ mark {
   }
 }
 
+/* @keyframes shake {
+  10%, 90% {
+    transform: translate3d(-.2px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(.5px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(1px, 0, 0);
+  }
+} */
+
 @media (max-width: 700px) {
   .income_display h2 {
     font-size: 0.8em;
@@ -211,4 +232,3 @@ mark {
     font-size: 0.8em;
   }
 }
-

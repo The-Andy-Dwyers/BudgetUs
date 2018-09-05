@@ -40,6 +40,8 @@ class Setup extends Component {
       id,
       savings
     });
+
+    
   };
 
   render() {
@@ -52,16 +54,24 @@ class Setup extends Component {
           {name || email ? (
             <div className="setup_sub_cont">
               <h2>Click to edit info</h2>
-              <ContentEditable
-                className="income_content"
-                html={find && find.name}
-                onChange={e => this.setState({ name: e.target.value })}
-              />
-              <ContentEditable
-                className="income_content"
-                html={find && find.email}
-                onChange={e => this.setState({ email: e.target.value })}
-              />
+              <div>
+                <p>Name:</p>
+                <ContentEditable
+                  className="profile_content"
+                  html={find && find.name}
+                  onChange={e => this.setState({ name: e.target.value })}
+                  onBlur={() => this.editUser()}
+                />
+              </div>
+              <div>
+                <p>Email:</p>
+                <ContentEditable
+                  className="profile_content"
+                  html={find && find.email}
+                  onChange={e => this.setState({ email: e.target.value })}
+                  onBlur={() => this.editUser()}
+                />
+              </div>
             </div>
           ) : (
             <div className="setup_sub_cont">
@@ -78,12 +88,11 @@ class Setup extends Component {
                 placeholder="What is your email"
                 onChange={e => this.setState({ email: e.target.value })}
               />
+              <h3 className="setup_btn btn" onClick={() => this.editUser()}>
+                Submit
+              </h3>
             </div>
           )}
-
-          <h3 className="setup_btn btn" onClick={() => this.editUser()}>
-            Submit
-          </h3>
         </div>
 
         <div className="setup_container modal">

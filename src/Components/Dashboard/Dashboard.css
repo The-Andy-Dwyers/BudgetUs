@@ -4,6 +4,7 @@
   height: 100%;
   padding-left: 80px;
   background-color: rgb(247, 247, 247);
+  animation: downFade 1.5s;
 }
 
 .dashboard_top {
@@ -20,20 +21,45 @@
   box-shadow: 1px 1px 5px grey;
   margin: 1%;
   padding: 1%;
-  animation: downFade 1.5s;
   position: relative;
+}
+
+.dashboard_expense:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 .dashboard_expense > div {
   width: 90%;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
 }
 
 .dash_map {
   display: flex;
   justify-content: space-between;
+  padding: 1% 1% 1% 0;
+}
+
+.dash_map2 {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid black;
   padding: 1% 1% 1% 0;
+  width: 93%;
+}
+
+.dash_map_icon {
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgb(190, 190, 190);
+}
+
+
+.dash_map_icon img {
+  width: 20px;
+  height: 20px;
 }
 
 .expenses_link {
@@ -44,6 +70,8 @@
   position: absolute;
   bottom: 5%;
   right: 1%;
+  display: inline-block;
+  width: 80px;
 }
 
 .link2 {
@@ -58,7 +86,6 @@ div.react-switch-bg {
 }
 
 .dash_switch {
-  animation: downFade 1.5s;
   display: flex;
   justify-content: center;
   align-items: center;

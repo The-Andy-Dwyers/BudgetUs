@@ -1,230 +1,291 @@
 .expenses_container {
-  margin-top: 10%;
+	/* display: flex; */
+	/* justify-self: center; */
+	margin: 1%;
+	box-shadow: 1px 1px 5px grey;
+	background-color: #fff;
 }
 
 .expensesinfo_map2 {
-  display: none;
+	display: none;
 }
 
 .expensesinfo_content {
-  display: flex;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 .expense_input_btn {
-  display: inline-block;
-  box-shadow: 1px 1px 5px grey;
-  background-color: rgb(245, 245, 245);
-  padding: 0.5em;
-  border-radius: 10%;
-  margin: 3% 0;
+	display: inline-block;
+	box-shadow: 1px 1px 5px grey;
+	background-color: rgb(245, 245, 245);
+	padding: 0.5em;
+	border-radius: 10%;
+	margin: 3% 0;
 }
 
 .expensesinfo_map {
-  display: flex;
-  width: 100%;
-  border-top: 1px solid black;
-  padding-bottom: 1%;
-  position: relative;
+	display: flex;
+	width: 100%;
+	border-top: 1px solid black;
+	padding-bottom: 1%;
+	position: relative;
 }
 
 .expensesinfo_map p {
-  width: 100%;
+	width: 100%;
 }
 
 .expensesinfo_map form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .expensesinfo_map form div {
-  display: flex;
+	display: flex;
 }
 
 .expensesinfo_map1_total {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 1%;
-  color: rgb(128, 10, 10);
-  font-size: 1.05em;
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 1%;
+	color: rgb(128, 10, 10);
+	font-size: 1.05em;
+}
+.Expenses .expenses {
+	width: 97%;
+	margin: 1% auto;
+	height: 100%;
+	padding: 1%;
 }
 .expenses h2 {
-  font-weight: bolder;
-  letter-spacing: 2px;
-  width: 98%;
-  padding: 0.5%;
-}
-
-.expenses {
-  width: 97%;
-  margin: 1% auto;
-  height: 100%;
-  padding: 1%;
+	font-weight: bolder;
+	letter-spacing: 2px;
+	width: 98%;
+	padding: 0.5%;
 }
 
 .expenses_titles {
-  display: flex;
-  justify-content: space-around;
+	display: flex;
+	justify-content: space-around;
 }
 
 .expense_btn_holder {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+.expensesinfo_checkbox_container {
+	position: relative;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	padding: 1%;
 }
 .expense_map_bottom {
-  display: flex;
-  width: 117%;
+	display: flex;
+	width: 117%;
 }
 
 .expensesinfo_select {
-  background-color: #ffffff;
-  width: 100%;
+	background-color: #ffffff;
+	width: 100%;
 }
 .expenses_edit {
-  width: 100%;
-  height: 30px;
+	width: 100%;
+	height: 30px;
 }
 
 .expenses_x_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	position: relative;
 }
 
 .expense_x_div {
-  width: 30px;
-  height: 3px;
-  border-radius: 15%;
-  background-color: grey;
-  position: absolute;
+	width: 30px;
+	height: 3px;
+	border-radius: 15%;
+	background-color: grey;
+	position: absolute;
 }
 
 .expensesinfo_modal {
-  display: flex;
-  flex-direction: column;
-  width: 50vw;
-  height: 70vh;
+	display: flex;
+	flex-direction: column;
+	width: 50vw;
+	height: 50vh;
 }
 
 .expensesinfo_modal h2 {
-  font-weight: 800;
+	font-weight: 800;
 }
 
 .expensesinfo_modal p {
-  padding: 1%;
+	padding: 1%;
 }
 
 .expensesinfo_modal input {
-  width: 98%;
-  margin: 1%;
+	width: 98%;
+	margin: 1%;
 }
 
 .expensesinfo_modal_form input {
-  width: 2%;
+	width: 2%;
 }
 
 .expensesinfo_modal select {
-  width: 23%;
-  background-color: #ffffff;
+	width: 23%;
+	background-color: #ffffff;
 }
 
 .expensesinfo_modal button {
-  width: 20%;
-  border-radius: 11%;
-  background-color: #dfdfdf;
+	width: 20%;
+	border-radius: 11%;
+	background-color: #dfdfdf;
+}
+
+.expensesinfo_chart {
+	background-color: #fff;
+	box-shadow: 1px 1px 5px grey;
+	margin: 1%;
+	padding: 1%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	width: 96%;
+	height: 40vh;
+}
+.expensesinfo_chart h2 {
+	width: 30%;
+	text-align: center;
 }
 
 /* mobile view map2 CSS */
 
 @media (max-width: 900px) {
+	.Expenses {
+		width: 100%;
+		margin: 0;
+	}
 
-  .Expenses {
-    width: 100%;
-    margin: 2%;
-  }
-  
-  .expensesinfo_map1 {
-    display: none;
-  }
+	.expensesinfo_map1 {
+		display: none;
+	}
 
-  .expensesinfo_map2 {
-    display: flex;
-    /* border: 1px solid green; */
-    height: 50vh;
-    flex-direction: column;
-  }
+	.expensesinfo_map2 {
+		display: flex;
+		/* border: 1px solid green; */
+		height: 100%;
+		flex-direction: column;
+	}
 
-  .expensesinfo_map2_all {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 1px 1px 5px grey;
-    margin-bottom: 1%;
-  }
+	.expensesinfo_map2_all {
+		display: flex;
+		flex-direction: column;
+		box-shadow: 1px 1px 5px grey;
+		margin-bottom: 1%;
+	}
 
-  .expensesinfo_map2_cards:hover {
-    cursor: pointer;
-    background-color: beige;
-  }
-  .expensesinfo_map2_cards {
-    display: flex;
-    width: 95%;
-    height: 100%;
-    margin: 2%;
-    flex-direction: column;
-    /* border: solid 1px red; */
-  }
+	.expensesinfo_map2_cards:hover {
+		cursor: pointer;
+		background-color: beige;
+	}
+	.expensesinfo_map2_cards {
+		display: flex;
+		width: 95%;
+		height: 100%;
+		margin: 2%;
+		flex-direction: column;
+		/* border: solid 1px red; */
+	}
 
-  .expensesinfo_map2_top {
-    display: flex;
-    border-bottom: solid 1px black;
-    padding-bottom: 1%;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .left {
-    display: flex;
-  }
-  .right {
-    display: flex;
-  }
+	.expensesinfo_map2_top {
+		display: flex;
+		border-bottom: solid 1px black;
+		padding-bottom: 1%;
+		width: 100%;
+		justify-content: space-between;
+	}
+	.left {
+		display: flex;
+	}
+	.right {
+		display: flex;
+	}
 
-  .right h3 {
-    border-left: solid 1px black;
-    padding-left: 10%;
-  }
-  .right h3:hover {
-    color: rgb(167, 110, 110);
-    cursor: pointer;
-  }
-  .expensesinfo_map2_bottom {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding-top: 1%;
-  }
+	.right h3 {
+		border-left: solid 1px black;
+		padding-left: 10%;
+	}
+	.right h3:hover {
+		color: rgb(167, 110, 110);
+		cursor: pointer;
+	}
+	.expensesinfo_map2_bottom {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		padding-top: 1%;
+	}
 
-  .expensesinfo_map2_right {
-    display: flex;
-    /* color: red; */
-  }
+	.expensesinfo_map2_right {
+		display: flex;
+		/* color: red; */
+	}
 
-  .expensesinfo_map2_right h3 {
-    margin-left: 20px;
-  }
-  .expensesinfo_map2_right_edit {
-    width: 90%;
-  }
-  .expensesinfo_map2_total {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 3%;
-    margin-bottom: 1%;
-    font-size: 1.2em;
-  }
+	.expensesinfo_map2_right h3 {
+		margin-left: 15%;
+	}
+	.expensesinfo_map2_right_edit {
+		width: 90%;
+	}
+	.expensesinfo_map2_total {
+		display: flex;
+		justify-content: flex-end;
+		margin-right: 3%;
+		margin-bottom: 1%;
+		margin-top: 1%;
+		font-size: 1.2em;
+	}
+	.space {
+		display: flex;
+		width: 20px;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 600px) {
+	.expensesinfo_map2_all {
+		font-size: 0.8em;
+	}
+	.expensesinfo_map2_total {
+		font-size: 1em;
+	}
+}
+
+@media (max-width: 320px) {
+	.expensesinfo_map2_all {
+		font-size: 0.75em;
+	}
+	.expensesinfo_map2_total {
+		font-size: 0.85em;
+	}
+	.right_320 {
+		width: 40%;
+		height: 95%;
+	}
+	.left_320 {
+		width: 60%;
+		height: 95%;
+	}
 }
