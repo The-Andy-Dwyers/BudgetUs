@@ -35,8 +35,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #EFE9F4;
-  box-shadow: inset 1px 0 5px #000000;
+  background-color: rgb(216, 216, 216);
+  box-shadow: inset 1px 0 5px rgb(185, 185, 185);
 }
 
 .navbar_sub {

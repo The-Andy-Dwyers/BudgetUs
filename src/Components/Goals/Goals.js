@@ -23,7 +23,7 @@ class Goals extends Component {
     return (
       <div className="goals">
         <div>
-          {find ? (
+          {find && find.name !== null ? (
             <h2 className="profile_homepage">Welcome {find.name}!</h2>
           ) : (
             <div>
