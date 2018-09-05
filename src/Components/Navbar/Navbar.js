@@ -90,7 +90,7 @@ class Navbar extends Component {
         {this.state.hidden && (
           <div
             className="ham_container"
-            onBlur={() => this.setState({ hidden: false })}
+            onBlur={() => this.setState({ hidden: false, icon: true })}
           >
             <div className="navbar_main_hidden">
               <div className="navbar_logo_container">
@@ -105,7 +105,14 @@ class Navbar extends Component {
                 <Link className="link" to="/dashboard">
                   <div className="navbar_holder">
                     <img className="navbar_icon" src={home} alt="Home icon" />
-                    <img className="navbar_icon1" src={home1} alt="Home icon" />
+                    <img
+                      className="navbar_icon1"
+                      src={home1}
+                      alt="Home icon"
+                      onClick={() =>
+                        this.setState({ hidden: false, icon: true })
+                      }
+                    />
                   </div>
                 </Link>
                 <Link className="link calendar_link" to="/calendar">
@@ -119,6 +126,9 @@ class Navbar extends Component {
                       className="navbar_icon1"
                       src={calendar1}
                       alt="Calendar icon"
+                      onClick={() =>
+                        this.setState({ hidden: false, icon: true })
+                      }
                     />
                   </div>
                 </Link>
@@ -133,6 +143,9 @@ class Navbar extends Component {
                       className="navbar_icon1"
                       src={settings1}
                       alt="Settings icon"
+                      onClick={() =>
+                        this.setState({ hidden: false, icon: true })
+                      }
                     />
                   </div>
                 </Link>

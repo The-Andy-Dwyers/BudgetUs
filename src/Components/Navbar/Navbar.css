@@ -181,6 +181,9 @@ input:focus {
     display: none;
   }
 
+  .hamburger {
+    display: block;
+  }
 
   .dash_top2 {
     margin: 2% 0;
