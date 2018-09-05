@@ -10,7 +10,13 @@ const port = process.env.PORT || 3001;
 
 const strategy = require('./strategy');
 
-const { login, logout, getUser, getUsers, editUser } = require('./Ctrl/userCtrl');
+const {
+  login,
+  logout,
+  getUser,
+  getUsers,
+  editUser
+} = require('./Ctrl/userCtrl');
 const {
   getExpenses,
   addExpenses,
@@ -31,7 +37,7 @@ const {
   incomeYearlySum,
   getIncomeById
 } = require('./Ctrl/incomeCtrl');
-const { addGoal, getGoal, editGoal } = require('./Ctrl/goalsCtrl');
+const { addGoal, getGoal, editGoal, addTrophy, getTrophy } = require('./Ctrl/goalsCtrl');
 
 const app = express();
 app.use(bodyParser.json());
@@ -50,7 +56,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
     // cookie: {
     //   maxAge: 60 * 60 * 24 * 7 * 2
     // }
@@ -67,9 +73,13 @@ passport.serializeUser((user, done) => {
   db.users
     .get_user_by_id(user.id)
     .then(response => {
+      const modifiedUser = user.displayName.includes('@')
+        ? user.nickname
+        : user.displayName;
+      console.log(modifiedUser);
       if (!response[0]) {
         db.users
-          .add_user([user.displayName, user.id])
+          .add_user([modifiedUser, user.id])
           .then(res => done(null, res[0]))
           .catch(err => done(err, null));
       } else {
@@ -110,7 +120,10 @@ app.get('/api/income/:id', getIncomeById);
 //goals endpoints
 app.get('/api/goal', getGoal);
 app.post('/api/add-goal', addGoal);
-app.put('/api/edit-goal', editGoal)
+app.put('/api/edit-goal', editGoal);
+app.post('/api/add-trophy', addTrophy);
+app.get('/api/trophy', getTrophy);
+
 
 // run build
 // app.get("*", (req, res) => {
