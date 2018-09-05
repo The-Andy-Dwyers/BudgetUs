@@ -25,7 +25,16 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getDashboard(start(moment()), end(moment()));
     this.props.getTopExpenses(start(moment()), end(moment()));
+    // this.getIncome();
   }
+
+
+// getIncome = () => {
+// const {id} = this.props.userReducer
+// axios.get(`/api/income/${id}`)
+
+// };
+
 
   handleChange = month => {
     if (month === "year") {
@@ -48,6 +57,7 @@ class Dashboard extends Component {
   };
 
   render() {
+    console.log(this.props)
     const { topExpenses } = this.props.expensesReducer;
     const map =
       topExpenses.length !== 0 &&
