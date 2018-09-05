@@ -46,18 +46,6 @@ class Dashboard extends Component {
       this.props.getTopExpenses(start(month), end(month));
     }
   };
-  handleSwitchChange = month => {
-    this.setState(
-      { month },
-      () =>
-        this.state.month
-          ? this.props.getDashboard(start(moment()), end(moment()))
-          : this.props.getDashboard(
-              start(moment().startOf("year")),
-              end(moment().endOf("year"))
-            )
-    );
-  };
 
   render() {
     const { topExpenses } = this.props.expensesReducer;
@@ -227,12 +215,12 @@ export default connect(
 )(Dashboard);
 
 function start(d) {
-  return moment(d)
+  return moment(new Date(d).toISOString())
     .startOf("month")
     .format("l");
 }
 function end(d) {
-  return moment(d)
+  return moment(new Date(d).toISOString())
     .endOf("month")
     .format("l");
 }
