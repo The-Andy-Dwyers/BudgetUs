@@ -37,6 +37,9 @@ class LineChart extends Component {
       scales: { xAxes: [{ maxBarThickness: 90 }] },
       legend: { display: false },
       tooltips: {
+        custom: function(tooltip) {
+          tooltip.displayColors = false;
+        },
         callbacks: {
           label: function(tooltipItem, data) {
             return "$" + data.datasets[0]["data"][tooltipItem.index];
