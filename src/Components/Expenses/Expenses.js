@@ -6,7 +6,6 @@ import {
 } from "../../ducks/reducers/expensesReducer";
 import { connect } from "react-redux";
 import moment from "moment";
-import Switch from "react-switch";
 
 import Chart from "../Chart/Chart";
 import "./Expenses.css";
@@ -14,7 +13,7 @@ import ExpensesInfo from "./ExpensesInfo";
 class Expenses extends Component {
   constructor() {
     super();
-    this.state = { month: true };
+    this.state = {};
   }
   componentDidMount() {
     this.props.getUsers();
@@ -24,6 +23,12 @@ class Expenses extends Component {
 
   handleChange = month => {
     if (month === "year") {
+      this.setState({
+        start: moment()
+          .startOf("year")
+          .format("l"),
+        end: moment().format("l")
+      });
       this.props.getExpenses(
         moment()
           .startOf("year")
@@ -37,6 +42,10 @@ class Expenses extends Component {
         moment().format("l")
       );
     } else {
+      this.setState({
+        start: start(month),
+        end: end(month)
+      });
       this.props.getExpenses(start(month), end(month));
       this.props.getExpensesByCategory(start(month), end(month));
     }
@@ -52,24 +61,22 @@ class Expenses extends Component {
     return (
       <div className="Expenses">
         <div className="expenses_top">
-          {this.state.month && (
-            <select
-              className="dash_options"
-              onChange={e => this.handleChange(e.target.value)}
+          <select
+            className="dash_options"
+            onChange={e => this.handleChange(e.target.value)}
+          >
+            <option
+              value={moment().format("l")}
+              defaultValue={moment().format("l")}
             >
-              <option
-                value={moment().format("l")}
-                defaultValue={moment().format("l")}
-              >
-                {moment().format("MMMM")}
-              </option>
-              <option disabled>───────</option>
-              {options}
-              <option value="year">YTD</option>
-            </select>
-          )}
+              {moment().format("MMMM")}
+            </option>
+            <option disabled>───────</option>
+            {options}
+            <option value="year">YTD</option>
+          </select>
         </div>
-        <ExpensesInfo />
+        <ExpensesInfo start={this.state.start} end={this.state.end} />
         <Chart type="expenses" />
       </div>
     );
