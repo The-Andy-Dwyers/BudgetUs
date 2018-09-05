@@ -28,18 +28,18 @@ class Dashboard extends Component {
   }
 
   handleChange = month => {
-    if (
-      month ===
-      moment()
-        .startOf("year")
-        .format("l")
-    ) {
-      this.props.getDashboard(start(month), moment().format("l"));
-      this.props.getTopExpenses(
-        start(month),
+    if (month === "year") {
+      this.props.getDashboard(
         moment()
-          .endOf("month")
-          .format("l")
+          .startOf("year")
+          .format("l"),
+        moment().format("l")
+      );
+      this.props.getTopExpenses(
+        moment()
+          .startOf("year")
+          .format("l"),
+        moment().format("l")
       );
     } else {
       this.props.getDashboard(start(month), end(month));
@@ -72,7 +72,8 @@ class Dashboard extends Component {
           </div>
         );
       });
-    const options = this.props.expensesReducer.expensesbymonth
+
+    const options = this.props.incomeReducer.months
       .filter(e => e.month.trim() !== moment().format("MMMM"))
       .map((e, i) => (
         <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
@@ -84,8 +85,6 @@ class Dashboard extends Component {
     const remaining = dashboard && dashboard.incomesum - dashboard.expensesum;
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
-
-    // console.log(this.props);
 
     return (
       <div className="dashboard">
@@ -105,13 +104,7 @@ class Dashboard extends Component {
                 </option>
                 <option disabled>───────</option>
                 {options}
-                <option
-                  value={moment()
-                    .startOf("year")
-                    .format("l")}
-                >
-                  YTD
-                </option>
+                <option value={"year"}>YTD</option>
               </select>
             )}
           </div>

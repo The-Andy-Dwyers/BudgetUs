@@ -7,7 +7,9 @@ const initialState = {
   title: "",
   didErr: false,
   events: [],
-  dashboard: []
+  dashboard: [],
+  sources: [],
+  months: []
 };
 
 const GET_AMOUNT = "GET_AMOUNT";
@@ -63,7 +65,9 @@ export default function userReducer(state = initialState, action) {
     case `${GET_DASHBOARD}_FULFILLED`:
       return {
         ...state,
-        dashboard: action.payload.data
+        dashboard: action.payload.data,
+        sources: action.payload.data.sources,
+        months: action.payload.data.months
       };
     case `${GET_INCOME_EVENTS}_FULFILLED`:
       return {

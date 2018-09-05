@@ -19,11 +19,16 @@ const getDashboard = (req, res) => {
         db.expenses
           .get_expense_sum([req.user.id, start, end])
           .then(expensesum =>
-            res.status(200).send({
-              sources,
-              incomesum: +incomesum[0]["sum"],
-              expensesum: +expensesum[0]["sum"]
-            })
+            db
+              .get_all_months([req.user.id, year, moment().format("l")])
+              .then(months => {
+                res.status(200).send({
+                  months,
+                  sources,
+                  incomesum: +incomesum[0]["sum"],
+                  expensesum: +expensesum[0]["sum"]
+                });
+              })
           )
       )
     )
