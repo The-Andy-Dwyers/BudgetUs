@@ -18,6 +18,7 @@ class Calendar extends Component {
     this.props.getIncomeEvents();
 
     $("#calendar").fullCalendar({
+      aspectRatio: 0.85,
       header: {
         left: "prev,next",
         center: "title",
@@ -71,10 +72,9 @@ class Calendar extends Component {
   render() {
     return (
       <div className="calendar">
-      <div className='calendar_top'>
-
-        <h1>Calendar</h1>
-      </div>
+        <div className="calendar_top">
+          <h1>Calendar</h1>
+        </div>
         <div id="calendar" />
       </div>
     );
