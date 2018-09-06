@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import './LandingPage.css';
+import coins from './coins.svg'
 
 export default class LandingPage extends Component {
   componentDidMount() {
@@ -15,19 +16,31 @@ export default class LandingPage extends Component {
         });
         $('.login_btn').css({
           'background-color': '#fff',
-          'color': '#fff',
+          color: '#fff',
           'z-index': '9999'
-        })
+        });
+        $('.landing_logo2').css({
+          display: 'none'
+        });
       } else {
         $('.landing_header').css({
           // height: '18vh',
           display: 'block',
-          'background-color': '#fff'
+          'background-color': '#fff',
+          'z-index': '9'
         });
         $('.login_btn').css({
           'background-color': '#f6f6f6',
           'z-index': '9999'
-        })
+        });
+        $('.landing_logo').css({
+          display: 'none',
+          'z-index': '9999'
+        });
+        $('.landing_logo2').css({
+          display: 'block',
+          'z-index': '9999'
+        });
       }
     });
   }
@@ -41,6 +54,14 @@ export default class LandingPage extends Component {
         <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
           <h1 className="login_link">Login</h1>
         </a>
+        <img
+          className="landing_logo"
+          src={coins}
+          alt="Logo"
+        />
+        <img 
+        className='landing_logo2'
+        src="https://image.flaticon.com/icons/svg/134/134597.svg" alt="Coinslogo"/>
         <div className="landing_sub">
           <div>
             <h2>Create Budget</h2>
@@ -55,7 +76,7 @@ export default class LandingPage extends Component {
           </div>
           <div>
             <h2>Manage Bills</h2>
-            <p />
+            <p>Successfully maintain all your finances in one location. </p>
             <img
               src="https://image.flaticon.com/icons/svg/438/438051.svg"
               alt="Paying bills"
@@ -64,8 +85,8 @@ export default class LandingPage extends Component {
           <div>
             <h2>Track Savings</h2>
             <p>
-              Lorem ipsum debitis optio maiores repellendus, aliquid accusamus
-              sunt laudantium.
+              Keep track of the amount of income you save. Every little cent
+              counts!
             </p>
             <img
               src="https://image.flaticon.com/icons/svg/858/858699.svg"
@@ -85,6 +106,17 @@ export default class LandingPage extends Component {
             src="http://icon-park.com/imagefiles/ipad_air_2_silver.png"
             alt=""
           />
+        </div>
+        <div className="landing_sub1" />
+        <div className="landing_sub2">
+          <h2>Sign up for BudgetUs now!</h2>
+          <p />
+          <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
+            <h1 className="login_link">Login</h1>
+          </a>
+        </div>
+        <div className='landing_footer'>
+
         </div>
       </div>
     );

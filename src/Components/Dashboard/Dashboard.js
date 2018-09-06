@@ -193,13 +193,13 @@ class Dashboard extends Component {
               <h2>Expenses Overview</h2>
               <div>{map}</div>
               <Link className="link2" to="/expenses">
-                <h2 className="expenses_link btn">More info</h2>
+                <h3 className="expenses_link btn">More info</h3>
               </Link>
             </div>
           ) : (
             <div className="dashboard_expense">
               <Link className="link2" to="/expenses">
-                <h2 className="expenses_link btn">Go To Expenses Page</h2>
+                <h3 className="expenses_link btn">Go To Expenses Page</h3>
               </Link>
             </div>
           )}
@@ -224,13 +224,13 @@ class Dashboard extends Component {
               <h2>Expenses Overview</h2>
               <div>{map}</div>
               <Link className="link2" to="/expenses">
-                <h2 className="expenses_link btn">More info</h2>
+                <h3 className="expenses_link btn">More info</h3>
               </Link>
             </div>
           ) : (
             <div className="dashboard_expense">
               <Link className="link2" to="/expenses">
-                <h2 className="expenses_link btn">Go To Expenses Page</h2>
+                <h3 className="expenses_link btn">Go To Expenses Page</h3>
               </Link>
             </div>
           )}
