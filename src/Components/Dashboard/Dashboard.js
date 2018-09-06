@@ -24,6 +24,7 @@ class Dashboard extends Component {
       expenses: []
     };
   }
+
   async componentDidMount() {
     await this.props.getDashboard(start(moment()), end(moment()));
     await this.props.getTopExpenses(start(moment()), end(moment()));
@@ -92,6 +93,7 @@ class Dashboard extends Component {
   };
 
   render() {
+    const { amount, dashboard } = this.props.incomeReducer;
     const { topExpenses } = this.props.expensesReducer;
     const map =
       topExpenses.length !== 0 &&
@@ -144,7 +146,6 @@ class Dashboard extends Component {
         </option>
       ));
 
-    const { dashboard } = this.props.incomeReducer;
     const remaining = dashboard && dashboard.incomesum - dashboard.expensesum;
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
@@ -152,6 +153,7 @@ class Dashboard extends Component {
     const { income } = this.props.incomeReducer;
     const sum = income && income.reduce((sum, e) => (sum += +e.amount), 0);
 
+    const sumTotal = sum + +amount
     return (
       <div className="dashboard">
         <header className="dash_switch">
@@ -183,7 +185,7 @@ class Dashboard extends Component {
                 You earned <mark>${dashboard.incomesum}</mark> this month!
               </p>
               <p>
-                You've made <mark>${sum}</mark> this year!
+                You've made <mark>${sumTotal}</mark> this year!
               </p>
             </TextLoop>
           </div>

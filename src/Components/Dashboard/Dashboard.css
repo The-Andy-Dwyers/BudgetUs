@@ -2,7 +2,7 @@
   width: 100vw;
   min-height: 100vh;
   height: 100%;
-  padding-left: 80px;
+  padding-left: 200px;
   background-color: rgb(247, 247, 247);
   animation: downFade 1.5s;
 }
@@ -22,6 +22,10 @@
   margin: 1%;
   padding: 1%;
   position: relative;
+}
+
+.dashboard_expense h2 {
+  font-size: 1.2em;
 }
 
 .dashboard_expense:hover {
@@ -54,6 +58,10 @@
   align-items: center;
   border-radius: 50%;
   border: 1px solid rgb(190, 190, 190);
+}
+
+.dash_map_icon:hover {
+  opacity: .8;
 }
 
 
@@ -121,18 +129,18 @@ div.react-switch-bg {
   background-color: grey;
   position: absolute;
   width: 3px;
-  border-radius: 15%;
+  border-radius: 10%;
   margin-top: 10%;
 }
 
 .c_left {
   height: 12px;
-  transform: rotate(135deg);
+  transform: rotate(135deg) translate(3px, 3px);
 }
 
 .c_right {
   height: 25px;
-  transform: rotate(41deg) translate(5px, -11px);
+  transform: rotate(43deg) translate(2.5px, -9px);
 }
 
 .checkbox_container:hover .check_main {
@@ -220,4 +228,11 @@ div.react-switch-bg {
     display: block;
   }
 
+}
+
+@media (max-width: 720px) {
+  .dashboard_expense > div {
+
+    margin-bottom: 7%;
+  }
 }
