@@ -18,6 +18,7 @@ const GET_TITLE = 'GET_TITLE';
 const RESET = 'RESET';
 const GET_DASHBOARD = 'GET_DASHBOARD';
 const GET_INCOME_EVENTS = 'GET_INCOME_EVENTS';
+const GET_INCOME = 'GET_INCOME';
 
 export const getDashboard = (start, end) => {
   return {
@@ -25,10 +26,18 @@ export const getDashboard = (start, end) => {
     payload: axios.get(`/api/dashboard?start=${start}&end=${end}`)
   };
 };
+
 export const getIncomeEvents = () => {
   return {
     type: GET_INCOME_EVENTS,
     payload: axios.get(`/api/dashboard?view=year`)
+  };
+};
+
+export const getIncome = id => {
+  return {
+    type: GET_INCOME,
+    payload: axios.get(`/api/income/${id}`)
   };
 };
 
@@ -74,7 +83,13 @@ export default function userReducer(state = initialState, action) {
         ...state,
         events: action.payload.data.sources
       };
+      case `${GET_INCOME}_FULFILLED`:
+      return {
+        ...state,
+        income: action.payload.data
+      };
     case `${GET_DASHBOARD}_REJECTED`:  
+    case `${GET_INCOME}_REJECTED`:      
       return {
         ...state,
         didErr: true

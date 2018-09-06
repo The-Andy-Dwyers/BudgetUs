@@ -29,7 +29,6 @@ const getGoal = (req, res) => {
   const editGoal = (req,res) => {
     const db = req.app.get("db");
     const {id, savings} = req.body
-    console.log(req.body)
 
     db.goals
     .edit_goal([id, savings])
@@ -45,7 +44,6 @@ const getGoal = (req, res) => {
   const addTrophy = (req,res) => {
     const db = req.app.get("db");
     const {trophy, id} = req.body
-    console.log('trophy body>>>', req.body)
 
     db.goals
     .add_trophy([trophy, id])
