@@ -13,6 +13,7 @@ import {
 import { getUsers } from '../../ducks/reducers/userReducer';
 import { getDashboard } from '../../ducks/reducers/incomeReducer';
 import ContentEditable from 'react-contenteditable';
+import ExpensesEdit from './ExpensesEdit';
 
 class Expenses extends Component {
 	state = {
@@ -109,149 +110,7 @@ class Expenses extends Component {
 		const map2 =
 			expense &&
 			expense.map(e => {
-				return !this.state.edit ? (
-					<div className="expensesinfo_map2_all" key={e.id}>
-						<div
-							className="expensesinfo_map2_cards"
-							onClick={() => this.setState({ edit: true })}
-						>
-							<div className="expensesinfo_map2_top">
-								<div className="left">
-									<p>{e.title}</p>
-									<div className="space">|</div>
-									<p>{e.company}</p>
-								</div>
-								<div className="right">
-									<p className="expensesinfo_map2_right">
-										${e.cost.toLocaleString()}
-									</p>
-								</div>
-							</div>
-
-							<div className="expensesinfo_map2_bottom">
-								<div className="left">
-									<p>{moment.utc(e.expense_date).format('ddd, MMM D')}</p>
-									<div className="space">|</div>
-									<p>{e.occur}</p>
-								</div>
-								<div className="right">
-									<p className="expensesinfo_map2_right">{e.category}</p>
-									<div className="expensesinfo_map2_right">
-										{!this.state.edit && (
-											<h3 onClick={() => this.setState({ edit: true })}>
-												Edit
-											</h3>
-										)}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				) : (
-					<div className="expensesinfo_map2_all" key={e.id}>
-						<div className="expensesinfo_map2_cards">
-							<div className="expensesinfo_map2_top">
-								<div className="left">
-									<ContentEditable
-										className="expensesinfo_content"
-										html={e.title}
-										onChange={e =>
-											this.updateExpense(e.target.value, 'expenseName')
-										}
-									/>
-									<div style={{ width: '20px' }} />
-									<ContentEditable
-										className="expensesinfo_content"
-										html={e.company}
-										onChange={e =>
-											this.updateExpense(e.target.value, 'company')
-										}
-									/>
-								</div>
-								<div className="right">
-									<ContentEditable
-										className="expensesinfo_content"
-										html={String(e.cost.toLocaleString())}
-										onChange={e => this.updateExpense(e.target.value, 'amount')}
-									/>
-								</div>
-							</div>
-
-							<div className="expensesinfo_map2_bottom">
-								<div className="left left_320">
-									<DatePicker
-										width={240}
-										inputStyle={{
-											width: 70
-										}}
-										date={moment.utc(e.expense_date).format('MM/DD/YYYY')}
-										placeholder={moment
-											.utc(e.expense_date)
-											.format('MM/DD/YYYY')}
-										handleDateChange={this.handleDateChange}
-									/>
-									<div style={{ width: '20px' }} />
-									<form>
-										<div>
-											<input
-												name="occur"
-												type="radio"
-												value="recurring"
-												onClick={() => this.handleType('Recurring')}
-											/>{' '}
-											Recurring
-										</div>
-										<div>
-											<input
-												name="occur"
-												type="radio"
-												value="nonrecurring"
-												onClick={() => this.handleType('Non-Recurring')}
-											/>{' '}
-											Non-Recurring
-										</div>
-									</form>
-								</div>
-								<div className="right right_320">
-									<select
-										className="expensesinfo_select"
-										required
-										onChange={e =>
-											this.updateExpense(e.target.value, 'category')
-										}
-									>
-										<option>Category:</option>
-										<option value="Rent">Rent</option>
-										<option value="Bills">Bills</option>
-										<option value="Food">Food</option>
-										<option value="Gas">Gas</option>
-										<option value="Entertainment">Entertainment</option>
-										<option value="Other">other</option>
-									</select>
-									<div className="expensesinfo_map2_right_edit">
-										<div
-											className="expense_btn_holder"
-											onClick={id => this.handleEdit(e.id)}
-										>
-											<div className="expensesinfo_checkbox_container">
-												<div className="check_main c_left" />
-												<div className="check_main c_right" />
-											</div>
-
-											<div
-												className="expenses_x_container btn"
-												onClick={id => this.handleDelete(e.id)}
-											>
-												<div className="x_div x1" />
-												<div className="x_div x2" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				);
+				return <ExpensesEdit e={e} />;
 			});
 
 		const map =
