@@ -62,7 +62,7 @@ class Calendar extends Component {
           });
       },
       eventMouseout: function(calEvent, jsEvent) {
-        $(this).css("z-index", 8);
+        $(this).css("z-index", 0);
         $(".tooltipevent").remove();
       }
     });
