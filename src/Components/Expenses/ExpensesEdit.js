@@ -12,9 +12,8 @@ import {
 } from '../../ducks/reducers/expensesReducer';
 import { getUsers } from '../../ducks/reducers/userReducer';
 import ContentEditable from 'react-contenteditable';
-import ExpensesEdit from './ExpensesEdit';
 
-class Expenses extends Component {
+class ExpensesEdit extends Component {
 	state = {
 		expenseName: '',
 		amount: '',
@@ -61,8 +60,8 @@ class Expenses extends Component {
 				category: !category ? find.category : category
 			})
 			.then(() => {
-				this.props.getExpenses(this.props.start, this.props.end);
-				this.props.getExpensesByCategory(this.props.start, this.props.end);
+				this.props.getExpenses();
+				this.props.getExpensesByCategory();
 				this.setState({ edit: false });
 				this.setState({
 					expenseName: '',
@@ -102,64 +101,73 @@ class Expenses extends Component {
 					  )
 		);
 	render() {
-		const { expense } = this.props.expensesReducer;
-
-		const map2 =
-			expense &&
-			expense.map(e => {
-				return <ExpensesEdit e={e} />;
-			});
-
-		const map =
-			expense &&
-			expense.map(e => {
-				return !this.state.edit ? (
-					<div className="expensesinfo_map" key={e.id}>
-						<p>{e.title}</p>
-						<p>{e.company}</p>
-						<p>${e.cost.toLocaleString()}</p>
-						<p>{e.occur}</p>
-						<p>{moment.utc(e.expense_date).format('ddd, MMM D')}</p>
-						<p>{e.category}</p>
+		var { e } = this.props;
+		return !this.state.edit ? (
+			<div className="expensesinfo_map2_all" key={e.id}>
+				<div
+					className="expensesinfo_map2_cards"
+					onClick={() => this.setState({ edit: true })}
+				>
+					<div className="expensesinfo_map2_top">
+						<div className="left">
+							<p>{e.title}</p>
+							<div className="space">|</div>
+							<p>{e.company}</p>
+						</div>
+						<div className="right">
+							<p className="expensesinfo_map2_right">
+								${e.cost.toLocaleString()}
+							</p>
+						</div>
 					</div>
-				) : (
-					<div key={e.id} className="expensesinfo_map">
-						<ContentEditable
-							className="expensesinfo_content"
-							html={e.title}
-							onChange={e => this.updateExpense(e.target.value, 'expenseName')}
-						/>
-						<ContentEditable
-							className="expensesinfo_content"
-							html={e.company}
-							onChange={e => this.updateExpense(e.target.value, 'company')}
-						/>
-						<ContentEditable
-							className="expensesinfo_content"
-							html={String(e.cost.toLocaleString())}
-							onChange={e => this.updateExpense(e.target.value, 'amount')}
-						/>
-						<form>
-							<div>
-								<input
-									name="occur"
-									type="radio"
-									value="recurring"
-									onClick={() => this.handleType('Recurring')}
-								/>{' '}
-								Recurring
+
+					<div className="expensesinfo_map2_bottom">
+						<div className="left">
+							<p>{moment.utc(e.expense_date).format('ddd, MMM D')}</p>
+							<div className="space">|</div>
+							<p>{e.occur}</p>
+						</div>
+						<div className="right">
+							<p className="expensesinfo_map2_right">{e.category}</p>
+							<div className="expensesinfo_map2_right">
+								{!this.state.edit && (
+									<h3 onClick={() => this.setState({ edit: true })}>Edit</h3>
+								)}
 							</div>
-							<div>
-								<input
-									name="occur"
-									type="radio"
-									value="nonrecurring"
-									onClick={() => this.handleType('Non-Recurring')}
-								/>{' '}
-								Non-Recurring
-							</div>
-						</form>
-						<div className="expensesinfo_content">
+						</div>
+					</div>
+				</div>
+			</div>
+		) : (
+			<div className="expensesinfo_map2_all" key={e.id}>
+				<div className="expensesinfo_map2_cards">
+					<div className="expensesinfo_map2_top">
+						<div className="left">
+							<ContentEditable
+								className="expensesinfo_content"
+								html={e.title}
+								onChange={e =>
+									this.updateExpense(e.target.value, 'expenseName')
+								}
+							/>
+							<div style={{ width: '20px' }} />
+							<ContentEditable
+								className="expensesinfo_content"
+								html={e.company}
+								onChange={e => this.updateExpense(e.target.value, 'company')}
+							/>
+						</div>
+						<div className="right">
+							<ContentEditable
+								className="expensesinfo_content"
+								html={String(e.cost.toLocaleString())}
+								onChange={e => this.updateExpense(e.target.value, 'amount')}
+							/>
+						</div>
+					</div>
+
+					<div className="expensesinfo_map2_bottom">
+						<div className="left left_320">
 							<DatePicker
 								width={240}
 								inputStyle={{
@@ -169,8 +177,29 @@ class Expenses extends Component {
 								placeholder={moment.utc(e.expense_date).format('MM/DD/YYYY')}
 								handleDateChange={this.handleDateChange}
 							/>
+							<div style={{ width: '20px' }} />
+							<form>
+								<div>
+									<input
+										name="occur"
+										type="radio"
+										value="recurring"
+										onClick={() => this.handleType('Recurring')}
+									/>{' '}
+									Recurring
+								</div>
+								<div>
+									<input
+										name="occur"
+										type="radio"
+										value="nonrecurring"
+										onClick={() => this.handleType('Non-Recurring')}
+									/>{' '}
+									Non-Recurring
+								</div>
+							</form>
 						</div>
-						<div className="expense_map_bottom">
+						<div className="right right_320">
 							<select
 								className="expensesinfo_select"
 								required
@@ -184,66 +213,27 @@ class Expenses extends Component {
 								<option value="Entertainment">Entertainment</option>
 								<option value="Other">other</option>
 							</select>
-
-							<div
-								className="expense_btn_holder"
-								onClick={id => this.handleEdit(e.id)}
-							>
-								<div className="checkbox_container">
-									<div className="check_main c_left" />
-									<div className="check_main c_right" />
-								</div>
-
+							<div className="expensesinfo_map2_right_edit">
 								<div
-									className="expenses_x_container btn"
-									onClick={id => this.handleDelete(e.id)}
+									className="expense_btn_holder"
+									onClick={id => this.handleEdit(e.id)}
 								>
-									<div className="x_div x1" />
-									<div className="x_div x2" />
+									<div className="expensesinfo_checkbox_container">
+										<div className="check_main c_left" />
+										<div className="check_main c_right" />
+									</div>
+
+									<div
+										className="expenses_x_container btn"
+										onClick={id => this.handleDelete(e.id)}
+									>
+										<div className="x_div x1" />
+										<div className="x_div x2" />
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				);
-			});
-
-		const sum = expense && expense.reduce((sum, e) => (sum += +e.cost), 0);
-
-		return (
-			<div className="expenses_container">
-				<div className="expensesinfo_map1">
-					<div className="expenses">
-						<div className="expenses_titles">
-							<h2>Name</h2>
-							<h2>Company</h2>
-							<h2>Amount</h2>
-							<h2>Type</h2>
-							<h2>Date</h2>
-							<h2>Category</h2>
-							<div>
-								{!this.state.edit.length &&
-									expense.length !== 0 && (
-										<h3
-											className="expensesinfo_edit btn"
-											onClick={() => this.setState({ edit: true })}
-										>
-											Edit
-										</h3>
-									)}
-							</div>
-						</div>
-
-						{map}
-						<div className="expensesinfo_map1_total">
-							<p>Expenses Total: ${sum}</p>
-						</div>
-					</div>
-				</div>
-				<div className="expensesinfo_map2">
-					<div className="expensesinfo_map2_total">
-						<p>Expenses Total: ${sum}</p>
-					</div>
-					{map2}
 				</div>
 			</div>
 		);
@@ -255,4 +245,4 @@ const mapStateToProps = state => state;
 export default connect(
 	mapStateToProps,
 	{ getExpenses, addExpenses, getUsers, deleteExpense, getExpensesByCategory }
-)(Expenses);
+)(ExpensesEdit);
