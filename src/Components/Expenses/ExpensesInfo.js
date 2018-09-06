@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import DatePicker from "react-custom-date-picker";
-import moment from "moment";
-import "./ExpensesInfo.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import DatePicker from 'react-custom-date-picker';
+import moment from 'moment';
+import './ExpensesInfo.css';
 import {
   getExpensesByCategory,
   getExpenses,
   addExpenses,
   deleteExpense
-} from "../../ducks/reducers/expensesReducer";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import { getDashboard } from "../../ducks/reducers/incomeReducer";
-import ContentEditable from "react-contenteditable";
-import ExpensesEdit from "./ExpensesEdit";
+} from '../../ducks/reducers/expensesReducer';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import { getDashboard } from '../../ducks/reducers/incomeReducer';
+import ContentEditable from 'react-contenteditable';
+import ExpensesEdit from './ExpensesEdit';
 
 class Expenses extends Component {
   state = {
-    expenseName: "",
-    amount: "",
-    type: "",
-    company: "",
-    category: "",
+    expenseName: '',
+    amount: '',
+    type: '',
+    company: '',
+    category: '',
     date: new Date().toISOString(),
     edit: false,
     month: true
@@ -67,12 +67,12 @@ class Expenses extends Component {
         this.props.getExpensesByCategory(this.props.start, this.props.end);
         this.setState({ edit: false });
         this.setState({
-          expenseName: "",
-          amount: "",
-          type: "",
-          company: "",
-          category: "",
-          date: ""
+          expenseName: '',
+          amount: '',
+          type: '',
+          company: '',
+          category: '',
+          date: ''
         });
       });
   };
@@ -88,30 +88,34 @@ class Expenses extends Component {
         this.state.month
           ? this.props.getExpenses(
               moment()
-                .startOf("month")
-                .format("l"),
+                .startOf('month')
+                .format('l'),
               moment()
-                .endOf("month")
-                .format("l")
+                .endOf('month')
+                .format('l')
             )
           : this.props.getExpenses(
               moment()
-                .startOf("year")
-                .format("l"),
+                .startOf('year')
+                .format('l'),
               moment()
-                .endOf("year")
-                .format("l")
+                .endOf('year')
+                .format('l')
             )
     );
   render() {
-    console.log(this.props);
     const { expense } = this.props.expensesReducer;
 
     const map2 =
       expense &&
       expense.map(e => {
         return (
-          <ExpensesEdit start={this.props.start} end={this.props.end} e={e} />
+          <ExpensesEdit
+            start={this.props.start}
+            end={this.props.end}
+            e={e}
+            key={e.id}
+          />
         );
       });
 
@@ -124,7 +128,7 @@ class Expenses extends Component {
             <p>{e.company}</p>
             <p>${e.cost.toLocaleString()}</p>
             <p>{e.occur}</p>
-            <p>{moment.utc(e.expense_date).format("ddd, MMM D")}</p>
+            <p>{moment.utc(e.expense_date).format('ddd, MMM D')}</p>
             <p>{e.category}</p>
           </div>
         ) : (
@@ -132,17 +136,17 @@ class Expenses extends Component {
             <ContentEditable
               className="expensesinfo_content"
               html={e.title}
-              onChange={e => this.updateExpense(e.target.value, "expenseName")}
+              onChange={e => this.updateExpense(e.target.value, 'expenseName')}
             />
             <ContentEditable
               className="expensesinfo_content"
               html={e.company}
-              onChange={e => this.updateExpense(e.target.value, "company")}
+              onChange={e => this.updateExpense(e.target.value, 'company')}
             />
             <ContentEditable
               className="expensesinfo_content"
               html={String(e.cost.toLocaleString())}
-              onChange={e => this.updateExpense(e.target.value, "amount")}
+              onChange={e => this.updateExpense(e.target.value, 'amount')}
             />
             <form>
               <div>
@@ -150,8 +154,8 @@ class Expenses extends Component {
                   name="occur"
                   type="radio"
                   value="recurring"
-                  onClick={() => this.handleType("Recurring")}
-                />{" "}
+                  onClick={() => this.handleType('Recurring')}
+                />{' '}
                 Recurring
               </div>
               <div>
@@ -159,8 +163,8 @@ class Expenses extends Component {
                   name="occur"
                   type="radio"
                   value="nonrecurring"
-                  onClick={() => this.handleType("Non-Recurring")}
-                />{" "}
+                  onClick={() => this.handleType('Non-Recurring')}
+                />{' '}
                 Non-Recurring
               </div>
             </form>
@@ -170,8 +174,8 @@ class Expenses extends Component {
                 inputStyle={{
                   width: 70
                 }}
-                date={moment.utc(e.expense_date).format("MM/DD/YYYY")}
-                placeholder={moment.utc(e.expense_date).format("MM/DD/YYYY")}
+                date={moment.utc(e.expense_date).format('MM/DD/YYYY')}
+                placeholder={moment.utc(e.expense_date).format('MM/DD/YYYY')}
                 handleDateChange={this.handleDateChange}
               />
             </div>
@@ -179,7 +183,7 @@ class Expenses extends Component {
               <select
                 className="expensesinfo_select"
                 required
-                onChange={e => this.updateExpense(e.target.value, "category")}
+                onChange={e => this.updateExpense(e.target.value, 'category')}
               >
                 <option>Category:</option>
                 <option value="Rent">Rent</option>
@@ -271,11 +275,11 @@ export default connect(
 
 function start(d) {
   return moment(new Date(d).toISOString())
-    .startOf("month")
-    .format("l");
+    .startOf('month')
+    .format('l');
 }
 function end(d) {
   return moment(new Date(d).toISOString())
-    .endOf("month")
-    .format("l");
+    .endOf('month')
+    .format('l');
 }
