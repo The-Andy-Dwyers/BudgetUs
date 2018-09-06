@@ -1,0 +1,20 @@
+.modal_goals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30vh;
+  width: 50vw;
+}
+
+.modal_goals h1 {
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  margin-bottom: 10%;
+}
+
+.modal_goals > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 15vh;
+}

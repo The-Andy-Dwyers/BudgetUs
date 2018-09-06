@@ -11,6 +11,7 @@ import {
 	deleteExpense
 } from '../../ducks/reducers/expensesReducer';
 import { getUsers } from '../../ducks/reducers/userReducer';
+import { getDashboard } from '../../ducks/reducers/incomeReducer';
 import ContentEditable from 'react-contenteditable';
 
 class Expenses extends Component {
@@ -26,6 +27,7 @@ class Expenses extends Component {
 	};
 
 	componentDidMount() {
+		this.props.getDashboard(start(moment()), end(moment()));		
 		this.props.getUsers();
 	}
 
@@ -101,6 +103,7 @@ class Expenses extends Component {
 					  )
 		);
 	render() {
+		console.log(this.props)
 		const { expense } = this.props.expensesReducer;
 
 		const map2 =
@@ -395,5 +398,17 @@ const mapStateToProps = state => state;
 
 export default connect(
 	mapStateToProps,
-	{ getExpenses, addExpenses, getUsers, deleteExpense, getExpensesByCategory }
+	{ getDashboard, getExpenses, addExpenses, getUsers, deleteExpense, getExpensesByCategory }
 )(Expenses);
+
+
+function start(d) {
+	return moment(new Date(d).toISOString())
+	  .startOf('month')
+	  .format('l');
+  }
+  function end(d) {
+	return moment(new Date(d).toISOString())
+	  .endOf('month')
+	  .format('l');
+  }

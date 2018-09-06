@@ -307,7 +307,7 @@
   }
   
   .fc-row .fc-bg {
-    z-index: 1;
+    /* z-index: 1; */
   }
   
   /* highlighting cells & background event skeleton */
@@ -329,11 +329,11 @@
   }
   
   .fc-row .fc-bgevent-skeleton {
-    z-index: 2;
+    /* z-index: 2; */
   }
   
   .fc-row .fc-highlight-skeleton {
-    z-index: 3;
+    /* z-index: 3; */
   }
   
   /*
@@ -342,13 +342,13 @@
   */
   .fc-row .fc-content-skeleton {
     position: relative;
-    z-index: 4;
+    /* z-index: 4; */
     padding-bottom: 2px;
     /* matches the space above the events */
   }
   
   .fc-row .fc-helper-skeleton {
-    z-index: 5;
+    /* z-index: 5; */
   }
   
   .fc .fc-row .fc-content-skeleton table,
@@ -430,20 +430,20 @@
   
   .fc-event .fc-bg {
     /* the generic .fc-bg already does position */
-    z-index: 1;
+    /* z-index: 1; */
     background: #fff;
     opacity: 0.25;
   }
   
   .fc-event .fc-content {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
   }
   
   /* resizer (cursor AND touch devices) */
   .fc-event .fc-resizer {
     position: absolute;
-    z-index: 4;
+    /* z-index: 4; */
   }
   
   /* resizer (touch devices) */
@@ -462,7 +462,7 @@
     /* 40x40 touch area */
     content: '';
     position: absolute;
-    z-index: 9999;
+    /* z-index: 9999; */
     /* user of this util can scope within a lower z-index */
     top: 50%;
     left: 50%;
@@ -475,7 +475,7 @@
   /* Event Selection (only for touch devices)
   --------------------------------------------------------------------------------------------------*/
   .fc-event.fc-selected {
-    z-index: 9999 !important;
+    /* z-index: 9999 !important; */
     /* overcomes inline z-index */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
@@ -490,7 +490,7 @@
   .fc-h-event.fc-selected:before {
     content: '';
     position: absolute;
-    z-index: 3;
+    /* z-index: 3; */
     /* below resizers */
     top: -10px;
     bottom: -10px;
@@ -593,7 +593,7 @@
   .fc-day-grid-event.fc-selected:after {
     content: '';
     position: absolute;
-    z-index: 1;
+    /* z-index: 1; */
     /* same z-index as fc-bg, behind text */
     /* overcome the borders */
     top: -1px;
@@ -651,12 +651,12 @@
   
   /* popover that appears when "more" link is clicked */
   .fc-day-grid .fc-row {
-    z-index: 1;
+    /* z-index: 1; */
     /* make the "more" popover one higher than this */
   }
   
   .fc-more-popover {
-    z-index: 2;
+    /* z-index: 2; */
     width: 220px;
   }
   
@@ -978,20 +978,20 @@
   
   .fc-toolbar .fc-state-hover,
   .fc-toolbar .ui-state-hover {
-    z-index: 2;
+    /* z-index: 2; */
   }
   
   .fc-toolbar .fc-state-down {
-    z-index: 3;
+    /* z-index: 3; */
   }
   
   .fc-toolbar .fc-state-active,
   .fc-toolbar .ui-state-active {
-    z-index: 4;
+    /* z-index: 4; */
   }
   
   .fc-toolbar button:focus {
-    z-index: 5;
+    /* z-index: 5; */
   }
   
   /* View Structure
@@ -1010,7 +1010,7 @@
   .fc-view > table {
     /* so dragged elements can be above the view's main element */
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
   }
   
   /* BasicView
@@ -1096,7 +1096,7 @@
   --------------------------------------------------------------------------------------------------*/
   .fc-agenda-view .fc-day-grid {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
     /* so the "more.." popover will be over the time grid */
   }
   
@@ -1133,7 +1133,7 @@
   .fc-time-grid {
     /* so slats/bg/content/etc positions get scoped within here */
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
   }
   
   .fc-time-grid {
@@ -1147,14 +1147,14 @@
   }
   
   .fc-time-grid > .fc-bg {
-    z-index: 1;
+    /* z-index: 1; */
   }
   
   .fc-time-grid .fc-slats,
   .fc-time-grid > hr {
     /* the <hr> AgendaView injects when grid is shorter than scroller */
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
   }
   
   .fc-time-grid .fc-content-col {
@@ -1164,7 +1164,7 @@
   
   .fc-time-grid .fc-content-skeleton {
     position: absolute;
-    z-index: 3;
+    /* z-index: 3; */
     top: 0;
     left: 0;
     right: 0;
@@ -1173,32 +1173,32 @@
   /* divs within a cell within the fc-content-skeleton */
   .fc-time-grid .fc-business-container {
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
   }
   
   .fc-time-grid .fc-bgevent-container {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
   }
   
   .fc-time-grid .fc-highlight-container {
     position: relative;
-    z-index: 3;
+    /* z-index: 3; */
   }
   
   .fc-time-grid .fc-event-container {
     position: relative;
-    z-index: 4;
+    /* z-index: 4; */
   }
   
   .fc-time-grid .fc-now-indicator-line {
-    z-index: 5;
+    /* z-index: 5; */
   }
   
   .fc-time-grid .fc-helper-container {
     /* also is fc-event-container */
     position: relative;
-    z-index: 6;
+    /* z-index: 6; */
   }
   
   /* TimeGrid Slats (lines that run horizontally)
@@ -1243,7 +1243,7 @@
   .fc-time-grid .fc-event,
   .fc-time-grid .fc-bgevent {
     position: absolute;
-    z-index: 1;
+    /* z-index: 1; */
     /* scope inner z-index's */
   }
   

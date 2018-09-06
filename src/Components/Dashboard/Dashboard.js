@@ -82,7 +82,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    console.log(this.props)
     const { topExpenses } = this.props.expensesReducer;
     const map =
       topExpenses.length !== 0 &&
@@ -142,7 +141,6 @@ class Dashboard extends Component {
 
     const {income} = this.props.incomeReducer
     const sum = income && income.reduce((sum, e) => (sum += +e.amount), 0)
-    console.log(sum)
 
     return (
       <div className="dashboard">

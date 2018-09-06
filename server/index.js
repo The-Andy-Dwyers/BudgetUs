@@ -82,7 +82,6 @@ passport.serializeUser((user, done) => {
       const modifiedUser = user.displayName.includes('@')
         ? user.nickname
         : user.displayName;
-      console.log(modifiedUser);
       if (!response[0]) {
         db.users
           .add_user([modifiedUser, user.id])
