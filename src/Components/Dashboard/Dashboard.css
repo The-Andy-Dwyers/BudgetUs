@@ -121,18 +121,18 @@ div.react-switch-bg {
   background-color: grey;
   position: absolute;
   width: 3px;
-  border-radius: 15%;
+  border-radius: 10%;
   margin-top: 10%;
 }
 
 .c_left {
   height: 12px;
-  transform: rotate(135deg);
+  transform: rotate(135deg) translate(3px, 3px);
 }
 
 .c_right {
   height: 25px;
-  transform: rotate(41deg) translate(5px, -11px);
+  transform: rotate(43deg) translate(2.5px, -9px);
 }
 
 .checkbox_container:hover .check_main {
@@ -220,4 +220,11 @@ div.react-switch-bg {
     display: block;
   }
 
+}
+
+@media (max-width: 720px) {
+  .dashboard_expense > div {
+
+    margin-bottom: 7%;
+  }
 }

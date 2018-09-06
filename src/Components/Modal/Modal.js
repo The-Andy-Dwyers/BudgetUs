@@ -32,7 +32,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     boxShadow: '1px 1px 20px #000',
-	fontFamily: 'Lato, sans-serif',
+    fontFamily: 'Lato, sans-serif'
   }
 };
 
@@ -114,14 +114,21 @@ class Goals extends Component {
       })
       .then(() => {
         // this.props.getDashboard(this.state.month ? 'month' : 'year');
-        this.props.getDashboard(
-          moment()
-            .startOf('month')
-            .format('l'),
-          moment()
-            .endOf('month')
-            .format('l')
-        );
+        this.state.month
+          ? this.props.getDashboard(
+              moment()
+                .startOf('month')
+                .format('l'),
+              moment()
+                .endOf('month')
+                .format('l')
+            )
+          : (moment()
+              .startOf('year')
+              .format('l'),
+            moment()
+              .endOf('month')
+              .format('l'));
         this.closeModal();
       });
   };
