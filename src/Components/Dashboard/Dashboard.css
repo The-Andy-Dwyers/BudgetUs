@@ -2,7 +2,7 @@
   width: 100vw;
   min-height: 100vh;
   height: 100%;
-  padding-left: 200px;
+  padding-left: 80px;
   background-color: rgb(247, 247, 247);
   animation: downFade 1.5s;
 }
@@ -79,7 +79,7 @@
   bottom: 5%;
   right: 1%;
   display: inline-block;
-  width: 80px;
+  width: 100px;
 }
 
 .link2 {
