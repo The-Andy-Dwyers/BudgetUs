@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ContentEditable from 'react-contenteditable';
+import swal from 'sweetalert2';
 
 import './Setup.css';
 import { getGoals } from '../../ducks/reducers/expensesReducer';
@@ -26,11 +27,21 @@ class Setup extends Component {
       users.length && users.find(e => e.id === this.props.userReducer.id);
     const { name, email } = this.state;
 
-    axios.put('/api/edit-user', {
-      name: name ? name : find.name,
-      email: email ? email : find.email
-    });
-    this.setState({ name: '', email: '', savings: '' });
+    axios
+      .put('/api/edit-user', {
+        name: name ? name : find.name,
+        email: email ? email : find.email
+      })
+      .then(() => {
+        swal({
+          position: 'top-end',
+          title: 'Info edited',
+          background: 'rgb(204,204,204)',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.setState({ name: '', email: '', savings: '' });
+      });
   };
 
   editGoal = () => {

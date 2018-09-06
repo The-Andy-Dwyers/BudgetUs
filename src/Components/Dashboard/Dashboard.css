@@ -24,6 +24,10 @@
   position: relative;
 }
 
+.dashboard_expense h2 {
+  font-size: 1.2em;
+}
+
 .dashboard_expense:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
@@ -56,6 +60,10 @@
   border: 1px solid rgb(190, 190, 190);
 }
 
+.dash_map_icon:hover {
+  opacity: .8;
+}
+
 
 .dash_map_icon img {
   width: 20px;
@@ -71,7 +79,7 @@
   bottom: 5%;
   right: 1%;
   display: inline-block;
-  width: 80px;
+  width: 100px;
 }
 
 .link2 {
