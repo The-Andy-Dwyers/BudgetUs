@@ -34,7 +34,10 @@ class LineChart extends Component {
       ]
     };
     const options = {
-      scales: { xAxes: [{ maxBarThickness: 90 }] },
+      scales: {
+        xAxes: [{ maxBarThickness: 90 }],
+        yAxes: [{ ticks: { min: 0 } }]
+      },
       legend: { display: false },
       tooltips: {
         custom: function(tooltip) {

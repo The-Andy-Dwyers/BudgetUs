@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import moment from 'moment';
-import axios from 'axios';
-import ContentEditable from 'react-contenteditable';
-import DatePicker from 'react-custom-date-picker';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import moment from "moment";
+import axios from "axios";
+import ContentEditable from "react-contenteditable";
+import DatePicker from "react-custom-date-picker";
 
-import './Income.css';
+import "./Income.css";
 import {
   updateAmount,
   updateDate,
   updateTitle,
   getDashboard,
   reset
-} from '../../ducks/reducers/incomeReducer';
-import { getUser } from '../../ducks/reducers/userReducer';
-import { getExpenses } from '../../ducks/reducers/expensesReducer';
+} from "../../ducks/reducers/incomeReducer";
+import { getUser } from "../../ducks/reducers/userReducer";
+import { getExpenses } from "../../ducks/reducers/expensesReducer";
 
 class Income extends Component {
   state = {
@@ -34,23 +34,7 @@ class Income extends Component {
   handleDelete = id => {
     axios.delete(`/api/delete-income/${id}`).then(() => {
       // this.props.getDashboard(this.props.month ? 'month' : 'year');
-      this.state.month
-        ? this.props.getDashboard(
-            moment()
-              .startOf('month')
-              .format('l'),
-            moment()
-              .endOf('month')
-              .format('l')
-          )
-        : this.props.getDashboard(
-            moment()
-              .startOf('year')
-              .format('l'),
-            moment()
-              .endOf('month')
-              .format('l')
-          );
+      this.props.getDashboard(this.props.start, this.props.end);
       this.setState({ edit: false });
     });
   };
@@ -69,14 +53,7 @@ class Income extends Component {
       .then(() => {
         this.setState({ edit: false });
         // this.props.getDashboard(this.props.month ? 'month' : 'year');
-        this.props.getDashboard(
-          moment()
-            .startOf('month')
-            .format('l'),
-          moment()
-            .endOf('month')
-            .format('l')
-        );
+        this.props.getDashboard(this.props.start, this.props.end);
         this.props.reset();
       });
   };
@@ -94,7 +71,7 @@ class Income extends Component {
           <p>
             <mark>${e.amount.toLocaleString()}</mark>
           </p>
-          <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
+          <p>{moment.utc(e.date).format("ddd, MMM D")}</p>
         </div>
       ) : (
         <div key={e.id} className="income_map">
@@ -111,8 +88,8 @@ class Income extends Component {
           <div className="income_map_bottom">
             <DatePicker
               className="income_content"
-              date={moment.utc(e.date).format('MM/DD/YYYY')}
-              placeholder={moment.utc(e.date).format('MM/DD/YYYY')}
+              date={moment.utc(e.date).format("MM/DD/YYYY")}
+              placeholder={moment.utc(e.date).format("MM/DD/YYYY")}
               handleDateChange={this.handleDateChange}
             />
             <div
@@ -171,7 +148,7 @@ class Income extends Component {
               </p>
             ) : (
               <p>
-                {' '}
+                {" "}
                 Total:
                 <mark>
                   $
