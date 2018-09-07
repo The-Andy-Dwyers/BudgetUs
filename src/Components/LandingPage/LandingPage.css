@@ -25,15 +25,13 @@
   top: 0;
   height: 80px;
   width: 100vw;
-  /* z-index: 9; */
   animation: fadeDown 0.7s;
-  transition: 0.8s;
 }
 
 .landing_sub {
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  width: 100vw;
   height: 35vh;
   background-color: #fff;
 }
@@ -65,7 +63,7 @@
 .landing_sub1 {
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  width: 100vw;
   height: 40vh;
   background-color: #f6f6f6;
 }
@@ -73,14 +71,60 @@
 .landing_sub2 {
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  align-items: center;
+  width: 100vw;
   height: 50vh;
   background-color: #fff;
 }
 
+.landing_sub22 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 50%;
+  border-bottom: 1px solid rgb(167, 167, 167);
+}
+
+.landing_sub22 h2 {
+  font-size: 2em;
+  margin-bottom: 3%;
+}
+.landing_sub22 > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+}
+
+.login_signup {
+  text-decoration: none;
+  background-color: #56b7a6;
+  padding: 2% 4%;
+  width: 80px;
+  text-align: center;
+}
+
+.login_btn_bottom {
+  cursor: pointer;
+  background-color: #fff;
+  padding: 2% 4%;
+  text-decoration: none;
+  border: 1px solid rgb(192, 192, 192);
+  margin: 10% 0;
+  width: 70px;
+  text-align: center;
+}
+
 .ipad_image {
   transform: rotate(90deg);
-  height: 500px;
+  height: 90%;
+}
+
+.iphone_img {
+  width: 400px;
+  height: 384px;
 }
 
 .login_btn {
@@ -117,7 +161,6 @@
   z-index: 99;
   padding-right: 1%;
   border-right: 1px solid rgb(189, 189, 189);
-  animation: fadeDown 0.7s;  
 }
 
 .landing_footer {
@@ -127,15 +170,58 @@
 }
 
 .landing_logo2 {
-  display: none;
   position: fixed;
-  top: 1%;
   left: 1%;
   width: 60px;
   z-index: 99;
   padding-right: 1%;
+  margin-top: 0.5%;
   border-right: 1px solid rgb(189, 189, 189);
-  animation: fadeDown 0.7s;  
+  display: none;
+}
+
+/* ------- */
+
+.landing_content div {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.landing_content div:first-of-type {
+  animation: showup 7s infinite;
+}
+
+.landing_content div:last-of-type {
+  width:0px;
+  animation: reveal 7s infinite;
+}
+
+.landing_content div:last-of-type span {
+  margin-left:-100px;
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+  0% {opacity:0;}
+  20% {opacity:1;}
+  80% {opacity:1;}
+  100% {opacity:0;}
+}
+
+@keyframes slidein {
+  0% { margin-left:-800px; }
+  20% { margin-left:-800px; }
+  35% { margin-left:0px; }
+  100% { margin-left:0px; }
+}
+
+@keyframes reveal {
+  0% {opacity:0;width:0px;}
+  20% {opacity:1;width:0px;}
+  30% {width:355px;}
+  80% {opacity:1;}
+  100% {opacity:0;width:355px;}
 }
 
 @keyframes fadeIn {
@@ -169,5 +255,28 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .iphone_img {
+    width: 300px;
+    height: 280px;
+  }
+
+  .landing_sub1 {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 600px) {
+  .ipad_image {
+    height: 70%;
+  }
+
+  .landing_sub2 {
+    display: flex;
+    align-items: center;
   }
 }

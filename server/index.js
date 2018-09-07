@@ -134,9 +134,9 @@ app.post('/api/add-trophy', addTrophy);
 app.get('/api/trophy', getTrophy);
 
 // run build
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}.`);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import './LandingPage.css';
-import coins from './coins.svg'
+import coins from './coins.svg';
 
 export default class LandingPage extends Component {
   componentDidMount() {
@@ -11,7 +11,6 @@ export default class LandingPage extends Component {
 
       if (scrollh < 60 || scrollh === 0) {
         $('.landing_header').css({
-          // height: '8vh',
           display: 'none'
         });
         $('.login_btn').css({
@@ -22,9 +21,11 @@ export default class LandingPage extends Component {
         $('.landing_logo2').css({
           display: 'none'
         });
+        $('.landing_logo').css({
+          display: 'block'
+        });
       } else {
         $('.landing_header').css({
-          // height: '18vh',
           display: 'block',
           'background-color': '#fff',
           'z-index': '9'
@@ -33,13 +34,12 @@ export default class LandingPage extends Component {
           'background-color': '#f6f6f6',
           'z-index': '9999'
         });
-        $('.landing_logo').css({
-          display: 'none',
-          'z-index': '9999'
-        });
         $('.landing_logo2').css({
           display: 'block',
-          'z-index': '9999'
+          'z-index': '99999'
+        });
+        $('.landing_logo').css({
+          display: 'none'
         });
       }
     });
@@ -47,21 +47,24 @@ export default class LandingPage extends Component {
   render() {
     return (
       <div className="landing">
-        <div className="landing_header" />
+        <div className="landing_header">
+          <img
+            className="landing_logo2"
+            src="https://image.flaticon.com/icons/svg/134/134597.svg"
+            alt="Coinslogo"
+          />
+        </div>
         <div className="landing_content">
-          <h1>BudgetUs</h1>
+          <div>Budget</div>
+          <div>
+            <span>Us</span>
+          </div>
         </div>
         <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
           <h1 className="login_link">Login</h1>
         </a>
-        <img
-          className="landing_logo"
-          src={coins}
-          alt="Logo"
-        />
-        <img 
-        className='landing_logo2'
-        src="https://image.flaticon.com/icons/svg/134/134597.svg" alt="Coinslogo"/>
+        <img className="landing_logo" src={coins} alt="Logo" />
+
         <div className="landing_sub">
           <div>
             <h2>Create Budget</h2>
@@ -96,6 +99,7 @@ export default class LandingPage extends Component {
         </div>
         <div className="landing_sub1">
           <img
+            className="iphone_img"
             src="https://www.mint.com/sites/default/files/styles/mint_half_width/public/billsmodule%402x_1.png?itok=Z7UZtlau&timestamp=1535430201"
             alt="Iphone"
           />
@@ -109,15 +113,29 @@ export default class LandingPage extends Component {
         </div>
         <div className="landing_sub1" />
         <div className="landing_sub2">
-          <h2>Sign up for BudgetUs now!</h2>
-          <p />
-          <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
-            <h1 className="login_link">Login</h1>
-          </a>
+          <div className="landing_sub22">
+            <h2>Sign up for BudgetUs now!</h2>
+            <p>
+              Sign up today to take control of your finances, once and for all.{' '}
+              <br />
+            </p>
+            <div>
+              <a
+                className="login_signup btn"
+                href={process.env.REACT_APP_LOGIN}
+              >
+                <h1 className="login_link">Sign up</h1>
+              </a>
+              <a
+                className="login_btn_bottom btn"
+                href={process.env.REACT_APP_LOGIN}
+              >
+                <h1 className="login_link">Login</h1>
+              </a>
+            </div>
+          </div>
         </div>
-        <div className='landing_footer'>
-
-        </div>
+        <div className="landing_footer" />
       </div>
     );
   }
