@@ -101,6 +101,13 @@ class Navbar extends Component {
                   alt="Logo"
                 />
               </div>
+              <div
+                className="x_container btn navbar_x"
+                onClick={() => this.setState({hidden: false, icon: true})}
+              >
+                <div className="x_divnav x1" />
+                <div className="x_divnav x2" />
+              </div>
 
               <div className="navbar_sub">
                 <Link className="link" to="/dashboard">

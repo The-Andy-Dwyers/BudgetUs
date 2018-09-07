@@ -93,7 +93,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { amount, dashboard } = this.props.incomeReducer;
+    const { amount, dashboard, income } = this.props.incomeReducer;
     const { topExpenses } = this.props.expensesReducer;
     const map =
       topExpenses.length !== 0 &&
@@ -149,11 +149,9 @@ class Dashboard extends Component {
     const remaining = dashboard && dashboard.incomesum - dashboard.expensesum;
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
-
-    const { income } = this.props.incomeReducer;
     const sum = income && income.reduce((sum, e) => (sum += +e.amount), 0);
-
     const sumTotal = sum + +amount
+    
     return (
       <div className="dashboard">
         <header className="dash_switch">

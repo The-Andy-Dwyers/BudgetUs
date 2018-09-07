@@ -219,9 +219,9 @@
 @keyframes reveal {
   0% {opacity:0;width:0px;}
   20% {opacity:1;width:0px;}
-  30% {width:355px;}
+  30% {width:100px;}
   80% {opacity:1;}
-  100% {opacity:0;width:355px;}
+  100% {opacity:0;width:100px;}
 }
 
 @keyframes fadeIn {
