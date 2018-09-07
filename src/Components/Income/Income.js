@@ -33,7 +33,6 @@ class Income extends Component {
 
   handleDelete = id => {
     axios.delete(`/api/delete-income/${id}`).then(() => {
-      // this.props.getDashboard(this.props.month ? 'month' : 'year');
       this.props.getDashboard(this.props.start, this.props.end);
       this.setState({ edit: false });
     });
@@ -52,7 +51,6 @@ class Income extends Component {
       })
       .then(() => {
         this.setState({ edit: false });
-        // this.props.getDashboard(this.props.month ? 'month' : 'year');
         this.props.getDashboard(this.props.start, this.props.end);
         this.props.reset();
       });
