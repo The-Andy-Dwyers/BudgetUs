@@ -196,7 +196,7 @@
 		margin-bottom: 1%;
 	}
 
-	.expensesinfo_map2_cards:hover {
+	.expensesinfo_map2_all:hover {
 		cursor: pointer;
 		background-color: beige;
 	}
@@ -271,6 +271,10 @@
 	.expensesinfo_map2_total {
 		font-size: 1em;
 	}
+	.expensesinfo_map2_all:hover {
+		cursor: pointer;
+		background-color: beige;
+	}
 }
 
 @media (max-width: 320px) {
@@ -287,5 +291,9 @@
 	.left_320 {
 		width: 60%;
 		height: 95%;
+	}
+	.expensesinfo_map2_all:hover {
+		cursor: pointer;
+		background-color: beige;
 	}
 }
