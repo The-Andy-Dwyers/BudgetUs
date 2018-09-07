@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import DatePicker from "react-custom-date-picker";
-import moment from "moment";
-import "./ExpensesInfo.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import DatePicker from 'react-custom-date-picker';
+import moment from 'moment';
+import './ExpensesInfo.css';
 import {
   getExpensesByCategory,
   getExpenses,
   addExpenses,
   deleteExpense
-} from "../../ducks/reducers/expensesReducer";
-import { getUsers } from "../../ducks/reducers/userReducer";
-import ContentEditable from "react-contenteditable";
+} from '../../ducks/reducers/expensesReducer';
+import { getUsers } from '../../ducks/reducers/userReducer';
+import ContentEditable from 'react-contenteditable';
 
 class ExpensesEdit extends Component {
   state = {
-    expenseName: "",
-    amount: "",
-    type: "",
-    company: "",
-    category: "",
+    expenseName: '',
+    amount: '',
+    type: '',
+    company: '',
+    category: '',
     date: new Date().toISOString(),
     edit: false,
     month: true
@@ -41,8 +41,8 @@ class ExpensesEdit extends Component {
 
   handleDelete = id => {
     axios.delete(`/api/delete-expense/${id}`).then(() => {
-      this.props.getExpensesByCategory(this.props.start, this.props.end);
       this.props.getExpenses(this.props.start, this.props.end);
+      this.props.getExpensesByCategory(this.props.start, this.props.end);
     });
   };
 
@@ -64,12 +64,12 @@ class ExpensesEdit extends Component {
         this.props.getExpensesByCategory(this.props.start, this.props.end);
         this.setState({ edit: false });
         this.setState({
-          expenseName: "",
-          amount: "",
-          type: "",
-          company: "",
-          category: "",
-          date: ""
+          expenseName: '',
+          amount: '',
+          type: '',
+          company: '',
+          category: '',
+          date: ''
         });
       });
   };
@@ -85,19 +85,19 @@ class ExpensesEdit extends Component {
         this.state.month
           ? this.props.getExpenses(
               moment()
-                .startOf("month")
-                .format("l"),
+                .startOf('month')
+                .format('l'),
               moment()
-                .endOf("month")
-                .format("l")
+                .endOf('month')
+                .format('l')
             )
           : this.props.getExpenses(
               moment()
-                .startOf("year")
-                .format("l"),
+                .startOf('year')
+                .format('l'),
               moment()
-                .endOf("year")
-                .format("l")
+                .endOf('year')
+                .format('l')
             )
     );
   render() {
@@ -123,17 +123,12 @@ class ExpensesEdit extends Component {
 
           <div className="expensesinfo_map2_bottom">
             <div className="left">
-              <p>{moment.utc(e.expense_date).format("ddd, MMM D")}</p>
+              <p>{moment.utc(e.expense_date).format('ddd, MMM D')}</p>
               <div className="space">|</div>
               <p>{e.occur}</p>
             </div>
             <div className="right">
               <p className="expensesinfo_map2_right">{e.category}</p>
-              <div className="expensesinfo_map2_right">
-                {!this.state.edit && (
-                  <h3 onClick={() => this.setState({ edit: true })}>Edit</h3>
-                )}
-              </div>
             </div>
           </div>
         </div>
@@ -147,21 +142,21 @@ class ExpensesEdit extends Component {
                 className="expensesinfo_content"
                 html={e.title}
                 onChange={e =>
-                  this.updateExpense(e.target.value, "expenseName")
+                  this.updateExpense(e.target.value, 'expenseName')
                 }
               />
-              <div style={{ width: "20px" }} />
+              <div style={{ width: '20px' }} />
               <ContentEditable
                 className="expensesinfo_content"
                 html={e.company}
-                onChange={e => this.updateExpense(e.target.value, "company")}
+                onChange={e => this.updateExpense(e.target.value, 'company')}
               />
             </div>
             <div className="right">
               <ContentEditable
                 className="expensesinfo_content"
                 html={String(e.cost.toLocaleString())}
-                onChange={e => this.updateExpense(e.target.value, "amount")}
+                onChange={e => this.updateExpense(e.target.value, 'amount')}
               />
             </div>
           </div>
@@ -173,19 +168,19 @@ class ExpensesEdit extends Component {
                 inputStyle={{
                   width: 70
                 }}
-                date={moment.utc(e.expense_date).format("MM/DD/YYYY")}
-                placeholder={moment.utc(e.expense_date).format("MM/DD/YYYY")}
+                date={moment.utc(e.expense_date).format('MM/DD/YYYY')}
+                placeholder={moment.utc(e.expense_date).format('MM/DD/YYYY')}
                 handleDateChange={this.handleDateChange}
               />
-              <div style={{ width: "20px" }} />
+              <div style={{ width: '20px' }} />
               <form>
                 <div>
                   <input
                     name="occur"
                     type="radio"
                     value="recurring"
-                    onClick={() => this.handleType("Recurring")}
-                  />{" "}
+                    onClick={() => this.handleType('Recurring')}
+                  />{' '}
                   Recurring
                 </div>
                 <div>
@@ -193,8 +188,8 @@ class ExpensesEdit extends Component {
                     name="occur"
                     type="radio"
                     value="nonrecurring"
-                    onClick={() => this.handleType("Non-Recurring")}
-                  />{" "}
+                    onClick={() => this.handleType('Non-Recurring')}
+                  />{' '}
                   Non-Recurring
                 </div>
               </form>
@@ -203,7 +198,7 @@ class ExpensesEdit extends Component {
               <select
                 className="expensesinfo_select"
                 required
-                onChange={e => this.updateExpense(e.target.value, "category")}
+                onChange={e => this.updateExpense(e.target.value, 'category')}
               >
                 <option>Category:</option>
                 <option value="Rent">Rent</option>

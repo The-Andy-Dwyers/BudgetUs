@@ -29,7 +29,7 @@
 }
 
 .dashboard_expense:hover {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 .dashboard_expense > div {
@@ -61,9 +61,8 @@
 }
 
 .dash_map_icon:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
-
 
 .dash_map_icon img {
   width: 20px;
@@ -99,7 +98,6 @@ div.react-switch-bg {
   align-items: center;
   height: 150px;
   width: 100%;
-
 }
 
 .dash_switch > div:nth-child(1) {
@@ -165,17 +163,17 @@ div.react-switch-bg {
   font-size: 2em;
 }
 
-
 .dash_options:focus {
   outline: none;
 }
 
-.dash_top2, .dash_bottom2 {
+.dash_top2,
+.dash_bottom2 {
   display: none;
 }
 
 .dashboard header {
-  background-color: #0BC8B3;
+  background-color: #0bc8b3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -195,7 +193,8 @@ div.react-switch-bg {
     display: flex;
     flex-direction: column;
   }
-  .dashboard_top, .dash_bottom  {
+  .dashboard_top,
+  .dash_bottom {
     display: none;
   }
 
@@ -213,26 +212,49 @@ div.react-switch-bg {
     width: 32%;
   }
 
-
   .dash_bottom2 {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-   .dashboard_expense, .linechart_cont {
+  .dashboard_expense,
+  .linechart_cont {
     width: 90%;
   }
 
   .dash_modal {
     display: block;
   }
-
 }
 
 @media (max-width: 720px) {
   .dashboard_expense > div {
-
     margin-bottom: 7%;
+  }
+
+  @media (max-width: 425px) {
+    .dash_top2 {
+      /* padding-left: 0; */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* margin: 1%; */
+    }
+    .income_container {
+      width: 90%;
+      margin: 1%;
+    }
+    .chart {
+      width: 88%;
+      margin: 1%;
+    }
+    .dash_map2 {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid black;
+      padding: 1% 1% 1% 0;
+      width: 91%;
+    }
   }
 }
