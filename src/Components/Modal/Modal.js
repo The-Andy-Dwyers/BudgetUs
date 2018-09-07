@@ -113,7 +113,6 @@ class Goals extends Component {
         id
       })
       .then(() => {
-        // this.props.getDashboard(this.state.month ? 'month' : 'year');
         this.state.month
           ? this.props.getDashboard(
               moment()

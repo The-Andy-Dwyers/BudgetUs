@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './Goals.css';
-import { getDashboard } from '../../ducks/reducers/incomeReducer';
 import { getGoals } from '../../ducks/reducers/expensesReducer';
 import { getUsers } from '../../ducks/reducers/userReducer';
 
@@ -73,5 +72,5 @@ const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,
-  { getDashboard, getGoals, getUsers }
+  { getGoals, getUsers }
 )(Goals);
