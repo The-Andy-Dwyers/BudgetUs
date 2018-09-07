@@ -7,7 +7,7 @@ const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
 
-const port = process.env.PORT || 3001;
+const port = process.env.SERVER_PORT || 3001;
 
 const strategy = require('./strategy');
 
