@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
+const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
@@ -134,8 +135,8 @@ app.post('/api/add-trophy', addTrophy);
 app.get('/api/trophy', getTrophy);
 
 // run build
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 app.listen(port, () => {
