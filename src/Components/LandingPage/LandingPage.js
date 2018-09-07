@@ -98,11 +98,17 @@ export default class LandingPage extends Component {
           </div>
         </div>
         <div className="landing_sub1">
-          <img
-            className="iphone_img"
-            src="https://www.mint.com/sites/default/files/styles/mint_half_width/public/billsmodule%402x_1.png?itok=Z7UZtlau&timestamp=1535430201"
-            alt="Iphone"
-          />
+          <div>
+            <div>
+              <h3 className='landing_title title1'>Add Bills on the go</h3>
+              <p>Check your progress at your own convenience.</p>
+            </div>
+            <img
+              className="iphone_img"
+              src="https://www.mint.com/sites/default/files/styles/mint_half_width/public/billsmodule%402x_1.png?itok=Z7UZtlau&timestamp=1535430201"
+              alt="Iphone"
+            />
+          </div>
         </div>
         <div className="landing_sub2">
           <img
@@ -110,9 +116,13 @@ export default class LandingPage extends Component {
             src="http://icon-park.com/imagefiles/ipad_air_2_silver.png"
             alt=""
           />
+          <div>
+            <h3 className='landing_title title2'>Set monthly goals</h3>
+            <p>Dynamically compare your monthly spending with your goals</p>
+          </div>
         </div>
-        <div className="landing_sub1" />
-        <div className="landing_sub2">
+        <div className="landing_sub3" />
+        <div className="landing_sub4">
           <div className="landing_sub22">
             <h2>Sign up for BudgetUs now!</h2>
             <p>
@@ -133,9 +143,15 @@ export default class LandingPage extends Component {
                 <h1 className="login_link">Login</h1>
               </a>
             </div>
+            <p className="footer_text">
+              This is a ficticious project made by a team of student developers
+              at Dev Mountain Dallas.
+            </p>
           </div>
         </div>
-        <div className="landing_footer" />
+        <div className="landing_footer">
+          <h3>© 2018 Andy Dwyer Productions</h3>
+        </div>
       </div>
     );
   }

@@ -49,7 +49,7 @@
   margin: 5% 0;
 }
 
-.landing_sub p {
+.landing p {
   margin: 2% 0;
   text-align: center;
   color: grey;
@@ -60,7 +60,8 @@
   margin-top: 5%;
 }
 
-.landing_sub1 {
+.landing_sub1,
+.landing_sub3 {
   display: flex;
   justify-content: space-around;
   width: 100vw;
@@ -68,7 +69,8 @@
   background-color: #f6f6f6;
 }
 
-.landing_sub2 {
+.landing_sub2,
+.landing_sub4 {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -77,14 +79,51 @@
   background-color: #fff;
 }
 
+.landing_sub1 > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+}
+.landing_sub1 > div > div {
+  margin-bottom: 10%;
+}
+
+.landing_sub2 > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10%;
+}
+
+.landing_title {
+  font-size: 1.3em;
+  margin: 10% 0;
+}
+
+.title1 {
+  color: #e16a62;
+}
+
+.title2 {
+  color: #56b7a6;
+}
+
 .landing_sub22 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 70%;
-  width: 50%;
-  border-bottom: 1px solid rgb(167, 167, 167);
+  width: 70%;
+}
+
+.footer_text {
+  font-size: 0.9em;
+  margin-top: 5%;
+  border-top: 1px solid rgb(167, 167, 167);
+  padding-top: 5%;
+  text-align: center;
 }
 
 .landing_sub22 h2 {
@@ -165,8 +204,16 @@
 
 .landing_footer {
   width: 100vw;
-  height: 20vh;
+  height: 10vh;
   background-color: rgb(48, 48, 48);
+}
+.landing_footer h3 {
+  color: rgb(230, 230, 230);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 80%;
+  font-size: 0.9em;
 }
 
 .landing_logo2 {
@@ -193,35 +240,64 @@
 }
 
 .landing_content div:last-of-type {
-  width:0px;
+  width: 0px;
   animation: reveal 7s infinite;
 }
 
 .landing_content div:last-of-type span {
-  margin-left:-100px;
+  margin-left: -100px;
   animation: slidein 7s infinite;
 }
 
 @keyframes showup {
-  0% {opacity:0;}
-  20% {opacity:1;}
-  80% {opacity:1;}
-  100% {opacity:0;}
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes slidein {
-  0% { margin-left:-800px; }
-  20% { margin-left:-800px; }
-  35% { margin-left:0px; }
-  100% { margin-left:0px; }
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 0px;
+  }
 }
 
 @keyframes reveal {
-  0% {opacity:0;width:0px;}
-  20% {opacity:1;width:0px;}
-  30% {width:100px;}
-  80% {opacity:1;}
-  100% {opacity:0;width:100px;}
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+  30% {
+    width: 100px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 100px;
+  }
 }
 
 @keyframes fadeIn {
@@ -258,7 +334,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .iphone_img {
     width: 300px;
     height: 280px;
@@ -270,7 +346,42 @@
   }
 }
 
+@media (max-width: 800px) {
+  .landing_sub h2 {
+    font-size: 1.2em;
+  }
+
+  .landing_sub p {
+    font-size: 0.7em;
+  }
+
+  .landing_sub img {
+    width: 70px;
+    margin-top: 15%;
+  }
+
+  .landing_sub1 p {
+    font-size: 0.8em;
+  }
+}
+
 @media (max-width: 600px) {
+  .iphone_img {
+    width: 200px;
+    height: 180px;
+  }
+
+  .landing_sub1 {
+    height: 23vh;
+  }
+
+  .landing_sub1 > div {
+    width: 100%;
+  }
+  .landing_sub1 > div > div {
+    width: 50%;
+  }
+
   .ipad_image {
     height: 70%;
   }
@@ -278,5 +389,20 @@
   .landing_sub2 {
     display: flex;
     align-items: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .iphone_img {
+    width: 150px;
+    height: 130px;
+  }
+  .landing_title {
+    font-size: 1em;
+    text-align: center;
+  }
+  .landing_sub1 p {
+    font-size: 0.7em;
+    text-align: center;
   }
 }

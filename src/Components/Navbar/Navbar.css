@@ -150,7 +150,7 @@ input:focus {
 
 .navbar_x {
   position: absolute;
-  top: -40px;
+  top: -80px;
   left: 85px;
   animation: slide-in-left .7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; 
   height: 30px;
