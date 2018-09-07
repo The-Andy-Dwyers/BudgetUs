@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import $ from "jquery";
+import moment from "moment";
 import { Bar } from "react-chartjs-2";
 import { connect } from "react-redux";
 import { getExpenseTotalsByMonth } from "../../ducks/reducers/expensesReducer";
@@ -9,7 +11,12 @@ class LineChart extends Component {
   }
   render() {
     const data = {
-      labels: this.props.totals.map(e => e.month.trim()),
+      labels:
+        $(window).width() < 400
+          ? this.props.totals.map(e =>
+              moment(e.month.trim(), "MMMM").format("MMM")
+            )
+          : this.props.totals.map(e => e.month.trim()),
       datasets: [
         {
           backgroundColor: [
