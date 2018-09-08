@@ -16,6 +16,8 @@ import { getUsers, getUser, getTrophy } from "../../ducks/reducers/userReducer";
 import { getDashboard, getIncome } from "../../ducks/reducers/incomeReducer";
 import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
 
+import wallet from './icons/wallet.svg';
+
 class Dashboard extends Component {
   constructor() {
     super();
@@ -108,7 +110,7 @@ class Dashboard extends Component {
                 />
               ) : e.category === "Bills" ? (
                 <img
-                  src="https://image.flaticon.com/icons/svg/85/85966.svg"
+                  src={wallet}
                   alt="Bills icon"
                 />
               ) : e.category === "Entertainment" ? (

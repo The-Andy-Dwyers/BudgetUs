@@ -21,26 +21,24 @@ export default class LandingPage extends Component {
         $('.landing_logo2').css({
           display: 'none'
         });
-        $('.landing_logo').css({
-          display: 'block'
-        });
+
       } else {
         $('.landing_header').css({
           display: 'block',
-          'background-color': '#fff',
+          'background-color': 'rgb(250, 250, 250)',
           'z-index': '9'
         });
         $('.login_btn').css({
-          'background-color': '#f6f6f6',
+          'background-color': 'transparent',
+          'borderRadius': '0',
+          'border': 'none',
           'z-index': '9999'
         });
         $('.landing_logo2').css({
           display: 'block',
           'z-index': '99999'
         });
-        $('.landing_logo').css({
-          display: 'none'
-        });
+
       }
     });
   }
@@ -62,8 +60,8 @@ export default class LandingPage extends Component {
         </div>
         <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
           <h1 className="login_link">Login</h1>
-        </a>
-        <img className="landing_logo" src={coins} alt="Logo" />
+        </a>      
+  
 
         <div className="landing_sub">
           <div>
@@ -117,7 +115,7 @@ export default class LandingPage extends Component {
             alt=""
           />
           <div>
-            <h3 className='landing_title title2'>Set monthly goals</h3>
+            <h3 className='landing_title title2'>Track your digital savings with ease!</h3>
             <p>Dynamically compare your monthly spending with your goals</p>
           </div>
         </div>

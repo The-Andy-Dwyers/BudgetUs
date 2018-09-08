@@ -23,7 +23,7 @@
 .landing_header {
   position: fixed;
   top: 0;
-  height: 80px;
+  height: 70px;
   width: 100vw;
   animation: fadeDown 0.7s;
 }
@@ -65,7 +65,7 @@
   display: flex;
   justify-content: space-around;
   width: 100vw;
-  height: 40vh;
+  height: 50vh;
   background-color: #f6f6f6;
 }
 
@@ -173,7 +173,6 @@
   cursor: pointer;
   background-color: #fff;
   padding: 0.5%;
-  border-radius: 10%;
   text-decoration: none;
   border: 1px solid rgb(143, 143, 143);
 }
@@ -190,16 +189,6 @@
 .login_link {
   color: rgb(92, 92, 92);
   font-size: 1.5em;
-}
-
-.landing_logo {
-  position: fixed;
-  top: 1%;
-  left: 1%;
-  width: 60px;
-  z-index: 99;
-  padding-right: 1%;
-  border-right: 1px solid rgb(189, 189, 189);
 }
 
 .landing_footer {
@@ -233,6 +222,7 @@
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
+  height: 38px;
 }
 
 .landing_content div:first-of-type {
@@ -343,6 +333,11 @@
   .landing_sub1 {
     display: flex;
     align-items: flex-end;
+  }
+
+  .landing_sub1,
+  .landing_sub3 {
+    height: 40vh;
   }
 }
 

@@ -1,5 +1,5 @@
 .navbar_main {
-  width: 80px;
+  width: 120px;
   background-color: #000;
   height: 100%;
   max-height: 1000px;
@@ -23,6 +23,7 @@
 .link {
   text-decoration: none;
   color: rgb(228, 228, 228);
+  display: inline-block;
 }
 
 .link:hover {
@@ -34,7 +35,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: rgb(63, 63, 63);
+  height: 20vh;
+  border-bottom: 4px solid #0bc8b3;
 }
 
 .navbar_sub {
@@ -43,7 +46,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20% 0;
-  height: 80vh;
+  height: 60vh;
 }
 
 .navbar_logo {
@@ -52,8 +55,8 @@
 }
 
 .navbar_holder {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .navbar_icon {
@@ -73,7 +76,7 @@
 }
 
 .navbar_icon1 {
-  width: 40px;
+  width: 30px;
   display: none;
 }
 
