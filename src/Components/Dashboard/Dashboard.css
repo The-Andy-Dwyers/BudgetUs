@@ -205,6 +205,19 @@ div.react-switch-bg {
   top: 1%;
   right: 2%;
 }
+.equation {
+  width: 35% !important;
+  padding: 2% 4%;
+}
+.equation > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.equation_line {
+  border-bottom: 1px solid grey;
+  padding: 2%;
+}
 
 @media (max-width: 900px) {
   .dashboard {

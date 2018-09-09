@@ -1,0 +1,16 @@
+.review_main {
+    min-height: 100vh;
+    height: 100%;
+    margin-left: 120px;
+}
+
+.review_header {
+    min-width: 91.65vw;
+}
+
+@media (max-width: 900px) {
+    .review_main {
+      margin-left: 0;
+        min-width: 100vw;
+    }
+}

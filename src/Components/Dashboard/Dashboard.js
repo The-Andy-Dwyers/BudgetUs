@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import moment from "moment";
-import Income from "../Income/Income";
-import Chart from "../Chart/Chart";
-import Goals from "../Goals/Goals";
-import LineChart from "../Chart/LineChart";
-import Modal from "../Modal/Modal";
-import TextLoop from "react-text-loop";
-import swal from "sweetalert2";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
+import Income from '../Income/Income';
+import Chart from '../Chart/Chart';
+import Goals from '../Goals/Goals';
+import LineChart from '../Chart/LineChart';
+import Modal from '../Modal/Modal';
+import TextLoop from 'react-text-loop';
+import swal from 'sweetalert2';
 
-import "./Dashboard.css";
-import { getUsers, getUser, getTrophy } from "../../ducks/reducers/userReducer";
-import { getDashboard, getIncome } from "../../ducks/reducers/incomeReducer";
-import { getTopExpenses } from "../../ducks/reducers/expensesReducer";
+import './Dashboard.css';
+import { getUsers, getUser, getTrophy } from '../../ducks/reducers/userReducer';
+import { getDashboard, getIncome } from '../../ducks/reducers/incomeReducer';
+import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
 
 import wallet from './icons/wallet.svg';
 
@@ -46,16 +46,16 @@ class Dashboard extends Component {
       income &&
       income.length >= 10 &&
       axios
-        .post("/api/add-trophy", {
+        .post('/api/add-trophy', {
           trophy: 2,
           id
         })
         .then(() => {
           swal({
-            position: "top-end",
-            title: "New Achievement!",
-            text: "Go to settings to view your medals",
-            imageUrl: "https://image.flaticon.com/icons/svg/610/610333.svg",
+            position: 'top-end',
+            title: 'New Achievement!',
+            text: 'Go to settings to view your medals',
+            imageUrl: 'https://image.flaticon.com/icons/svg/610/610333.svg',
             imageWidth: 150,
             imageHeight: 225,
             showConfirmButton: false,
@@ -65,24 +65,24 @@ class Dashboard extends Component {
   };
 
   handleChange = month => {
-    if (month === "year") {
+    if (month === 'year') {
       this.setState({
         start: moment()
-          .startOf("year")
-          .format("l"),
-        end: moment().format("l")
+          .startOf('year')
+          .format('l'),
+        end: moment().format('l')
       });
       this.props.getDashboard(
         moment()
-          .startOf("year")
-          .format("l"),
-        moment().format("l")
+          .startOf('year')
+          .format('l'),
+        moment().format('l')
       );
       this.props.getTopExpenses(
         moment()
-          .startOf("year")
-          .format("l"),
-        moment().format("l")
+          .startOf('year')
+          .format('l'),
+        moment().format('l')
       );
     } else {
       this.setState({
@@ -103,22 +103,19 @@ class Dashboard extends Component {
         return (
           <div className="dash_map" key={i}>
             <div className="dash_map_icon">
-              {e.category === "Food" ? (
+              {e.category === 'Food' ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/263/263125.svg"
                   alt="Food icon"
                 />
-              ) : e.category === "Bills" ? (
-                <img
-                  src={wallet}
-                  alt="Bills icon"
-                />
-              ) : e.category === "Entertainment" ? (
+              ) : e.category === 'Bills' ? (
+                <img src={wallet} alt="Bills icon" />
+              ) : e.category === 'Entertainment' ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/263/263068.svg"
                   alt="Entertainment icon"
                 />
-              ) : e.category === "Gas" ? (
+              ) : e.category === 'Gas' ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/115/115101.svg"
                   alt="Gas icon"
@@ -141,9 +138,9 @@ class Dashboard extends Component {
       });
 
     const options = this.props.incomeReducer.months
-      .filter(e => e.month.trim() !== moment().format("MMMM"))
+      .filter(e => e.month.trim() !== moment().format('MMMM'))
       .map((e, i) => (
-        <option key={i} value={moment(e.month.trim(), "MMMM").format("l")}>
+        <option key={i} value={moment(e.month.trim(), 'MMMM').format('l')}>
           {e.month.trim()}
         </option>
       ));
@@ -152,8 +149,8 @@ class Dashboard extends Component {
     const days = moment().daysInMonth();
     const daily = Math.round((remaining / days) * 100) / 100;
     const sum = income && income.reduce((sum, e) => (sum += +e.amount), 0);
-    const sumTotal = sum + +amount
-    
+    const sumTotal = sum + +amount;
+
     return (
       <div className="dashboard">
         <header className="dash_switch">
@@ -165,14 +162,14 @@ class Dashboard extends Component {
               >
                 <option
                   className="dash_select"
-                  value={moment().format("l")}
-                  defaultValue={moment().format("l")}
+                  value={moment().format('l')}
+                  defaultValue={moment().format('l')}
                 >
-                  {moment().format("MMMM")}
+                  {moment().format('MMMM')}
                 </option>
                 <option disabled>───────</option>
                 {options}
-                <option value={"year"}>YTD</option>
+                <option value={'year'}>YTD</option>
               </select>
             )}
           </div>
@@ -251,6 +248,32 @@ class Dashboard extends Component {
 
           {this.props.incomeReducer.dashboard.sources && <LineChart />}
         </div>
+        <div className="dashboard_expense equation">
+          <div>
+            <p>Total Income</p>
+            <p>
+              <mark>${sumTotal}</mark>
+            </p>
+          </div>
+          <div className="equation_line">
+            <p>Total Expenses</p>
+            <p>
+              + <mark>${dashboard.incomesum}</mark>
+            </p>
+          </div>
+          <div>
+            <p>Remaining!</p>
+            <mark>${sumTotal - dashboard.incomesum}</mark>
+          </div>
+        </div>
+        <div className="dashboard_expense">
+          <h2>Financial review</h2>
+          <p>Need some financial advise?</p>
+          <p>Let's see how we can help!</p>
+          <Link to="/review">
+            <p>Review</p>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -272,11 +295,11 @@ export default connect(
 
 function start(d) {
   return moment(new Date(d).toISOString())
-    .startOf("month")
-    .format("l");
+    .startOf('month')
+    .format('l');
 }
 function end(d) {
   return moment(new Date(d).toISOString())
-    .endOf("month")
-    .format("l");
+    .endOf('month')
+    .format('l');
 }

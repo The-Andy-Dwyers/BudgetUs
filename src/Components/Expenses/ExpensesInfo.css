@@ -193,12 +193,15 @@
 		display: flex;
 		flex-direction: column;
 		box-shadow: 1px 1px 5px grey;
-		margin-bottom: 1%;
+		margin: 1%;
 	}
 
 	.expensesinfo_map2_all:hover {
 		cursor: pointer;
-		background-color: beige;
+		box-shadow: 0px 0px 2px 2px rgb(201, 201, 201);
+		margin: 1% 1.2%;
+		transition: .5s;
+		opacity: .7;
 	}
 	.expensesinfo_map2_cards {
 		display: flex;
@@ -271,10 +274,6 @@
 	.expensesinfo_map2_total {
 		font-size: 1em;
 	}
-	.expensesinfo_map2_all:hover {
-		cursor: pointer;
-		background-color: beige;
-	}
 }
 
 @media (max-width: 320px) {
@@ -291,9 +290,5 @@
 	.left_320 {
 		width: 60%;
 		height: 95%;
-	}
-	.expensesinfo_map2_all:hover {
-		cursor: pointer;
-		background-color: beige;
 	}
 }
