@@ -21,7 +21,6 @@ export default class LandingPage extends Component {
         $('.landing_logo2').css({
           display: 'none'
         });
-
       } else {
         $('.landing_header').css({
           display: 'block',
@@ -30,15 +29,14 @@ export default class LandingPage extends Component {
         });
         $('.login_btn').css({
           'background-color': 'transparent',
-          'borderRadius': '0',
-          'border': 'none',
+          borderRadius: '0',
+          border: 'none',
           'z-index': '9999'
         });
         $('.landing_logo2').css({
           display: 'block',
           'z-index': '99999'
         });
-
       }
     });
   }
@@ -60,8 +58,7 @@ export default class LandingPage extends Component {
         </div>
         <a className="login_btn" href={process.env.REACT_APP_LOGIN}>
           <h1 className="login_link">Login</h1>
-        </a>      
-  
+        </a>
 
         <div className="landing_sub">
           <div>
@@ -98,7 +95,7 @@ export default class LandingPage extends Component {
         <div className="landing_sub1">
           <div>
             <div>
-              <h3 className='landing_title title1'>Add Bills on the go</h3>
+              <h3 className="landing_title title1">Add Bills on the go</h3>
               <p>Check your progress at your own convenience.</p>
             </div>
             <img
@@ -115,11 +112,21 @@ export default class LandingPage extends Component {
             alt=""
           />
           <div>
-            <h3 className='landing_title title2'>Track your digital savings with ease!</h3>
+            <h3 className="landing_title title2">
+              Track your digital savings with ease!
+            </h3>
             <p>Dynamically compare your monthly spending with your goals</p>
           </div>
         </div>
-        <div className="landing_sub3" />
+        <div className="landing_sub3">
+          <div className="landing_img">
+              
+          </div>
+          <div>
+          <h2>Review your finances with the click of a button</h2>
+            
+          </div>
+        </div>
         <div className="landing_sub4">
           <div className="landing_sub22">
             <h2>Sign up for BudgetUs now!</h2>

@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import moment from "moment";
-import axios from "axios";
-import ContentEditable from "react-contenteditable";
-import DatePicker from "react-custom-date-picker";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import axios from 'axios';
+import ContentEditable from 'react-contenteditable';
+import DatePicker from 'react-custom-date-picker';
 
-import "./Income.css";
+import './Income.css';
 import {
   updateAmount,
   updateDate,
   updateTitle,
   getDashboard,
   reset
-} from "../../ducks/reducers/incomeReducer";
-import { getUser } from "../../ducks/reducers/userReducer";
-import { getExpenses } from "../../ducks/reducers/expensesReducer";
+} from '../../ducks/reducers/incomeReducer';
+import { getUser } from '../../ducks/reducers/userReducer';
+import { getExpenses } from '../../ducks/reducers/expensesReducer';
 
 class Income extends Component {
   state = {
@@ -66,10 +66,10 @@ class Income extends Component {
       return !this.state.edit ? (
         <div key={e.id} className="income_map">
           <p>{e.title}</p>
-          <p>
+          <p className="im_amount">
             <mark>${e.amount.toLocaleString()}</mark>
           </p>
-          <p>{moment.utc(e.date).format("ddd, MMM D")}</p>
+          <p>{moment.utc(e.date).format('ddd, MMM D')}</p>
         </div>
       ) : (
         <div key={e.id} className="income_map">
@@ -86,8 +86,8 @@ class Income extends Component {
           <div className="income_map_bottom">
             <DatePicker
               className="income_content"
-              date={moment.utc(e.date).format("MM/DD/YYYY")}
-              placeholder={moment.utc(e.date).format("MM/DD/YYYY")}
+              date={moment.utc(e.date).format('MM/DD/YYYY')}
+              placeholder={moment.utc(e.date).format('MM/DD/YYYY')}
               handleDateChange={this.handleDateChange}
             />
             <div
@@ -126,12 +126,18 @@ class Income extends Component {
             <div className="income_edit_holder">
               {!this.state.edit &&
                 this.props.incomeReducer.dashboard.sources.length !== 0 && (
-                  <h3
+                  // <h3
+                  //   onClick={() => this.setState({ edit: true })}
+                  //   className="income_edit2 btn"
+                  // >
+                  //   Edit
+                  // </h3>
+                  <img
                     onClick={() => this.setState({ edit: true })}
-                    className="income_edit2 btn"
-                  >
-                    Edit
-                  </h3>
+                    className="edit_icon btn"
+                    src="https://image.flaticon.com/icons/svg/118/118779.svg"
+                    alt="Edit btn"
+                  />
                 )}
             </div>
           </div>
@@ -146,7 +152,7 @@ class Income extends Component {
               </p>
             ) : (
               <p>
-                {" "}
+                {' '}
                 Total:
                 <mark>
                   $
