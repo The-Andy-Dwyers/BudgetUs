@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import './LandingPage.css';
-import coins from './coins.svg';
 
 export default class LandingPage extends Component {
   componentDidMount() {
@@ -11,7 +10,8 @@ export default class LandingPage extends Component {
 
       if (scrollh < 60 || scrollh === 0) {
         $('.landing_header').css({
-          display: 'none'
+          display: 'none',
+          'transition': '.5s'
         });
         $('.login_btn').css({
           'background-color': '#fff',

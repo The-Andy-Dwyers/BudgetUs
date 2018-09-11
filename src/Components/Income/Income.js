@@ -51,7 +51,14 @@ class Income extends Component {
       })
       .then(() => {
         this.setState({ edit: false });
-        this.props.getDashboard(this.props.start, this.props.end);
+        this.props.getDashboard(
+          moment()
+            .startOf('month')
+            .format('l'),
+          moment()
+            .endOf('month')
+            .format('l')
+        );
         this.props.reset();
       });
   };
@@ -126,12 +133,6 @@ class Income extends Component {
             <div className="income_edit_holder">
               {!this.state.edit &&
                 this.props.incomeReducer.dashboard.sources.length !== 0 && (
-                  // <h3
-                  //   onClick={() => this.setState({ edit: true })}
-                  //   className="income_edit2 btn"
-                  // >
-                  //   Edit
-                  // </h3>
                   <div>
                     <div className="fake_line" />
                     <img
