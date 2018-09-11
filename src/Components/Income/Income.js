@@ -132,12 +132,15 @@ class Income extends Component {
                   // >
                   //   Edit
                   // </h3>
-                  <img
-                    onClick={() => this.setState({ edit: true })}
-                    className="edit_icon btn"
-                    src="https://image.flaticon.com/icons/svg/118/118779.svg"
-                    alt="Edit btn"
-                  />
+                  <div>
+                    <div className="fake_line" />
+                    <img
+                      onClick={() => this.setState({ edit: true })}
+                      className="edit_icon btn"
+                      src="https://image.flaticon.com/icons/svg/149/149307.svg"
+                      alt="Edit btn"
+                    />
+                  </div>
                 )}
             </div>
           </div>

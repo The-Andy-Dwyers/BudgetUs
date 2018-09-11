@@ -33,6 +33,7 @@
 
 .income_edit_holder {
   justify-content: flex-end !important;
+  position: relative;
 }
 
 .income_edit {
@@ -201,6 +202,30 @@ mark {
 .edit_icon {
   width: 20px;
   height: 20px;
+  transition: .7s;  
+}
+
+.income_edit_holder > div {
+  display: flex;
+}
+
+.edit_icon:hover {
+  transform: translateX(10px);
+  transition: .5s;
+  padding-left: 10px;
+}
+
+.income_edit_holder:hover .fake_line{
+  display: block;
+  transition: .5s;
+  
+}
+
+.fake_line {
+  display: none;
+  width: 10px;
+  border-bottom: 1px solid #000;
+  transform: translateX(20px);
 }
 
 @keyframes puff-in-top {

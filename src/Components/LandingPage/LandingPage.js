@@ -97,6 +97,11 @@ export default class LandingPage extends Component {
             <div>
               <h3 className="landing_title title1">Add Bills on the go</h3>
               <p>Check your progress at your own convenience.</p>
+              <ul>
+                <li>Find a breakdown of your expenses</li>
+                <li>See all bills in one location</li>
+                <li>Take control of your budget</li>
+              </ul>
             </div>
             <img
               className="iphone_img"
@@ -116,15 +121,19 @@ export default class LandingPage extends Component {
               Track your digital savings with ease!
             </h3>
             <p>Dynamically compare your monthly spending with your goals</p>
+            <ul>
+                <li>No need to keep unwanted receipts</li>
+                <li>Compare spending with previous months</li>
+              </ul>
           </div>
         </div>
         <div className="landing_sub3">
           <div className="landing_img">
               
           </div>
-          <div>
+          <div className='landing_3a'>
           <h2>Review your finances with the click of a button</h2>
-            
+          <p>View a complete breakdown of your finances with the click of a button.</p>
           </div>
         </div>
         <div className="landing_sub4">

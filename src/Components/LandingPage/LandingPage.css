@@ -80,7 +80,7 @@
 
 .landing_sub3 {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100vw;
   height: 50vh;
   background-color: #f6f6f6;
@@ -96,10 +96,23 @@
 padding-top: 5%;
 color: #56b7a6;
 font-size: 1.5em;
+margin-bottom: 5%;
+}
+
+.landing_3a{
+display: flex;
+justify-content: center;
+flex-direction: column;
 }
 
 .landing_sub4 {
   height: 70vh;
+}
+
+.landing li {
+  list-style-type: disc;
+  list-style: inside;
+  margin: 1% 0;
 }
 
 .landing_img {
@@ -110,6 +123,7 @@ font-size: 1.5em;
   background-size: 100%;
   width: 60%;
   box-shadow: 0 0 8px 8px #f6f6f6 inset;
+  margin-left: -100px;
 }
 
 .landing_sub1 > div {
