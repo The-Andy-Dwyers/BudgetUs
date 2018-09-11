@@ -80,8 +80,8 @@
 .income_modal {
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  height: 50vh;
+  width: 70vw;
+  height: 70vh;
 }
 
 .income_modal h2 {

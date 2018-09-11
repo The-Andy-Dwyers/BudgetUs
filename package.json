@@ -40,7 +40,8 @@
     "start": "concurrently --kill-others \"nodemon server/index.js\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress": "cypress open"
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {

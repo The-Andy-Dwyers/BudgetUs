@@ -263,6 +263,7 @@ class Goals extends Component {
                   <p>Source:</p>
                   <input
                     autoFocus
+                    placeholder="Dev Mountain"
                     onChange={e => updateTitle(e.target.value)}
                     type="text"
                   />
@@ -272,7 +273,7 @@ class Goals extends Component {
                   <input
                     onChange={e => updateAmount(e.target.value)}
                     type="text"
-                    placeholder="$"
+                    placeholder="$1,000"
                   />
                 </div>
                 <div className="income_sub">
@@ -311,7 +312,7 @@ class Goals extends Component {
                 <div className="income_sub">
                   <p>Amount:</p>
                   <input
-                    placeholder="amount"
+                    placeholder="Amount"
                     onChange={e => this.handleInputs(e.target.value, 'amount')}
                   />
                 </div>

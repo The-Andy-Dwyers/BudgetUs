@@ -18,3 +18,9 @@
     justify-content: space-around;
     height: 15vh;
 }
+
+
+.all_modal input{
+  border: none;
+  border-bottom: 1px solid rgb(143, 143, 143);
+}
