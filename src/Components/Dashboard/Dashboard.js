@@ -266,12 +266,9 @@ class Dashboard extends Component {
             <mark>${sumTotal - dashboard.incomesum}</mark>
           </div>
         </div>
-        <div className="dashboard_expense">
-          <h2>Financial review</h2>
-          <p>Need some financial advise?</p>
-          <p>Let's see how we can help!</p>
-          <Link to="/review">
-            <p>Review</p>
+        <div className="dashboard_expense expense_btm">
+          <Link className='expense_review btn'to="/review">
+            <h2>Financial review</h2>
           </Link>
         </div>
       </div>

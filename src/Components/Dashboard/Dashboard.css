@@ -24,6 +24,18 @@
   position: relative;
 }
 
+.expense_btm {
+  width: 100%;
+  margin: 0;
+  background-color: #0bc8b3;  
+}
+
+.expense_review {
+  color: white;
+  text-decoration: none;
+  letter-spacing: 3px;
+}
+
 .dashboard_expense h2 {
   font-size: 1.2em;
 }
@@ -209,6 +221,7 @@ div.react-switch-bg {
   width: 35% !important;
   padding: 2% 4%;
 }
+
 .equation > div {
   display: flex;
   justify-content: space-between;
@@ -253,6 +266,10 @@ div.react-switch-bg {
   .dashboard_expense,
   .linechart_cont {
     width: 90%;
+  }
+
+  .expense_btm {
+    width: 95%;
   }
 
   .dash_modal {
