@@ -1,16 +1,30 @@
 .review_main {
-    min-height: 100vh;
-    height: 100%;
-    margin-left: 120px;
+  min-height: 100vh;
+  height: 100%;
+  margin-left: 120px;
 }
 
 .review_header {
-    min-width: 91.65vw;
+  min-width: 91.65vw;
+}
+
+.print_btn_holder {
+  display: flex;
+  justify-content: center;
+}
+
+.print_btn {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.ex_map {
+    display: flex;
 }
 
 @media (max-width: 900px) {
-    .review_main {
-      margin-left: 0;
-        min-width: 100vw;
-    }
+  .review_main {
+    margin-left: 0;
+    min-width: 100vw;
+  }
 }

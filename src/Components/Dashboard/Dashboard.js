@@ -109,7 +109,7 @@ class Dashboard extends Component {
                   alt="Food icon"
                 />
               ) : e.category === 'Bills' ? (
-                <img src={wallet} alt="Bills icon" />
+                <img src='https://image.flaticon.com/icons/svg/116/116369.svg' alt="Bills icon" />
               ) : e.category === 'Entertainment' ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/263/263068.svg"
