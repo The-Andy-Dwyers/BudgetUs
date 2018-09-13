@@ -139,7 +139,7 @@
 }
 
 .expensesinfo_modal_form input {
-	width: 2%;
+	width: 10px;
 }
 
 .expensesinfo_modal select {
@@ -198,6 +198,7 @@
 		flex-direction: column;
 		box-shadow: 1px 1px 5px grey;
 		margin: 1%;
+		z-index: 1;
 	}
 
 	.expensesinfo_map2_all:hover {
@@ -225,6 +226,7 @@
 	}
 	.left {
 		display: flex;
+		z-index: 9999;
 	}
 	.right {
 		display: flex;

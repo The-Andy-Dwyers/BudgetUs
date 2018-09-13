@@ -24,3 +24,34 @@
   border: none;
   border-bottom: 1px solid rgb(143, 143, 143);
 }
+
+.modal_bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal_bottom > div:nth-of-type(1) {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 5% 0;
+  align-items: center;
+}
+
+.modal_bottom select {
+  height: 100%;
+
+}
+
+.expensesinfo_modal_form div {  
+  width: 150px;
+}
+
+.income_modal > div:nth-of-type(3n) {
+  display: flex;
+  justify-content: center;
+  margin: 5% 0;
+}
+
+

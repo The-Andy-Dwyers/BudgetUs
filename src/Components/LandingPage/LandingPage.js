@@ -11,7 +11,7 @@ export default class LandingPage extends Component {
       if (scrollh < 60 || scrollh === 0) {
         $('.landing_header').css({
           display: 'none',
-          'transition': '.5s'
+          transition: '.5s'
         });
         $('.login_btn').css({
           'background-color': '#fff',
@@ -122,18 +122,20 @@ export default class LandingPage extends Component {
             </h3>
             <p>Dynamically compare your monthly spending with your goals</p>
             <ul>
-                <li>No need to keep unwanted receipts</li>
-                <li>Compare spending with previous months</li>
-              </ul>
+              <li>No need to keep unwanted receipts</li>
+              <li>Compare spending with previous months</li>
+            </ul>
           </div>
         </div>
         <div className="landing_sub3">
-          <div className="landing_img">
-              
-          </div>
-          <div className='landing_3a'>
-          <h2>Review your finances with the click of a button</h2>
-          <p>View a complete breakdown of your finances with the click of a button.</p>
+          <div className="landing_img" />
+          <div className="landing_3a">
+            <h2>Review your finances with the click of a button</h2>
+            <p>View a complete breakdown of your finances in seconds.</p>
+            <ul>
+              <li>Simple, readable information</li>
+              <li>Printable sheet for your convenience</li>
+            </ul>
           </div>
         </div>
         <div className="landing_sub4">

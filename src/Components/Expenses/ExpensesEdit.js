@@ -20,7 +20,7 @@ class ExpensesEdit extends Component {
     type: '',
     company: '',
     category: '',
-    date: new Date().toISOString(),
+    date: '',
     edit: false,
     month: true
   };
@@ -166,7 +166,8 @@ class ExpensesEdit extends Component {
               <DatePicker
                 width={240}
                 inputStyle={{
-                  width: 70
+                  width: 70,
+                  zIndex: 9999
                 }}
                 date={moment.utc(e.expense_date).format('MM/DD/YYYY')}
                 placeholder={moment.utc(e.expense_date).format('MM/DD/YYYY')}

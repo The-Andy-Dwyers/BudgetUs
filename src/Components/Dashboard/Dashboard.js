@@ -16,16 +16,11 @@ import { getUsers, getUser, getTrophy } from '../../ducks/reducers/userReducer';
 import { getDashboard, getIncome } from '../../ducks/reducers/incomeReducer';
 import { getTopExpenses } from '../../ducks/reducers/expensesReducer';
 
-import wallet from './icons/wallet.svg';
-
 class Dashboard extends Component {
-  constructor() {
-    super();
-    this.state = {
-      month: true,
-      expenses: []
-    };
-  }
+  state = {
+    month: true,
+    expenses: []
+  };
 
   async componentDidMount() {
     await this.props.getDashboard(start(moment()), end(moment()));
@@ -34,6 +29,7 @@ class Dashboard extends Component {
     await this.props.getUser();
     await this.props.getIncome(this.props.userReducer.id);
     await this.addTrophy2();
+    await this.addTrophy3();
   }
 
   addTrophy2 = () => {
@@ -41,10 +37,11 @@ class Dashboard extends Component {
     const { income } = this.props.incomeReducer;
     const { trophies } = this.props.userReducer;
     var find = trophies.filter(e => e.trophy === 2);
+    console.log(income)
 
     !find &&
       income &&
-      income.length >= 10 &&
+      income.length >= 1 &&
       axios
         .post('/api/add-trophy', {
           trophy: 2,
@@ -53,7 +50,40 @@ class Dashboard extends Component {
         .then(() => {
           swal({
             position: 'top-end',
-            title: 'New Achievement!',
+            title: 'New Achievement' + '\n' + 'Input first Incom!',
+            text: 'Go to settings to view your medals',
+            imageUrl: 'https://image.flaticon.com/icons/svg/610/610333.svg',
+            imageWidth: 150,
+            imageHeight: 225,
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+  };
+
+  addTrophy3 = () => {
+    const { id } = this.props.userReducer;
+    const { trophies } = this.props.userReducer;
+    const { amount, dashboard, income } = this.props.incomeReducer;
+    const sum = income && income.reduce((sum, e) => (sum += +e.amount), 0);
+    const sumTotal = sum + +amount;
+    const remaining = sumTotal - dashboard.incomesum;
+    var find = trophies.filter(e => e.trophy === 3);
+    console.log(trophies);
+    console.log(find);
+    console.log(remaining)
+
+    !find.length &&
+      remaining > 1000 &&
+      axios
+        .post('/api/add-trophy', {
+          trophy: 3,
+          id
+        })
+        .then(() => {
+          swal({
+            position: 'top-end',
+            title: 'New Achievement' + '\n' + 'Saved your first $1,000!',
             text: 'Go to settings to view your medals',
             imageUrl: 'https://image.flaticon.com/icons/svg/610/610333.svg',
             imageWidth: 150,
@@ -109,7 +139,10 @@ class Dashboard extends Component {
                   alt="Food icon"
                 />
               ) : e.category === 'Bills' ? (
-                <img src='https://image.flaticon.com/icons/svg/116/116369.svg' alt="Bills icon" />
+                <img
+                  src="https://image.flaticon.com/icons/svg/116/116369.svg"
+                  alt="Bills icon"
+                />
               ) : e.category === 'Entertainment' ? (
                 <img
                   src="https://image.flaticon.com/icons/svg/263/263068.svg"
@@ -267,7 +300,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="dashboard_expense expense_btm">
-          <Link className='expense_review btn'to="/review">
+          <Link className="expense_review btn" to="/review">
             <h2>Financial review</h2>
           </Link>
         </div>

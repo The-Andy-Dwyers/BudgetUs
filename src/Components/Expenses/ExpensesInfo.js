@@ -22,7 +22,7 @@ class Expenses extends Component {
     type: '',
     company: '',
     category: '',
-    date: new Date().toISOString(),
+    date: '',
     edit: false,
     month: true
   };

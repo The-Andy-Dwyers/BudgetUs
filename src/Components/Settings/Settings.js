@@ -24,7 +24,7 @@ class Settings extends Component {
         .then(() => {
           swal({
             position: 'top-end',
-            title: 'New Achievement!',
+            title: 'New Achievement' + '\n' + 'Created Account!',           
             text: 'Go to settings to view your medals',
             imageUrl: 'https://image.flaticon.com/icons/svg/610/610333.svg',
             imageWidth: 150,
@@ -44,7 +44,7 @@ class Settings extends Component {
 
     const trophyArr = [
       { trophy: 'Created Account', id: 1 },
-      { trophy: 'Input 10 expenses', id: 2 },
+      { trophy: 'Input first income', id: 2 },
       { trophy: 'Saved your first $1,000', id: 3 },
       { trophy: 'Position Balance for 3 months', id: 4 },
       { trophy: 'Saved a total of $5,000', id: 5 },
