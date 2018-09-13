@@ -372,22 +372,9 @@ class Goals extends Component {
                       })
                       .then(() => {
                         this.closeModal();
-                        // this.props.getTopExpenses();
+                        this.props.getTopExpenses(start(moment()), end(moment()));
                         this.props.getExpenses();
                         this.props.getExpenseTotalsByMonth();
-                        this.state.month
-                          ? this.props.getTopExpenses(
-                              moment()
-                                .startOf('month')
-                                .format('l'),
-                              moment().format('l')
-                            )
-                          : this.props.getTopExpenses(
-                              moment()
-                                .startOf('year')
-                                .format('l'),
-                              moment().format('l')
-                            );
                       })
                   }
                 >
@@ -419,3 +406,14 @@ export default connect(
     addExpenses
   }
 )(Goals);
+
+function start(d) {
+  return moment(new Date(d).toISOString())
+    .startOf('month')
+    .format('l');
+}
+function end(d) {
+  return moment(new Date(d).toISOString())
+    .endOf('month')
+    .format('l');
+}

@@ -154,19 +154,23 @@
 }
 
 .expensesinfo_chart {
-	background-color: #fff;
-	box-shadow: 1px 1px 5px grey;
-	margin: 1%;
-	padding: 1%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
 	width: 96%;
-	height: 40vh;
+	height: 100%;
+	margin-top: 5%;
+}
+
+.expensesinfo_chart > div {
+	width: 60%;
+	background-color: #fff;
+	box-shadow: 1px 1px 5px grey;
+	margin: 1%;
+	padding: 1%;
 }
 .expensesinfo_chart h2 {
-	width: 30%;
 	text-align: center;
 }
 

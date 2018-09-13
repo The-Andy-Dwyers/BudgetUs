@@ -63,8 +63,8 @@ class Expenses extends Component {
         category: !category ? find.category : category
       })
       .then(() => {
-        this.props.getExpenses(this.props.start, this.props.end);
-        this.props.getExpensesByCategory(this.props.start, this.props.end);
+        this.props.getExpenses(start(moment()), end(moment()));
+        this.props.getExpensesByCategory(start(moment()), end(moment()));
         this.setState({ edit: false });
         this.setState({
           expenseName: '',
