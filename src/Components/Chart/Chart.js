@@ -97,7 +97,7 @@ class Chart extends Component {
         <h2>Expenses By Category Chart</h2>
 
         {this.state.month ? (
-          <div>
+          <div >
             <h2>Month View</h2>
             {this.props.expenses.length !== 0 && (
               <Doughnut data={spendData} options={options} />
