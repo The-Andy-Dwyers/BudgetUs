@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { Doughnut } from "react-chartjs-2";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import { connect } from 'react-redux';
 
-import "./Chart.css";
+import './Chart.css';
 
 import {
   getExpensesByCategory,
   getYearlyExpensesByCategory,
   getExpenses
-} from "../../ducks/reducers/expensesReducer";
+} from '../../ducks/reducers/expensesReducer';
 
 class Chart extends Component {
-  constructor() {
-    super();
-    this.state = { month: true };
-  }
+  state = {
+    month: true
+  };
+
   componentDidMount() {
     // this.props.getExpensesByCategory();
   }
@@ -42,18 +42,18 @@ class Chart extends Component {
             this.props.incomesum - this.props.expensesum
           ],
           backgroundColor: [
-            "#28224F",
+            '#28224F',
             this.props.incomesum - this.props.expensesum < 0
-              ? "#d12012"
-              : "#0EC1AA"
+              ? '#d12012'
+              : '#0EC1AA'
           ]
         }
       ],
       labels: [
-        "expenses",
+        'expenses',
         this.props.incomesum - this.props.expensesum < 0
-          ? "defecit"
-          : "remaining"
+          ? 'defecit'
+          : 'remaining'
       ]
     };
     const spendData = {
@@ -61,11 +61,11 @@ class Chart extends Component {
         {
           data: this.props.expenses.map(e => e.amount),
           backgroundColor: [
-            "#D12012",
-            "#28224F",
-            "#68151E",
-            "#205798",
-            "#2EC4B6"
+            '#D12012',
+            '#28224F',
+            '#68151E',
+            '#205798',
+            '#2EC4B6'
           ]
         }
       ],
@@ -78,14 +78,14 @@ class Chart extends Component {
         },
         callbacks: {
           label: function(tooltipItem, data) {
-            return "$" + data.datasets[0]["data"][tooltipItem.index];
+            return '$' + data.datasets[0]['data'][tooltipItem.index];
           }
         }
       },
-      legend: { display: true, labels: { fontColor: "black" } },
+      legend: { display: true, labels: { fontColor: 'black' } },
       elements: { arc: { borderWidth: 0.5 } }
     };
-    return this.props.type === "remaining" ? (
+    return this.props.type === 'remaining' ? (
       <div className="chart">
         <h2>Remaining Chart</h2>
         <div className="chart_main">
@@ -97,7 +97,7 @@ class Chart extends Component {
         <h2>Expenses By Category Chart</h2>
 
         {this.state.month ? (
-          <div >
+          <div>
             <h2>Month View</h2>
             {this.props.expenses.length !== 0 && (
               <Doughnut data={spendData} options={options} />

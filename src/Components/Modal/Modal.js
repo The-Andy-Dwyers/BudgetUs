@@ -316,70 +316,79 @@ class Goals extends Component {
                     onChange={e => this.handleInputs(e.target.value, 'amount')}
                   />
                 </div>
-                <form className="expensesinfo_modal_form">
+                <div className="modal_bottom">
                   <div>
-                    <input
-                      name="type"
-                      type="radio"
-                      value="recurring"
-                      onClick={() => this.handleType('Recurring')}
-                    />{' '}
-                    Recurring
+                    <form className="expensesinfo_modal_form">
+                      <div>
+                        <input
+                          name="type"
+                          type="radio"
+                          value="recurring"
+                          onClick={() => this.handleType('Recurring')}
+                        />{' '}
+                        Recurring
+                      </div>
+                      <div>
+                        <input
+                          name="type"
+                          type="radio"
+                          value="nonrecurring"
+                          onClick={() => this.handleType('Non-Recurring')}
+                        />{' '}
+                        Non-Recurring
+                      </div>
+                    </form>
+                    <select
+                      required
+                      onChange={e =>
+                        this.handleInputs(e.target.value, 'category')
+                      }
+                    >
+                      <option>Category:</option>
+                      <option value="Rent">Rent</option>
+                      <option value="Bills">Bills</option>
+                      <option value="Food">Food</option>
+                      <option value="Gas">Gas</option>
+                      <option value="Entertainment">Entertainment</option>
+                      <option value="Other">other</option>
+                    </select>
                   </div>
-                  <div>
-                    <input
-                      name="type"
-                      type="radio"
-                      value="nonrecurring"
-                      onClick={() => this.handleType('Non-Recurring')}
-                    />{' '}
-                    Non-Recurring
+
+                  <div className="income_sub">
+                    <p>Date:</p>
+
+                    <DatePicker
+                      date={this.state.date}
+                      handleDateChange={this.handleDateChange1}
+                    />
                   </div>
-                </form>
-                <select
-                  required
-                  onChange={e => this.handleInputs(e.target.value, 'category')}
-                >
-                  <option>Category:</option>
-                  <option value="Rent">Rent</option>
-                  <option value="Bills">Bills</option>
-                  <option value="Food">Food</option>
-                  <option value="Gas">Gas</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Other">other</option>
-                </select>
-
-                <div className="income_sub">
-                  <p>Date:</p>
-
-                  <DatePicker
-                    date={this.state.date}
-                    handleDateChange={this.handleDateChange1}
-                  />
+                  <h3
+                    className="income_btn btn"
+                    onClick={() =>
+                      this.props
+                        .addExpenses({
+                          expenseName,
+                          amount,
+                          type,
+                          date,
+                          company,
+                          category,
+                          id
+                        })
+                        .then(() => {
+                          this.closeModal();
+                          this.props.getTopExpenses(
+                            start(moment()),
+                            end(moment())
+                          );
+                          this.props.getExpenses(start(moment()), end(moment()));
+                          this.props.getExpenseTotalsByMonth();
+                        })
+                    }
+                  >
+                    Submit
+                  </h3>
                 </div>
-                <h3
-                  className="income_btn btn"
-                  onClick={() =>
-                    this.props
-                      .addExpenses({
-                        expenseName,
-                        amount,
-                        type,
-                        date,
-                        company,
-                        category,
-                        id
-                      })
-                      .then(() => {
-                        this.closeModal();
-                        this.props.getTopExpenses(start(moment()), end(moment()));
-                        this.props.getExpenses();
-                        this.props.getExpenseTotalsByMonth();
-                      })
-                  }
-                >
-                  Submit
-                </h3>
               </div>
             )}
           </div>
