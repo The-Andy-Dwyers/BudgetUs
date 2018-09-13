@@ -19,6 +19,10 @@
     height: 15vh;
 }
 
+.all_modal {
+  z-index: 9999;
+}
+
 
 .all_modal input{
   border: none;

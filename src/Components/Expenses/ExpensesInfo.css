@@ -4,10 +4,13 @@
 	margin: 1%;
 	box-shadow: 1px 1px 5px grey;
 	background-color: #fff;
+
+	z-index: -1;
 }
 
 .expensesinfo_map2 {
 	display: none;
+
 }
 
 .expensesinfo_content {
@@ -198,7 +201,7 @@
 		flex-direction: column;
 		box-shadow: 1px 1px 5px grey;
 		margin: 1%;
-		z-index: 1;
+		/* z-index: 1; */
 	}
 
 	.expensesinfo_map2_all:hover {
@@ -226,7 +229,6 @@
 	}
 	.left {
 		display: flex;
-		z-index: 9999;
 	}
 	.right {
 		display: flex;

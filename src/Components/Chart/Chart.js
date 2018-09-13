@@ -61,7 +61,7 @@ class Chart extends Component {
         {
           data: this.props.expenses.map(e => e.amount),
           backgroundColor: [
-            '#D12012',
+            '#833f83',
             '#28224F',
             '#68151E',
             '#205798',
