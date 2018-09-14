@@ -28,31 +28,43 @@ class Review extends Component {
   }
 
   getMonthlyIncome = () => {
-    axios.get('/api/income-monthly')
-    
-    .then(res => {
-      this.setState({ income: res.data });
-    });
-  };
-  
-  render() {
-    console.log(this.props);
-    console.log(this.state);
-    const { incomesum, expensesum } = this.props.incomeReducer.dashboard;
-    const remainder = incomesum - expensesum;
-    const { expensesbymonth, expense } = this.props.expensesReducer;
+    axios
+      .get('/api/income-monthly')
 
-    const monthMap =
-      expensesbymonth.length &&
-      expensesbymonth.map((e, i) => {
+      .then(res => {
+        this.setState({ income: res.data });
+      });
+  };
+
+  render() {
+    const { expensesbymonth, expense } = this.props.expensesReducer;
+    const { income } = this.state;
+
+    const incomeMap =
+      income &&
+      income.map((e, i) => {
         return (
-          <div className="ex_map">
+          <div className="ex_income_map" key={i}>
             <p>{e.month}</p>
             <p>${e.sum}</p>
           </div>
         );
       });
+
     const incomeReduce =
+      income && income.reduce((sum, e) => (sum += +e.sum), 0);
+
+    const monthMap =
+      expensesbymonth.length &&
+      expensesbymonth.map((e, i) => {
+        return (
+          <div key={i} className="ex_map">
+            <p>{e.month}</p>
+            <p>${e.sum}</p>
+          </div>
+        );
+      });
+    const expenseReduce =
       expensesbymonth.length &&
       expensesbymonth.reduce((sum, e) => (sum += +e.sum), 0);
 
@@ -66,13 +78,13 @@ class Review extends Component {
             <h1>Monthly Income</h1>
             <div className="spreadsheet_top" />
             <div className="spreadsheet_main">
-              {monthMap}
-              {incomeReduce}
+              {incomeMap}
+              <div className='review_total'>${incomeReduce}</div>
             </div>
             <h1>Monthly Expenses</h1>
             <div className="spreadsheet_sub">
               {monthMap}
-              {incomeReduce}
+              <div className='review_total'>${expenseReduce}</div>
             </div>
           </div>
         </Print>
