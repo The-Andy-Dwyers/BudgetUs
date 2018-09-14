@@ -285,7 +285,7 @@ class Goals extends Component {
                   />
                 </div>
                 <h3
-                  className="income_btn btn"
+                  className="income_btn"
                   onClick={e => this.submitIncome(e)}
                 >
                   Submit
@@ -355,7 +355,7 @@ class Goals extends Component {
                   </div>
 
                   <div className="income_sub">
-                    <p>Date:</p>
+                    <p className='datep'>Date:</p>
 
                     <DatePicker
                       date={this.state.date}
@@ -363,7 +363,7 @@ class Goals extends Component {
                     />
                   </div>
                   <h3
-                    className="income_btn btn"
+                    className="income_btn"
                     onClick={() =>
                       this.props
                         .addExpenses({

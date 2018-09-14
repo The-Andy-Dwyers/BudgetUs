@@ -1,5 +1,6 @@
 .income_sub {
   display: flex;
+  margin-bottom: 3%;
 }
 
 .income_container {
@@ -99,10 +100,20 @@
 }
 
 .income_btn {
-  text-align: center;
-  margin-top: 10%;
-  width: 100%;
+  align-self: center;
+  background-color: #0bc8b3;
+  padding: .5% 4%;
+  border: 1px solid rgb(202, 202, 202);
 }
+
+.income_btn:hover {
+cursor: pointer;
+background-color: transparent;
+ }  
+
+.income_btn:active {
+  transform: scale(.98)
+} 
 
 .btn:hover {
   cursor: pointer;

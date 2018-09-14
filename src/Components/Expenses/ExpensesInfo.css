@@ -133,6 +133,10 @@
 	padding: 1%;
 }
 
+.datep {
+	margin-right: 2%;
+}
+
 .expensesinfo_modal input {
 	width: 98%;
 	margin: 1%;
