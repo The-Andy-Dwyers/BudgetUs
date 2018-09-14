@@ -18,8 +18,53 @@
   cursor: pointer;
 }
 
+.spreadsheet_main {
+  border: 2px solid grey;
+}
+
 .ex_map {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ex_map p {
+  border: 1px solid grey;
+  padding: 1%;
+  width: 50%;
+}
+
+.financial_spreadsheet {
+  margin: 2%;
+  border: solid 3px #000;
+}
+
+.financial_spreadsheet h1 {
+  font-size: 1.7em;
+  text-align: center;
+  letter-spacing: 3px;
+  margin: 1% 0;
+  background-color: rgb(52, 117, 190);
+}
+
+.spreadsheet_sub {
+  border: 2px solid grey;
+}
+
+.expenses_review_map {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5% 0;
+}
+
+.expenses_review_map p {
+  border: 1px solid grey;
+  padding: 1%;
+  width: 24%;
+}
+
+.ex_map p:nth-of-type(2):hover,
+.expenses_review_map p:nth-of-type(3):hover {
+  color: #008000;
 }
 
 @media (max-width: 900px) {

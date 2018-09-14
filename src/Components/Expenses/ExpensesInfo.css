@@ -1,6 +1,4 @@
 .expenses_container {
-	/* display: flex; */
-	/* justify-self: center; */
 	margin: 1%;
 	box-shadow: 1px 1px 5px grey;
 	background-color: #fff;
@@ -88,7 +86,6 @@
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	/* padding: 1%; */
 }
 .expense_map_bottom {
 	display: flex;
@@ -191,7 +188,6 @@
 
 	.expensesinfo_map2 {
 		display: flex;
-		/* border: 1px solid green; */
 		height: 100%;
 		flex-direction: column;
 	}
@@ -201,7 +197,6 @@
 		flex-direction: column;
 		box-shadow: 1px 1px 5px grey;
 		margin: 1%;
-		/* z-index: 1; */
 	}
 
 	.expensesinfo_map2_all:hover {
@@ -217,7 +212,6 @@
 		height: 100%;
 		margin: 2%;
 		flex-direction: column;
-		/* border: solid 1px red; */
 	}
 
 	.expensesinfo_map2_top {
@@ -251,7 +245,6 @@
 
 	.expensesinfo_map2_right {
 		display: flex;
-		/* color: red; */
 	}
 
 	.expensesinfo_map2_right h3 {

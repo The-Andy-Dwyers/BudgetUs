@@ -22,7 +22,7 @@
 
 .link {
   text-decoration: none;
-  color: rgb(228, 228, 228);
+  color: #e4e4e4;
   display: inline-block;
 }
 
@@ -35,10 +35,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(63, 63, 63);
+  background-color: rgb(0, 0, 0);
   height: 20vh;
   border-bottom: 4px solid #0bc8b3;
+  position: relative;
 }
+
+
 
 .navbar_sub {
   display: flex;
@@ -155,9 +158,9 @@ input:focus {
   position: absolute;
   top: -135px;
   left: 85px;
-  animation: slide-in-left .7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; 
+  animation: slide-in-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   height: 30px;
-  width: 30px; 
+  width: 30px;
 }
 
 .x_divnav {
@@ -169,12 +172,11 @@ input:focus {
 }
 
 .navbar_x:hover .x1 {
-  transform: rotate(51deg);  
+  transform: rotate(51deg);
 }
 
 .navbar_x:hover .x2 {
   transform: rotate(130deg);
-  
 }
 
 @keyframes slide-in-left {

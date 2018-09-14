@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import './LandingPage.css';
+import graph from './graph.svg';
+import iphone from './newiphone.png';
+import ipad from './tablet.png';
 
 export default class LandingPage extends Component {
   componentDidMount() {
@@ -46,8 +49,9 @@ export default class LandingPage extends Component {
         <div className="landing_header">
           <img
             className="landing_logo2"
-            src="https://image.flaticon.com/icons/svg/134/134597.svg"
-            alt="Coinslogo"
+            // src="https://image.flaticon.com/icons/svg/134/134597.svg"
+            src={graph}
+            alt="Graph logo"
           />
         </div>
         <div className="landing_content">
@@ -105,7 +109,8 @@ export default class LandingPage extends Component {
             </div>
             <img
               className="iphone_img"
-              src="https://www.mint.com/sites/default/files/styles/mint_half_width/public/billsmodule%402x_1.png?itok=Z7UZtlau&timestamp=1535430201"
+              // src="https://www.mint.com/sites/default/files/styles/mint_half_width/public/billsmodule%402x_1.png?itok=Z7UZtlau&timestamp=1535430201"
+              src={iphone}
               alt="Iphone"
             />
           </div>
@@ -113,7 +118,8 @@ export default class LandingPage extends Component {
         <div className="landing_sub2">
           <img
             className="ipad_image"
-            src="http://icon-park.com/imagefiles/ipad_air_2_silver.png"
+            // src="http://icon-park.com/imagefiles/ipad_air_2_silver.png"
+            src={ipad}
             alt=""
           />
           <div>
