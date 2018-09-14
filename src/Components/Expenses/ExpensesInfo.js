@@ -216,7 +216,9 @@ class Expenses extends Component {
         );
       });
 
+
     const sum = expense && expense.reduce((sum, e) => (sum += +e.cost), 0);
+    const sumAgain = Math.round(sum * 100) /100
 
     return (
       <div className="expenses_container">
@@ -244,13 +246,13 @@ class Expenses extends Component {
 
             {map}
             <div className="expensesinfo_map1_total">
-              <p>Expenses Total: ${sum}</p>
+              <p>Expenses Total: ${sumAgain}</p>
             </div>
           </div>
         </div>
         <div className="expensesinfo_map2">
           <div className="expensesinfo_map2_total">
-            <p>Expenses Total: ${sum}</p>
+            <p>Expenses Total: ${sumAgain}</p>
           </div>
           {map2}
         </div>

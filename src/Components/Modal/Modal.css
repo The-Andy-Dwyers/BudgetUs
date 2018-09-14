@@ -7,10 +7,11 @@
 }
 
 .modal_goals h1 {
-  font-size: 1.5em;
+  font-size: 1.7em;
   letter-spacing: 2px;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
+
 
 .modal_goals > div {
     display: flex;

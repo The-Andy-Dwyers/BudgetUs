@@ -217,7 +217,7 @@ class Goals extends Component {
                   type="text"
                   onChange={e => this.setState({ savings: e.target.value })}
                 />
-                <h3 className="income_btn btn" onClick={() => this.addGoal()}>
+                <h3 className="income_btn" onClick={() => this.addGoal()}>
                   Submit
                 </h3>
               </div>
