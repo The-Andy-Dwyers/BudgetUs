@@ -57,6 +57,10 @@
   width: 80px;
 }
 
+.logo_small {
+  width: 60px;
+}
+
 .navbar_holder {
   width: 30px;
   height: 30px;
@@ -109,6 +113,10 @@
   display: none;
 }
 
+.income_input_btn2:hover {
+  cursor: pointer;  
+  }  
+
 .hamburger {
   width: 40px;
   margin-left: 20px;
@@ -137,6 +145,10 @@
   text-align: center;
   cursor: pointer;
 }
+
+.modal_top h2:hover {
+  background-color: #0bc8b3;
+  }  
 
 .modal_top h2:active {
   transform: scale(0.99);

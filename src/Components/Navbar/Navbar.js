@@ -32,7 +32,7 @@ class Navbar extends Component {
           <div className="navbar_main">
             <div className="navbar_logo_container">
               <img
-                className="navbar_logo logo1"
+                className="navbar_logo"
                 src="https://image.flaticon.com/icons/svg/138/138349.svg"
                 alt="Logo"
               />
@@ -99,8 +99,8 @@ class Navbar extends Component {
             <div className="navbar_main_hidden">
               <div className="navbar_logo_container">
                 <img
-                  className="navbar_logo"
-                  src="https://image.flaticon.com/icons/svg/134/134597.svg"
+                  className="navbar_logo logo_small"
+                  src="https://image.flaticon.com/icons/svg/138/138349.svg"
                   alt="Logo"
                 />
               </div>
