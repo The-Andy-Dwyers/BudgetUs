@@ -12,6 +12,7 @@ import calendar from './icons/calendar.svg';
 import calendar1 from './icons/calendar1.svg';
 import settings from './icons/settings.svg';
 import settings1 from './icons/settings1.svg';
+
 import Modal from '../Modal/Modal';
 
 class Navbar extends Component {
@@ -31,10 +32,12 @@ class Navbar extends Component {
           <div className="navbar_main">
             <div className="navbar_logo_container">
               <img
-                className="navbar_logo"
-                src="https://image.flaticon.com/icons/svg/134/134597.svg"
+                className="navbar_logo logo1"
+                src="https://image.flaticon.com/icons/svg/138/138349.svg"
                 alt="Logo"
               />
+            
+
             </div>
 
             <div className="navbar_sub">
@@ -103,7 +106,7 @@ class Navbar extends Component {
               </div>
               <div
                 className="x_container btn navbar_x"
-                onClick={() => this.setState({hidden: false, icon: true})}
+                onClick={() => this.setState({ hidden: false, icon: true })}
               >
                 <div className="x_divnav x1" />
                 <div className="x_divnav x2" />

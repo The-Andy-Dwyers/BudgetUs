@@ -8,6 +8,9 @@ const month = moment()
 const year = moment()
   .startOf("year")
   .format("l");
+const yearend = moment()
+  .endOf("month")
+  .format("l");
 
 const getDashboard = (req, res) => {
   const db = req.app.get("db");
@@ -99,10 +102,24 @@ const editIncome = (req, res) => {
     });
 };
 
+const getIncomeMonthly = (req, res) => {
+  const db = req.app.get("db");
+  db.income
+    .get_income_by_month(req.user.id, year, yearend)
+    .then(totals => {
+      res.status(200).send(totals);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 module.exports = {
   getDashboard,
   addIncome,
   deleteIncome,
   editIncome,
-  getIncomeById
+  getIncomeById,
+  getIncomeMonthly
 };

@@ -37,7 +37,6 @@ class Dashboard extends Component {
     const { income } = this.props.incomeReducer;
     const { trophies } = this.props.userReducer;
     var find = trophies.filter(e => e.trophy === 2);
-    console.log(income)
 
     !find &&
       income &&
@@ -69,9 +68,7 @@ class Dashboard extends Component {
     const sumTotal = sum + +amount;
     const remaining = sumTotal - dashboard.incomesum;
     var find = trophies.filter(e => e.trophy === 3);
-    console.log(trophies);
-    console.log(find);
-    console.log(remaining)
+   
 
     !find.length &&
       remaining > 1000 &&

@@ -36,7 +36,8 @@ const {
   incomeSum,
   getYearlyIncome,
   incomeYearlySum,
-  getIncomeById
+  getIncomeById,
+  getIncomeMonthly  
 } = require('./Ctrl/incomeCtrl');
 const {
   addGoal,
@@ -126,6 +127,7 @@ app.post('/api/setup-income', addIncome);
 app.delete('/api/delete-income/:id', deleteIncome);
 app.put('/api/edit-income/:id', editIncome);
 app.get('/api/income/:id', getIncomeById);
+app.get('/api/income-monthly', getIncomeMonthly);
 
 //goals endpoints
 app.get('/api/goal', getGoal);
